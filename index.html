@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>私家智囊 — 您的投资家庭医生</title>
+<style>
+/* === Reset === */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:-apple-system,"PingFang SC","Noto Sans SC","Helvetica Neue",sans-serif;
+  background:#0a0e1a;color:#e8e6e3;line-height:1.7;
+  -webkit-font-smoothing:antialiased
+}
+
+/* === Typography === */
+h1,h2,h3{font-weight:400;letter-spacing:-0.02em}
+h1{font-size:clamp(2rem,5vw,3.5rem)}
+h2{font-size:clamp(1.4rem,3vw,2rem)}
+h3{font-size:clamp(1rem,2vw,1.3rem)}
+p{font-size:clamp(0.9rem,1.5vw,1.05rem);color:#b0aeab}
+a{color:#d4a853;text-decoration:none;transition:color .3s}
+a:hover{color:#f0c868}
+
+/* === Layout === */
+.container{max-width:740px;margin:0 auto;padding:0 24px}
+.section{padding:100px 0}
+.section-title{
+  font-size:.75rem;text-transform:uppercase;letter-spacing:.15em;
+  color:#d4a853;margin-bottom:12px;font-weight:500
+}
+
+/* === Header === */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(10,14,26,.85);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(212,168,83,.08)
+}
+header .container{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-size:1rem;font-weight:500;color:#e8e6e3;letter-spacing:.05em}
+.logo span{color:#d4a853}
+nav a{font-size:.8rem;margin-left:24px;color:#8a8885}
+nav a:hover{color:#e8e6e3}
+
+/* === Hero SVG Background === */
+.hero{
+  min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden
+}
+.hero-svg{
+  position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none
+}
+.hero .container{position:relative;z-index:1}
+.hero .subtitle{
+  font-size:.8rem;letter-spacing:.12em;color:#d4a853;margin-bottom:20px;font-weight:500
+}
+.hero h1{line-height:1.2;margin-bottom:24px}
+.hero h1 .highlight{display:block;color:#d4a853;font-weight:500}
+.hero p{font-size:clamp(1rem,1.8vw,1.15rem);max-width:520px;margin-bottom:40px}
+.hero-cta{
+  display:inline-block;padding:14px 36px;
+  border:1px solid #d4a853;color:#d4a853;
+  font-size:.9rem;letter-spacing:.05em;transition:all .3s
+}
+.hero-cta:hover{background:#d4a853;color:#0a0e1a}
+
+/* === Core Belief === */
+.belief{background:linear-gradient(180deg,#0a0e1a 0%,#0f1424 100%)}
+.belief-block{
+  border-left:2px solid #d4a853;
+  padding:28px 0 28px 28px;margin:40px 0
+}
+.belief-block .big-quote{
+  font-size:clamp(1.4rem,3vw,1.8rem);color:#e8e6e3;line-height:1.4
+}
+.belief-block .attribution{margin-top:12px;font-size:.85rem;color:#8a8885}
+
+/* === Principles === */
+.principles-grid{display:grid;grid-template-columns:1fr;gap:24px;margin-top:40px}
+@media(min-width:640px){.principles-grid{grid-template-columns:1fr 1fr 1fr}}
+.principle-card{
+  border:1px solid rgba(212,168,83,.12);padding:32px 24px;
+  background:rgba(255,255,255,.02);transition:border-color .3s,background .3s
+}
+.principle-card:hover{border-color:rgba(212,168,83,.3);background:rgba(212,168,83,.03)}
+.principle-card .icon{display:block;margin-bottom:16px}
+.principle-card .icon svg{width:48px;height:48px}
+.principle-card h3{margin-bottom:8px}
+.principle-card p{font-size:.9rem}
+
+/* === Dialogue Tabs === */
+.dialogue-tabs{display:flex;gap:12px;margin:32px 0}
+.dialogue-tabs button{
+  padding:10px 20px;background:transparent;border:1px solid rgba(212,168,83,.2);
+  color:#8a8885;font-size:.85rem;cursor:pointer;transition:all .3s
+}
+.dialogue-tabs button:hover{border-color:rgba(212,168,83,.4);color:#e8e6e3}
+.dialogue-tabs button.active{background:rgba(212,168,83,.1);border-color:#d4a853;color:#d4a853}
+.dialogue-pane{display:none}
+.dialogue-pane.active{display:block}
+
+/* === Dialogue Content === */
+.dialogue-block{
+  padding:24px;border-left:2px solid rgba(212,168,83,.15);
+  background:rgba(255,255,255,.015);font-size:.95rem;line-height:1.8;color:#c8c6c2
+}
+.dialogue-block .speaker{font-weight:500;color:#d4a853}
+.dialogue-block .speaker-a{color:#7aa8d8}
+.dialogue-block .scene{
+  font-style:italic;color:#6a6865;font-size:.85rem;margin-bottom:16px;padding-left:0
+}
+.dialogue-block .epilogue{
+  margin-top:24px;color:#8a8885;font-style:italic;font-size:.9rem
+}
+.dialogue-block .quote-line{
+  margin-top:20px;padding:16px 20px;border-left:2px solid #d4a853;
+  color:#b0aeab;font-style:italic;font-size:.9rem
+}
+.dialogue-block .summary-table{
+  margin:16px 0;width:100%;border-collapse:collapse;font-size:.85rem
+}
+.dialogue-block .summary-table td,.dialogue-block .summary-table th{
+  padding:8px 12px;border:1px solid rgba(255,255,255,.06);text-align:left
+}
+.dialogue-block .summary-table th{color:#d4a853;font-weight:500;background:rgba(212,168,83,.04)}
+
+/* === About === */
+.about-text{border-top:1px solid rgba(212,168,83,.15);padding-top:40px;margin-top:20px}
+.about-text .tagline{font-size:1rem;color:#d4a853;margin-bottom:20px;font-weight:500}
+
+/* === Subscribe === */
+.subscribe-box{
+  border:1px solid rgba(212,168,83,.15);padding:48px 32px;text-align:center;
+  background:rgba(212,168,83,.02)
+}
+.subscribe-box h2{margin-bottom:16px}
+.subscribe-box p{margin-bottom:28px;font-size:.95rem}
+.subscribe-form{display:flex;flex-direction:column;gap:12px;max-width:400px;margin:0 auto}
+@media(min-width:480px){.subscribe-form{flex-direction:row}}
+.subscribe-form input{
+  flex:1;padding:12px 16px;background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);color:#e8e6e3;font-size:.9rem;outline:none;
+  transition:border-color .3s
+}
+.subscribe-form input:focus{border-color:#d4a853}
+.subscribe-form input::placeholder{color:#6a6865}
+.subscribe-form button{
+  padding:12px 24px;background:#d4a853;border:none;color:#0a0e1a;
+  font-size:.85rem;font-weight:500;cursor:pointer;transition:background .3s;white-space:nowrap
+}
+.subscribe-form button:hover{background:#f0c868}
+
+/* === Footer === */
+footer{border-top:1px solid rgba(255,255,255,.04);padding:48px 0 32px;text-align:center}
+footer .slogan{font-size:.9rem;color:#8a8885;margin-bottom:8px}
+footer .slogan span{color:#d4a853}
+footer .copyright{font-size:.75rem;color:#5a5855}
+
+/* === Mobile Fine-tune === */
+@media(max-width:480px){
+  .section{padding:64px 0}
+  nav a{margin-left:14px;font-size:.75rem}
+  .principle-card{padding:24px 20px}
+  .subscribe-box{padding:32px 20px}
+  .dialogue-tabs{flex-direction:column}
+}
+
+/* === Scroll Indicator === */
+.scroll-indicator{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+  width:1px;height:40px;
+  background:linear-gradient(180deg,#d4a853 0%,transparent 100%);
+  animation:pulse-down 2s ease-in-out infinite
+}
+@keyframes pulse-down{
+  0%,100%{opacity:.3;transform:translateX(-50%) translateY(0)}
+  50%{opacity:1;transform:translateX(-50%) translateY(8px)}
+}
+
+/* === Hero Image Overlay === */
+.hero-img{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  object-fit:cover;object-position:center;
+  opacity:.18;z-index:0;pointer-events:none;
+  mix-blend-mode:screen;filter:brightness(1.1) contrast(1.05)
+}
+
+/* === Section Images === */
+.section-img{
+  display:block;margin:48px auto 0;max-width:100%;height:auto;
+  border-radius:4px;border:1px solid rgba(212,168,83,.1);
+  box-shadow:0 8px 40px rgba(0,0,0,.4),0 0 60px rgba(212,168,83,.04)
+}
+.section-img.wide{max-width:900px}
+.section-img.square{max-width:500px}
+.section-img.portrait{max-width:320px;border-radius:50% 50% 4px 4px}
+
+/* === Dialogue Banner Image === */
+.dialogue-banner{
+  margin-bottom:32px;border-radius:4px;overflow:hidden;
+  border:1px solid rgba(212,168,83,.12);
+  box-shadow:0 4px 24px rgba(0,0,0,.3)
+}
+.dialogue-banner img{
+  width:100%;height:auto;display:block;opacity:.75;
+  filter:brightness(.9) contrast(1.08);transition:opacity .5s
+}
+.dialogue-banner:hover img{opacity:.9}
+
+/* === About Portrait Layout === */
+.about-layout{
+  display:flex;flex-direction:column;gap:36px;align-items:center;margin-top:20px
+}
+@media(min-width:640px){.about-layout{flex-direction:row;align-items:flex-start}}
+.about-text{border-top:none;padding-top:0;margin-top:0;flex:1}
+.about-portrait{
+  flex-shrink:0;text-align:center
+}
+.about-portrait img{
+  max-width:280px;width:100%;height:auto;border-radius:4px;
+  border:1px solid rgba(212,168,83,.2);
+  box-shadow:0 8px 32px rgba(0,0,0,.5),0 0 40px rgba(212,168,83,.06);
+  filter:brightness(1.05) contrast(1.03)
+}
+
+/* === Hero Two-Column Layout === */
+.hero-layout{display:flex;flex-direction:column;gap:48px;align-items:center}
+@media(min-width:900px){.hero-layout{flex-direction:row;align-items:center}}
+.hero-text{flex:1}
+.hero-brand{flex-shrink:0;text-align:center}
+.hero-brand img{
+  max-width:380px;width:100%;border-radius:8px;
+  border:1px solid rgba(212,168,83,.25);
+  box-shadow:0 12px 48px rgba(0,0,0,.5),0 0 60px rgba(212,168,83,.08)
+}
+
+/* === Light-background image adaptation === */
+.img-light-bg{
+  display:block;margin:48px auto 32px;padding:32px 40px;
+  background:linear-gradient(180deg,#f5f4f2 0%,#eae8e5 100%);
+  border-radius:4px;border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 8px 40px rgba(0,0,0,.4),0 0 40px rgba(212,168,83,.04);
+  max-width:480px;text-align:center
+}
+.img-light-bg img{max-width:100%;height:auto;display:block;margin:0 auto}
+
+/* === Subscribe Visual === */
+.subscribe-visual{margin-bottom:32px;text-align:center}
+.subscribe-visual img{
+  max-width:260px;width:100%;height:auto;border-radius:4px;
+  border:1px solid rgba(212,168,83,.15);opacity:.85;
+  box-shadow:0 4px 24px rgba(0,0,0,.3)
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header>
+  <div class="container">
+    <div class="logo">私家<span>智囊</span></div>
+    <nav>
+      <a href="#belief">理念</a>
+      <a href="#content">对话</a>
+      <a href="#about">关于</a>
+      <a href="#subscribe">联系</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <!-- AI-generated hero visual: golden particle upward curve on dark background -->
+  <img class="hero-img" src="./images/A_sophisticated_dark_themed_in_2026-05-30T13-24-44.png" alt="Golden compound growth curve" />
+
+  <!-- SVG Background: Cosmic glow + upward arc -->
+  <svg class="hero-svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="heroGlow" cx="35%" cy="45%" r="55%">
+        <stop offset="0%" stop-color="#d4a853" stop-opacity=".12"/>
+        <stop offset="30%" stop-color="#d4a853" stop-opacity=".04"/>
+        <stop offset="100%" stop-color="#0a0e1a" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="heroGlow2" cx="65%" cy="55%" r="50%">
+        <stop offset="0%" stop-color="#d4a853" stop-opacity=".06"/>
+        <stop offset="100%" stop-color="#0a0e1a" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <!-- Deep space base -->
+    <rect width="1440" height="900" fill="#0a0e1a"/>
+    <rect width="1440" height="900" fill="url(#heroGlow)"/>
+    <rect width="1440" height="900" fill="url(#heroGlow2)"/>
+    <!-- Subtle stars -->
+    <circle cx="200" cy="150" r="1.2" fill="#fff" opacity=".3"/>
+    <circle cx="500" cy="80" r=".8" fill="#fff" opacity=".2"/>
+    <circle cx="900" cy="200" r="1" fill="#fff" opacity=".25"/>
+    <circle cx="1200" cy="100" r=".7" fill="#fff" opacity=".15"/>
+    <circle cx="300" cy="600" r=".9" fill="#fff" opacity=".2"/>
+    <circle cx="1100" cy="650" r="1.1" fill="#fff" opacity=".18"/>
+    <circle cx="700" cy="750" r=".6" fill="#fff" opacity=".15"/>
+    <circle cx="1350" cy="400" r="1.3" fill="#fff" opacity=".2"/>
+    <circle cx="80" cy="350" r=".5" fill="#fff" opacity=".1"/>
+    <circle cx="600" cy="120" r=".7" fill="#fff" opacity=".15"/>
+    <!-- Upward compound curve -->
+    <path d="M0 720 Q360 640 540 520 T1080 340 T1440 300"
+          fill="none" stroke="#d4a853" stroke-width="1.5" opacity=".15"/>
+    <path d="M0 720 Q360 620 540 480 T1080 280 T1440 230"
+          fill="none" stroke="#d4a853" stroke-width=".8" opacity=".08"/>
+  </svg>
+
+  <div class="container">
+    <div class="hero-layout">
+      <div class="hero-text">
+        <div class="subtitle">私家智囊 · 您的投资家庭医生</div>
+        <h1>
+          信心<br>
+          是复利<span class="highlight">不中断的核动力</span>
+        </h1>
+        <p>
+          投资选择复利，投机选择凯利公式，<br>
+          家庭财富保值增值——选择坚定的信心。
+        </p>
+        <a href="#content" class="hero-cta">阅读对话 →</a>
+      </div>
+      <div class="hero-brand">
+        <img src="./images/hero-brand.jpg" alt="信心是复利不中断的核动力 · 投资家庭医生" />
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator"></div>
+</section>
+
+<!-- ===== Core Belief ===== -->
+<section class="section belief" id="belief">
+  <div class="container">
+    <div class="section-title">核心理念</div>
+    <h2>以理念和信仰<br>选择投资或投机交易</h2>
+    <div class="belief-block">
+      <div class="big-quote">"信心是复利不中断的核动力"</div>
+      <div class="attribution">— 私家智囊 · 基石信念</div>
+    </div>
+    <div class="principles-grid">
+      <div class="principle-card">
+        <div class="icon">
+          <svg viewBox="0 0 48 48" width="48" height="48">
+            <path d="M4 44 L24 10 L44 44" fill="none" stroke="#d4a853" stroke-width="1.5" opacity=".5"/>
+            <path d="M10 38 Q20 18 28 22 T38 10" fill="none" stroke="#d4a853" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="38" cy="10" r="3" fill="#d4a853" opacity=".6"/>
+          </svg>
+        </div>
+        <h3>投资 → 复利公式</h3>
+        <p>选对标的，交给时间。复利的敌人不是波动，是你在低谷时离场。</p>
+      </div>
+      <div class="principle-card">
+        <div class="icon">
+          <svg viewBox="0 0 48 48" width="48" height="48">
+            <rect x="8" y="20" width="8" height="20" rx="1" fill="#d4a853" opacity=".3"/>
+            <rect x="20" y="14" width="8" height="26" rx="1" fill="#d4a853" opacity=".5"/>
+            <rect x="32" y="8" width="8" height="32" rx="1" fill="#d4a853" opacity=".7"/>
+            <line x1="4" y1="42" x2="44" y2="42" stroke="#d4a853" stroke-width=".5" opacity=".3"/>
+          </svg>
+        </div>
+        <h3>投机 → 凯利公式</h3>
+        <p>下注讲概率，仓位靠纪律。每一笔交易都是一次期望值计算。</p>
+      </div>
+      <div class="principle-card">
+        <div class="icon">
+          <svg viewBox="0 0 48 48" width="48" height="48">
+            <path d="M24 6 L28 18 L40 18 L30 26 L34 38 L24 30 L14 38 L18 26 L8 18 L20 18 Z"
+                  fill="none" stroke="#d4a853" stroke-width="1.5" opacity=".5"/>
+            <circle cx="24" cy="24" r="8" fill="none" stroke="#d4a853" stroke-width="1.5" opacity=".3"/>
+          </svg>
+        </div>
+        <h3>家财 → 坚定信心</h3>
+        <p>保值增值不需要最聪明的头脑，只需要最稳定的执行和敢拿住的底气。</p>
+      </div>
+    </div>
+    <!-- Abstract geometric illustration: Compound growth visual -->
+    <div class="section-img square">
+      <img src="./images/Abstract_geometric_illustratio_2026-05-30T13-25-25.png" alt="复利增长抽象几何" />
+    </div>
+    <!-- Brand logo: compound interest + Kelly criterion -->
+    <div class="img-light-bg">
+      <img src="./images/principles-brand.jpg" alt="复利 凯利公式" />
+    </div>
+  </div>
+</section>
+
+<!-- ===== Dialogues ===== -->
+<section class="section" id="content">
+  <div class="container">
+    <div class="section-title">对话 · 随笔</div>
+    <h2>深索道先生 × 安德路</h2>
+
+    <!-- AI-generated dialogue atmosphere: riverside silhouettes conversation scene -->
+    <div class="dialogue-banner">
+      <img src="./images/Atmospheric_silhouette_scene_o_2026-05-30T13-25-15.png" alt="Riverside dock at dusk, two figures in conversation" />
+    </div>
+
+    <div class="dialogue-tabs">
+      <button class="active" onclick="switchDialogue(event,'d1')">第一篇 · 家庭医生聊财富管理</button>
+      <button onclick="switchDialogue(event,'d2')">第二篇 · 江边对话录</button>
+      <button onclick="switchDialogue(event,'d3')">第三篇 · 复利的朋友与负利的敌人</button>
+    </div>
+
+    <!-- ===== Dialogue 1 ===== -->
+    <div class="dialogue-pane active" id="d1">
+      <div class="dialogue-block">
+        <p class="scene">场景：两人喝茶。深索道最近被老婆一句话问得失眠了。</p>
+
+        <p><span class="speaker">深索道：</span>老量，我最近在琢磨一个事。</p>
+        <p><span class="speaker speaker-a">安德路：</span>你琢磨的事一般都不小。说。</p>
+        <p><span class="speaker">深索道：</span>我老婆上星期跟我说了一句话，搞得我失眠了两天。她说——"你股票赚那么多，但咱家钱到底怎么安排的，我完全不知道。万一你哪天没了，我连哪个密码是多少都不清楚。"</p>
+        <p><span class="speaker speaker-a">安德路：</span>……你老婆是个明白人。</p>
+        <p><span class="speaker">深索道：</span>可不嘛。我顿时意识到一个问题——我这辈子研究怎么赚钱，研究得挺透的。但"怎么管钱"，好像从来没认真想过。</p>
+        <p><span class="speaker speaker-a">安德路：</span>你这是典型的"把投资和家庭财富管理混为一谈"。</p>
+        <p><span class="speaker">深索道：</span>有区别？</p>
+        <p><span class="speaker speaker-a">安德路：</span>区别大了。投资是怎么让钱变多。家庭财富管理是怎么让你的钱——注意，是你全家人的钱——在不同的人生阶段，安全、够用、不走弯路。</p>
+        <p><span class="speaker">深索道：</span>你这么说，我倒想起一个类比。投资就像健身，你练得好能跑能跳能举铁。但家庭财富管理，像是你的家庭医生。</p>
+        <p><span class="speaker speaker-a">安德路：</span>嘿，这个有意思。接着说。</p>
+        <p><span class="speaker">深索道：</span>健身教练告诉你——再做一个、再坚持一下、突破极限。但家庭医生说——别逞强，先做个全面体检，看看血脂血压。</p>
+        <p><span class="speaker speaker-a">安德路：</span>而且家庭医生不会替你跑步。他做的事情是：定期检查、提前预警、在你生病时告诉你该不该去医院。投资也是一样——没有人能替你赚钱，但有人能帮你别犯致命错误。</p>
+        <p><span class="speaker">深索道：</span>对！我就缺这么个人。不是缺人教我怎么买股票——我买股票不用人教。我是缺一个人，能站在我全家人的角度，帮我看一看：我现在的配置合不合理？万一出事了有没有兜底？孩子上学的钱有没有单独放好？</p>
+        <p><span class="speaker speaker-a">安德路：</span>你这说的，其实就是"私家智囊"。</p>
+        <p><span class="speaker">深索道：</span>私家智囊？</p>
+        <p><span class="speaker speaker-a">安德路：</span>就是你的投资家庭医生。他不替你下单，不替你操盘。他做的事情是——每年给你做一次资产体检、在你贪的时候拉你一把、在你慌的时候告诉你别动、在你要犯错的前一秒帮你挡住自己。</p>
+        <p><span class="speaker">深索道：</span>那跟你有什么关系？</p>
+        <p><span class="speaker speaker-a">安德路：</span>我？我是你的健身教练。我帮你在市场上找超额收益。但你要问我——"老量，我这2000万该怎么分配给孩子教育和养老？"那不是我该管的事。</p>
+        <p><span class="speaker">深索道：</span>所以你们俩互补？</p>
+        <p><span class="speaker speaker-a">安德路：</span>对。你该有个健身教练帮你赚钱，也该有个家庭医生帮你管钱。一个人进攻，一个人防守。你要只靠健身教练过日子，那身体迟早出问题。</p>
+
+        <p class="epilogue">后记：深索道先生后来真的签约了一位私家智囊。第一件事，智囊让他把婚内资产做了个清单。他说，这是他四十年来头一次清清楚楚知道自己家有多少钱、放在哪、密码是多少。他说：那一刻比赚到第一个一千万还踏实。</p>
+      </div>
+    </div>
+
+    <!-- ===== Dialogue 2 ===== -->
+    <div class="dialogue-pane" id="d2">
+      <div class="dialogue-block">
+        <p class="scene">场景：盘后散步至江边旧码头，从"财富自由后想做的工作，就是现在应该做的工作"这个命题开始，一路用第一性原理拆到天黑。</p>
+
+        <p style="font-size:.8rem;color:#d4a853;letter-spacing:.1em;margin-bottom:16px;">第一幕 · 命题拆解</p>
+
+        <p><span class="speaker speaker-a">安德路：</span>深总，我最近看到一个说法——"财富自由后想做的工作，就是现在应该做的工作"。您怎么看？</p>
+        <p><span class="speaker">深索道：</span>我们先确认一下——你理解的"财富自由"是什么？别用流行词定义，用你自己的话。</p>
+        <p><span class="speaker speaker-a">安德路：</span>就是……不用为了钱工作了。被动收入覆盖所有生活开支，不再需要出卖时间换钱。</p>
+        <p><span class="speaker">深索道：</span>好。那我们再问一层——"想做的工作"去掉财富自由这个条件后，剩下的是什么？换句话说，你现在量化交易的工作，如果去掉薪水，你还做不做？</p>
+        <p><span class="speaker speaker-a">安德路：</span>做。但不是每天那些回测、调参数、写日报的事情。我会做个策略研究沙盒，只研究我自己好奇的东西——不对超额收益负责，不向任何人汇报。</p>
+        <p><span class="speaker">深索道：</span>所以这句话对你来说基本成立。但我要追问你：你怎么笃定"没有金钱压力下的你"就是"真实的你"？你29岁开始做量化，到今天32岁，你的职业身份、朋友圈、获取成就感的方式——这些已经被交易塑造了。不是财富自由解放了你，是交易把你变成了现在这个"想做交易"的人。这是自由选择，还是路径锁定？</p>
+
+        <div class="quote-line">"如果一件事情要等到'财富自由'才开始做，那财富自由后你大概率也不会开始——因为你习惯了'等条件满足再行动'的思维模式。"</div>
+
+        <p style="font-size:.8rem;color:#d4a853;letter-spacing:.1em;margin:24px 0 16px;">第二幕 · 财富增长的数学结构</p>
+
+        <p><span class="speaker speaker-a">安德路：</span>我在想——财富积累的数学结构，是加法、乘法、还是指数？</p>
+        <p><span class="speaker">深索道：</span>我们需要先定义这几个运算在财富语境下的含义：<br>
+        <span style="color:#8a8885;">加法：</span>一份时间换一份钱。典型的劳动收入。线性。<br>
+        <span style="color:#8a8885;">乘法：</span>一份时间换多份钱，或者通过杠杆放大。线性系数 > 1。<br>
+        <span style="color:#8a8885;">指数：</span>收益基座在自我增长。本金创造收益，收益并回本金再创造新收益。纯粹复利。</p>
+        <p><span class="speaker speaker-a">安德路：</span>大多数人一辈子在加法象限。打工就是。我见过最焦虑的人就是年薪200万但每天被钉在工位上的合伙人——他的收入系数很高，但他的时间被完全锁定，自由度为0。</p>
+        <p><span class="speaker">深索道：</span>讨论增长率的时候，不要只讨论钱的增长率，要同时讨论时间的释放率。</p>
+
+        <p style="font-size:.8rem;color:#d4a853;letter-spacing:.1em;margin:24px 0 16px;">第三幕 · 勤奋劳动的正确用法</p>
+
+        <p><span class="speaker speaker-a">安德路：</span>勤奋劳动放在投资里，被翻译成"每天看盘12小时"、"研究每个季报的每个脚注"。但真正有效的投资劳动是找对关键问题的机会成本。</p>
+        <p><span class="speaker">深索道：</span>我补充一个观察：勤奋劳动有一个隐藏害处——它挤占了你"什么都不做"的时间。我最好的投资决策，有一半不是在办公室想出来的，是在钓鱼的时候。</p>
+
+        <div class="quote-line">"40岁以前的'无效勤奋'和40岁以后的'自由度'呈负相关。"</div>
+
+        <p style="font-size:.8rem;color:#d4a853;letter-spacing:.1em;margin:24px 0 16px;">终幕 · 总结</p>
+
+        <p><span class="speaker speaker-a">安德路：</span>（低头看江水）让我总结一下今晚我们走到这里的结论——</p>
+
+        <table class="summary-table">
+          <tr><th>#</th><th>结论</th></tr>
+          <tr><td>1</td><td>财富增长结构：加法 → 乘法 → 指数。但进入指数之前，必须有扎实的加法积累。</td></tr>
+          <tr><td>2</td><td>效率应算 (资本回报 ÷ 时间锁定度)。很多人赚乘法收入但时间被锁死，效率为负。</td></tr>
+          <tr><td>3</td><td>勤奋劳动的正确用法：建立可挂机的资产——知识体系、可信赖关系、一次性的框架。</td></tr>
+          <tr><td>4</td><td>自由不是财富自由。自由是"说不"的能力。今天就能开始训练。</td></tr>
+          <tr><td>5</td><td>空闲不是浪费，是战略输入。把散步、发呆写进你的工作系统里。</td></tr>
+        </table>
+
+        <p><span class="speaker">深索道：</span>你漏了最后一条——复利公式里最容易被忽略的是n，不是r。大多数人穷尽一生追求收益率r，而真正改变命运的是时间的持续在场。</p>
+        <p><span class="speaker speaker-a">安德路：</span>那您现在最大的恐惧是什么？钱够了，时间也够自由了。</p>
+        <p><span class="speaker">深索道：</span>被自己的过去锚定。怕自己在新的象限里，还在用旧象限的方法论。怕一辈子只能做"风控"这个动词，而不是做"判断"。</p>
+
+        <div class="quote-line">"大多数人穷尽一生追求收益率r，而真正改变命运的是时间的持续在场——n。"</div>
+
+        <p><span class="speaker">深索道：</span>走吧，去吃碗面。</p>
+
+        <p class="epilogue">对话记录于 2026年5月某日盘后。黄总旁观整理。</p>
+      </div>
+    </div>
+
+    <!-- ===== Dialogue 3 ===== -->
+    <div class="dialogue-pane" id="d3">
+      <div class="dialogue-block">
+        <p class="scene">江边。安德路先到了，手里捏着一张对账单，盯着看了半晌不说话。</p>
+
+        <p><span class="speaker">深索道：</span>（走过来扫了一眼）怎么了？</p>
+        <p><span class="speaker speaker-a">安德路：</span>深总，我去年量化策略跑下来，扣除融资利息和交易损耗，净收益比毛收益少了四成。四成。</p>
+        <p><span class="speaker">深索道：</span>我问你一个问题——你知道为什么巴菲特年化只有20%出头，却能成为全球首富吗？</p>
+        <p><span class="speaker speaker-a">安德路：</span>时间长？</p>
+        <p><span class="speaker">深索道：</span>对，但也不全对。更准确地说——他找到了复利的朋友，同时一辈子没碰过复利的敌人。</p>
+
+        <p style="font-size:.8rem;color:#d4a853;letter-spacing:.1em;margin:20px 0 12px;">上篇 · 复利的朋友</p>
+
+        <p><span class="speaker">深索道：</span>先说朋友。复利公式 F = P(1+r)^n 里，绝大多数人一辈子在追 r——收益率。但改变命运的是 n——时间。</p>
+        <p><span class="speaker">深索道：</span>标普500从1926年至今，年化回报约10%。听起来不高，但1美元放进去到今天变成了两万美金。杰里米·西格尔的《股市长线法宝》里算过这笔账。</p>
+        <p><span class="speaker speaker-a">安德路：</span>这我知道。</p>
+        <p><span class="speaker">深索道：</span>你不知道的是另一组数据。JP摩根做过统计：2003到2022这二十年，标普500年化8.2%。如果你错过最好的10个交易日——二十年里最好的10天——你的年化掉到3.6%。错过最好的30天，直接变成亏损。</p>
+        <p><span class="speaker">深索道：</span>二十年里，你只要偏离了30天，所有的复利就没了。</p>
+        <p><span class="speaker speaker-a">安德路：</span>所以"长坡厚雪"的真正含义，不是找多厚的雪，是别从坡上摔下来。</p>
+        <p><span class="speaker">深索道：</span>对。巴菲特的原话是——"Life is like a snowball. The important thing is finding wet snow and a really long hill."湿雪是优质资产，长坡是时间。大部分人找到了湿雪，但在坡上站不稳。</p>
+        <p><span class="speaker speaker-a">安德路：</span>那什么是"复利的朋友"？</p>
+
+        <p><span class="speaker">深索道：</span>三条标准。第一，能想象它十年后还在。你买入一个东西，问自己：十年后这家公司还在吗？如果答案是"不确定"，它就不配放进复利公式里。</p>
+        <p><span class="speaker">深索道：</span>第二，有持续现金流产出。分红、利息、租金——不是靠别人接手才能变现的价格差。复利最怕中断，现金流是唯一能让你在低谷期不必卖的底气。</p>
+        <p><span class="speaker">深索道：</span>第三，波动不致命。跌50%需要涨100%才能回本。复利路上最大的敌人不是跌，是你被迫在跌的时候卖。</p>
+        <p><span class="speaker speaker-a">安德路：</span>这第三条，就是行为金融学说的——散户持有基金的平均期限只有2.8年。不是资产不行，是人拿不住。</p>
+
+        <p style="font-size:.8rem;color:#d4a853;letter-spacing:.1em;margin:20px 0 12px;">下篇 · 负利的敌人</p>
+
+        <p><span class="speaker">深索道：</span>现在说敌人。你刚才说的融资利息，典型的负利——Negative Carry。那些随着时间推移不断消耗你现金流的负债或资产，都是复利的敌人。</p>
+        <p><span class="speaker">深索道：</span>2015年A股融资余额峰值2.27万亿，股灾后强行平仓了1.2万亿。这些人的共同特征是什么？他们拿着高杠杆，每天睁眼就欠利息，跌了必须卖。复利还没开始，已经被利息吃掉了。</p>
+        <p><span class="speaker">深索道：</span>执行标准只有一条：绝不长期持有高杠杆、高损耗且无现金流产出的合约类工具。</p>
+        <p><span class="speaker speaker-a">安德路：</span>那房贷呢？我每个月还利息，算不算负利？</p>
+        <p><span class="speaker">深索道：</span>算，但它是被驯服的负利。房贷利率3%，你的资产收益如果能做到12%，时间反而是你的朋友——它在用通胀稀释你的债务本金。区别在于：房贷有不动产做底，你不是在赌；融资买股票没有安全垫，你是在用时间换一个概率。</p>
+        <p><span class="speaker">深索道：</span>所以关键是用复利的朋友去对冲负利的敌人。只要分红大于利息，你就把负利驯服成了可控的成本。否则——你在给时间打工。</p>
+
+        <p><span class="speaker speaker-a">安德路：</span>（沉默）深总，你再说一遍那句话。</p>
+        <p><span class="speaker">深索道：</span>哪句？</p>
+        <p><span class="speaker speaker-a">安德路：</span>信心是复利不中断的核动力。</p>
+        <p><span class="speaker">深索道：</span>大多数人穷尽一生追求收益率r，而真正改变命运的是时间的持续在场——n。你找到了复利的朋友，又看清了负利的敌人，中间差的那一步，就是敢不敢在整个市场都在卖的时候，按住自己的手。</p>
+        <p><span class="speaker">深索道：</span>（站起来，拍拍裤子）走吧，今晚我请。</p>
+        <p><span class="speaker speaker-a">安德路：</span>那复利的公式呢？</p>
+        <p><span class="speaker">深索道：</span>你已经记住了。F = P(1+r)^n。P是你现在有的，r是眼光，n是命。还有一条——信心，是让n不中断的唯一燃料。</p>
+
+        <p class="epilogue" style="margin-top:20px;color:#d4a853;">核心词：信心是复利不中断的核动力。最重要的是复利的"n"期限，不是"r"复利率。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== About ===== -->
+<section class="section" id="about" style="background:rgba(255,255,255,.01);">
+  <div class="container">
+    <div class="section-title">关于</div>
+    <div class="about-layout">
+      <div class="about-text">
+        <div class="tagline">私家智囊，您的投资家庭医生。</div>
+      <p>20年A股长投+融资双体系实战，穿越周期。不相信预测，只相信纪律。</p>
+      <p>核心理念：信心是复利不中断的核动力。<br>投资选复利，投机选凯利公式，家庭财富保值增值选私家智囊。</p>
+      <p style="margin-top:20px;color:#8a8885;font-size:.9rem;">
+        不荐股、不带单、不给代码。<br>
+        只做一件事：帮你锚定信心，管住手，拿住。
+      </p>
+      </div>
+      <!-- Portrait: confidence is the core power -->
+      <div class="about-portrait">
+        <img src="./images/about-portrait.jpg" alt="私家智囊 · 信心是复利不中断的核动力" />
+      </div>
+    </div>
+    <!-- Elegant abstract portrait: strategist presence -->
+    <div class="section-img portrait" style="max-width:220px;margin-top:-20px">
+      <img src="./images/Elegant_abstract_portrait_of_a_2026-05-30T13-25-25.png" alt="智囊专家剪影" />
+    </div>
+  </div>
+</section>
+
+<!-- ===== Subscribe ===== -->
+<section class="section" id="subscribe">
+  <div class="container">
+    <div class="subscribe-visual">
+      <img src="./images/subscribe-visual.jpg" alt="阅读的力量" />
+    </div>
+    <div class="subscribe-box">
+      <h2>订阅私家智囊</h2>
+      <p>每周一篇，不讲代码，只聊怎么拿住。<br>新对话、新理念，第一时间送到你的邮箱。</p>
+      <form class="subscribe-form" onsubmit="event.preventDefault();alert('感谢订阅（演示版）——正式上线后接入真实邮件服务。');">
+        <input type="email" placeholder="输入你的邮箱" required>
+        <button type="submit">订阅 →</button>
+      </form>
+      <p style="margin-top:16px;font-size:.75rem;color:#5a5855;">不发送垃圾邮件。随时可以退订。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <div class="container">
+    <p class="slogan">信心，是复利<span>不中断</span>的核动力</p>
+    <p class="copyright">私家智囊 · 2026</p>
+  </div>
+</footer>
+
+<script>
+function switchDialogue(e,id){
+  document.querySelectorAll('.dialogue-tabs button').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.dialogue-pane').forEach(p=>p.classList.remove('active'));
+  e.target.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+</script>
+</body>
+</html>
