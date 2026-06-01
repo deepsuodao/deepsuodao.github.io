@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>私家智囊 — 您的投资家庭医生</title>
+<title>私家智囊 — 您家庭财富的规划师与守夜人</title>
 <style>
 /* === Reset === */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -106,6 +106,7 @@ nav a:hover{color:#e8e6e3}
 }
 .dialogue-block .speaker{font-weight:500;color:#d4a853}
 .dialogue-block .speaker-a{color:#7aa8d8}
+.dialogue-block .speaker-k{color:#c9897a}
 .dialogue-block .scene{
   font-style:italic;color:#6a6865;font-size:.85rem;margin-bottom:16px;padding-left:0
 }
@@ -311,19 +312,19 @@ footer .copyright{font-size:.75rem;color:#5a5855}
   <div class="container">
     <div class="hero-layout">
       <div class="hero-text">
-        <div class="subtitle">私家智囊 · 您的投资家庭医生</div>
+        <div class="subtitle">私家智囊 · 您家庭财富的规划师与守夜人</div>
         <h1>
           信心<br>
           是复利<span class="highlight">不中断的核动力</span>
         </h1>
         <p>
-          投资选择复利，投机选择凯利公式，<br>
-          家庭财富保值增值——选择坚定的信心。
+          致力于帮助您在漫长的投资旅途中<br>
+          守护那份至关重要的、让复利得以生长的<span style="color:#d4a853;">坚定与平静</span>。
         </p>
         <a href="#content" class="hero-cta">阅读对话 →</a>
       </div>
       <div class="hero-brand">
-        <img src="./images/hero-brand.jpg" alt="信心是复利不中断的核动力 · 投资家庭医生" />
+        <img src="./images/hero-brand.jpg" alt="私家智囊 · 家庭财富的规划师与守夜人 · 信心是复利不中断的核动力" />
       </div>
     </div>
   </div>
@@ -334,10 +335,10 @@ footer .copyright{font-size:.75rem;color:#5a5855}
 <section class="section belief" id="belief">
   <div class="container">
     <div class="section-title">核心理念</div>
-    <h2>以理念和信仰<br>选择投资或投机交易</h2>
+    <h2>您家庭财富的<br>规划师与守夜人</h2>
     <div class="belief-block">
       <div class="big-quote">"信心是复利不中断的核动力"</div>
-      <div class="attribution">— 私家智囊 · 基石信念</div>
+      <div class="attribution">— 私家智囊 · 基石信念（不变）</div>
     </div>
     <div class="principles-grid">
       <div class="principle-card">
@@ -348,8 +349,8 @@ footer .copyright{font-size:.75rem;color:#5a5855}
             <circle cx="38" cy="10" r="3" fill="#d4a853" opacity=".6"/>
           </svg>
         </div>
-        <h3>投资 → 复利公式</h3>
-        <p>选对标的，交给时间。复利的敌人不是波动，是你在低谷时离场。</p>
+        <h3>规划师 — 年度体检</h3>
+        <p>不预测涨跌，只设计框架。资产审计、再平衡、风险前置预警——让钱在正确的位置自我生长。</p>
       </div>
       <div class="principle-card">
         <div class="icon">
@@ -360,8 +361,8 @@ footer .copyright{font-size:.75rem;color:#5a5855}
             <line x1="4" y1="42" x2="44" y2="42" stroke="#d4a853" stroke-width=".5" opacity=".3"/>
           </svg>
         </div>
-        <h3>投机 → 凯利公式</h3>
-        <p>下注讲概率，仓位靠纪律。每一笔交易都是一次期望值计算。</p>
+        <h3>守夜人 — 暴跌急诊</h3>
+        <p>在你慌的时候按住你的手，在你贪的时候拉你一把。风平浪静时隐身，惊涛骇浪时在岗。</p>
       </div>
       <div class="principle-card">
         <div class="icon">
@@ -371,8 +372,8 @@ footer .copyright{font-size:.75rem;color:#5a5855}
             <circle cx="24" cy="24" r="8" fill="none" stroke="#d4a853" stroke-width="1.5" opacity=".3"/>
           </svg>
         </div>
-        <h3>家财 → 坚定信心</h3>
-        <p>保值增值不需要最聪明的头脑，只需要最稳定的执行和敢拿住的底气。</p>
+        <h3>坚定与平静</h3>
+        <p>漫长投资旅途中，最稀缺的不是信息，是敢拿住的底气。让复利得以生长的，是内心的定力。</p>
       </div>
     </div>
     <!-- Abstract geometric illustration: Compound growth visual -->
@@ -381,7 +382,7 @@ footer .copyright{font-size:.75rem;color:#5a5855}
     </div>
     <!-- Brand logo: compound interest + Kelly criterion -->
     <div class="img-light-bg">
-      <img src="./images/principles-brand.jpg" alt="复利 凯利公式" />
+      <img src="./images/principles-brand.jpg" alt="规划师与守夜人" />
     </div>
   </div>
 </section>
@@ -398,38 +399,71 @@ footer .copyright{font-size:.75rem;color:#5a5855}
     </div>
 
     <div class="dialogue-tabs">
-      <button class="active" onclick="switchDialogue(event,'d1')">第一篇 · 家庭医生聊财富管理</button>
+      <button class="active" onclick="switchDialogue(event,'d1')">第一篇 · 规划，始于一张人生清单</button>
       <button onclick="switchDialogue(event,'d2')">第二篇 · 江边对话录</button>
       <button onclick="switchDialogue(event,'d3')">第三篇 · 复利的朋友与负利的敌人</button>
+      <button onclick="switchDialogue(event,'d4')">第四篇 · 儿童节的三个账户</button>
     </div>
 
     <!-- ===== Dialogue 1 ===== -->
     <div class="dialogue-pane active" id="d1">
       <div class="dialogue-block">
-        <p class="scene">场景：两人喝茶。深索道最近被老婆一句话问得失眠了。</p>
+        <p class="scene">一场关于财富的对话：当你的规划，始于一张"人生清单"</p>
 
-        <p><span class="speaker">深索道：</span>老量，我最近在琢磨一个事。</p>
-        <p><span class="speaker speaker-a">安德路：</span>你琢磨的事一般都不小。说。</p>
-        <p><span class="speaker">深索道：</span>我老婆上星期跟我说了一句话，搞得我失眠了两天。她说——"你股票赚那么多，但咱家钱到底怎么安排的，我完全不知道。万一你哪天没了，我连哪个密码是多少都不清楚。"</p>
-        <p><span class="speaker speaker-a">安德路：</span>……你老婆是个明白人。</p>
-        <p><span class="speaker">深索道：</span>可不嘛。我顿时意识到一个问题——我这辈子研究怎么赚钱，研究得挺透的。但"怎么管钱"，好像从来没认真想过。</p>
-        <p><span class="speaker speaker-a">安德路：</span>你这是典型的"把投资和家庭财富管理混为一谈"。</p>
-        <p><span class="speaker">深索道：</span>有区别？</p>
-        <p><span class="speaker speaker-a">安德路：</span>区别大了。投资是怎么让钱变多。家庭财富管理是怎么让你的钱——注意，是你全家人的钱——在不同的人生阶段，安全、够用、不走弯路。</p>
-        <p><span class="speaker">深索道：</span>你这么说，我倒想起一个类比。投资就像健身，你练得好能跑能跳能举铁。但家庭财富管理，像是你的家庭医生。</p>
-        <p><span class="speaker speaker-a">安德路：</span>嘿，这个有意思。接着说。</p>
-        <p><span class="speaker">深索道：</span>健身教练告诉你——再做一个、再坚持一下、突破极限。但家庭医生说——别逞强，先做个全面体检，看看血脂血压。</p>
-        <p><span class="speaker speaker-a">安德路：</span>而且家庭医生不会替你跑步。他做的事情是：定期检查、提前预警、在你生病时告诉你该不该去医院。投资也是一样——没有人能替你赚钱，但有人能帮你别犯致命错误。</p>
-        <p><span class="speaker">深索道：</span>对！我就缺这么个人。不是缺人教我怎么买股票——我买股票不用人教。我是缺一个人，能站在我全家人的角度，帮我看一看：我现在的配置合不合理？万一出事了有没有兜底？孩子上学的钱有没有单独放好？</p>
-        <p><span class="speaker speaker-a">安德路：</span>你这说的，其实就是"私家智囊"。</p>
-        <p><span class="speaker">深索道：</span>私家智囊？</p>
-        <p><span class="speaker speaker-a">安德路：</span>就是你的投资家庭医生。他不替你下单，不替你操盘。他做的事情是——每年给你做一次资产体检、在你贪的时候拉你一把、在你慌的时候告诉你别动、在你要犯错的前一秒帮你挡住自己。</p>
-        <p><span class="speaker">深索道：</span>那跟你有什么关系？</p>
-        <p><span class="speaker speaker-a">安德路：</span>我？我是你的健身教练。我帮你在市场上找超额收益。但你要问我——"老量，我这2000万该怎么分配给孩子教育和养老？"那不是我该管的事。</p>
-        <p><span class="speaker">深索道：</span>所以你们俩互补？</p>
-        <p><span class="speaker speaker-a">安德路：</span>对。你该有个健身教练帮你赚钱，也该有个家庭医生帮你管钱。一个人进攻，一个人防守。你要只靠健身教练过日子，那身体迟早出问题。</p>
+        <p><span class="speaker speaker-a">安德路：</span>最近看了很多理财文章，但越看越迷茫。有人建议定投指数，有人说该买黄金，还有人说现在是布局某些板块的机会。我的需求其实很简单：改善家庭生活品质，为孩子的未来做准备，为自己留一份养老的从容。但具体该怎么做，总觉得无从下手。</p>
 
-        <p class="epilogue">后记：深索道先生后来真的签约了一位私家智囊。第一件事，智囊让他把婚内资产做了个清单。他说，这是他四十年来头一次清清楚楚知道自己家有多少钱、放在哪、密码是多少。他说：那一刻比赚到第一个一千万还踏实。</p>
+        <p><span class="speaker">深索道：</span>这很常见。大多数人是从"买什么产品"开始思考——就像走进一家药店，直接看柜台里的药，却不清楚自己到底得了什么病。真正的规划，应该从另一个问题开始："你希望财富，支撑起怎样的人生？"</p>
+
+        <p><span class="speaker speaker-a">安德路：</span>这个问题很大。似乎应该先有一些具体的目标？</p>
+
+        <p><span class="speaker">深索道：</span>没错。所以我们的对话不妨从一个简单的练习开始：请拿出一张白纸，诚实地写下你的"人生愿望清单"，并尽量为它们标上"价格"和"时间"。</p>
+
+        <p>比如，它可能包括：</p>
+        <p style="color:#b0aeab;font-size:.9rem;padding-left:20px;">→ "我希望5年内，能为家庭换一套更宽敞的房子，预计需要额外准备XXX万。"</p>
+        <p style="color:#b0aeab;font-size:.9rem;padding-left:20px;">→ "我希望15年后，能积累足够的资产，让我可以选择更从容的工作节奏，预计每月需要被动收入XXX元。"</p>
+        <p style="color:#b0aeab;font-size:.9rem;padding-left:20px;">→ "我希望为我的孩子储备一笔教育金，支持他未来在国内深造或海外留学的选择权，预计需要XXX万。"</p>
+
+        <p><span class="speaker speaker-a">安德路：</span>这样一列，感觉目标清晰了，但数字也让人更有压力了。</p>
+
+        <p><span class="speaker">深索道：</span>这是好事。清晰的量化目标，是财富航行的真正坐标。压力来源于"缺口"，而管理缺口，正是规划的开始。接下来，我们就要面对财富增长中最核心、也最容易被误解的一对概念：<strong style="color:#d4a853;">投资与投机</strong>。</p>
+
+        <p><span class="speaker speaker-a">安德路：</span>很多人认为这是一回事，都是"钱生钱"。</p>
+
+        <p><span class="speaker">深索道：</span>它们的本质逻辑截然不同。<strong style="color:#7aa8d8;">投机</strong>，更像一种聪明的概率游戏。它追求在不确定中博取回报，其数学内核可以近似理解为"凯利公式"——在胜率和赔率的基础上，计算最优下注比例。它需要敏锐、纪律和接受失败的准备。</p>
+
+        <p><span class="speaker">深索道：</span>而<strong style="color:#d4a853;">投资</strong>，尤其是指向家庭长远目标的投资，其内核是<strong style="color:#d4a853;">复利</strong>。它相信伴随经济持续向好的企业长期价值，并借助时间的力量实现累积增长。但复利要创造奇迹，有一个至关重要的前提：<strong style="color:#d4a853;">信心是其不中断的核动力</strong>。市场波动是必然的，但若因恐惧而频繁撤离，或因贪婪而盲目转换，就等于亲手熄灭了复利的引擎。</p>
+
+        <div class="quote-line">"复利要创造奇迹，前提是——信心是其不中断的核动力。"</div>
+
+        <p><span class="speaker speaker-a">安德路：</span>所以，为家庭长远目标准备的资金，应该放在"投资"的篮子里，依靠复利；而用一些闲钱去尝试"投机"，则需严守纪律，明白那是博弈。</p>
+
+        <p><span class="speaker">深索道：</span>非常准确。这就是我们常说的<strong style="color:#d4a853;">"核心-卫星"</strong>配置思路。用追求稳健复利的资产作为"核心"，牢牢守护住教育、养老、安居这些绝不能失败的人生目标；用少量可以承受损失的资本作为"卫星"，在严格限定内去捕捉机会。家庭财富的保值与增值，最终选择的不是某种产品，而是一份能贯穿牛熊的、坚定的信心与纪律。</p>
+
+        <p><span class="speaker speaker-a">安德路：</span>道理我明白了。但在现实中，最大的困难可能就是自己。市场高涨时难免贪婪，幻想更快致富；市场低落时又难免恐惧，怀疑一切。如何能确保那份"信心"不被情绪中断？</p>
+
+        <p><span class="speaker">深索道：</span>这正是许多人需要<strong style="color:#d4a853;">私家智囊</strong>的原因。智囊的作用，远不止于设计一份资产配置方案。他更像一位家庭的"财富健康守护者"和"行为教练"。</p>
+
+        <p><span class="speaker">深索道：</span>首先，他基于您的人生清单，与您共同构建一份理性、个性化的长远规划，让每一步都目标清晰。</p>
+        <p><span class="speaker">深索道：</span>其次，他凭借专业，在复杂的金融工具、税务政策和法律结构中，为您搭建最高效的执行框架。</p>
+        <p><span class="speaker">深索道：</span>而最重要的——他提供了一份宝贵的独立性。他不销售任何具体产品，只对您的目标忠诚。在市场喧嚣时，他提醒风险，防止"卫星"部分侵占"核心"；在市场寒冷时，他传递理性，确保"核心"部分的定投与持有不被中断。他守护的，正是那份让复利得以持续的<strong style="color:#d4a853;">平静与坚定</strong>。</p>
+
+        <p><span class="speaker speaker-a">安德路：</span>所以，智囊的价值，在于整合规划、专业执行，更在于提供外部视角和纪律约束，帮助我们对抗人性的弱点？</p>
+
+        <p><span class="speaker">深索道：</span>是的。财富管理，在技术层面是关于数字、周期和配置；但在更深的层面，它是关于认知、心性与目标的管理。一个专业的智囊，是您家庭的<strong style="color:#d4a853;">"规划师与守夜人"</strong>——既设计框架，也守护纪律，致力于将您对美好生活的愿景，通过理性的规划与长期的纪律，一步一步变成稳固可及的财务现实。</p>
+
+        <p><span class="speaker speaker-a">安德路：</span>我似乎有了更清晰的脉络。一切都始于那张关于自己人生的清单，之后是选择正确的道路——投资还是投机，并找到合适的伙伴来帮助自己保持走在正确的道路上。</p>
+
+        <p><span class="speaker">深索道：</span>总结得非常好。我们所有的努力，无非是为了一个简单的目的：<strong style="color:#d4a853;">用今天的理性规划，换取明天选择生活的自由。</strong> 而这一切，都始于你提笔列下梦想的那一刻。</p>
+
+        <div class="quote-line" style="margin-top:24px;">
+          投资，是选择让时间成为朋友，用复利积累厚重；<br>
+          投机，是选择与概率共舞，用敏锐博取锐利。<br>
+          请勿用管理核心财富的心，去追逐卫星的收益。
+        </div>
+
+        <p class="epilogue" style="margin-top:20px;color:#d4a853;">
+          核心词：信心是复利不中断的核动力。用今天的理性规划，换取明天选择生活的自由。
+        </p>
       </div>
     </div>
 
@@ -487,7 +521,7 @@ footer .copyright{font-size:.75rem;color:#5a5855}
 
         <p><span class="speaker">深索道：</span>走吧，去吃碗面。</p>
 
-        <p class="epilogue">对话记录于 2026年5月某日盘后。黄总旁观整理。</p>
+        <p class="epilogue">对话记录于 2026年5月某日盘后。</p>
       </div>
     </div>
 
@@ -538,6 +572,97 @@ footer .copyright{font-size:.75rem;color:#5a5855}
         <p class="epilogue" style="margin-top:20px;color:#d4a853;">核心词：信心是复利不中断的核动力。最重要的是复利的"n"期限，不是"r"复利率。</p>
       </div>
     </div>
+
+    <!-- ===== Dialogue 4 ===== -->
+    <div class="dialogue-pane" id="d4">
+      <div class="dialogue-block">
+        <p class="scene">六一儿童节的中午，安静的餐厅。落地窗透进六月的阳光，桌上三杯龙井冒着热气。新人物：格林格·金（Gleeger·Kim），深索道和安德路的老板，40+女性，三个孩子的母亲。佩戴珍珠胸针，简约干练。</p>
+
+        <p>深索道先到的，手机屏幕上是一张照片——一个年轻人穿着学士服站在礼堂前。他看了好一会儿才熄灭屏幕。</p>
+
+        <p>安德路匆匆走进来，拉开椅子坐下，还在低头看手机。</p>
+
+        <p><span class="speaker">深索道：</span>你迟到了。</p>
+        <p><span class="speaker speaker-a">安德路：</span>儿子幼儿园六一表演。刚表演完，太太发来的。</p>
+        <p>他把手机翻过来——屏幕上是一个穿着小王子服装、脸上画着胡须的小孩。</p>
+        <p><span class="speaker">深索道：</span>（笑了一下，把手机翻回去）过两年就是你了。我闺女的毕业照，上个月刚入职，做审计。</p>
+        <p><span class="speaker speaker-a">安德路：</span>这么快？我记得她去年还在实习。</p>
+        <p><span class="speaker">深索道：</span>时间比你想的快得多。你刚才一路跑进来，是想说什么事？</p>
+
+        <p>格林格·金解开西装外套坐下，胸前的珍珠胸针在光里泛了一层柔光。</p>
+        <p><span class="speaker speaker-k">格林格·金：</span>六一节聊投资，也挺应景。安德路，你刚刷到什么了？</p>
+        <p><span class="speaker speaker-a">安德路：</span>美国国会这周又提了一个法案——婴儿账户。联邦政府给每个新生儿开一个投资账户，存1000美金起步，低收入家庭能到5000。钱投在指数基金里，18岁后可以取出来用于教育、买房、创业。</p>
+        <p><span class="speaker">深索道：</span>（没看手机）等于是政府帮你做了第一笔定投。这个版本跟之前有什么不一样？</p>
+        <p><span class="speaker speaker-a">安德路：</span>这次强制绑定了三个锁定条件——取钱必须有明确用途，不然继续滚。另外有人建议跟已有的529大学储蓄计划打通，再加一个Roth IRA通道，从第一笔收入开始就能往里放钱。</p>
+
+        <p>格林格·金端起茶杯，没有急着喝。</p>
+        <p><span class="speaker speaker-k">格林格·金：</span>所以这是一套三层结构——婴儿期的种子资金，学龄期的教育储蓄，就业期的退休账户。一个人在出生那一刻，就被自动装进了一个长期投资框架。</p>
+        <p><span class="speaker speaker-a">安德路：</span>对。人在成年之前，已经有两个长期账户在自动滚动了。全是锁定结构——你不能随便取。你要在18岁前把529里的钱拿出来买辆车？行，收益部分交税再加10%罚款。</p>
+        <p><span class="speaker">深索道：</span>（沉默了一会儿）惩罚机制。这才是真正的"投资从娃娃抓起"——不是教小孩K线图，而是用制度让他的钱比他自己更有耐心。</p>
+
+        <p><span class="speaker speaker-a">安德路：</span>（转向格林格·金）金姐，你做投资这么多年，三个小孩，你怎么看这套东西？</p>
+
+        <p>格林格·金放下杯子，手指轻碰了一下领口的珍珠胸针——那是她从二十多岁时就养成的习惯，仿佛那枚圆润的珠子在提醒她什么事都不值得慌张。</p>
+        <p><span class="speaker speaker-k">格林格·金：</span>你们聊的，本质上是一个机制设计的问题。我给孩子做教育金储备，用的是最简单的指数定投——一年固定时间投进去，十年不看。不是因为我有超凡的意志力，是因为我把取款的流程设计得足够麻烦，需要三个人签字。人在面对自己的钱时，最怕的不是选错标的，是手痒。</p>
+
+        <p><span class="speaker">深索道：</span>（敲了一下桌面）这话说到根上了。</p>
+        <p><span class="speaker speaker-a">安德路：</span>什么意思？</p>
+        <p><span class="speaker">深索道：</span>一个人的投资回报，最终取决于什么？不是他选了哪只股票，不是他什么时候抄底——是他的钱在市场里待了多久。</p>
+        <p><span class="speaker speaker-a">安德路：</span>时间。</p>
+        <p><span class="speaker">深索道：</span>正确。但时间不是天赋，不是意志力。时间是一个结构问题。你要让一个人拿住十年，你不能指望他每天念经。你得用机制把他锁住。</p>
+
+        <p><span class="speaker speaker-k">格林格·金：</span>（微微点头）所以美国那套婴儿账户，真正厉害的地方不是那1000美金。是它把一个人的财务生命，从出生的第一天就放进了一个长期框架里。你不需要懂复利，你已经被装进了复利。</p>
+
+        <p>安德路皱眉，转而问道。</p>
+        <p><span class="speaker speaker-a">安德路：</span>但有个问题——这个结构设计的前提，是有相应的税收和制度配套。一个纯粹的锁定账户，没有这些配套，会不会变成单纯的不方便？</p>
+        <p><span class="speaker speaker-k">格林格·金：</span>（笑了一下）你这个问题本身就说到关键了。你问的是"能不能只靠锁定"——而真正的答案是，锁定和配套机制是一体的。美国能推这套婴儿账户，是因为他们有529计划（收益免税用于教育支出）、401k和Roth IRA（递延税收优惠）。这些机制共同组成了一个完整的生态系统，能把一个人的财务行为锁定到一个超长周期里。</p>
+        <p>她端起茶杯又放下。</p>
+        <p><span class="speaker speaker-k">格林格·金：</span>所以问题不在于某一个工具管不管用，而在于你所在的体系里，有没有一个能让时间真正成为你朋友的结构。没有这个结构，光靠个人意志力——很难。</p>
+
+        <p>安德路沉默了。</p>
+
+        <p><span class="speaker">深索道：</span>所以核心不是婴儿账户这个产品，是"锁定"这个机制。美国用税收做锁链，用惩罚做围墙。</p>
+
+        <p><span class="speaker speaker-a">安德路：</span>那信心呢？你们总说"信心是复利不中断的核动力"——如果一个人的钱被锁住了，他不需要信心，不也就拿住了？</p>
+
+        <p>格林格·金看了他一眼，手指又碰了一下珍珠胸针。</p>
+        <p><span class="speaker speaker-k">格林格·金：</span>你这个问题问得好，但方向反了。信心和锁定机制不是二选一，是叠加的。一个18年后才能取的钱——如果没有信心支撑，你会质疑"放进去到底安不安全""制度会不会变""通胀会不会吃掉"。锁定关上了门，信心让你睡得着。</p>
+        <p><span class="speaker">深索道：</span>金姐说得对。机制解决行为问题，信心解决心理问题。两者缺一不可。</p>
+
+        <p>安德路靠着椅背，想了一会儿。</p>
+        <p><span class="speaker speaker-a">安德路：</span>所以巴菲特说的"别人恐惧时贪婪"——那不是性格问题，是结构问题。他不需要在暴跌时做决策，因为他知道他的钱没有被设计成能轻易取出来。</p>
+        <p><span class="speaker">深索道：</span>你总算开窍了。</p>
+
+        <p>格林格·金从包里取出一个扁平的笔记本，翻开一页，边写边说。</p>
+        <p><span class="speaker speaker-k">格林格·金：</span>今天聊的这些，归根到底是一个框架——挣钱、赚钱、积累、花钱、传承。</p>
+
+        <p>她写完，把本子转向两人：</p>
+
+        <table class="summary-table">
+          <tr><th>层级</th><th>逻辑</th><th>数学</th></tr>
+          <tr><td>挣钱</td><td>靠勤奋——体力、时间、专业</td><td>加法</td></tr>
+          <tr><td>赚钱</td><td>靠能力——判断力、认知差、资本配置</td><td>乘法</td></tr>
+          <tr><td>积累财富</td><td>靠格局——锁定、耐心、不完结的n</td><td>指数</td></tr>
+          <tr><td>花钱</td><td>是一门艺术——把资源放在真正重要的地方</td><td>—</td></tr>
+          <tr><td>传承财富</td><td>靠机制——婴儿账户、信托、保险、家族办公室</td><td>—</td></tr>
+        </table>
+
+        <p><span class="speaker speaker-a">安德路：</span>（看了很久）这个框架，够写十篇对话了。</p>
+        <p><span class="speaker speaker-k">格林格·金：</span>（合上本子）没错。今天六一，先从"投资从娃娃抓起"开头——不是让孩子学会炒股，是让他们的钱在出生那一刻就开始打工。</p>
+
+        <p>深索道端起茶杯，举了一下。</p>
+        <p><span class="speaker">深索道：</span>敬时间。</p>
+        <p><span class="speaker speaker-a">安德路：</span>敬机制。</p>
+        <p><span class="speaker speaker-k">格林格·金：</span>（轻轻碰了碰杯沿，珍珠胸针在阳光下闪了一下）敬信心。</p>
+
+        <p class="epilogue" style="margin-top:20px;color:#d4a853;">
+          核心词：信心是复利不中断的核动力。最重要的是复利的"n"期限，不是"r"复利率。时间不是天赋，是一个结构问题——你要用机制把自己锁住。
+        </p>
+        <p class="epilogue">
+          （挣钱靠勤奋，赚钱靠能力，积累财富靠格局，花钱是艺术，传承财富靠机制——作为后续对话的伏笔。）
+        </p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -547,17 +672,23 @@ footer .copyright{font-size:.75rem;color:#5a5855}
     <div class="section-title">关于</div>
     <div class="about-layout">
       <div class="about-text">
-        <div class="tagline">私家智囊，您的投资家庭医生。</div>
+        <div class="tagline">私家智囊 — 您家庭财富的规划师与守夜人。</div>
+      <p>致力于帮助您在漫长的投资旅途中，守护那份至关重要的、让复利得以生长的坚定与平静。</p>
       <p>20年A股长投+融资双体系实战，穿越周期。不相信预测，只相信纪律。</p>
-      <p>核心理念：信心是复利不中断的核动力。<br>投资选复利，投机选凯利公式，家庭财富保值增值选私家智囊。</p>
+      <p style="margin-top:16px;font-size:.95rem;color:#d4a853;">
+        <strong>规划师 → 年度资产审计 · 再平衡 · 风险前置预警</strong>
+      </p>
+      <p style="font-size:.95rem;color:#d4a853;">
+        <strong>守夜人 → 暴跌时在场 · 贪婪时拉绳 · 风浪中在岗</strong>
+      </p>
       <p style="margin-top:20px;color:#8a8885;font-size:.9rem;">
         不荐股、不带单、不给代码。<br>
-        只做一件事：帮你锚定信心，管住手，拿住。
+        只做一件事：帮你守护信心，管住手，拿住。
       </p>
       </div>
       <!-- Portrait: confidence is the core power -->
       <div class="about-portrait">
-        <img src="./images/about-portrait.jpg" alt="私家智囊 · 信心是复利不中断的核动力" />
+        <img src="./images/about-portrait.jpg" alt="私家智囊 · 家庭财富的规划师与守夜人" />
       </div>
     </div>
     <!-- Elegant abstract portrait: strategist presence -->
@@ -574,19 +705,13 @@ footer .copyright{font-size:.75rem;color:#5a5855}
       <img src="./images/subscribe-visual.jpg" alt="阅读的力量" />
     </div>
     <div class="subscribe-box">
-      <h2>关注私家智囊</h2>
-      <p>每周一篇，不讲代码，只聊怎么拿住。<br>新对话、新理念，第一时间送达。</p>
-      <div style="display:flex;flex-direction:column;gap:16px;max-width:400px;margin:0 auto;">
-        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-          <span style="display:inline-block;padding:12px 24px;border:1px solid #d4a853;color:#d4a853;font-size:.85rem;letter-spacing:.05em;">
-            ⓦ 微信公众号 · 私家智囊
-          </span>
-        </div>
-        <p style="font-size:.85rem;color:#6a6865;line-height:1.6;">
-          微信公众号搜索 <strong style="color:#d4a853;">"私家智囊"</strong> 关注<br>
-          或在微信扫描下方二维码
-        </p>
-      </div>
+      <h2>订阅私家智囊</h2>
+      <p>每周一篇，不讲代码，只聊怎么拿住。<br>新对话、新理念，第一时间送到你的邮箱。</p>
+      <form class="subscribe-form" onsubmit="event.preventDefault();alert('感谢订阅（演示版）——正式上线后接入真实邮件服务。');">
+        <input type="email" placeholder="输入你的邮箱" required>
+        <button type="submit">订阅 →</button>
+      </form>
+      <p style="margin-top:16px;font-size:.75rem;color:#5a5855;">不发送垃圾邮件。随时可以退订。</p>
     </div>
   </div>
 </section>
@@ -594,7 +719,7 @@ footer .copyright{font-size:.75rem;color:#5a5855}
 <!-- ===== Footer ===== -->
 <footer>
   <div class="container">
-    <p class="slogan">信心，是复利<span>不中断</span>的核动力</p>
+    <p class="slogan">家庭财富的<span>规划师</span>与<span>守夜人</span></p>
     <p class="copyright">私家智囊 · 2026</p>
   </div>
 </footer>
