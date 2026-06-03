@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="深索道×安德路×格林格·金：卖出前的两个自问——当初买它的理由变了吗？这个变化是临时的还是永久的？少操作不是消极，是主动放弃不该动的时刻。">
+<title>[6分钟] 第九篇 · 你不缺信息，缺的是一个能帮你按住手的人 — 私家智囊</title>
+<style>
+/* === Reset === */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:-apple-system,"PingFang SC","Noto Sans SC","Helvetica Neue",sans-serif;
+  background:#0a0e1a;color:#e8e6e3;line-height:1.7;
+  -webkit-font-smoothing:antialiased
+}
+
+/* === Typography === */
+h1,h2,h3{font-weight:400;letter-spacing:-0.02em}
+h1{font-size:clamp(2rem,5vw,3.5rem)}
+h2{font-size:clamp(1.4rem,3vw,2rem)}
+h3{font-size:clamp(1rem,2vw,1.3rem)}
+p{font-size:clamp(0.9rem,1.5vw,1.05rem);color:#b0aeab}
+a{color:#d4a853;text-decoration:none;transition:color .3s}
+a:hover{color:#f0c868}
+
+/* === Layout === */
+.container{max-width:740px;margin:0 auto;padding:0 24px}
+.section{padding:100px 0}
+.section-title{
+  font-size:.75rem;text-transform:uppercase;letter-spacing:.15em;
+  color:#d4a853;margin-bottom:12px;font-weight:500
+}
+
+/* === Header === */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(10,14,26,.85);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(212,168,83,.08)
+}
+header .container{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-size:1rem;font-weight:500;color:#e8e6e3;letter-spacing:.05em}
+.logo span{color:#d4a853}
+nav a{font-size:.8rem;margin-left:24px;color:#8a8885}
+nav a:hover{color:#e8e6e3}
+
+/* === Hero SVG Background === */
+.hero{
+  min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden
+}
+.hero-svg{
+  position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none
+}
+.hero .container{position:relative;z-index:1}
+.hero .subtitle{
+  font-size:.8rem;letter-spacing:.12em;color:#d4a853;margin-bottom:20px;font-weight:500
+}
+.hero h1{line-height:1.2;margin-bottom:24px}
+.hero h1 .highlight{display:block;color:#d4a853;font-weight:500}
+.hero p{font-size:clamp(1rem,1.8vw,1.15rem);max-width:520px;margin-bottom:40px}
+.hero-cta{
+  display:inline-block;padding:14px 36px;
+  border:1px solid #d4a853;color:#d4a853;
+  font-size:.9rem;letter-spacing:.05em;transition:all .3s
+}
+.hero-cta:hover{background:#d4a853;color:#0a0e1a}
+
+/* === Core Belief === */
+.belief{background:linear-gradient(180deg,#0a0e1a 0%,#0f1424 100%)}
+.belief-block{
+  border-left:2px solid #d4a853;
+  padding:28px 0 28px 28px;margin:40px 0
+}
+.belief-block .big-quote{
+  font-size:clamp(1.4rem,3vw,1.8rem);color:#e8e6e3;line-height:1.4
+}
+.belief-block .attribution{margin-top:12px;font-size:.85rem;color:#8a8885}
+
+/* === Principles === */
+.principles-grid{display:grid;grid-template-columns:1fr;gap:24px;margin-top:40px}
+@media(min-width:640px){.principles-grid{grid-template-columns:1fr 1fr 1fr}}
+.principle-card{
+  border:1px solid rgba(212,168,83,.12);padding:32px 24px;
+  background:rgba(255,255,255,.02);transition:border-color .3s,background .3s
+}
+.principle-card:hover{border-color:rgba(212,168,83,.3);background:rgba(212,168,83,.03)}
+.principle-card .icon{display:block;margin-bottom:16px}
+.principle-card .icon svg{width:48px;height:48px}
+.principle-card h3{margin-bottom:8px}
+.principle-card p{font-size:.9rem}
+
+/* === Dialogue Tabs === */
+.dialogue-tabs{display:flex;gap:12px;margin:32px 0}
+.dialogue-tabs button{
+  padding:10px 20px;background:transparent;border:1px solid rgba(212,168,83,.2);
+  color:#8a8885;font-size:.85rem;cursor:pointer;transition:all .3s
+}
+.dialogue-tabs button:hover{border-color:rgba(212,168,83,.4);color:#e8e6e3}
+.dialogue-tabs button.active{background:rgba(212,168,83,.1);border-color:#d4a853;color:#d4a853}
+.dialogue-pane{display:none}
+.dialogue-pane.active{display:block}
+
+/* === Dialogue Content === */
+.dialogue-block{
+  padding:24px;border-left:2px solid rgba(212,168,83,.15);
+  background:rgba(255,255,255,.015);font-size:.95rem;line-height:1.8;color:#c8c6c2
+}
+.dialogue-block .speaker{font-weight:500;color:#d4a853}
+.dialogue-block .speaker-a{color:#7aa8d8}
+.dialogue-block .speaker-k{color:#c9897a}
+.dialogue-block .scene{
+  font-style:italic;color:#6a6865;font-size:.85rem;margin-bottom:16px;padding-left:0
+}
+.dialogue-block .epilogue{
+  margin-top:24px;color:#8a8885;font-style:italic;font-size:.9rem
+}
+.dialogue-block .quote-line{
+  margin-top:20px;padding:16px 20px;border-left:2px solid #d4a853;
+  color:#b0aeab;font-style:italic;font-size:.9rem
+}
+.dialogue-block .summary-table{
+  margin:16px 0;width:100%;border-collapse:collapse;font-size:.85rem
+}
+.dialogue-block .summary-table td,.dialogue-block .summary-table th{
+  padding:8px 12px;border:1px solid rgba(255,255,255,.06);text-align:left
+}
+.dialogue-block .summary-table th{color:#d4a853;font-weight:500;background:rgba(212,168,83,.04)}
+
+/* === About === */
+.about-text{border-top:1px solid rgba(212,168,83,.15);padding-top:40px;margin-top:20px}
+.about-text .tagline{font-size:1rem;color:#d4a853;margin-bottom:20px;font-weight:500}
+
+/* === Subscribe === */
+.subscribe-box{
+  border:1px solid rgba(212,168,83,.15);padding:48px 32px;text-align:center;
+  background:rgba(212,168,83,.02)
+}
+.subscribe-box h2{margin-bottom:16px}
+.subscribe-box p{margin-bottom:28px;font-size:.95rem}
+.subscribe-form{display:flex;flex-direction:column;gap:12px;max-width:400px;margin:0 auto}
+@media(min-width:480px){.subscribe-form{flex-direction:row}}
+.subscribe-form input{
+  flex:1;padding:12px 16px;background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);color:#e8e6e3;font-size:.9rem;outline:none;
+  transition:border-color .3s
+}
+.subscribe-form input:focus{border-color:#d4a853}
+.subscribe-form input::placeholder{color:#6a6865}
+.subscribe-form button{
+  padding:12px 24px;background:#d4a853;border:none;color:#0a0e1a;
+  font-size:.85rem;font-weight:500;cursor:pointer;transition:background .3s;white-space:nowrap
+}
+.subscribe-form button:hover{background:#f0c868}
+
+/* === Footer === */
+footer{border-top:1px solid rgba(255,255,255,.04);padding:48px 0 32px;text-align:center}
+footer .slogan{font-size:.9rem;color:#8a8885;margin-bottom:8px}
+footer .slogan span{color:#d4a853}
+footer .copyright{font-size:.75rem;color:#5a5855}
+
+/* === Mobile Fine-tune === */
+@media(max-width:480px){
+  .section{padding:64px 0}
+  nav a{margin-left:14px;font-size:.75rem}
+  .principle-card{padding:24px 20px}
+  .subscribe-box{padding:32px 20px}
+  .dialogue-tabs{flex-direction:column}
+}
+
+/* === Scroll Indicator === */
+.scroll-indicator{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+  width:1px;height:40px;
+  background:linear-gradient(180deg,#d4a853 0%,transparent 100%);
+  animation:pulse-down 2s ease-in-out infinite
+}
+@keyframes pulse-down{
+  0%,100%{opacity:.3;transform:translateX(-50%) translateY(0)}
+  50%{opacity:1;transform:translateX(-50%) translateY(8px)}
+}
+
+/* === Hero Image Overlay === */
+.hero-img{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  object-fit:cover;object-position:center;
+  opacity:.18;z-index:0;pointer-events:none;
+  mix-blend-mode:screen;filter:brightness(1.1) contrast(1.05)
+}
+
+/* === Section Images === */
+.section-img{
+  display:block;margin:48px auto 0;max-width:100%;height:auto;
+  border-radius:4px;border:1px solid rgba(212,168,83,.1);
+  box-shadow:0 8px 40px rgba(0,0,0,.4),0 0 60px rgba(212,168,83,.04)
+}
+.section-img.wide{max-width:900px}
+.section-img.square{max-width:500px}
+.section-img.portrait{max-width:320px;border-radius:50% 50% 4px 4px}
+
+/* === Dialogue Banner Image === */
+.dialogue-banner{
+  margin-bottom:32px;border-radius:4px;overflow:hidden;
+  border:1px solid rgba(212,168,83,.12);
+  box-shadow:0 4px 24px rgba(0,0,0,.3)
+}
+.dialogue-banner img{
+  width:100%;height:auto;display:block;opacity:.75;
+  filter:brightness(.9) contrast(1.08);transition:opacity .5s
+}
+.dialogue-banner:hover img{opacity:.9}
+
+/* === About Portrait Layout === */
+.about-layout{
+  display:flex;flex-direction:column;gap:36px;align-items:center;margin-top:20px
+}
+@media(min-width:640px){.about-layout{flex-direction:row;align-items:flex-start}}
+.about-text{border-top:none;padding-top:0;margin-top:0;flex:1}
+.about-portrait{
+  flex-shrink:0;text-align:center
+}
+.about-portrait img{
+  max-width:280px;width:100%;height:auto;border-radius:4px;
+  border:1px solid rgba(212,168,83,.2);
+  box-shadow:0 8px 32px rgba(0,0,0,.5),0 0 40px rgba(212,168,83,.06);
+  filter:brightness(1.05) contrast(1.03)
+}
+
+/* === Hero Two-Column Layout === */
+.hero-layout{display:flex;flex-direction:column;gap:48px;align-items:center}
+@media(min-width:900px){.hero-layout{flex-direction:row;align-items:center}}
+.hero-text{flex:1}
+.hero-brand{flex-shrink:0;text-align:center}
+.hero-brand img{
+  max-width:380px;width:100%;border-radius:8px;
+  border:1px solid rgba(212,168,83,.25);
+  box-shadow:0 12px 48px rgba(0,0,0,.5),0 0 60px rgba(212,168,83,.08)
+}
+
+/* === Light-background image adaptation === */
+.img-light-bg{
+  display:block;margin:48px auto 32px;padding:32px 40px;
+  background:linear-gradient(180deg,#f5f4f2 0%,#eae8e5 100%);
+  border-radius:4px;border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 8px 40px rgba(0,0,0,.4),0 0 40px rgba(212,168,83,.04);
+  max-width:480px;text-align:center
+}
+.img-light-bg img{max-width:100%;height:auto;display:block;margin:0 auto}
+
+/* === Subscribe Visual === */
+.subscribe-visual{margin-bottom:32px;text-align:center}
+.subscribe-visual img{
+  max-width:260px;width:100%;height:auto;border-radius:4px;
+  border:1px solid rgba(212,168,83,.15);opacity:.85;
+  box-shadow:0 4px 24px rgba(0,0,0,.3)
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header>
+  <div class="container">
+    <div class="logo">私家<span>智囊</span></div>
+    <nav>
+      <a href="./index.html#belief">理念</a>
+      <a href="./index.html#content">对话列表</a>
+      <a href="./index.html#about">关于</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== Page Title ===== -->
+<section class="section" style="padding-top:120px;">
+  <div class="container">
+    <div class="section-title">对话 · 第九篇</div>
+    <h2>你不缺信息，缺的是一个能帮你按住手的人</h2>
+  </div>
+</section>
+
+<!-- ===== Dialogue 7 ===== -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="dialogue-block">
+<p class="scene">还是那个茶馆。安德路到的时候，深索道和格林格·金已经坐了一会儿。金面前放着一杯红茶，深索道面前是空的——他在等茶凉。</p>
+<p><span class="speaker">安德路：</span> （坐下，把手机推到桌子中间）你们看看这个。</p>
+<p><span class="speaker">深索道：</span> （看了一眼屏幕）这是什么？</p>
+<p><span class="speaker">安德路：</span> 我一个朋友过去两年的交易记录。他每个月的操作次数从去年的6次变成了今年的14次。账户收益率从13%变成了负2%。但他跟我说他"感觉自己在进步"——操作越来越快了。</p>
+<p><span class="speaker">格林格·金：</span> （没看手机）13%变负2%，15个百分点的差距。他是选错股票了，还是操作太多了？</p>
+<p><span class="speaker">安德路：</span> 操作太多了。他自己复盘的时候也说——每一次操作都有理由。技术面走坏了、利好要出了、大盘不对劲了。但加起来就是输。</p>
+<p><span class="speaker">深索道：</span> 同一个故事。我看过几百次了。</p>
+<p><span class="speaker">格林格·金：</span> 我也看过。我身边一些朋友——不是不懂投资，是管不住手。他们缺的不是一个交易系统，是一道门。</p>
+<p><span class="speaker">安德路：</span> 一道门？</p>
+<p><span class="speaker">格林格·金：</span> 在每次点击"卖出"之前，有一道门让你停一下，问自己一个问题。</p>
+<p><span class="speaker">深索道：</span> 这个问题很简单：<strong style="color:#d4a853;">你当初买它的理由变了吗？</strong></p>
+<p><span class="speaker">安德路：</span> 就一个问题？</p>
+<p><span class="speaker">深索道：</span> 再加一个：<strong style="color:#d4a853;">这个变化是临时的，还是永久的？</strong></p>
+<p>如果理由没变——别动。如果变化是临时的——也别动。只有"理由变了并且是永久的"，才考虑动。</p>
+<p><span class="speaker">格林格·金：</span> 我给自己设过一个机制。我做了任何一笔买入之后，在笔记本上写一句话——买它的理由。三个月后回头看，如果那句话还成立，就不动。如果不成立了，再看是临时还是永久。</p>
+<p><span class="speaker">安德路：</span> 那你有多少次发现"三个月后理由不成立了"？</p>
+<p><span class="speaker">格林格·金：</span> 十次里有两次。那两次我卖掉了，事后看都是对的。另外八次——我留住了，事后看也是对的。</p>
+<p><span class="speaker">安德路：</span> 那如果我没有这个机制呢？</p>
+<p><span class="speaker">深索道：</span> 那就需要一个人。</p>
+<hr style="border:none;border-top:1px solid rgba(212,168,83,.12);margin:32px 0;">
+<p><span class="speaker">安德路：</span> 一个人？</p>
+<p><span class="speaker">深索道：</span> 一个人，你知道他不卖产品给你，你知道他在你慌的时候会说一句"先别急"。不一定是建议，不一定给指令——就是让你停一下。</p>
+<p><span class="speaker">格林格·金：</span> 我理解的"按住手"，不是拦着不让做。是让你在动之前，知道自己为什么动。</p>
+<p><span class="speaker">安德路：</span> 所以守夜人的角色，就是那个让你停一下的人？</p>
+<p><span class="speaker">深索道：</span> 对。规划师帮你画好框架——钱放哪、放多少、什么时候调整。守夜人帮你做的——就是在你每次想越界的时候提醒你一下。</p>
+<p>你原来的框架说了——融资比例不超过资产30%。你自己可能会想多融一点没事。守夜人的工作就是告诉你，你当初定的就是这个数，现在越界了。</p>
+<p><span class="speaker">格林格·金：</span> 我公公那辈人有一个习惯——买股票之前，先打个电话给他在银行的朋友。不是问"买不买"，是告诉他"我打算买这个，你看有什么问题吗"。他不需要那个人替他做决定，他需要的是在按下按钮之前，有一个声音。</p>
+<p><span class="speaker">安德路：</span> 那个声音就是守夜人。</p>
+<p><span class="speaker">格林格·金：</span> 对。</p>
+<hr style="border:none;border-top:1px solid rgba(212,168,83,.12);margin:32px 0;">
+<p><span class="speaker">安德路：</span> 那我朋友这个情况——操作频率翻倍、收益转负——如果有一个守夜人，该怎么做？</p>
+<p><span class="speaker">深索道：</span> 给他发一份行为账单。</p>
+<p><span class="speaker">安德路：</span> 什么是行为账单？</p>
+<p><span class="speaker">深索道：</span> 把他这14次操作逐笔列出来——每一次卖出的价格、买入的价格、手续费、税——然后对比"如果这些操作全部没做，现在的账户是多少钱"。</p>
+<p><span class="speaker">安德路：</span> 那他看了之后？</p>
+<p><span class="speaker">深索道：</span> 通常他会沉默30秒。然后说一句"我下次不这样了"。然后下次还会这样。但持续发这种账单，一年之后他会开始少操作。</p>
+<p><span class="speaker">格林格·金：</span> 因为数据会说话。我每年年底会做一件事——把自己当年的操作记录打印出来，和"什么都没做"的方案对比。第一年对比完，我减了30%的操作。不是刻意控制的，是数据告诉我——少动比多动好。</p>
+<p><span class="speaker">安德路：</span> 所以行为账单的意义不是让人愧疚，是让人看到数据？</p>
+<p><span class="speaker">格林格·金：</span> 对。人不怕亏钱。人怕看到"我明明什么都没做就赢了"。</p>
+<hr style="border:none;border-top:1px solid rgba(212,168,83,.12);margin:32px 0;">
+<p><span class="speaker">安德路：</span> 我发现一个有意思的事。你们俩，一个是规划师，一个是已经走通的投资者——你们都提倡少操作。</p>
+<p><span class="speaker">深索道：</span> 这不奇怪。JP摩根的统计：2003到2022这二十年，标普500年化8.2%。如果你错过最好的10个交易日，年化掉到3.6%。错过最好的30天，变成亏损。二十年，30天，就决定了胜负。</p>
+<p><span class="speaker">格林格·金：</span> 所以少操作不是消极，是主动放弃那些"你以为该动但实际不该动"的时刻。</p>
+<p><span class="speaker">安德路：</span> （停顿了一下）那说回我朋友。他现在应该怎么做？</p>
+<p><span class="speaker">深索道：</span> 第一，把最近三个月的操作打印出来，逐笔标上"如果没动会怎样"。第二，在他手机里设一个提醒，每次操作前弹出"你当初买它的理由变了吗"。第三，找一个人——不卖产品、不替他决策——让他每次想操作的时候，先发给那个人看。</p>
+<p><span class="speaker">格林格·金：</span> 第三条最难。因为前两条是自己能做的，第三条需要信任一个人。</p>
+<p><span class="speaker">深索道：</span> 对。但这第三条，就是我从规划师变成守夜人的时候。</p>
+<hr style="border:none;border-top:1px solid rgba(212,168,83,.12);margin:32px 0;">
+<p><span class="speaker">本文核心，值得收藏：</span></p>
+<p><span class="speaker">卖出前的两个自问：</span></p>
+<p>1. 我当初买它的理由变了吗？</p>
+<p>2. 这个变化是临时的，还是永久的？</p>
+<p>答案分别是"没变"和"临时的"——别动。</p>
+<p><span class="speaker">行为账单：</span></p>
+<p>把实际操作的收益率和"什么都没做"的收益率对比。数据会说话。</p>
+<div class="quote-line">
+少操作不是消极。是主动放弃那些"你以为该动但实际不该动"的时刻。
+</div>
+<hr style="border:none;border-top:1px solid rgba(212,168,83,.12);margin:32px 0;">
+<p>*私家智囊 · 您家庭财富的规划师与守夜人*</p>
+<p>*规划师画图，守夜人值班。不荐股，不带单，不给代码。只做两件事：画好一张图，盯住五条底线。*</p>
+<p>*关注「私家智囊」，每周一篇，不讲代码，只聊怎么拿住。*</p>
+</div>
+
+    <div style="text-align:center;margin-top:40px;">
+      <a href="./index.html" style="display:inline-block;padding:12px 28px;border:1px solid rgba(212,168,83,.25);color:#d4a853;font-size:.85rem;letter-spacing:.05em;text-decoration:none;">← 返回全部对话</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <div class="container">
+    <p class="slogan">家庭财富的<span>规划师</span>与<span>守夜人</span></p>
+    <p class="copyright">私家智囊 · 2026</p>
+  </div>
+</footer>
+
+</body>
+</html>
