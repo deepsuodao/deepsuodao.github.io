@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>人生愿望清单 · 目标规划表 — 私家智囊</title>
+<meta name="description" content="拿出一张纸，写下你的人生愿望清单，标上金额和时间。清晰的量化目标，是财富航行的真正坐标。">
+<meta property="og:title" content="人生愿望清单 · 目标规划表 — 私家智囊">
+<meta property="og:description" content="用今天的理性规划，换取明天选择生活的自由。从一张清单开始你的财富规划。">
+<meta property="og:image" content="https://huanghb71.github.io/deepsuodao.github.io/images/dialogue-scene.jpg">
+<meta property="og:type" content="article">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:#0a0e1a;color:#e8e6e3;line-height:1.7;-webkit-font-smoothing:antialiased}
+.container{max-width:680px;margin:0 auto;padding:0 24px}
+
+header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,14,26,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,168,83,.08)}
+header .container{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-size:1rem;font-weight:500;color:#e8e6e3}
+.logo a{color:#e8e6e3;text-decoration:none}
+.logo span{color:#d4a853}
+nav a{font-size:.8rem;margin-left:20px;color:#8a8885;text-decoration:none}
+nav a:hover{color:#e8e6e3}
+
+.page{padding:100px 0 60px}
+.page h1{font-size:1.6rem;font-weight:500;margin-bottom:8px}
+.page .related{font-size:.8rem;color:#6a6865;margin-bottom:32px}
+.page .related a{color:#d4a853}
+.page .quote{font-size:.95rem;color:#8a8885;font-style:italic;padding:20px 24px;border-left:2px solid #d4a853;background:rgba(212,168,83,.03);margin-bottom:28px;line-height:1.8}
+
+.row-input{display:grid;grid-template-columns:2fr 1fr 1fr 50px;gap:8px;align-items:end;margin-bottom:12px}
+.row-input.header{font-size:.75rem;color:#6a6865;margin-bottom:8px}
+.row-input.header span{padding:0 4px}
+.row-input input{padding:10px 12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);color:#e8e6e3;font-size:.9rem;border-radius:4px;outline:none;transition:border-color .3s}
+.row-input input:focus{border-color:#d4a853}
+.row-input input:last-child{width:100%;padding:8px}
+.del-btn{background:rgba(200,80,50,.1);border:1px solid rgba(200,80,50,.3);color:#c87868;font-size:.85rem;border-radius:4px;cursor:pointer;padding:10px 6px;text-align:center}
+.del-btn:hover{background:rgba(200,80,50,.2)}
+@media(max-width:480px){.row-input{grid-template-columns:1fr 1fr;gap:6px}.row-input.header{display:none}}
+
+.add-row{padding:12px;border:1px dashed rgba(255,255,255,.06);text-align:center;color:#6a6865;font-size:.85rem;cursor:pointer;border-radius:4px;margin-bottom:24px;transition:all .2s}
+.add-row:hover{border-color:rgba(212,168,83,.3);color:#b0aeab}
+
+.summary-box{padding:24px;background:rgba(212,168,83,.04);border:1px solid rgba(212,168,83,.1);border-radius:6px;margin-bottom:24px}
+.summary-box .label{font-size:.78rem;color:#6a6865}
+.summary-box .big{font-size:1.8rem;font-weight:300;color:#d4a853;margin:4px 0}
+.summary-box .row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.85rem}
+.summary-box .row:last-child{border:none}
+
+.actions{text-align:center;margin:28px 0}
+.btn{display:inline-block;padding:10px 24px;background:rgba(212,168,83,.1);border:1px solid rgba(212,168,83,.3);color:#d4a853;font-size:.85rem;border-radius:4px;cursor:pointer;text-decoration:none;margin:6px}
+.btn:hover{background:rgba(212,168,83,.2)}
+.btn.primary{background:#d4a853;color:#0a0e1a;border-color:#d4a853}
+.btn.primary:hover{background:#f0c868}
+
+footer{border-top:1px solid rgba(255,255,255,.04);padding:32px 0;text-align:center;font-size:.8rem;color:#5a5855}
+footer a{color:#d4a853;text-decoration:none}
+@media print{header{position:static}.page{padding:20px 0}.add-row,.del-btn,footer{display:none}.row-input input{border:1px solid #ccc}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="logo"><a href="index.html">私家<span>智囊</span></a></div>
+    <nav>
+      <a href="index.html#belief">理念</a>
+      <a href="index.html#content">对话</a>
+      <a href="index.html#tools">工具箱</a>
+      <a href="index.html#about">关于</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page">
+<div class="container">
+
+<h1>人生愿望清单</h1>
+<p class="related">配套工具 · <a href="dialogue-01.html">对话01：规划，始于一张人生清单</a></p>
+
+<div class="quote">
+  "你希望财富，支撑起怎样的人生？"<br>
+  <span style="font-size:.85rem">拿出一张纸（或下面的表格），写下愿望，标上金额和时间。清晰的量化目标，是财富航行的真正坐标。</span>
+</div>
+
+<div class="row-input header">
+  <span>愿望（例：换房、教育、退休…）</span>
+  <span>所需金额（万）</span>
+  <span>目标年份</span>
+  <span></span>
+</div>
+
+<div id="rows">
+  <div class="row-input">
+    <input type="text" placeholder="例：换一套更宽敞的房子" oninput="update()">
+    <input type="number" placeholder="金额（万）" oninput="update()">
+    <input type="number" placeholder="例：5" oninput="update()">
+    <button class="del-btn" onclick="delRow(this)">×</button>
+  </div>
+</div>
+
+<div class="add-row" onclick="addRow()">+ 添加一个愿望</div>
+
+<div class="summary-box" id="summary">
+  <div class="label">愿望总计</div>
+  <div class="big" id="totalAmt">¥0</div>
+  <div id="detail"></div>
+</div>
+
+<div class="actions">
+  <button class="btn primary" onclick="print()">🖨 打印清单</button>
+  <button class="btn" onclick="resetAll()">重新填写</button>
+</div>
+
+</div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>用今天的理性规划，换取明天选择生活的自由。</p>
+    <a href="index.html">← 返回私家智囊首页</a>
+  </div>
+</footer>
+
+<script>
+function fmt(n){return n.toLocaleString('zh-CN',{maximumFractionDigits:0})}
+
+function addRow(){
+  var div=document.createElement('div');
+  div.className='row-input';
+  div.innerHTML='<input type="text" placeholder="你的愿望..." oninput="update()"><input type="number" placeholder="金额（万）" oninput="update()"><input type="number" placeholder="几年后？" oninput="update()"><button class="del-btn" onclick="delRow(this)">×</button>';
+  document.getElementById('rows').appendChild(div);
+}
+
+function delRow(btn){btn.parentElement.remove();update();}
+
+function update(){
+  var rows=document.querySelectorAll('#rows .row-input'),total=0,html='';
+  rows.forEach(function(r,i){
+    var inputs=r.querySelectorAll('input');
+    var name=inputs[0].value||'愿望 '+(i+1);
+    var amt=parseFloat(inputs[1].value)||0;
+    var yr=parseInt(inputs[2].value)||0;
+    total+=amt;
+    if(amt>0){
+      html+='<div class="row"><span>'+name+(yr>0?' · '+yr+'年内':'')+'</span><span style="color:#d4a853">¥'+fmt(amt*10000)+'</span></div>';
+    }
+  });
+  document.getElementById('totalAmt').textContent='¥'+fmt(total*10000);
+  document.getElementById('detail').innerHTML=html||'<div class="row"><span style="color:#6a6865">添加你的第一个愿望</span></div>';
+}
+
+function resetAll(){
+  document.getElementById('rows').innerHTML='<div class="row-input"><input type="text" placeholder="例：换一套更宽敞的房子" oninput="update()"><input type="number" placeholder="金额（万）" oninput="update()"><input type="number" placeholder="例：5" oninput="update()"><button class="del-btn" onclick="delRow(this)">×</button></div>';
+  update();
+}
+
+update();
+</script>
+</body>
+</html>

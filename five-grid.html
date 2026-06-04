@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>五格家庭财务结构图 — 私家智囊</title>
+<meta name="description" content="五个格子：堡垒账户、锋利账户、现金储备、跨市场配置、固定资产。填完就知道自己家的财务盲区在哪。">
+<meta property="og:title" content="五格家庭财务结构图 — 私家智囊">
+<meta property="og:description" content="空一个格子，比填错一个格子好。建一座属于你的家庭财务堡垒。">
+<meta property="og:image" content="https://huanghb71.github.io/deepsuodao.github.io/images/dialogue-scene.jpg">
+<meta property="og:type" content="article">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:#0a0e1a;color:#e8e6e3;line-height:1.7;-webkit-font-smoothing:antialiased}
+.container{max-width:680px;margin:0 auto;padding:0 24px}
+
+header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,14,26,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,168,83,.08)}
+header .container{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-size:1rem;font-weight:500;color:#e8e6e3}
+.logo a{color:#e8e6e3;text-decoration:none}
+.logo span{color:#d4a853}
+nav a{font-size:.8rem;margin-left:20px;color:#8a8885;text-decoration:none}
+nav a:hover{color:#e8e6e3}
+
+.page{padding:100px 0 60px}
+.page h1{font-size:1.6rem;font-weight:500;margin-bottom:8px}
+.page .related{font-size:.8rem;color:#6a6865;margin-bottom:32px}
+.page .related a{color:#d4a853}
+.page .subtitle{font-size:.9rem;color:#8a8885;margin-bottom:28px}
+.page .quote{font-size:.9rem;color:#6a6865;font-style:italic;margin-bottom:24px}
+
+.grid-box{border:1px solid rgba(212,168,83,.2);border-radius:8px;overflow:hidden;margin-bottom:28px}
+.grid-box .g-title{background:rgba(212,168,83,.06);padding:14px 20px;font-size:.85rem;color:#d4a853;font-weight:500;border-bottom:1px solid rgba(212,168,83,.15)}
+.grid-box .g-body{padding:20px}
+.grid-box label{display:block;font-size:.78rem;color:#6a6865;margin-bottom:4px}
+.grid-box input,.grid-box textarea{width:100%;padding:10px 14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);color:#e8e6e3;font-size:.9rem;border-radius:4px;outline:none;resize:vertical;transition:border-color .3s}
+.grid-box input:focus,.grid-box textarea:focus{border-color:#d4a853}
+.grid-box .q{font-size:.82rem;color:#8a8885;margin-top:8px;margin-bottom:0}
+.grid-box .status{display:inline-block;padding:3px 10px;border-radius:3px;font-size:.75rem;margin-top:8px}
+.status.filled{background:rgba(100,180,100,.12);color:#7c7;border:1px solid rgba(100,180,100,.2)}
+.status.warn{background:rgba(200,180,60,.12);color:#dd8;border:1px solid rgba(200,180,60,.2)}
+.status.empty{background:rgba(200,100,80,.12);color:#d86;border:1px solid rgba(200,100,80,.2)}
+
+.actions{margin:28px 0;text-align:center}
+.btn{display:inline-block;padding:10px 24px;background:rgba(212,168,83,.1);border:1px solid rgba(212,168,83,.3);color:#d4a853;font-size:.85rem;border-radius:4px;cursor:pointer;text-decoration:none;margin:6px}
+.btn:hover{background:rgba(212,168,83,.2)}
+.btn.primary{background:#d4a853;color:#0a0e1a;border-color:#d4a853}
+.btn.primary:hover{background:#f0c868}
+
+.summary{margin-top:24px;padding:20px;background:rgba(212,168,83,.04);border:1px solid rgba(212,168,83,.1);border-radius:6px;font-size:.85rem;color:#8a8885;line-height:1.8}
+.summary strong{color:#e8e6e3}
+
+footer{border-top:1px solid rgba(255,255,255,.04);padding:32px 0;text-align:center;font-size:.8rem;color:#5a5855}
+footer a{color:#d4a853;text-decoration:none}
+@media print{header{position:static}.page{padding:20px 0}.grid-box{break-inside:avoid}.actions{display:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="logo"><a href="index.html">私家<span>智囊</span></a></div>
+    <nav>
+      <a href="index.html#belief">理念</a>
+      <a href="index.html#content">对话</a>
+      <a href="index.html#tools">工具箱</a>
+      <a href="index.html#about">关于</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page">
+<div class="container">
+
+<h1>五格家庭财务结构图</h1>
+<p class="related">配套工具 · <a href="dialogue-07.html">对话07：给家庭建一座堡垒</a></p>
+<p class="quote">"不是每个格子都需要填满。但空着的格子，就是你的风险点。"</p>
+
+<div class="grid-box">
+  <div class="g-title">第一格 · 堡垒账户 · 零融资、分红稳定的安全资产</div>
+  <div class="g-body">
+    <p class="q">自问：它的现金流能覆盖哪些固定支出？</p>
+    <textarea rows="3" placeholder="例：180万分红股票，每年8万，覆盖房贷月供" oninput="updateStatus(this,'s1')"></textarea>
+    <div class="status empty" id="s1">待填写</div>
+  </div>
+</div>
+
+<div class="grid-box">
+  <div class="g-title">第二格 · 锋利账户 · 追求超额收益，可接受波动和杠杆</div>
+  <div class="g-body">
+    <p class="q">自问：它归零了，家庭能扛多久？</p>
+    <textarea rows="3" placeholder="例：融资账户30万，占总投资15%。归零不影响堡垒账户。" oninput="updateStatus(this,'s2')"></textarea>
+    <div class="status empty" id="s2">待填写</div>
+  </div>
+</div>
+
+<div class="grid-box">
+  <div class="g-title">第三格 · 现金储备 · 不动的那笔钱（建议≥36个月固定支出）</div>
+  <div class="g-body">
+    <p class="q">自问：不靠任何收入，能撑多久？</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div><label>每月固定支出（元）</label><input type="number" placeholder="例：15000" oninput="calcCash()" id="monthlyExp"></div>
+      <div><label>现金储备余额（元）</label><input type="number" placeholder="例：360000" oninput="calcCash()" id="cashBal"></div>
+    </div>
+    <div id="cashResult" style="margin-top:8px;font-size:.85rem;color:#8a8885"></div>
+  </div>
+</div>
+
+<div class="grid-box">
+  <div class="g-title">第四格 · 跨市场配置 · 与主市场不相关的分散资产（可选）</div>
+  <div class="g-body">
+    <p class="q">自问：你所有的鸡蛋在几个篮子里？没有就空着。空一个格子，比填错一个格子好。</p>
+    <textarea rows="2" placeholder="例：无（可选项）" oninput="updateStatus(this,'s4')"></textarea>
+    <div class="status empty" id="s4">待填写</div>
+  </div>
+</div>
+
+<div class="grid-box">
+  <div class="g-title">第五格 · 公用/固定资产 · 不参与资本市场波动，但保值增值</div>
+  <div class="g-body">
+    <p class="q">自问：股市关门了也还在的资产有什么？</p>
+    <textarea rows="2" placeholder="例：自住房产一套、公积金余额20万" oninput="updateStatus(this,'s5')"></textarea>
+    <div class="status empty" id="s5">待填写</div>
+  </div>
+</div>
+
+<div class="actions">
+  <button class="btn primary" onclick="print()">🖨 打印结构图</button>
+  <button class="btn" onclick="clearAll()">重新填写</button>
+</div>
+
+</div>
+</section>
+
+<footer>
+  <div class="container">
+    <a href="index.html">← 返回私家智囊首页</a>
+  </div>
+</footer>
+
+<script>
+function updateStatus(el,sid){
+  var s=document.getElementById(sid);
+  var v=el.value.trim();
+  s.textContent=v?'✅ 已填写':'待填写';
+  s.className='status '+(v?'filled':'empty');
+}
+
+function calcCash(){
+  var exp=parseFloat(document.getElementById('monthlyExp').value)||0;
+  var bal=parseFloat(document.getElementById('cashBal').value)||0;
+  var months=exp>0?Math.round(bal/exp):0;
+  var html='';
+  if(exp&&bal){
+    html='当前可覆盖 <strong style="color:#d4a853">'+months+' 个月</strong>';
+    if(months>=36)html+=' <span style="color:#7c7">· ✅ 达标（≥36个月）</span>';
+    else if(months>=24)html+=' <span style="color:#dd8">· ⚠️ 接近（建议补至36个月）</span>';
+    else html+=' <span style="color:#d86">· 🔴 不足（优先补充）</span>';
+  }
+  document.getElementById('cashResult').innerHTML=html;
+}
+
+function clearAll(){
+  document.querySelectorAll('textarea,input[type=number]').forEach(function(el){el.value=''});
+  ['s1','s2','s4','s5'].forEach(function(id){
+    var s=document.getElementById(id);s.textContent='待填写';s.className='status empty';
+  });
+  document.getElementById('cashResult').innerHTML='';
+}
+</script>
+</body>
+</html>

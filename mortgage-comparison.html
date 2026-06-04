@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>提前还贷对比器 — 私家智囊</title>
+<meta name="description" content="三步拆解法：息差、现金流覆盖度、时间窗口。输入你的数据，看提前还贷和不还贷的20年差距。">
+<meta property="og:title" content="提前还贷对比器 — 私家智囊">
+<meta property="og:description" content="借银行的钱（3%），生自己的蛋（12%）。输入你的数字，自己判断该不该提前还贷。">
+<meta property="og:image" content="https://huanghb71.github.io/deepsuodao.github.io/images/dialogue-scene.jpg">
+<meta property="og:type" content="article">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:#0a0e1a;color:#e8e6e3;line-height:1.7;-webkit-font-smoothing:antialiased}
+.container{max-width:680px;margin:0 auto;padding:0 24px}
+
+header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,14,26,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,168,83,.08)}
+header .container{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-size:1rem;font-weight:500;color:#e8e6e3}
+.logo a{color:#e8e6e3;text-decoration:none}
+.logo span{color:#d4a853}
+nav a{font-size:.8rem;margin-left:20px;color:#8a8885;text-decoration:none}
+nav a:hover{color:#e8e6e3}
+
+.page{padding:100px 0 60px}
+.page h1{font-size:1.6rem;font-weight:500;margin-bottom:8px}
+.page .related{font-size:.8rem;color:#6a6865;margin-bottom:32px}
+.page .related a{color:#d4a853}
+
+.calc-card{background:rgba(255,255,255,.02);border:1px solid rgba(212,168,83,.1);padding:32px;border-radius:6px;margin-bottom:24px}
+.calc-card h3{font-size:.95rem;color:#d4a853;margin-bottom:12px;font-weight:500}
+.calc-card label{display:block;font-size:.82rem;color:#8a8885;margin-bottom:6px}
+.calc-card input{width:100%;padding:10px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:#e8e6e3;font-size:1rem;border-radius:4px;outline:none;transition:border-color .3s}
+.calc-card input:focus{border-color:#d4a853}
+.input-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+@media(max-width:480px){.input-row{grid-template-columns:1fr}}
+.btn{display:inline-block;padding:12px 32px;background:#d4a853;color:#0a0e1a;border:none;font-size:.9rem;font-weight:500;border-radius:4px;cursor:pointer;margin-top:8px}
+.btn:hover{background:#f0c868}
+
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+@media(max-width:480px){.result-grid{grid-template-columns:1fr}}
+.result-card{padding:24px;border-radius:6px;text-align:center}
+.result-card.good{background:rgba(212,168,83,.08);border:1px solid rgba(212,168,83,.2)}
+.result-card.bad{background:rgba(200,80,50,.06);border:1px solid rgba(200,80,50,.15)}
+.result-card .num{font-size:1.8rem;font-weight:300;margin:4px 0}
+.result-card.good .num{color:#d4a853}
+.result-card.bad .num{color:#c87868}
+.result-card .label{font-size:.8rem;color:#8a8885}
+
+.verdict{padding:24px;margin-top:20px;border-left:2px solid #d4a853;background:rgba(212,168,83,.04);font-size:.95rem;line-height:1.8}
+.verdict .gap{font-size:1.4rem;color:#d4a853;font-weight:500;margin:8px 0}
+
+.three-steps{margin-top:32px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:480px){.three-steps{grid-template-columns:1fr}}
+.step{padding:16px;border:1px solid rgba(212,168,83,.15);border-radius:4px;font-size:.82rem;color:#8a8885}
+.step .idx{color:#d4a853;font-weight:500;margin-bottom:4px}
+.step .ok{color:#4a8} .step .warn{color:#da5}
+
+footer{border-top:1px solid rgba(255,255,255,.04);padding:32px 0;text-align:center;font-size:.8rem;color:#5a5855}
+footer a{color:#d4a853;text-decoration:none}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="logo"><a href="index.html">私家<span>智囊</span></a></div>
+    <nav>
+      <a href="index.html#belief">理念</a>
+      <a href="index.html#content">对话</a>
+      <a href="index.html#tools">工具箱</a>
+      <a href="index.html#about">关于</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page">
+<div class="container">
+
+<h1>提前还贷对比器</h1>
+<p class="related">配套工具 · <a href="dialogue-05.html">对话05：提前还房贷，还是持有资产组合？</a></p>
+
+<div class="calc-card">
+  <h3>贷款信息</h3>
+  <div class="input-row">
+    <div><label>剩余贷款（万元）</label><input type="number" id="loan" value="120" step="1"></div>
+    <div><label>贷款利率（%）</label><input type="number" id="loanRate" value="3" step="0.01"></div>
+  </div>
+  <div class="input-row">
+    <div><label>剩余年限</label><input type="number" id="years" value="20" step="1"></div>
+    <div><label>还款方式</label>
+      <select id="repayType" style="width:100%;padding:10px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:#e8e6e3;font-size:1rem;border-radius:4px;outline:none">
+        <option value="equal">等额本息</option>
+        <option value="principal">等额本金</option>
+      </select>
+    </div>
+  </div>
+
+  <h3 style="margin-top:28px">资产信息</h3>
+  <div class="input-row">
+    <div><label>可卖出还贷的资产（万元）</label><input type="number" id="asset" value="120" step="1"></div>
+    <div><label>资产预期年化收益（%）</label><input type="number" id="assetReturn" value="12" step="0.1"></div>
+  </div>
+  <div class="input-row">
+    <div><label>每年分红/现金流（万元）</label><input type="number" id="dividend" value="8" step="0.1"></div>
+    <div><label>剩余资产继续持有（万元）</label><input type="number" id="keep" value="60" step="1"></div>
+  </div>
+
+  <button class="btn" onclick="compare()">对比计算 →</button>
+</div>
+
+<div id="result"></div>
+
+<div class="three-steps" style="margin-top:28px">
+  <div class="step"><div class="idx">第一步 · 看息差</div><div id="step1">—</div></div>
+  <div class="step"><div class="idx">第二步 · 看覆盖</div><div id="step2">—</div></div>
+  <div class="step"><div class="idx">第三步 · 看窗口</div><div id="step3">—</div></div>
+</div>
+
+</div>
+</section>
+
+<footer>
+  <div class="container">
+    <a href="index.html">← 返回私家智囊首页</a>
+  </div>
+</footer>
+
+<script>
+function fmt(n){return n.toLocaleString('zh-CN',{maximumFractionDigits:0})}
+
+function monthlyEqual(loan,r,years){
+  var mr=r/12/100,nm=years*12;
+  if(mr===0)return loan*10000/nm;
+  return loan*10000*mr*Math.pow(1+mr,nm)/(Math.pow(1+mr,nm)-1);
+}
+
+function totalPay(loan,r,years,type){
+  var monthly;
+  if(type==='principal'){
+    var mr=r/12/100,nm=years*12,mp=loan*10000/nm,total=0;
+    for(var i=0;i<nm;i++)total+=(mp+(loan*10000-mp*i)*mr);
+    return total;
+  }
+  return monthlyEqual(loan,r,years)*years*12;
+}
+
+function compare(){
+  var loan=parseFloat(document.getElementById('loan').value)||0;
+  var loanRate=parseFloat(document.getElementById('loanRate').value)||0;
+  var years=parseInt(document.getElementById('years').value)||0;
+  var type=document.getElementById('repayType').value;
+  var asset=parseFloat(document.getElementById('asset').value)||0;
+  var assetR=parseFloat(document.getElementById('assetReturn').value)/100||0;
+  var div=parseFloat(document.getElementById('dividend').value)||0;
+  var keep=parseFloat(document.getElementById('keep').value)||0;
+
+  // Option A: don't sell, use dividend to pay
+  var monthly=monthlyEqual(loan,loanRate,years);
+  var annualPay=monthly*12;
+  var assetA=asset;
+  for(var i=0;i<years;i++)assetA=assetA*(1+assetR)+Math.max(0,div-annualPay/10000);
+  var principalA=asset;
+
+  // Option B: sell to repay, rest keeps growing
+  var sellAmt=Math.min(asset,loan);
+  var remainB=asset-sellAmt;
+  var finalB=remainB;
+  for(var i=0;i<years;i++)finalB=finalB*(1+assetR);
+  var principalB=remainB;
+
+  var gap=assetA-finalB;
+
+  // Step indicators
+  var spread=assetR*100-loanRate;
+  var coverPct=div/(annualPay/10000)*100;
+
+  document.getElementById('step1').innerHTML=spread>2
+    ?'<span class="ok">息差 '+spread.toFixed(1)+'% — 正向，保留贷款有利</span>'
+    :'<span class="warn">息差 '+spread.toFixed(1)+'% — 接近或为负，认真考虑还贷</span>';
+  document.getElementById('step2').innerHTML=coverPct>=80
+    ?'<span class="ok">覆盖 '+coverPct.toFixed(0)+'% — 现金流自循环</span>'
+    :'<span class="warn">覆盖 '+coverPct.toFixed(0)+'% — 需要工资补缺口</span>';
+  document.getElementById('step3').innerHTML=years>=15
+    ?'<span class="ok">窗口 '+years+' 年 — 时间足够长</span>'
+    :'<span class="warn">窗口 '+years+' 年 — 时间偏短，复利效应受限</span>';
+
+  var html='<div class="result-grid">';
+  html+='<div class="result-card good"><div class="label">方案一：不卖资产</div><div class="num">¥'+fmt(assetA*10000)+'</div><div class="label">'+years+'年后终值</div></div>';
+  html+='<div class="result-card bad"><div class="label">方案二：卖资产还贷</div><div class="num">¥'+fmt(finalB*10000)+'</div><div class="label">剩余资产终值</div></div>';
+  html+='</div>';
+  html+='<div class="verdict">';
+  if(gap>0){
+    html+='<p>不卖资产比还贷<strong style="color:#d4a853">多赚</strong></p><div class="gap">约 ¥'+fmt(Math.abs(gap)*10000)+'</div>';
+  }else{
+    html+='<p>还贷比不卖资产<strong style="color:#c87868">更划算</strong></p><div class="gap">约 ¥'+fmt(Math.abs(gap)*10000)+'</div>';
+  }
+  html+='<p style="font-size:.85rem;color:#8a8885;margin-top:8px">月供 ¥'+fmt(monthly)+' / 年付 ¥'+fmt(annualPay)+' · 年分红 ¥'+fmt(div*10000)+'</p>';
+  html+='</div>';
+
+  document.getElementById('result').innerHTML=html;
+}
+
+window.addEventListener('DOMContentLoaded',compare);
+</script>
+</body>
+</html>

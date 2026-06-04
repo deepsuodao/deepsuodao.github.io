@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>八问自检表 — 私家智囊</title>
+<meta name="description" content="8个问题，15分钟，不打公式，凭感觉打钩。给家庭财务做一次快速年度体检。">
+<meta property="og:title" content="八问自检表 · 家庭财务年度审计 — 私家智囊">
+<meta property="og:description" content="保障金、负债、流动性、家庭结构、纪律——8个问题15分钟，看清自己家的财务盲区。">
+<meta property="og:image" content="https://huanghb71.github.io/deepsuodao.github.io/images/dialogue-scene.jpg">
+<meta property="og:type" content="article">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:#0a0e1a;color:#e8e6e3;line-height:1.7;-webkit-font-smoothing:antialiased}
+.container{max-width:680px;margin:0 auto;padding:0 24px}
+
+header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,14,26,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,168,83,.08)}
+header .container{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-size:1rem;font-weight:500;color:#e8e6e3}
+.logo a{color:#e8e6e3;text-decoration:none}
+.logo span{color:#d4a853}
+nav a{font-size:.8rem;margin-left:20px;color:#8a8885;text-decoration:none}
+nav a:hover{color:#e8e6e3}
+
+.page{padding:100px 0 60px}
+.page h1{font-size:1.6rem;font-weight:500;margin-bottom:8px}
+.page .related{font-size:.8rem;color:#6a6865;margin-bottom:32px}
+.page .related a{color:#d4a853}
+.page .subtitle{font-size:.9rem;color:#8a8885;margin-bottom:28px}
+
+.q-card{background:rgba(255,255,255,.02);border:1px solid rgba(212,168,83,.1);padding:24px;border-radius:6px;margin-bottom:16px;transition:border-color .3s}
+.q-card:hover{border-color:rgba(212,168,83,.2)}
+.q-card .q-num{font-size:.75rem;color:#d4a853;font-weight:500;margin-bottom:4px}
+.q-card .q-text{font-size:.95rem;margin-bottom:12px}
+.q-card .options{display:flex;flex-wrap:wrap;gap:8px}
+.q-card .opt{padding:8px 16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:4px;color:#8a8885;font-size:.82rem;cursor:pointer;transition:all .2s;text-align:center;min-width:100px}
+.q-card .opt:hover{border-color:rgba(212,168,83,.4);color:#e8e6e3}
+.q-card .opt.selected{background:rgba(212,168,83,.12);border-color:#d4a853;color:#d4a853}
+
+.score-bar{margin:28px 0;text-align:center}
+.score-bar .big-score{font-size:3rem;font-weight:300;color:#d4a853}
+.score-bar .level{padding:4px 16px;border-radius:20px;font-size:.85rem;font-weight:500;display:inline-block;margin-top:8px}
+.level.green{background:rgba(100,180,100,.15);color:#7c7;border:1px solid rgba(100,180,100,.3)}
+.level.yellow{background:rgba(200,180,60,.15);color:#dd8;border:1px solid rgba(200,180,60,.3)}
+.level.red{background:rgba(200,80,60,.15);color:#d86;border:1px solid rgba(200,80,60,.3)}
+.level.alert{background:rgba(220,40,40,.15);color:#f66;border:1px solid rgba(220,40,40,.3)}
+
+.advice{margin-top:24px;padding:24px;border-left:2px solid #d4a853;background:rgba(212,168,83,.04);font-size:.9rem;line-height:1.8}
+.advice h3{font-size:.9rem;color:#d4a853;margin-bottom:8px}
+
+.actions{margin:28px 0}
+.btn{display:inline-block;padding:10px 24px;background:rgba(212,168,83,.1);border:1px solid rgba(212,168,83,.3);color:#d4a853;font-size:.85rem;border-radius:4px;cursor:pointer;text-decoration:none;margin-right:12px}
+.btn:hover{background:rgba(212,168,83,.2)}
+.btn.primary{background:#d4a853;color:#0a0e1a;border-color:#d4a853}
+.btn.primary:hover{background:#f0c868}
+
+footer{border-top:1px solid rgba(255,255,255,.04);padding:32px 0;text-align:center;font-size:.8rem;color:#5a5855}
+footer a{color:#d4a853;text-decoration:none}
+@media print{header{position:static}.page{padding:20px 0}.q-card,.score-bar,.advice{break-inside:avoid}.actions{display:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="logo"><a href="index.html">私家<span>智囊</span></a></div>
+    <nav>
+      <a href="index.html#belief">理念</a>
+      <a href="index.html#content">对话</a>
+      <a href="index.html#tools">工具箱</a>
+      <a href="index.html#about">关于</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page">
+<div class="container">
+
+<h1>八问自检表</h1>
+<p class="related">配套工具 · <a href="dialogue-10.html">对话10：给家庭财务做一次年度审计</a></p>
+<p class="subtitle">8 个问题，不打公式，凭感觉打钩。知道自己哪项需要复查，就已经完成了一大半。</p>
+
+<div id="questions"></div>
+
+<div class="score-bar" id="scorePanel" style="display:none">
+  <div class="big-score" id="totalScore"></div>
+  <div id="levelTag"></div>
+  <div class="advice" id="adviceText"></div>
+</div>
+
+<div class="actions" style="text-align:center;margin-top:32px">
+  <button class="btn primary" onclick="print()">🖨 打印自检表</button>
+  <button class="btn" onclick="resetAll()">重新填写</button>
+</div>
+
+</div>
+</section>
+
+<footer>
+  <div class="container">
+    <a href="index.html">← 返回私家智囊首页</a>
+  </div>
+</footer>
+
+<script>
+var questions=[
+  {id:'q1',num:'Q1',text:'保障金能撑多久？（不算股票、房产，只算低风险、一周内可变现的金融资产）',
+   opts:[{v:10,t:'36个月以上'},{v:7,t:'12-36个月'},{v:4,t:'6-12个月'},{v:1,t:'不到6个月'}]},
+  {id:'q2',num:'Q2',text:'保障金被挪用没？',
+   opts:[{v:10,t:'独立账户从未动过'},{v:7,t:'动过但已补回'},{v:3,t:'被借走未还'},{v:0,t:'已被全部挪用'}]},
+  {id:'q3',num:'Q3',text:'有新增担保/借贷吗？（任何形式的担保、连带责任或隐性借贷）',
+   opts:[{v:10,t:'完全没有'},{v:7,t:'有信用卡/花呗但每月还清'},{v:3,t:'为他人提供了担保'},{v:1,t:'有网贷或借呗未还余额'}]},
+  {id:'q4',num:'Q4',text:'清楚自己的负债利率吗？',
+   opts:[{v:10,t:'完全清楚，大部分固定利率'},{v:6,t:'大概知道，最近没关注'},{v:3,t:'不太清楚，凭感觉还'},{v:0,t:'完全不知道'}]},
+  {id:'q5',num:'Q5',text:'应急金 3 万元几天能拿到？（只算活期存款和货币基金）',
+   opts:[{v:10,t:'当天就能'},{v:8,t:'3天内'},{v:5,t:'一周内'},{v:1,t:'一个月以上或拿不出'}]},
+  {id:'q6',num:'Q6',text:'有锁定期产品吗？（理财、私募、非标等有锁定期的资产）',
+   opts:[{v:10,t:'没有'},{v:7,t:'有，但金额和到期时间清楚'},{v:4,t:'有，金额大且分散在不同到期日'},{v:1,t:'有大笔资金被锁定一年以上'}]},
+  {id:'q7',num:'Q7',text:'过去一年，家庭结构有变化吗？',
+   opts:[{v:10,t:'没有变化'},{v:7,t:'有变化但已更新所有文件'},{v:3,t:'有变化还没更新文件'},{v:0,t:'正经历重大变化（离婚/继承/企业重组）'}]},
+  {id:'q8',num:'Q8',text:'持仓偏离计划多少？',
+   opts:[{v:10,t:'偏离不超过5%'},{v:6,t:'偏离不超过15%'},{v:3,t:'偏离超15%但知道原因'},{v:0,t:'不知道计划是什么'}]}
+];
+
+var scores={};
+
+function render(){
+  var html='';
+  questions.forEach(function(q){
+    html+='<div class="q-card"><div class="q-num">'+q.num+'</div><div class="q-text">'+q.text+'</div><div class="options">';
+    q.opts.forEach(function(o){
+      var sel=scores[q.id]===o.v?' selected':'';
+      html+='<div class="opt'+sel+'" onclick="pick(\''+q.id+'\','+o.v+',this)">'+o.t+'</div>';
+    });
+    html+='</div></div>';
+  });
+  document.getElementById('questions').innerHTML=html;
+  updateScore();
+}
+
+function pick(id,v,el){
+  scores[id]=v;
+  var card=el.parentElement.parentElement;
+  card.querySelectorAll('.opt').forEach(function(o){o.classList.remove('selected')});
+  el.classList.add('selected');
+  updateScore();
+}
+
+function updateScore(){
+  var total=0,answered=0;
+  questions.forEach(function(q){
+    if(scores[q.id]!==undefined){total+=scores[q.id];answered++}
+  });
+  if(answered<8){
+    document.getElementById('scorePanel').style.display='none';
+    return;
+  }
+  document.getElementById('scorePanel').style.display='block';
+  document.getElementById('totalScore').textContent=total+'分';
+  var tag=document.getElementById('levelTag'),adv=document.getElementById('adviceText');
+  tag.className='level';
+  var advice='';
+  if(total>=70){tag.classList.add('green');tag.textContent='✅ 安全';advice='财务状况健康，继续保持。建议每年复查一次。';}
+  else if(total>=50){tag.classList.add('yellow');tag.textContent='⚠️ 关注';advice='有1-2项接近预警线。优先检查得分最低的那项，制定改进计划。';}
+  else if(total>=30){tag.classList.add('red');tag.textContent='🔴 预警';advice='多个风险点暴露。建议逐项梳理：先补保障金缺口，再厘清债务，最后调整投资纪律。';}
+  else{tag.classList.add('alert');tag.textContent='🚨 紧急';advice='财务安全面临严重威胁。建议尽快做一次完整的家庭财务审计，逐项落实保障措施。';}
+
+  // Specific advice
+  if(scores.q1<=4)advice+='<br><br>👉 优先补充低风险储备（定期存单、国债、货币基金）。';
+  if(scores.q3<=3)advice+='<br><br>👉 梳理所有担保和隐性借贷关系，评估连带风险。';
+  if(scores.q5<=5)advice+='<br><br>👉 留够随时能取的活钱，至少覆盖3-6个月生活费。';
+  if(scores.q7<=3)advice+='<br><br>👉 尽快更新保险受益人、遗嘱等法律文件。';
+  if(scores.q8<=3)advice+='<br><br>👉 回到最初的投资计划，先别动，重新确认偏离原因。';
+
+  adv.innerHTML='<h3>诊断建议</h3>'+advice;
+}
+
+function resetAll(){scores={};render();window.scrollTo(0,0);}
+
+render();
+</script>
+</body>
+</html>

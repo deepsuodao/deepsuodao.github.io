@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>复利计算器 — 私家智囊</title>
+<meta name="description" content="F=P(1+r)^n 复利计算器。输入本金、年化收益率、年限，看复利的威力。内置72法则速算和定投计算。">
+<meta property="og:title" content="复利计算器 — 私家智囊">
+<meta property="og:description" content="F=P(1+r)^n，输入3个数，看到30年后。信心是复利不中断的核动力。">
+<meta property="og:image" content="https://huanghb71.github.io/deepsuodao.github.io/images/dialogue-scene.jpg">
+<meta property="og:type" content="article">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:#0a0e1a;color:#e8e6e3;line-height:1.7;-webkit-font-smoothing:antialiased}
+.container{max-width:680px;margin:0 auto;padding:0 24px}
+
+header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,14,26,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,168,83,.08)}
+header .container{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-size:1rem;font-weight:500;color:#e8e6e3}
+.logo a{color:#e8e6e3;text-decoration:none}
+.logo span{color:#d4a853}
+nav a{font-size:.8rem;margin-left:20px;color:#8a8885;text-decoration:none}
+nav a:hover{color:#e8e6e3}
+
+.page{padding:100px 0 60px}
+.page h1{font-size:1.6rem;font-weight:500;margin-bottom:8px}
+.page .related{font-size:.8rem;color:#6a6865;margin-bottom:32px}
+.page .related a{color:#d4a853}
+
+.tabs{display:flex;gap:4px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,.06)}
+.tabs button{padding:10px 18px;background:transparent;border:none;color:#6a6865;font-size:.85rem;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s}
+.tabs button:hover{color:#b0aeab}
+.tabs button.active{color:#d4a853;border-bottom-color:#d4a853}
+.tab-pane{display:none}
+.tab-pane.active{display:block}
+
+.calc-card{background:rgba(255,255,255,.02);border:1px solid rgba(212,168,83,.1);padding:32px;border-radius:6px;margin-bottom:24px}
+.calc-card label{display:block;font-size:.82rem;color:#8a8885;margin-bottom:6px}
+.calc-card input{width:100%;padding:10px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:#e8e6e3;font-size:1rem;border-radius:4px;outline:none;transition:border-color .3s}
+.calc-card input:focus{border-color:#d4a853}
+.calc-card .input-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+@media(max-width:480px){.calc-card .input-row{grid-template-columns:1fr}}
+.calc-card .btn{display:inline-block;padding:12px 32px;background:#d4a853;color:#0a0e1a;border:none;font-size:.9rem;font-weight:500;border-radius:4px;cursor:pointer;margin-top:8px}
+.calc-card .btn:hover{background:#f0c868}
+
+.result-box{margin-top:24px;padding:24px;background:rgba(212,168,83,.06);border:1px solid rgba(212,168,83,.2);border-radius:6px}
+.result-box .big-num{font-size:2rem;font-weight:300;color:#d4a853;margin:8px 0}
+.result-box .sub{font-size:.85rem;color:#8a8885}
+.result-box .row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.9rem}
+.result-box .row:last-child{border:none}
+
+.chart-container{margin-top:24px;height:220px}
+.chart-container canvas{width:100%!important;height:100%!important}
+
+footer{border-top:1px solid rgba(255,255,255,.04);padding:32px 0;text-align:center;font-size:.8rem;color:#5a5855}
+footer a{color:#d4a853;text-decoration:none}
+.quote{font-size:.9rem;color:#8a8885;font-style:italic;margin-top:16px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="logo"><a href="index.html">私家<span>智囊</span></a></div>
+    <nav>
+      <a href="index.html#belief">理念</a>
+      <a href="index.html#content">对话</a>
+      <a href="index.html#tools">工具箱</a>
+      <a href="index.html#about">关于</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page">
+<div class="container">
+
+<h1>复利计算器</h1>
+<p class="related">配套工具 · <a href="dialogue-03.html">对话03：复利的朋友与负利的敌人</a></p>
+
+<div class="tabs">
+  <button class="active" onclick="switchTab(event,'basic')">单笔复利</button>
+  <button onclick="switchTab(event,'72rule')">72 法则</button>
+  <button onclick="switchTab(event,'dca')">定投计算</button>
+</div>
+
+<!-- Tab 1: Single Compound -->
+<div class="tab-pane active" id="basic">
+<div class="calc-card">
+  <div class="input-row">
+    <div><label>初始本金（元）</label><input type="number" id="p0" value="100000" step="1000"></div>
+    <div><label>年化收益率（%）</label><input type="number" id="r0" value="8" step="0.1"></div>
+  </div>
+  <div class="input-row">
+    <div><label>投资年限</label><input type="number" id="n0" value="20" step="1"></div>
+    <div><label>每月追加（元，可选）</label><input type="number" id="add0" value="0" step="100"></div>
+  </div>
+  <button class="btn" onclick="calcCompound()">计算 →</button>
+  <div id="resultBasic"></div>
+  <div class="chart-container"><canvas id="chartBasic"></canvas></div>
+  <p class="quote">F = P(1+r)^n —— 信心是复利不中断的核动力</p>
+</div>
+</div>
+
+<!-- Tab 2: 72 Rule -->
+<div class="tab-pane" id="72rule">
+<div class="calc-card">
+  <label>年化收益率（%）</label>
+  <input type="number" id="r72" value="8" step="0.1" style="max-width:300px;margin-bottom:16px">
+  <button class="btn" onclick="calc72()">速算 →</button>
+  <div id="result72"></div>
+  <p class="quote">72 ÷ 年化收益率 ≈ 本金翻倍所需年数</p>
+</div>
+</div>
+
+<!-- Tab 3: DCA -->
+<div class="tab-pane" id="dca">
+<div class="calc-card">
+  <div class="input-row">
+    <div><label>每月定投（元）</label><input type="number" id="dca_amt" value="3000" step="100"></div>
+    <div><label>年化收益率（%）</label><input type="number" id="dca_r" value="8" step="0.1"></div>
+  </div>
+  <div class="input-row">
+    <div><label>定投年限</label><input type="number" id="dca_n" value="20" step="1"></div>
+    <div><label>已有本金（元）</label><input type="number" id="dca_p" value="0" step="1000"></div>
+  </div>
+  <button class="btn" onclick="calcDCA()">计算 →</button>
+  <div id="resultDCA"></div>
+  <p class="quote">投资从娃娃抓起——用机制把自己锁住。</p>
+</div>
+</div>
+
+</div>
+</section>
+
+<footer>
+  <div class="container">
+    <a href="index.html">← 返回私家智囊首页</a>
+  </div>
+</footer>
+
+<script>
+function switchTab(e,id){
+  document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  e.target.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+
+function fmt(n){return n.toLocaleString('zh-CN',{maximumFractionDigits:0})}
+function fmt2(n){return n.toLocaleString('zh-CN',{maximumFractionDigits:2})}
+
+function calcCompound(){
+  var p=parseFloat(document.getElementById('p0').value)||0;
+  var r=parseFloat(document.getElementById('r0').value)/100||0;
+  var n=parseInt(document.getElementById('n0').value)||0;
+  var add=parseFloat(document.getElementById('add0').value)||0;
+  var total=p;
+  var yr=[];
+  for(var i=0;i<=n;i++){
+    yr.push(total);
+    total=total*(1+r)+add*12;
+  }
+  var final=yr[n];
+  var principal=p+add*12*n;
+  var gain=final-principal;
+  document.getElementById('resultBasic').innerHTML=
+    '<div class="result-box">'+
+    '<div class="sub">'+n+'年后终值</div>'+
+    '<div class="big-num">¥'+fmt(final)+'</div>'+
+    '<div class="row"><span>投入本金</span><span>¥'+fmt(principal)+'</span></div>'+
+    '<div class="row"><span>复利收益</span><span style="color:#d4a853">+¥'+fmt(gain)+' ('+(principal>0?Math.round(gain/principal*100):0)+'%)</span></div>'+
+    '<div class="row"><span>年化收益率</span><span>'+(r*100).toFixed(1)+'%</span></div>'+
+    '</div>';
+  drawChart(yr,r*100);
+}
+
+function drawChart(data,r){
+  var c=document.getElementById('chartBasic');
+  var dpr=window.devicePixelRatio||1;
+  var w=c.parentElement.clientWidth;
+  c.width=w*dpr;c.height=220*dpr;
+  c.style.width=w+'px';c.style.height='220px';
+  var ctx=c.getContext('2d');ctx.scale(dpr,dpr);
+  var pad={t:20,r:16,b:30,l:60};
+  var pw=w-pad.l-pad.r,ph=220-pad.t-pad.b;
+  var max=Math.max(...data);
+  ctx.clearRect(0,0,w,220);
+  ctx.strokeStyle='rgba(255,255,255,.06)';ctx.lineWidth=.5;
+  for(var i=0;i<=4;i++){var y=pad.t+ph*(1-i/4);ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(w-pad.r,y);ctx.stroke()}
+  for(var i=0;i<=data.length-1;i+=5){var x=pad.l+pw*i/(data.length-1);ctx.beginPath();ctx.moveTo(x,pad.t);ctx.lineTo(x,pad.t+ph);ctx.stroke()}
+  ctx.strokeStyle='#d4a853';ctx.lineWidth=2;
+  ctx.beginPath();
+  for(var i=0;i<data.length;i++){
+    var x=pad.l+pw*i/(data.length-1);
+    var y=pad.t+ph*(1-data[i]/max);
+    i==0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+  }
+  ctx.stroke();
+  ctx.fillStyle='#8a8885';ctx.font='11px sans-serif';
+  for(var i=0;i<=4;i++){var y=pad.t+ph*(1-i/4);var v=fmt(max*i/4);ctx.fillText(v,pad.l-8,y+4)}
+  var end=data.length-1;
+  ctx.fillStyle='#d4a853';ctx.font='12px sans-serif';
+  ctx.fillText('¥'+fmt(data[end]),w-pad.r-60,pad.t+ph*(1-data[end]/max)-6);
+}
+
+function calc72(){
+  var r=parseFloat(document.getElementById('r72').value)||8;
+  var years=72/r;
+  document.getElementById('result72').innerHTML=
+    '<div class="result-box">'+
+    '<div class="sub">年化 '+r+'% · 本金翻倍约需</div>'+
+    '<div class="big-num">'+years.toFixed(1)+' 年</div>'+
+    '<div class="row"><span>翻 2 倍</span><span>约 '+(72/r*2).toFixed(1)+' 年</span></div>'+
+    '<div class="row"><span>翻 4 倍</span><span>约 '+(72/r*3).toFixed(1)+' 年</span></div>'+
+    '</div>';
+}
+
+function calcDCA(){
+  var add=parseFloat(document.getElementById('dca_amt').value)||0;
+  var r=parseFloat(document.getElementById('dca_r').value)/100||0;
+  var n=parseInt(document.getElementById('dca_n').value)||0;
+  var p=parseFloat(document.getElementById('dca_p').value)||0;
+  var monthly=r/12,months=n*12,total=p;
+  for(var i=0;i<months;i++)total=(total+add)*(1+monthly);
+  var principal=p+add*months,gain=total-principal;
+  document.getElementById('resultDCA').innerHTML=
+    '<div class="result-box">'+
+    '<div class="sub">定投 '+n+' 年后终值</div>'+
+    '<div class="big-num">¥'+fmt(total)+'</div>'+
+    '<div class="row"><span>累计投入</span><span>¥'+fmt(principal)+'</span></div>'+
+    '<div class="row"><span>定投收益</span><span style="color:#d4a853">+¥'+fmt(gain)+' ('+(principal>0?Math.round(gain/principal*100):0)+'%)</span></div>'+
+    '<div class="row"><span>月投 '+(add/10000).toFixed(1)+'万 × '+(n*12)+'个月</span><span></span></div>'+
+    '</div>';
+}
+
+// Init
+window.addEventListener('DOMContentLoaded',calcCompound);
+</script>
+</body>
+</html>

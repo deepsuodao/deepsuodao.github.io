@@ -279,6 +279,21 @@ footer .copyright{font-size:.75rem;color:#5a5855}
   .dialogue-card .card-num{width:30px;font-size:1.2rem}
 }
 
+/* === Tools Grid === */
+.tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:640px){.tools-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:400px){.tools-grid{grid-template-columns:1fr}}
+.tool-card{
+  display:block;padding:20px;border:1px solid rgba(212,168,83,.1);
+  background:rgba(255,255,255,.015);border-radius:6px;text-decoration:none;transition:all .3s
+}
+.tool-card:hover{border-color:rgba(212,168,83,.3);background:rgba(212,168,83,.03)}
+.tool-card .tool-icon{font-size:1.4rem;display:block;margin-bottom:8px}
+.tool-card h3{font-size:.95rem;color:#e8e6e3;margin-bottom:4px;font-weight:500}
+.tool-card p{font-size:.8rem;color:#8a8885;line-height:1.4;margin:0}
+.tool-card .tool-link{font-size:.72rem;color:#6a6865;margin-top:8px;display:inline-block}
+.tool-card:hover .tool-link{color:#d4a853}
+
 </style>
 </head>
 <body>
@@ -290,6 +305,7 @@ footer .copyright{font-size:.75rem;color:#5a5855}
     <nav>
       <a href="#belief">理念</a>
       <a href="#content">对话</a>
+      <a href="#tools">工具箱</a>
       <a href="#about">关于</a>
       <a href="#subscribe">联系</a>
     </nav>
@@ -503,6 +519,47 @@ footer .copyright{font-size:.75rem;color:#5a5855}
       </a>
 
     </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Tools ===== -->
+<section class="section" id="tools" style="background:rgba(255,255,255,.01);">
+  <div class="container">
+    <div class="section-title">工具箱</div>
+    <h2>读完文章，动手算一算</h2>
+    <p style="margin-bottom:28px;font-size:.9rem;color:#8a8885;">每件工具对应一篇对话。所有数据仅在浏览器本地计算，不上传服务器。</p>
+    <div class="tools-grid">
+      <a href="compound-calculator.html" class="tool-card">
+        <span class="tool-icon">📐</span>
+        <h3>复利计算器</h3>
+        <p>F=P(1+r)^n · 72法则 · 定投</p>
+        <span class="tool-link">对话03 →</span>
+      </a>
+      <a href="mortgage-comparison.html" class="tool-card">
+        <span class="tool-icon">🏠</span>
+        <h3>提前还贷对比器</h3>
+        <p>三步拆解法 · 20年差距一目了然</p>
+        <span class="tool-link">对话05 →</span>
+      </a>
+      <a href="self-check-8q.html" class="tool-card">
+        <span class="tool-icon">📋</span>
+        <h3>八问自检表</h3>
+        <p>15分钟在线打钩 · 自动出分诊断</p>
+        <span class="tool-link">对话10 →</span>
+      </a>
+      <a href="five-grid.html" class="tool-card">
+        <span class="tool-icon">🏰</span>
+        <h3>五格家庭结构图</h3>
+        <p>填五个格子 · 看清风险所在</p>
+        <span class="tool-link">对话07 →</span>
+      </a>
+      <a href="life-checklist.html" class="tool-card">
+        <span class="tool-icon">📝</span>
+        <h3>人生愿望清单</h3>
+        <p>目标·金额·时间 → 缺口一目了然</p>
+        <span class="tool-link">对话01 →</span>
+      </a>
     </div>
   </div>
 </section>
