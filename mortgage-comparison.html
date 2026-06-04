@@ -4,60 +4,74 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>提前还贷对比器 — 私家智囊</title>
-<meta name="description" content="三步拆解法：息差、现金流覆盖度、时间窗口。输入你的数据，看提前还贷和不还贷的20年差距。">
-<meta property="og:title" content="提前还贷对比器 — 私家智囊">
-<meta property="og:description" content="借银行的钱（3%），生自己的蛋（12%）。输入你的数字，自己判断该不该提前还贷。">
+<meta name="description" content="三模块设计：房贷按揭、投资收益、场景对比。输入你的数据，看清不还贷和还贷的完整差距。">
+<meta property="og:title" content="提前还贷对比器 · 三模块决策工具 — 私家智囊">
+<meta property="og:description" content="借银行的钱（3%），生自己的蛋（12%）。三个独立模块，可单独使用或组合对比。">
 <meta property="og:image" content="https://huanghb71.github.io/deepsuodao.github.io/images/dialogue-scene.jpg">
 <meta property="og:type" content="article">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:#0a0e1a;color:#e8e6e3;line-height:1.7;-webkit-font-smoothing:antialiased}
-.container{max-width:680px;margin:0 auto;padding:0 24px}
-
+.container{max-width:720px;margin:0 auto;padding:0 24px}
 header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,14,26,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,168,83,.08)}
 header .container{display:flex;align-items:center;justify-content:space-between;height:60px}
-.logo{font-size:1rem;font-weight:500;color:#e8e6e3}
-.logo a{color:#e8e6e3;text-decoration:none}
-.logo span{color:#d4a853}
-nav a{font-size:.8rem;margin-left:20px;color:#8a8885;text-decoration:none}
-nav a:hover{color:#e8e6e3}
+.logo{font-size:1rem;font-weight:500}.logo a{color:#e8e6e3;text-decoration:none}.logo span{color:#d4a853}
+nav a{font-size:.8rem;margin-left:20px;color:#8a8885;text-decoration:none}nav a:hover{color:#e8e6e3}
+.page{padding:100px 0 60px}.page h1{font-size:1.6rem;font-weight:500;margin-bottom:4px}
+.page .related{font-size:.8rem;color:#6a6865;margin-bottom:4px}.page .related a{color:#d4a853}
+.page .design-note{font-size:.78rem;color:#5a5855;margin-bottom:28px}
 
-.page{padding:100px 0 60px}
-.page h1{font-size:1.6rem;font-weight:500;margin-bottom:8px}
-.page .related{font-size:.8rem;color:#6a6865;margin-bottom:32px}
-.page .related a{color:#d4a853}
+.tabs{display:flex;gap:4px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,.06);overflow-x:auto}
+.tabs button{padding:10px 16px;background:transparent;border:none;color:#6a6865;font-size:.82rem;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s}
+.tabs button:hover{color:#b0aeab}
+.tabs button.active{color:#d4a853;border-bottom-color:#d4a853}
+.tab-pane{display:none}.tab-pane.active{display:block}
 
-.calc-card{background:rgba(255,255,255,.02);border:1px solid rgba(212,168,83,.1);padding:32px;border-radius:6px;margin-bottom:24px}
-.calc-card h3{font-size:.95rem;color:#d4a853;margin-bottom:12px;font-weight:500}
-.calc-card label{display:block;font-size:.82rem;color:#8a8885;margin-bottom:6px}
-.calc-card input{width:100%;padding:10px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:#e8e6e3;font-size:1rem;border-radius:4px;outline:none;transition:border-color .3s}
-.calc-card input:focus{border-color:#d4a853}
-.input-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
-@media(max-width:480px){.input-row{grid-template-columns:1fr}}
-.btn{display:inline-block;padding:12px 32px;background:#d4a853;color:#0a0e1a;border:none;font-size:.9rem;font-weight:500;border-radius:4px;cursor:pointer;margin-top:8px}
+.module{background:rgba(255,255,255,.02);border:1px solid rgba(212,168,83,.1);padding:28px 24px;border-radius:6px;margin-bottom:20px}
+.module h3{font-size:.95rem;color:#d4a853;margin-bottom:6px;font-weight:500}
+.module .mod-desc{font-size:.8rem;color:#6a6865;margin-bottom:18px}
+label{display:block;font-size:.78rem;color:#8a8885;margin-bottom:4px}
+input,select{width:100%;padding:10px 12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:#e8e6e3;font-size:.92rem;border-radius:4px;outline:none;transition:border-color .3s}
+input:focus,select:focus{border-color:#d4a853}
+select{appearance:none;cursor:pointer}
+.field{margin-bottom:14px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+@media(max-width:500px){.row2,.row3{grid-template-columns:1fr}}
+.unit{font-size:.75rem;color:#5a5855;margin-left:4px}
+.btn{display:inline-block;padding:11px 28px;background:#d4a853;color:#0a0e1a;border:none;font-size:.9rem;font-weight:500;border-radius:4px;cursor:pointer;margin-top:4px}
 .btn:hover{background:#f0c868}
+.btn.sec{padding:9px 20px;background:rgba(212,168,83,.1);border:1px solid rgba(212,168,83,.3);color:#d4a853}
+.btn.sec:hover{background:rgba(212,168,83,.2)}
 
-.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
-@media(max-width:480px){.result-grid{grid-template-columns:1fr}}
-.result-card{padding:24px;border-radius:6px;text-align:center}
-.result-card.good{background:rgba(212,168,83,.08);border:1px solid rgba(212,168,83,.2)}
-.result-card.bad{background:rgba(200,80,50,.06);border:1px solid rgba(200,80,50,.15)}
-.result-card .num{font-size:1.8rem;font-weight:300;margin:4px 0}
-.result-card.good .num{color:#d4a853}
-.result-card.bad .num{color:#c87868}
-.result-card .label{font-size:.8rem;color:#8a8885}
+.result-box{margin-top:18px;padding:20px;background:rgba(212,168,83,.05);border:1px solid rgba(212,168,83,.15);border-radius:4px;font-size:.88rem}
+.result-box .big{font-size:1.5rem;color:#d4a853;font-weight:300;margin:4px 0}
+.result-box .rrow{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.result-box .rrow:last-child{border:none}
+.result-box .rrow span:last-child{min-width:80px;text-align:right}
 
-.verdict{padding:24px;margin-top:20px;border-left:2px solid #d4a853;background:rgba(212,168,83,.04);font-size:.95rem;line-height:1.8}
-.verdict .gap{font-size:1.4rem;color:#d4a853;font-weight:500;margin:8px 0}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+@media(max-width:500px){.compare-grid{grid-template-columns:1fr}}
+.scenario{padding:20px;border-radius:6px}
+.scenario.a{background:rgba(212,168,83,.06);border:1px solid rgba(212,168,83,.2)}
+.scenario.b{background:rgba(100,130,160,.06);border:1px solid rgba(100,130,160,.2)}
+.scenario .s-label{font-size:.78rem;font-weight:500;margin-bottom:4px}
+.scenario.a .s-label{color:#d4a853}
+.scenario.b .s-label{color:#7aa8d8}
+.scenario .s-num{font-size:1.6rem;font-weight:300;margin:2px 0}
+.scenario.a .s-num{color:#d4a853}.scenario.b .s-num{color:#7aa8d8}
+.scenario .s-sub{font-size:.75rem;color:#8a8885}
 
-.three-steps{margin-top:32px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-@media(max-width:480px){.three-steps{grid-template-columns:1fr}}
-.step{padding:16px;border:1px solid rgba(212,168,83,.15);border-radius:4px;font-size:.82rem;color:#8a8885}
-.step .idx{color:#d4a853;font-weight:500;margin-bottom:4px}
-.step .ok{color:#4a8} .step .warn{color:#da5}
+.verdict{padding:20px;margin-top:16px;border-left:2px solid #d4a853;background:rgba(212,168,83,.04);font-size:.9rem;line-height:1.8}
+.verdict .gap-num{font-size:1.4rem;color:#d4a853;font-weight:500;margin:6px 0}
+
+.chart-box{margin:20px 0;height:260px}.chart-box canvas{width:100%!important;height:100%!important}
 
 footer{border-top:1px solid rgba(255,255,255,.04);padding:32px 0;text-align:center;font-size:.8rem;color:#5a5855}
 footer a{color:#d4a853;text-decoration:none}
+.collapse{display:none;margin-top:12px}
+.collapse.show{display:block}
+.toggle-link{font-size:.8rem;color:#d4a853;cursor:pointer;margin-top:6px;display:inline-block}
 </style>
 </head>
 <body>
@@ -74,134 +88,334 @@ footer a{color:#d4a853;text-decoration:none}
   </div>
 </header>
 
-<section class="page">
-<div class="container">
+<section class="page"><div class="container">
 
 <h1>提前还贷对比器</h1>
 <p class="related">配套工具 · <a href="dialogue-05.html">对话05：提前还房贷，还是持有资产组合？</a></p>
+<p class="design-note">三模块设计：模块1和2可独立使用，模块3组合两者进行场景对比。</p>
 
-<div class="calc-card">
-  <h3>贷款信息</h3>
-  <div class="input-row">
-    <div><label>剩余贷款（万元）</label><input type="number" id="loan" value="120" step="1"></div>
-    <div><label>贷款利率（%）</label><input type="number" id="loanRate" value="3" step="0.01"></div>
-  </div>
-  <div class="input-row">
-    <div><label>剩余年限</label><input type="number" id="years" value="20" step="1"></div>
-    <div><label>还款方式</label>
-      <select id="repayType" style="width:100%;padding:10px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:#e8e6e3;font-size:1rem;border-radius:4px;outline:none">
-        <option value="equal">等额本息</option>
-        <option value="principal">等额本金</option>
-      </select>
-    </div>
-  </div>
-
-  <h3 style="margin-top:28px">资产信息</h3>
-  <div class="input-row">
-    <div><label>可卖出还贷的资产（万元）</label><input type="number" id="asset" value="120" step="1"></div>
-    <div><label>资产预期年化收益（%）</label><input type="number" id="assetReturn" value="12" step="0.1"></div>
-  </div>
-  <div class="input-row">
-    <div><label>每年分红/现金流（万元）</label><input type="number" id="dividend" value="8" step="0.1"></div>
-    <div><label>剩余资产继续持有（万元）</label><input type="number" id="keep" value="60" step="1"></div>
-  </div>
-
-  <button class="btn" onclick="compare()">对比计算 →</button>
+<div class="tabs">
+  <button class="active" onclick="switchTab(event,'m1')">① 房贷按揭</button>
+  <button onclick="switchTab(event,'m2')">② 投资收益</button>
+  <button onclick="switchTab(event,'m3')">③ 场景对比</button>
 </div>
 
-<div id="result"></div>
-
-<div class="three-steps" style="margin-top:28px">
-  <div class="step"><div class="idx">第一步 · 看息差</div><div id="step1">—</div></div>
-  <div class="step"><div class="idx">第二步 · 看覆盖</div><div id="step2">—</div></div>
-  <div class="step"><div class="idx">第三步 · 看窗口</div><div id="step3">—</div></div>
-</div>
-
-</div>
-</section>
-
-<footer>
-  <div class="container">
-    <a href="index.html">← 返回私家智囊首页</a>
+<!-- ===== MODULE 1: Mortgage ===== -->
+<div class="tab-pane active" id="m1">
+<div class="module">
+  <h3>模块一 · 房贷按揭计算器</h3>
+  <p class="mod-desc">等额本息/等额本金月供、剩余本金、提前还款试算。独立于投资模块使用。</p>
+  <div class="row2">
+    <div class="field"><label>贷款总额<span class="unit">万元</span></label><input type="number" id="m_loan" value="120" step="1"></div>
+    <div class="field"><label>年利率<span class="unit">%</span></label><input type="number" id="m_rate" value="3" step="0.01"></div>
   </div>
-</footer>
+  <div class="row2">
+    <div class="field"><label>贷款年限</label><input type="number" id="m_years" value="20" step="1"></div>
+    <div class="field"><label>还款方式</label><select id="m_type"><option value="equal">等额本息</option><option value="principal">等额本金</option></select></div>
+  </div>
+  <div class="row2">
+    <div class="field"><label>提前还款金额<span class="unit">万元（可选）</span></label><input type="number" id="m_prepay" value="0" step="1"></div>
+    <div class="field"><label>在第几个月还<span class="unit">（可选）</span></label><input type="number" id="m_prepayAt" value="0" step="1" placeholder="0=不提前还"></div>
+  </div>
+  <button class="btn" onclick="calcMortgage()">计算 →</button>
+  <div id="m1Result"></div>
+</div>
+</div>
+
+<!-- ===== MODULE 2: Investment ===== -->
+<div class="tab-pane" id="m2">
+<div class="module">
+  <h3>模块二 · 投资收益计算器</h3>
+  <p class="mod-desc">按月复利，支持初始本金、每月定投（可正可负）、现金分红与分红再投资。</p>
+  <div class="row3">
+    <div class="field"><label>初始本金<span class="unit">万元</span></label><input type="number" id="i_capital" value="180" step="1"></div>
+    <div class="field"><label>年化总收益<span class="unit">%</span></label><input type="number" id="i_totalR" value="12" step="0.1"></div>
+    <div class="field"><label>其中分红率<span class="unit">%</span></label><input type="number" id="i_divR" value="4.44" step="0.01"></div>
+  </div>
+  <div class="row3">
+    <div class="field"><label>投资年限</label><input type="number" id="i_years" value="20" step="1"></div>
+    <div class="field"><label>每月追加<span class="unit">元（正=投入，负=取出）</span></label><input type="number" id="i_dca" value="0" step="100"></div>
+    <div class="field"><label>分红处理</label><select id="i_divMode"><option value="reinvest">分红再投资</option><option value="cash">现金分红（不投入）</option></select></div>
+  </div>
+  <button class="btn" onclick="calcInvest()">计算 →</button>
+  <div id="m2Result"></div>
+</div>
+</div>
+
+<!-- ===== MODULE 3: Comparison ===== -->
+<div class="tab-pane" id="m3">
+<div class="module">
+  <h3>模块三 · 场景对比</h3>
+  <p class="mod-desc">同时使用房贷和投资参数，对比两个场景的完整财务路径。<br>⚠ 投资收益率需扣除分红率：资本增值率 = 年化总收益 − 分红率。</p>
+</div>
+
+<div class="module">
+  <h3>房贷参数</h3>
+  <div class="row2">
+    <div class="field"><label>贷款总额<span class="unit">万元</span></label><input type="number" id="c_loan" value="120" step="1"></div>
+    <div class="field"><label>年利率<span class="unit">%</span></label><input type="number" id="c_rate" value="3" step="0.01"></div>
+  </div>
+  <div class="row2">
+    <div class="field"><label>剩余年限</label><input type="number" id="c_years" value="20" step="1"></div>
+    <div class="field"><label>还款方式</label><select id="c_type"><option value="equal">等额本息</option><option value="principal">等额本金</option></select></div>
+  </div>
+  <div class="row2">
+    <div class="field"><label>提前还款金额<span class="unit">万元</span></label><input type="number" id="c_prepay" value="120" step="1"></div>
+    <div class="field"><label>还款发生在第几个月<span class="unit">（0=立即）</span></label><input type="number" id="c_prepayAt" value="0" step="1"></div>
+  </div>
+</div>
+
+<div class="module">
+  <h3>投资参数</h3>
+  <div class="row3">
+    <div class="field"><label>可用于投资的资产<span class="unit">万元</span></label><input type="number" id="c_capital" value="180" step="1"></div>
+    <div class="field"><label>年化总收益率<span class="unit">%</span></label><input type="number" id="c_totalR" value="12" step="0.1"></div>
+    <div class="field"><label>其中分红率<span class="unit">%</span></label><input type="number" id="c_divR" value="4.44" step="0.01"></div>
+  </div>
+  <div class="row2">
+    <div class="field"><label>每月定投<span class="unit">元（正=投入，负=取出）</span></label><input type="number" id="c_dca" value="0" step="100"></div>
+    <div class="field" style="font-size:.78rem;color:#6a6865;padding-top:28px">资本增值率 = 总收益 − 分红率 = <span id="capRate" style="color:#d4a853">7.56%</span></div>
+  </div>
+  <button class="btn" onclick="calcCompare()">开始对比 →</button>
+</div>
+
+<div id="c3Result"></div>
+</div>
+
+</div></section>
+
+<footer><div class="container"><a href="index.html">← 返回私家智囊首页</a></div></footer>
 
 <script>
 function fmt(n){return n.toLocaleString('zh-CN',{maximumFractionDigits:0})}
-
-function monthlyEqual(loan,r,years){
-  var mr=r/12/100,nm=years*12;
-  if(mr===0)return loan*10000/nm;
-  return loan*10000*mr*Math.pow(1+mr,nm)/(Math.pow(1+mr,nm)-1);
+function fmt2(n){return n.toLocaleString('zh-CN',{maximumFractionDigits:2})}
+function switchTab(e,id){
+  document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  e.target.classList.add('active');document.getElementById(id).classList.add('active');
 }
 
-function totalPay(loan,r,years,type){
-  var monthly;
-  if(type==='principal'){
-    var mr=r/12/100,nm=years*12,mp=loan*10000/nm,total=0;
-    for(var i=0;i<nm;i++)total+=(mp+(loan*10000-mp*i)*mr);
-    return total;
+// ===== MODULE 1: Mortgage =====
+function calcMortgage(){
+  var L=parseFloat(document.getElementById('m_loan').value)*10000||0;
+  var r=parseFloat(document.getElementById('m_rate').value)/100/12||0;
+  var n=parseInt(document.getElementById('m_years').value)*12||0;
+  var type=document.getElementById('m_type').value;
+  var prepay=parseFloat(document.getElementById('m_prepay').value)*10000||0;
+  var prepayAt=parseInt(document.getElementById('m_prepayAt').value)||0;
+  var html='';
+  if(!L||!r||!n){document.getElementById('m1Result').innerHTML='<div class="result-box">请填写完整参数</div>';return}
+  var monthly,totalInt,sch=[],rem=L;
+  if(type==='equal'){
+    monthly=r>0?L*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1):L/n;
+    totalInt=monthly*n-L;
+  }else{
+    var mp=L/n;totalInt=0;
+    for(var i=0;i<n;i++){var interest=rem*r;totalInt+=interest;rem-=mp}
+    monthly=mp+L*r;
   }
-  return monthlyEqual(loan,r,years)*years*12;
+  html+='<div class="result-box">';
+  html+='<div class="big">月供 ¥'+fmt(monthly)+'</div>';
+  html+='<div class="rrow"><span>贷款总额</span><span>¥'+fmt(L)+'</span></div>';
+  html+='<div class="rrow"><span>总利息</span><span>¥'+fmt(totalInt)+'</span></div>';
+  html+='<div class="rrow"><span>还款总额</span><span>¥'+fmt(L+totalInt)+'</span></div>';
+  html+='<div class="rrow"><span>还款期数</span><span>'+n+'期（'+n/12+'年）</span></div>';
+  if(prepay>0&&prepayAt>0&&prepayAt<n){
+    var rm=remaining(L,r,n,type,prepayAt);
+    var afterRM=rm-prepay;
+    var nd=n-prepayAt;
+    var newM=afterRM>0?(r>0?afterRM*r*Math.pow(1+r,nd)/(Math.pow(1+r,nd)-1):afterRM/nd):0;
+    var saved=monthly*(n-prepayAt)-newM*nd+prepay;
+    html+='<div class="rrow" style="margin-top:8px;color:#d4a853"><span>第'+prepayAt+'个月剩余本金</span><span>¥'+fmt(rm)+'</span></div>';
+    html+='<div class="rrow"><span>提前还 '+fmt(prepay)+' 后剩余</span><span>¥'+fmt(afterRM)+'</span></div>';
+    html+='<div class="rrow"><span>新��供</span><span>¥'+fmt(newM)+'</span></div>';
+    html+='<div class="rrow"><span>节省利息</span><span>¥'+fmt(saved)+'</span></div>';
+  }
+  html+='</div>';
+  document.getElementById('m1Result').innerHTML=html;
 }
 
-function compare(){
-  var loan=parseFloat(document.getElementById('loan').value)||0;
-  var loanRate=parseFloat(document.getElementById('loanRate').value)||0;
-  var years=parseInt(document.getElementById('years').value)||0;
-  var type=document.getElementById('repayType').value;
-  var asset=parseFloat(document.getElementById('asset').value)||0;
-  var assetR=parseFloat(document.getElementById('assetReturn').value)/100||0;
-  var div=parseFloat(document.getElementById('dividend').value)||0;
-  var keep=parseFloat(document.getElementById('keep').value)||0;
+function remaining(L,r,n,type,at){
+  if(type==='equal'){
+    var m=r>0?L*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1):L/n;
+    var rem=L;
+    for(var i=0;i<at;i++)rem=rem*(1+r)-m;
+    return Math.max(0,rem);
+  }
+  var mp=L/n;var rem=L;
+  for(var i=0;i<at;i++)rem-=mp;
+  return Math.max(0,rem);
+}
 
-  // Option A: don't sell, use dividend to pay
-  var monthly=monthlyEqual(loan,loanRate,years);
-  var annualPay=monthly*12;
-  var assetA=asset;
-  for(var i=0;i<years;i++)assetA=assetA*(1+assetR)+Math.max(0,div-annualPay/10000);
-  var principalA=asset;
-
-  // Option B: sell to repay, rest keeps growing
-  var sellAmt=Math.min(asset,loan);
-  var remainB=asset-sellAmt;
-  var finalB=remainB;
-  for(var i=0;i<years;i++)finalB=finalB*(1+assetR);
-  var principalB=remainB;
-
-  var gap=assetA-finalB;
-
-  // Step indicators
-  var spread=assetR*100-loanRate;
-  var coverPct=div/(annualPay/10000)*100;
-
-  document.getElementById('step1').innerHTML=spread>2
-    ?'<span class="ok">息差 '+spread.toFixed(1)+'% — 正向，保留贷款有利</span>'
-    :'<span class="warn">息差 '+spread.toFixed(1)+'% — 接近或为负，认真考虑还贷</span>';
-  document.getElementById('step2').innerHTML=coverPct>=80
-    ?'<span class="ok">覆盖 '+coverPct.toFixed(0)+'% — 现金流自循环</span>'
-    :'<span class="warn">覆盖 '+coverPct.toFixed(0)+'% — 需要工资补缺口</span>';
-  document.getElementById('step3').innerHTML=years>=15
-    ?'<span class="ok">窗口 '+years+' 年 — 时间足够长</span>'
-    :'<span class="warn">窗口 '+years+' 年 — 时间偏短，复利效应受限</span>';
-
-  var html='<div class="result-grid">';
-  html+='<div class="result-card good"><div class="label">方案一：不卖资产</div><div class="num">¥'+fmt(assetA*10000)+'</div><div class="label">'+years+'年后终值</div></div>';
-  html+='<div class="result-card bad"><div class="label">方案二：卖资产还贷</div><div class="num">¥'+fmt(finalB*10000)+'</div><div class="label">剩余资产终值</div></div>';
+// ===== MODULE 2: Investment =====
+function calcInvest(){
+  var P=parseFloat(document.getElementById('i_capital').value)*10000||0;
+  var totalR=parseFloat(document.getElementById('i_totalR').value)/100||0;
+  var divR=parseFloat(document.getElementById('i_divR').value)/100||0;
+  var n=parseInt(document.getElementById('i_years').value)||0;
+  var dca=parseFloat(document.getElementById('i_dca').value)||0;
+  var divMode=document.getElementById('i_divMode').value;
+  var capR=totalR-divR;
+  var mr=capR/12,months=n*12,val=P,totalDiv=0;
+  for(var i=0;i<months;i++){
+    var monthDiv=val*(divR/12);
+    totalDiv+=monthDiv;
+    val=val*(1+mr);
+    if(divMode==='reinvest')val+=monthDiv;
+    val+=dca;
+  }
+  var html='<div class="result-box">';
+  html+='<div class="big">终值 ¥'+fmt(val)+'</div>';
+  html+='<div class="rrow"><span>初始本金</span><span>¥'+fmt(P)+'</span></div>';
+  html+='<div class="rrow"><span>累计定投</span><span>¥'+fmt(dca*months)+'</span></div>';
+  html+='<div class="rrow"><span>累计分红</span><span>¥'+fmt(totalDiv)+'</span></div>';
+  html+='<div class="rrow"><span>资本增值率（年化）</span><span>'+(capR*100).toFixed(2)+'%</span></div>';
+  if(divMode==='cash')html+='<div class="rrow"><span>分红处理</span><span>现金（未再投资）</span></div>';
+  else html+='<div class="rrow"><span>分红处理</span><span>再投资</span></div>';
   html+='</div>';
+  document.getElementById('m2Result').innerHTML=html;
+}
+
+// ===== MODULE 3: Comparison =====
+// Update capital appreciation rate display
+document.getElementById('c_totalR').addEventListener('input',updateCapRate);
+document.getElementById('c_divR').addEventListener('input',updateCapRate);
+function updateCapRate(){
+  var tr=parseFloat(document.getElementById('c_totalR').value)||12;
+  var dr=parseFloat(document.getElementById('c_divR').value)||4.44;
+  document.getElementById('capRate').textContent=(tr-dr).toFixed(2)+'%';
+}
+
+function calcCompare(){
+  var L=parseFloat(document.getElementById('c_loan').value)*10000||0;
+  var r=parseFloat(document.getElementById('c_rate').value)/100/12||0;
+  var n=parseInt(document.getElementById('c_years').value)*12||0;
+  var type=document.getElementById('c_type').value;
+  var prepay=parseFloat(document.getElementById('c_prepay').value)*10000||0;
+  var prepayAt=parseInt(document.getElementById('c_prepayAt').value)||0;
+  var capital=parseFloat(document.getElementById('c_capital').value)*10000||0;
+  var totalR=parseFloat(document.getElementById('c_totalR').value)/100||0;
+  var divR=parseFloat(document.getElementById('c_divR').value)/100||0;
+  var dca=parseFloat(document.getElementById('c_dca').value)||0;
+  var capR=totalR-divR,mr=capR/12,dr=divR/12;
+
+  if(!L||!r||!n||!capital){document.getElementById('c3Result').innerHTML='<div class="result-box">请填写完整参数</div>';return}
+
+  // Monthly mortgage payment
+  var monthly=r>0?L*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1):L/n;
+
+  // Scenario A: Don't prepay
+  var valA=capital,netA=capital-L,chartA=[netA];
+  for(var i=0;i<n;i++){
+    var divA=valA*dr;
+    var shortfall=monthly-divA;
+    valA=valA*(1+mr);
+    if(shortfall>0){
+      valA-=shortfall;// pay mortgage shortfall from investment
+      if(valA<0)valA=0;
+    }else{
+      valA+=(-shortfall);// surplus reinvested
+    }
+    valA+=dca;
+    var remainingLoan=n>0?remainingFromMonths(L,r,n,i+1,type):0;
+    netA=valA-remainingLoan;
+    chartA.push(Math.max(0,netA));
+  }
+
+  // Scenario B: Prepay immediately
+  var prepayB=Math.min(prepay,capital);
+  var valB=capital-prepayB,netB=valB,chartB=[netB];
+  for(var i=0;i<n;i++){
+    var divB=valB*dr;
+    valB=valB*(1+mr)+divB+dca;
+    netB=valB;
+    if(valB<0)valB=0;
+    chartB.push(Math.max(0,netB));
+  }
+
+  var finalA=chartA[chartA.length-1],finalB=chartB[chartB.length-1];
+  var gap=finalA-finalB;
+
+  var html='<div class="compare-grid">';
+  html+='<div class="scenario a"><div class="s-label">场景A · 不提前还贷</div><div class="s-num">¥'+fmt(finalA)+'</div><div class="s-sub">净资产（组合价值−剩余贷款）</div></div>';
+  html+='<div class="scenario b"><div class="s-label">场景B · 提前还贷</div><div class="s-num">¥'+fmt(finalB)+'</div><div class="s-sub">净资产（全部为投资组合价值）</div></div>';
+  html+='</div>';
+
   html+='<div class="verdict">';
   if(gap>0){
-    html+='<p>不卖资产比还贷<strong style="color:#d4a853">多赚</strong></p><div class="gap">约 ¥'+fmt(Math.abs(gap)*10000)+'</div>';
+    html+='<p>不提前还贷<strong style="color:#d4a853">更优</strong></p><div class="gap-num">多出约 ¥'+fmt(gap)+'</div>';
+  }else if(gap<0){
+    html+='<p>提前还贷<strong style="color:#c87868">更优</strong></p><div class="gap-num">多出约 ¥'+fmt(Math.abs(gap))+'</div>';
   }else{
-    html+='<p>还贷比不卖资产<strong style="color:#c87868">更划算</strong></p><div class="gap">约 ¥'+fmt(Math.abs(gap)*10000)+'</div>';
+    html+='<p>两种方案<strong>结果接近</strong></p>';
   }
-  html+='<p style="font-size:.85rem;color:#8a8885;margin-top:8px">月供 ¥'+fmt(monthly)+' / 年付 ¥'+fmt(annualPay)+' · 年分红 ¥'+fmt(div*10000)+'</p>';
+  html+='<p style="font-size:.85rem;color:#8a8885;margin-top:8px">月供 ¥'+fmt(monthly)+' · 资本增值率 '+(capR*100).toFixed(2)+'% · 分红率 '+(divR*100).toFixed(2)+'% · 月定投 ¥'+fmt(dca)+'</p>';
   html+='</div>';
 
-  document.getElementById('result').innerHTML=html;
+  html+='<div class="chart-box"><canvas id="compareChart"></canvas></div>';
+
+  document.getElementById('c3Result').innerHTML=html;
+  drawCompareChart(chartA,chartB,n);
 }
 
-window.addEventListener('DOMContentLoaded',compare);
+function remainingFromMonths(L,r,n,at,type){
+  if(at>=n)return 0;
+  if(type==='equal'){
+    var m=r>0?L*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1):L/n;
+    var rem=L;
+    for(var i=0;i<at;i++)rem=rem*(1+r)-m;
+    return Math.max(0,rem);
+  }
+  var mp=L/n;
+  return Math.max(0,L-mp*at);
+}
+
+function drawCompareChart(dA,dB,totalMonths){
+  var c=document.getElementById('compareChart');
+  if(!c)return;
+  var dpr=window.devicePixelRatio||1;
+  var w=c.parentElement.clientWidth;
+  c.width=w*dpr;c.height=260*dpr;
+  c.style.width=w+'px';c.style.height='260px';
+  var ctx=c.getContext('2d');ctx.scale(dpr,dpr);
+  var pad={t:20,r:16,b:36,l:70};
+  var pw=w-pad.l-pad.r,ph=260-pad.t-pad.b;
+  var max=Math.max(...dA,...dB,1);
+  ctx.clearRect(0,0,w,260);
+
+  // Grid
+  ctx.strokeStyle='rgba(255,255,255,.04)';ctx.lineWidth=.5;
+  for(var i=0;i<=4;i++){var y=pad.t+ph*(1-i/4);ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(w-pad.r,y);ctx.stroke()}
+  for(var i=0;i<=totalMonths/12;i+=5){var x=pad.l+pw*i/(totalMonths/12);ctx.beginPath();ctx.moveTo(x,pad.t);ctx.lineTo(x,pad.t+ph);ctx.stroke()}
+
+  // Y labels
+  ctx.fillStyle='#8a8885';ctx.font='10px sans-serif';ctx.textAlign='right';
+  for(var i=0;i<=4;i++){var y=pad.t+ph*(1-i/4);ctx.fillText('¥'+(max*i/4/10000).toFixed(0)+'w',pad.l-6,y+4)}
+
+  // Lines
+  function drawLine(data,color,width){
+    ctx.strokeStyle=color;ctx.lineWidth=width;ctx.beginPath();
+    for(var i=0;i<data.length;i++){
+      var x=pad.l+pw*i/(totalMonths);
+      var y=pad.t+ph*(1-data[i]/max);
+      if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+  }
+  drawLine(dA,'#d4a853',2.5);
+  drawLine(dB,'#7aa8d8',2.5);
+
+  // Legend
+  ctx.font='11px sans-serif';
+  ctx.fillStyle='#d4a853';ctx.fillText('场景A · 不还',w-pad.r-140,pad.t+12);
+  ctx.fillStyle='#7aa8d8';ctx.fillText('场景B · 提前还',w-pad.r-140,pad.t+26);
+
+  // X axis
+  ctx.fillStyle='#8a8885';ctx.font='10px sans-serif';ctx.textAlign='center';
+  ctx.fillText('0年',pad.l,pad.t+ph+18);
+  ctx.fillText(Math.floor(totalMonths/12)+'年',w-pad.r,pad.t+ph+18);
+  ctx.fillText('净资产变动轨迹',w/2,pad.t+ph+32);
+}
 </script>
 </body>
 </html>
