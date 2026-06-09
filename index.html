@@ -421,6 +421,40 @@ footer .copyright{font-size:.75rem;color:#5a5855}
   </div>
 </section>
 
+<!-- ===== Recommended Module ===== -->
+<section class="section" id="recommended" style="padding:40px 0 20px;background:rgba(255,255,255,.01);">
+  <div class="container">
+    <div id="recommend-new" style="text-align:center;">
+      <div class="section-title">从这里开始</div>
+      <h2 style="margin-bottom:12px;">新读者？先从这里开始</h2>
+      <p style="font-size:.9rem;color:#8a8885;margin-bottom:24px;">如果你第一次来私家智囊，建议先了解我们的原则体系。</p>
+      <a href="principles.html" style="display:inline-block;padding:12px 32px;border:1px solid #d4a853;color:#d4a853;font-size:.85rem;letter-spacing:.05em;text-decoration:none;transition:all .3s;" onmouseover="this.style.background='#d4a853';this.style.color='#0a0e1a';" onmouseout="this.style.background='transparent';this.style.color='#d4a853';">了解守夜人原则 →</a>
+    </div>
+    <div id="recommend-return" style="text-align:center;display:none;">
+      <div class="section-title">最新内容</div>
+      <h2 style="margin-bottom:12px;">欢迎回来</h2>
+      <p style="font-size:.9rem;color:#8a8885;margin-bottom:24px;">继续阅读最新的对话，或使用工具箱中的测算工具。</p>
+      <p style="font-size:.85rem;color:#6a6865;margin-bottom:16px;">
+        <a href="#content" style="color:#d4a853;">📖 阅读最新对话 →</a>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="#tools" style="color:#d4a853;">🛠️ 打开工具箱 →</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+// 为你推荐：根据访问次数显示不同内容
+(function(){
+  var count = parseInt(localStorage.getItem('visitCount') || '0', 10);
+  if (count > 0) {
+    document.getElementById('recommend-new').style.display = 'none';
+    document.getElementById('recommend-return').style.display = 'block';
+  }
+  localStorage.setItem('visitCount', String(count + 1));
+})();
+</script>
+
 <!-- ===== Dialogue List ===== -->
 <section class="section" id="content">
   <div class="container">
