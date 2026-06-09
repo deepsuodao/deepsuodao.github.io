@@ -429,9 +429,23 @@ footer .copyright{font-size:.75rem;color:#5a5855}
     <p style="margin-bottom:12px;font-size:.9rem;color:#8a8885;">从五条安全底线开始，到一张人生清单。十篇对话，一套完整的家庭财务规划框架。</p>
     <p style="margin-bottom:36px;font-size:.82rem;color:#6a6865;">👤 深索道 → 规划师 | 安德路 → 提问者 | 格林格·金 → 守夜人（从第四篇起加入对话）</p>
 
+    <!-- ===== Filter Tags ===== -->
+    <div id="filter-tags" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid rgba(212,168,83,.08);">
+      <span class="filter-btn active" data-filter="all" style="cursor:pointer;padding:6px 14px;font-size:.78rem;border:1px solid rgba(212,168,83,.2);color:#d4a853;border-radius:2px;transition:all .2s;background:rgba(212,168,83,.08);">全部</span>
+      <span class="filter-btn" data-filter="保障金底线" style="cursor:pointer;padding:6px 14px;font-size:.78rem;border:1px solid rgba(212,168,83,.12);color:#8a8885;border-radius:2px;transition:all .2s;">保障金</span>
+      <span class="filter-btn" data-filter="负债边界" style="cursor:pointer;padding:6px 14px;font-size:.78rem;border:1px solid rgba(212,168,83,.12);color:#8a8885;border-radius:2px;transition:all .2s;">负债边界</span>
+      <span class="filter-btn" data-filter="投资纪律" style="cursor:pointer;padding:6px 14px;font-size:.78rem;border:1px solid rgba(212,168,83,.12);color:#8a8885;border-radius:2px;transition:all .2s;">投资纪律</span>
+      <span class="filter-btn" data-filter="时间朋友" style="cursor:pointer;padding:6px 14px;font-size:.78rem;border:1px solid rgba(212,168,83,.12);color:#8a8885;border-radius:2px;transition:all .2s;">时间朋友</span>
+      <span class="filter-btn" data-filter="系统信任" style="cursor:pointer;padding:6px 14px;font-size:.78rem;border:1px solid rgba(212,168,83,.12);color:#8a8885;border-radius:2px;transition:all .2s;">系统信任</span>
+      <span class="filter-btn" data-filter="分散布局" style="cursor:pointer;padding:6px 14px;font-size:.78rem;border:1px solid rgba(212,168,83,.12);color:#8a8885;border-radius:2px;transition:all .2s;">分散布局</span>
+      <span class="filter-btn" data-filter="守夜人总览" style="cursor:pointer;padding:6px 14px;font-size:.78rem;border:1px solid rgba(212,168,83,.12);color:#8a8885;border-radius:2px;transition:all .2s;">守夜人总览</span>
+      <span class="filter-btn" data-filter="原则总览" style="cursor:pointer;padding:6px 14px;font-size:.78rem;border:1px solid rgba(212,168,83,.12);color:#8a8885;border-radius:2px;transition:all .2s;">原则总览</span>
+      <span class="filter-btn" data-filter="综合应用" style="cursor:pointer;padding:6px 14px;font-size:.78rem;border:1px solid rgba(212,168,83,.12);color:#8a8885;border-radius:2px;transition:all .2s;">综合应用</span>
+    </div>
+
     <div class="dialogue-list">
 
-      <a href="dialogue-10.html" class="dialogue-card">
+      <a href="dialogue-10.html" class="dialogue-card" data-tags="守夜人,综合应用">
         <span class="card-num">10</span>
         <div class="card-body">
           <h3>给家庭财务做一次年度审计（附自检表）</h3>
@@ -440,7 +454,7 @@ footer .copyright{font-size:.75rem;color:#5a5855}
         </div>
       </a>
 
-      <a href="dialogue-09.html" class="dialogue-card">
+      <a href="dialogue-09.html" class="dialogue-card" data-tags="守夜人,投资纪律,系统信任">
         <span class="card-num">09</span>
         <div class="card-body">
           <h3>你不缺信息，缺的是一个能帮你按住手的人</h3>
@@ -449,7 +463,7 @@ footer .copyright{font-size:.75rem;color:#5a5855}
         </div>
       </a>
 
-      <a href="dialogue-08.html" class="dialogue-card">
+      <a href="dialogue-08.html" class="dialogue-card" data-tags="守夜人,守夜人总览">
         <span class="card-num">08</span>
         <div class="card-body">
           <h3>你不是缺信息，是缺一个帮你盯着五条底线的人</h3>
@@ -458,7 +472,7 @@ footer .copyright{font-size:.75rem;color:#5a5855}
         </div>
       </a>
 
-      <a href="dialogue-07.html" class="dialogue-card">
+      <a href="dialogue-07.html" class="dialogue-card" data-tags="规划师,保障金底线,分散布局">
         <span class="card-num">07</span>
         <div class="card-body">
           <h3>给家庭建一座堡垒</h3>
@@ -467,7 +481,7 @@ footer .copyright{font-size:.75rem;color:#5a5855}
         </div>
       </a>
 
-      <a href="dialogue-06.html" class="dialogue-card">
+      <a href="dialogue-06.html" class="dialogue-card" data-tags="规划师,原则总览">
         <span class="card-num">06</span>
         <div class="card-body">
           <h3>规划家庭的财务工程逻辑</h3>
@@ -476,7 +490,7 @@ footer .copyright{font-size:.75rem;color:#5a5855}
         </div>
       </a>
 
-      <a href="dialogue-05.html" class="dialogue-card">
+      <a href="dialogue-05.html" class="dialogue-card" data-tags="规划师,负债边界,分散布局">
         <span class="card-num">05</span>
         <div class="card-body">
           <h3>提前还房贷，还是持有房贷和股票的资产组合？</h3>
@@ -485,7 +499,7 @@ footer .copyright{font-size:.75rem;color:#5a5855}
         </div>
       </a>
 
-      <a href="dialogue-04.html" class="dialogue-card">
+      <a href="dialogue-04.html" class="dialogue-card" data-tags="规划师,综合应用">
         <span class="card-num">04</span>
         <div class="card-body">
           <h3>儿童节的三个账户</h3>
@@ -494,7 +508,7 @@ footer .copyright{font-size:.75rem;color:#5a5855}
         </div>
       </a>
 
-      <a href="dialogue-03.html" class="dialogue-card">
+      <a href="dialogue-03.html" class="dialogue-card" data-tags="规划师,时间朋友">
         <span class="card-num">03</span>
         <div class="card-body">
           <h3>复利的朋友与负利的敌人</h3>
@@ -503,7 +517,7 @@ footer .copyright{font-size:.75rem;color:#5a5855}
         </div>
       </a>
 
-      <a href="dialogue-02.html" class="dialogue-card">
+      <a href="dialogue-02.html" class="dialogue-card" data-tags="规划师,原则总览">
         <span class="card-num">02</span>
         <div class="card-body">
           <h3>江边对话录</h3>
@@ -512,7 +526,7 @@ footer .copyright{font-size:.75rem;color:#5a5855}
         </div>
       </a>
 
-      <a href="dialogue-01.html" class="dialogue-card">
+      <a href="dialogue-01.html" class="dialogue-card" data-tags="规划师,原则总览,时间朋友">
         <span class="card-num">01</span>
         <div class="card-body">
           <h3>规划，始于一张人生清单</h3>
@@ -649,6 +663,29 @@ function switchDialogue(e,id){
   e.target.classList.add('active');
   document.getElementById(id).classList.add('active');
 }
+
+// Filter tags
+document.querySelectorAll('.filter-btn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var filter = this.getAttribute('data-filter');
+    document.querySelectorAll('.filter-btn').forEach(function(b){
+      b.style.borderColor = 'rgba(212,168,83,.12)';
+      b.style.color = '#8a8885';
+      b.style.background = 'transparent';
+    });
+    this.style.borderColor = 'rgba(212,168,83,.2)';
+    this.style.color = '#d4a853';
+    this.style.background = 'rgba(212,168,83,.08)';
+    document.querySelectorAll('.dialogue-card').forEach(function(card){
+      if(filter === 'all'){
+        card.style.display = '';
+      } else {
+        var tags = (card.getAttribute('data-tags') || '').split(',');
+        card.style.display = tags.indexOf(filter) !== -1 ? '' : 'none';
+      }
+    });
+  });
+});
 </script>
 </body>
 </html>
