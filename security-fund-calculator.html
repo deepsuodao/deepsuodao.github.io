@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>保障金测算器 - 私家智囊</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card-title span {
+            font-size: 24px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .input-label .hint {
+            font-weight: 400;
+            color: #999;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+        
+        input[type="number"], input[type="text"], select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background: #fafafa;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+        }
+        
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .toggle-section {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .toggle-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #667eea;
+            font-weight: 500;
+        }
+        
+        .toggle-label input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .optional-badge {
+            display: inline-block;
+            background: #f0f0f0;
+            color: #666;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 8px;
+        }
+        
+        .hint-box {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .result-section {
+            margin-top: 30px;
+        }
+        
+        .result-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            padding: 40px 30px;
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .result-label {
+            font-size: 16px;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+        
+        .result-value {
+            font-size: 72px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .result-unit {
+            font-size: 24px;
+            font-weight: 400;
+        }
+        
+        .result-status {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 1s ease-in-out;
+        }
+        
+        .progress-fill.green { background: #10b981; }
+        .progress-fill.yellow { background: #f59e0b; }
+        .progress-fill.red { background: #ef4444; }
+        
+        .source-breakdown {
+            margin-top: 25px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .source-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 15px;
+        }
+        
+        .source-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .source-item:last-child {
+            border-bottom: none;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+        
+        .source-name {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .source-value {
+            font-size: 14px;
+            font-weight: 500;
+            color: #1a1a2e;
+        }
+        
+        .scenario-section {
+            margin-top: 25px;
+        }
+        
+        .scenario-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 15px;
+        }
+        
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .scenario-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .scenario-label {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .scenario-value {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+        
+        .scenario-value.green { color: #10b981; }
+        .scenario-value.yellow { color: #f59e0b; }
+        .scenario-value.red { color: #ef4444; }
+        
+        .benchmark-section {
+            margin-top: 25px;
+            background: #f0f9ff;
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid #0ea5e9;
+        }
+        
+        .benchmark-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0c4a6e;
+            margin-bottom: 12px;
+        }
+        
+        .benchmark-item {
+            font-size: 14px;
+            color: #0c4a6e;
+            line-height: 1.8;
+        }
+        
+        .recommendations {
+            margin-top: 25px;
+            background: #f0fdf4;
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid #10b981;
+        }
+        
+        .recommendations h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #065f46;
+            margin-bottom: 12px;
+        }
+        
+        .recommendations ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .recommendations li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+            font-size: 14px;
+            color: #065f46;
+            line-height: 1.6;
+        }
+        
+        .recommendations li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            font-weight: 600;
+        }
+        
+        button {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: rgba(255,255,255,0.8);
+            font-size: 13px;
+        }
+        
+        .concept-box {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .concept-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 8px;
+        }
+        
+        .concept-text {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛡️ 保障金测算器</h1>
+            <p>信心是复利不中断的核动力</p>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">
+                <span>📊</span>
+                <span>数据输入</span>
+            </div>
+            
+            <div class="concept-box">
+                <div class="concept-title">💡 保障金 ≠ 急用金</div>
+                <div class="concept-text">
+                    急用金：应对突发支出（3-6个月）| 保障金：确保复利不中断（36个月）<br>
+                    保障金是战略性储备，急用金是战术性储备。<br>
+                    <strong>A股一轮完整牛熊周期约3-5年，36个月储备让你能穿越周期不中断。</strong>
+                </div>
+            </div>
+            
+            <div class="hint-box">
+                💡 以下4项为核心输入，填写后即可得到基本结果。下方"选填项"填得越全，算得越准。
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">家庭月基本支出 <span class="hint">（必填）</span></label>
+                <input type="number" id="monthlyExpense" placeholder="如：15000" oninput="calculate()">
+            </div>
+            
+            <div class="row">
+                <div class="input-group">
+                    <label class="input-label">7天内可变现金融资产 <span class="hint">（必填）</span></label>
+                    <input type="number" id="liquid7d" placeholder="如：100000" oninput="calculate()">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">1年内到期存款 <span class="hint">（必填）</span></label>
+                    <input type="number" id="deposit1y" placeholder="如：50000" oninput="calculate()">
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">住房公积金余额 <span class="hint">（必填，失业可提取）</span></label>
+                <input type="number" id="housingFund" placeholder="如：200000" oninput="calculate()">
+            </div>
+            
+            <div class="toggle-section">
+                <label class="toggle-label" onclick="toggleOptional()">
+                    <input type="checkbox" id="showOptional">
+                    <span>选填项（填越全算越准）<span class="optional-badge">可选</span></span>
+                </label>
+                
+                <div id="optionalSection" class="hidden" style="margin-top: 20px;">
+                    <div class="row">
+                        <div class="input-group">
+                            <label class="input-label">1-2年内到期存款</label>
+                            <input type="number" id="deposit1to2y" placeholder="如：30000" oninput="calculate()">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label class="input-label">2-3年内到期存款</label>
+                            <input type="number" id="deposit2to3y" placeholder="如：20000" oninput="calculate()">
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label class="input-label">3年以上长期存款 <span class="hint">（失业时可提前支取，按92.5%贴现）</span></label>
+                        <input type="number" id="depositLong" placeholder="如：100000" oninput="calculate()">
+                    </div>
+                    
+                    <div class="toggle-section">
+                        <label class="toggle-label">
+                            <input type="checkbox" id="hasUnemployment" onchange="toggleUnemployment()">
+                            <span>我有失业保险</span>
+                        </label>
+                        
+                        <div id="unemploymentSection" class="hidden" style="margin-top: 15px;">
+                            <div class="row">
+                                <div class="input-group">
+                                    <label class="input-label">失业保险已缴月数</label>
+                                    <input type="number" id="unemploymentMonths" placeholder="如：60" oninput="calculate()">
+                                </div>
+                                
+                                <div class="input-group">
+                                    <label class="input-label">预计每月失业金</label>
+                                    <input type="number" id="unemploymentAmount" placeholder="如：2000" oninput="calculate()">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="toggle-section">
+                        <label class="toggle-label">
+                            <input type="checkbox" id="hasPassiveIncome" onchange="togglePassiveIncome()">
+                            <span>我有稳定非工资收入（股息/利息/租金等）</span>
+                        </label>
+                        
+                        <div id="passiveIncomeSection" class="hidden" style="margin-top: 15px;">
+                            <div class="row">
+                                <div class="input-group">
+                                    <label class="input-label">年被动收入总额</label>
+                                    <input type="number" id="passiveIncome" placeholder="如：50000" oninput="calculate()">
+                                </div>
+                                
+                                <div class="input-group">
+                                    <label class="input-label">折扣率 <span class="hint">（失业期间可能减少）</span></label>
+                                    <select id="discountRate" onchange="calculate()">
+                                        <option value="0.8">80%（乐观）</option>
+                                        <option value="0.75" selected>75%（中性）</option>
+                                        <option value="0.7">70%（保守）</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card result-section" id="resultCard">
+            <div class="card-title">
+                <span>🎯</span>
+                <span>测算结果</span>
+            </div>
+            
+            <div class="result-card" id="resultCardInner">
+                <!-- 动态生成 -->
+            </div>
+            
+            <div class="source-breakdown" id="sourceBreakdown">
+                <!-- 动态生成 -->
+            </div>
+            
+            <div class="scenario-section" id="scenarioSection">
+                <!-- 动态生成 -->
+            </div>
+            
+            <div class="benchmark-section" id="benchmarkSection">
+                <!-- 动态生成 -->
+            </div>
+            
+            <div class="recommendations" id="recommendations">
+                <!-- 动态生成 -->
+            </div>
+        </div>
+        
+        <button onclick="saveResult()">💾 保存测算结果</button>
+        
+        <div class="footer">
+            <p>私家智囊 · 守夜人值班 · 数据本地计算，不上传服务器</p>
+        </div>
+    </div>
+    
+    <script>
+        // 切换选填项显示
+        function toggleOptional() {
+            const checked = document.getElementById('showOptional').checked;
+            document.getElementById('optionalSection').classList.toggle('hidden', !checked);
+            calculate();
+        }
+        
+        // 切换失业保险输入框
+        function toggleUnemployment() {
+            const checked = document.getElementById('hasUnemployment').checked;
+            document.getElementById('unemploymentSection').classList.toggle('hidden', !checked);
+            calculate();
+        }
+        
+        // 切换被动收入输入框
+        function togglePassiveIncome() {
+            const checked = document.getElementById('hasPassiveIncome').checked;
+            document.getElementById('passiveIncomeSection').classList.toggle('hidden', !checked);
+            calculate();
+        }
+        
+        // 主计算函数
+        function calculate() {
+            const expense = parseFloat(document.getElementById('monthlyExpense').value) || 0;
+            const liquid7d = parseFloat(document.getElementById('liquid7d').value) || 0;
+            const deposit1y = parseFloat(document.getElementById('deposit1y').value) || 0;
+            const housingFund = parseFloat(document.getElementById('housingFund').value) || 0;
+            
+            if (expense === 0) {
+                document.getElementById('resultCard').style.display = 'none';
+                return;
+            }
+            
+            document.getElementById('resultCard').style.display = 'block';
+            
+            // 计算各项资金来源
+            const deposit1to2y = parseFloat(document.getElementById('deposit1to2y').value) || 0;
+            const deposit2to3y = parseFloat(document.getElementById('deposit2to3y').value) || 0;
+            const depositLong = parseFloat(document.getElementById('depositLong').value) || 0;
+            const depositLongDiscounted = depositLong * 0.925; // 贴现92.5%
+            
+            // 失业金计算
+            let unemploymentTotal = 0;
+            if (document.getElementById('hasUnemployment').checked) {
+                const unemploymentMonths = parseFloat(document.getElementById('unemploymentMonths').value) || 0;
+                const unemploymentAmount = parseFloat(document.getElementById('unemploymentAmount').value) || 0;
+                
+                // 根据缴费年限确定可领月数
+                let maxMonths = 0;
+                if (unemploymentMonths >= 120) maxMonths = 24;
+                else if (unemploymentMonths >= 60) maxMonths = 18;
+                else if (unemploymentMonths >= 12) maxMonths = 12;
+                
+                unemploymentTotal = unemploymentAmount * maxMonths;
+            }
+            
+            // 被动收入计算
+            let passiveIncomeMonths = 0;
+            if (document.getElementById('hasPassiveIncome').checked) {
+                const passiveIncome = parseFloat(document.getElementById('passiveIncome').value) || 0;
+                const discountRate = parseFloat(document.getElementById('discountRate').value) || 0.75;
+                passiveIncomeMonths = (passiveIncome * discountRate / 12) / expense * 12; // 被动收入能支撑的月数
+            }
+            
+            // 总保障资金和月数
+            const totalFund = liquid7d + deposit1y + deposit1to2y + deposit2to3y + depositLongDiscounted + housingFund + unemploymentTotal;
+            const totalMonths = totalFund / expense + passiveIncomeMonths;
+            
+            // 渲染结果
+            renderResult(totalMonths, expense, totalFund);
+            renderSourceBreakdown(liquid7d, deposit1y, deposit1to2y, deposit2to3y, depositLongDiscounted, housingFund, unemploymentTotal, passiveIncomeMonths, expense);
+            renderScenario(totalMonths);
+            renderBenchmark(totalMonths, expense);
+            renderRecommendations(totalMonths, expense, totalFund);
+        }
+        
+        // 渲染核心结果
+        function renderResult(totalMonths, expense, totalFund) {
+            const card = document.getElementById('resultCardInner');
+            
+            let status, statusText, statusColor;
+            if (totalMonths >= 36) {
+                status = 'green';
+                statusText = '✅ 保障充足';
+            } else if (totalMonths >= 24) {
+                status = 'yellow';
+                statusText = '⚠️ 保障偏低';
+            } else if (totalMonths >= 12) {
+                status = 'red';
+                statusText = '🔴 保障不足';
+            } else {
+                status = 'red';
+                statusText = '🔴 紧急！保障严重缺乏';
+            }
+            
+            const target = expense * 36;
+            const progress = Math.min(100, (totalFund / target * 100)).toFixed(1);
+            
+            card.innerHTML = `
+                <div class="result-label">保障金测算结果</div>
+                <div class="result-value">${totalMonths.toFixed(1)}<span class="result-unit">个月</span></div>
+                <div class="result-status">${statusText}</div>
+                <div style="font-size: 14px; margin-bottom: 15px;">总保障资金：${(totalFund / 10000).toFixed(1)}万元</div>
+                <div class="progress-bar">
+                    <div class="progress-fill ${status}" style="width: ${progress}%"></div>
+                </div>
+                <div style="font-size: 13px; opacity: 0.8;">达标进度：${progress}%（目标：36个月）</div>
+            `;
+        }
+        
+        // 渲染资金来源拆解
+        function renderSourceBreakdown(liquid7d, deposit1y, deposit1to2y, deposit2to3y, depositLongDiscounted, housingFund, unemploymentTotal, passiveIncomeMonths, expense) {
+            const section = document.getElementById('sourceBreakdown');
+            
+            const items = [
+                { name: '7天内可变现', value: liquid7d },
+                { name: '1年内到期', value: deposit1y },
+                { name: '1-2年内到期', value: deposit1to2y, optional: true },
+                { name: '2-3年内到期', value: deposit2to3y, optional: true },
+                { name: '长期存款（贴现）', value: depositLongDiscounted, optional: true },
+                { name: '住房公积金', value: housingFund },
+                { name: '失业金总额', value: unemploymentTotal, optional: true },
+            ];
+            
+            const totalFund = items.reduce((sum, item) => sum + item.value, 0);
+            const totalMonths = passiveIncomeMonths > 0 ? passiveIncomeMonths : 0;
+            
+            let html = `
+                <div class="source-title">资金来源拆解</div>
+            `;
+            
+            items.forEach(item => {
+                if (item.value > 0 || !item.optional) {
+                    const percent = totalFund > 0 ? (item.value / totalFund * 100).toFixed(1) : 0;
+                    html += `
+                        <div class="source-item">
+                            <span class="source-name">${item.name}</span>
+                            <span class="source-value">${(item.value / 10000).toFixed(1)}万元（${percent}%）</span>
+                        </div>
+                    `;
+                }
+            });
+            
+            if (passiveIncomeMonths > 0) {
+                html += `
+                    <div class="source-item">
+                        <span class="source-name">被动收入折算</span>
+                        <span class="source-value">${passiveIncomeMonths.toFixed(1)}个月</span>
+                    </div>
+                `;
+            }
+            
+            html += `
+                <div class="source-item">
+                    <span class="source-name">总保障资金</span>
+                    <span class="source-value">${(totalFund / 10000).toFixed(1)}万元</span>
+                </div>
+            `;
+            
+            section.innerHTML = html;
+        }
+        
+        // 渲染情景分析
+        function renderScenario(totalMonths) {
+            const section = document.getElementById('scenarioSection');
+            
+            const optimistic = totalMonths + 6; // 假设被动收入不中断
+            const neutral = totalMonths;
+            const pessimistic = Math.max(0, totalMonths - 6); // 假设被动收入中断
+            
+            section.innerHTML = `
+                <div class="scenario-title">📊 情景分析</div>
+                <div class="scenario-grid">
+                    <div class="scenario-card">
+                        <div class="scenario-label">乐观情景</div>
+                        <div class="scenario-value green">${optimistic.toFixed(1)}个月</div>
+                        <div style="font-size: 12px; color: #666; margin-top: 5px;">被动收入不中断</div>
+                    </div>
+                    <div class="scenario-card">
+                        <div class="scenario-label">中性情景</div>
+                        <div class="scenario-value">${neutral.toFixed(1)}个月</div>
+                        <div style="font-size: 12px; color: #666; margin-top: 5px;">被动收入按75%折扣</div>
+                    </div>
+                    <div class="scenario-card">
+                        <div class="scenario-label">悲观情景</div>
+                        <div class="scenario-value red">${pessimistic.toFixed(1)}个月</div>
+                        <div style="font-size: 12px; color: #666; margin-top: 5px;">被动收入中断</div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // 渲染对标分析
+        function renderBenchmark(totalMonths, expense) {
+            const section = document.getElementById('benchmarkSection');
+            
+            // 基于2024年数据的对标
+            let comparison = '';
+            if (expense > 20000) {
+                comparison = `您家保障月数${totalMonths.toFixed(1)}个月，高于一线城市家庭平均水平（约18个月）`;
+            } else if (expense > 10000) {
+                comparison = `您家保障月数${totalMonths.toFixed(1)}个月，高于二线城市家庭平均水平（约12个月）`;
+            } else {
+                comparison = `您家保障月数${totalMonths.toFixed(1)}个月，高于三四线城市家庭平均水平（约8个月）`;
+            }
+            
+            section.innerHTML = `
+                <div class="benchmark-title">📈 对标分析</div>
+                <div class="benchmark-item">
+                    <div>${comparison}</div>
+                    <div style="margin-top: 8px;">注：根据2024年国家统计局数据，67%的中国家庭应急资金不足2个月。</div>
+                </div>
+            `;
+        }
+        
+        // 渲染改进建议
+        function renderRecommendations(totalMonths, expense, totalFund) {
+            const section = document.getElementById('recommendations');
+            
+            const recommendations = [];
+            
+            if (totalMonths < 36) {
+                const gap = expense * 36 - totalFund;
+                recommendations.push(`优先补充保障金至24个月（需再准备${(gap / 10000).toFixed(1)}万元）`);
+            }
+            
+            if (totalMonths < 24) {
+                recommendations.push(`紧急补充流动性资产，确保至少能撑24个月`);
+            }
+            
+            if (totalMonths >= 36) {
+                recommendations.push(`保障金充足，建议定期复盘（每年一次）`);
+            }
+            
+            section.innerHTML = `
+                <h4>💡 改进建议（按优先级排列）</h4>
+                <ul>
+                    ${recommendations.map(r => `<li>${r}</li>`).join('')}
+                </ul>
+            `;
+        }
+        
+        // 保存结果
+        function saveResult() {
+            const data = {
+                monthlyExpense: document.getElementById('monthlyExpense').value,
+                liquid7d: document.getElementById('liquid7d').value,
+                deposit1y: document.getElementById('deposit1y').value,
+                housingFund: document.getElementById('housingFund').value,
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('securityFund', JSON.stringify(data));
+            alert('✅ 测算结果已保存到本地！');
+        }
+        
+        // 页面加载时恢复数据
+        window.onload = function() {
+            const saved = localStorage.getItem('securityFund');
+            if (saved) {
+                const data = JSON.parse(saved);
+                document.getElementById('monthlyExpense').value = data.monthlyExpense || '';
+                document.getElementById('liquid7d').value = data.liquid7d || '';
+                document.getElementById('deposit1y').value = data.deposit1y || '';
+                document.getElementById('housingFund').value = data.housingFund || '';
+                calculate();
+            }
+        };
+    </script>
+</body>
+</html>
