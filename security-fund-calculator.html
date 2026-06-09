@@ -5,387 +5,191 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>保障金测算器 - 私家智囊</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+        /* === Reset === */
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        html{scroll-behavior:smooth}
+        body{
+            font-family:-apple-system,"PingFang SC","Noto Sans SC","Helvetica Neue",sans-serif;
+            background:#0f1424;color:#e8e6e3;line-height:1.7;
+            -webkit-font-smoothing:antialiased;min-height:100vh
         }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
+        a{color:#d4a853;text-decoration:none;transition:color .3s}
+        a:hover{color:#f0c868}
+
+        /* === Layout === */
+        .container{max-width:800px;margin:0 auto;padding:0 20px 40px}
+
+        /* === Header === */
+        .header{text-align:center;padding:40px 0 28px}
+        .header h1{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:400;color:#d4a853;letter-spacing:-.02em}
+        .header p{font-size:.85rem;color:#8a8885;margin-top:8px}
+
+        /* === Card === */
+        .card{
+            background:#1a1f30;border-radius:4px;padding:28px 24px;margin-bottom:20px;
+            border:1px solid rgba(212,168,83,.12);
+            transition:border-color .3s
         }
-        
-        .header {
-            text-align: center;
-            color: white;
-            margin-bottom: 30px;
+        .card:hover{border-color:rgba(212,168,83,.25)}
+        .card-title{
+            font-size:1rem;font-weight:500;color:#d4a853;margin-bottom:20px;
+            display:flex;align-items:center;gap:10px;letter-spacing:.02em
         }
-        
-        .header h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
-            font-weight: 600;
+        .card-title span{font-size:1.2rem}
+
+        /* === Input === */
+        .input-group{margin-bottom:18px}
+        .input-label{
+            display:block;font-size:.82rem;color:#b0aeab;margin-bottom:6px;font-weight:400
         }
-        
-        .header p {
-            font-size: 16px;
-            opacity: 0.9;
+        .input-label .hint{color:#6a6865;font-size:.75rem;margin-left:6px}
+        input[type="number"],input[type="text"],select{
+            width:100%;padding:12px 14px;font-size:.95rem;
+            background:#232840;border:1px solid #3a3f55;border-radius:4px;
+            color:#e8e6e3;outline:none;transition:border-color .3s,background .3s;
+            font-family:inherit
         }
-        
-        .card {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        input:focus,select:focus{
+            border-color:#d4a853;background:#2a2f48
         }
-        
-        .card-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #1a1a2e;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        input::placeholder{color:#5a5855}
+        select{appearance:auto;cursor:pointer}
+
+        /* === Grid Row === */
+        .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+        @media(max-width:640px){.row{grid-template-columns:1fr}}
+
+        /* === Toggle / Optional === */
+        .toggle-section{margin-top:16px;padding-top:16px;border-top:1px solid rgba(212,168,83,.08)}
+        .toggle-label{
+            display:flex;align-items:center;gap:10px;cursor:pointer;
+            font-size:.85rem;color:#d4a853
         }
-        
-        .card-title span {
-            font-size: 24px;
+        .toggle-label input[type="checkbox"]{width:16px;height:16px;accent-color:#d4a853}
+        .hidden{display:none}
+        .optional-badge{
+            display:inline-block;font-size:.7rem;padding:2px 8px;border-radius:2px;
+            background:rgba(212,168,83,.12);color:#d4a853;margin-left:6px
         }
-        
-        .input-group {
-            margin-bottom: 20px;
+
+        /* === Hint Box === */
+        .hint-box{
+            background:rgba(212,168,83,.04);border-radius:4px;padding:12px 16px;
+            margin-bottom:18px;font-size:.82rem;color:#8a8885;line-height:1.6;
+            border-left:2px solid rgba(212,168,83,.2)
         }
-        
-        .input-label {
-            display: block;
-            font-size: 14px;
-            font-weight: 500;
-            color: #333;
-            margin-bottom: 8px;
+
+        /* === Concept Box === */
+        .concept-box{
+            background:rgba(255,255,255,.015);border-radius:4px;padding:16px 20px;
+            margin-bottom:18px;border-left:2px solid #d4a853
         }
-        
-        .input-label .hint {
-            font-weight: 400;
-            color: #999;
-            font-size: 12px;
-            margin-left: 8px;
+        .concept-title{font-size:.9rem;color:#d4a853;margin-bottom:6px;font-weight:500}
+        .concept-text{font-size:.82rem;color:#b0aeab;line-height:1.6}
+        .concept-text strong{color:#e8e6e3}
+
+        /* === Result Section === */
+        .result-section{margin-top:0}
+        .result-card{
+            background:linear-gradient(180deg,#1a1f30 0%,#1f2440 100%);
+            border:1px solid rgba(212,168,83,.15);border-radius:4px;
+            padding:36px 24px;text-align:center;margin-bottom:20px
         }
-        
-        input[type="number"], input[type="text"], select {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: all 0.3s;
-            background: #fafafa;
+        .result-label{font-size:.85rem;color:#8a8885;margin-bottom:12px}
+        .result-value{
+            font-size:clamp(2.5rem,5vw,4rem);font-weight:300;color:#d4a853;margin-bottom:8px
         }
-        
-        input:focus, select:focus {
-            outline: none;
-            border-color: #667eea;
-            background: white;
+        .result-unit{font-size:1.2rem;font-weight:400;color:#b0aeab;margin-left:4px}
+        .result-status{font-size:1.1rem;font-weight:500;margin-bottom:16px}
+        .result-status.green{color:#7db87d}
+        .result-status.yellow{color:#d4a853}
+        .result-status.red{color:#c97a7a}
+
+        /* === Progress Bar === */
+        .progress-bar{
+            width:100%;height:8px;background:rgba(255,255,255,.06);
+            border-radius:4px;overflow:hidden;margin:16px 0 8px
         }
-        
-        .row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+        .progress-fill{height:100%;border-radius:4px;transition:width 1s ease-in-out}
+        .progress-fill.green{background:#7db87d}
+        .progress-fill.yellow{background:#d4a853}
+        .progress-fill.red{background:#c97a7a}
+        .progress-label{font-size:.78rem;color:#6a6865}
+
+        /* === Source Breakdown === */
+        .source-breakdown{
+            background:rgba(255,255,255,.015);border-radius:4px;padding:20px;margin-bottom:20px;
+            border:1px solid rgba(212,168,83,.08)
         }
-        
-        @media (max-width: 768px) {
-            .row {
-                grid-template-columns: 1fr;
-            }
+        .source-title{font-size:.9rem;color:#d4a853;margin-bottom:14px;font-weight:500}
+        .source-item{
+            display:flex;justify-content:space-between;align-items:center;
+            padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.85rem
         }
-        
-        .toggle-section {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #f0f0f0;
+        .source-item:last-child{border-bottom:none;font-weight:500;color:#e8e6e3}
+        .source-name{color:#8a8885}
+        .source-value{color:#c8c6c2}
+
+        /* === Scenario === */
+        .scenario-section{margin-bottom:20px}
+        .scenario-title{font-size:.9rem;color:#d4a853;margin-bottom:14px;font-weight:500}
+        .scenario-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+        @media(max-width:480px){.scenario-grid{grid-template-columns:1fr}}
+        .scenario-card{
+            background:rgba(255,255,255,.015);border:1px solid rgba(212,168,83,.1);
+            border-radius:4px;padding:16px;text-align:center
         }
-        
-        .toggle-label {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            font-size: 14px;
-            color: #667eea;
-            font-weight: 500;
+        .scenario-label{font-size:.78rem;color:#8a8885;margin-bottom:6px}
+        .scenario-value{font-size:1.3rem;font-weight:500;color:#e8e6e3}
+        .scenario-value.green{color:#7db87d}
+        .scenario-value.yellow{color:#d4a853}
+        .scenario-value.red{color:#c97a7a}
+        .scenario-note{font-size:.72rem;color:#6a6865;margin-top:4px}
+
+        /* === Benchmark === */
+        .benchmark-section{
+            background:rgba(212,168,83,.04);border-radius:4px;padding:20px;margin-bottom:20px;
+            border:1px solid rgba(212,168,83,.1)
         }
-        
-        .toggle-label input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
+        .benchmark-title{font-size:.9rem;color:#d4a853;margin-bottom:10px;font-weight:500}
+        .benchmark-item{font-size:.82rem;color:#b0aeab;line-height:1.6}
+
+        /* === Recommendations === */
+        .recommendations{
+            background:rgba(125,184,125,.04);border-radius:4px;padding:20px;margin-bottom:0;
+            border:1px solid rgba(125,184,125,.12)
         }
-        
-        .hidden {
-            display: none;
+        .recommendations h4{font-size:.9rem;color:#7db87d;margin-bottom:12px;font-weight:500}
+        .recommendations ul{list-style:none;padding:0}
+        .recommendations li{
+            padding:6px 0 6px 20px;position:relative;font-size:.85rem;color:#b0aeab;line-height:1.6
         }
-        
-        .optional-badge {
-            display: inline-block;
-            background: #f0f0f0;
-            color: #666;
-            font-size: 12px;
-            padding: 2px 8px;
-            border-radius: 10px;
-            margin-left: 8px;
+        .recommendations li:before{content:"→";position:absolute;left:0;color:#d4a853}
+
+        /* === Save Button === */
+        .save-btn{
+            display:block;width:100%;padding:14px;margin-top:4px;
+            background:#d4a853;border:none;border-radius:4px;
+            color:#0a0e1a;font-size:.9rem;font-weight:500;cursor:pointer;
+            transition:background .3s;font-family:inherit
         }
-        
-        .hint-box {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 12px 16px;
-            margin-bottom: 20px;
-            font-size: 13px;
-            color: #666;
-            line-height: 1.6;
+        .save-btn:hover{background:#f0c868}
+
+        /* === Footer === */
+        .site-footer{
+            text-align:center;padding:32px 0 24px;border-top:1px solid rgba(255,255,255,.04);
+            margin-top:20px
         }
-        
-        .result-section {
-            margin-top: 30px;
-        }
-        
-        .result-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 16px;
-            padding: 40px 30px;
-            color: white;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        
-        .result-label {
-            font-size: 16px;
-            margin-bottom: 10px;
-            opacity: 0.9;
-        }
-        
-        .result-value {
-            font-size: 72px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        
-        .result-unit {
-            font-size: 24px;
-            font-weight: 400;
-        }
-        
-        .result-status {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-        
-        .progress-bar {
-            width: 100%;
-            height: 12px;
-            background: rgba(255,255,255,0.3);
-            border-radius: 6px;
-            overflow: hidden;
-            margin: 20px 0;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            border-radius: 6px;
-            transition: width 1s ease-in-out;
-        }
-        
-        .progress-fill.green { background: #10b981; }
-        .progress-fill.yellow { background: #f59e0b; }
-        .progress-fill.red { background: #ef4444; }
-        
-        .source-breakdown {
-            margin-top: 25px;
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 20px;
-        }
-        
-        .source-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #1a1a2e;
-            margin-bottom: 15px;
-        }
-        
-        .source-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #e0e0e0;
-        }
-        
-        .source-item:last-child {
-            border-bottom: none;
-            font-weight: 600;
-            color: #1a1a2e;
-        }
-        
-        .source-name {
-            font-size: 14px;
-            color: #666;
-        }
-        
-        .source-value {
-            font-size: 14px;
-            font-weight: 500;
-            color: #1a1a2e;
-        }
-        
-        .scenario-section {
-            margin-top: 25px;
-        }
-        
-        .scenario-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #1a1a2e;
-            margin-bottom: 15px;
-        }
-        
-        .scenario-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
-        
-        .scenario-card {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-        }
-        
-        .scenario-label {
-            font-size: 13px;
-            color: #666;
-            margin-bottom: 5px;
-        }
-        
-        .scenario-value {
-            font-size: 20px;
-            font-weight: 600;
-            color: #1a1a2e;
-        }
-        
-        .scenario-value.green { color: #10b981; }
-        .scenario-value.yellow { color: #f59e0b; }
-        .scenario-value.red { color: #ef4444; }
-        
-        .benchmark-section {
-            margin-top: 25px;
-            background: #f0f9ff;
-            border-radius: 12px;
-            padding: 20px;
-            border-left: 4px solid #0ea5e9;
-        }
-        
-        .benchmark-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #0c4a6e;
-            margin-bottom: 12px;
-        }
-        
-        .benchmark-item {
-            font-size: 14px;
-            color: #0c4a6e;
-            line-height: 1.8;
-        }
-        
-        .recommendations {
-            margin-top: 25px;
-            background: #f0fdf4;
-            border-radius: 12px;
-            padding: 20px;
-            border-left: 4px solid #10b981;
-        }
-        
-        .recommendations h4 {
-            font-size: 16px;
-            font-weight: 600;
-            color: #065f46;
-            margin-bottom: 12px;
-        }
-        
-        .recommendations ul {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .recommendations li {
-            padding: 8px 0;
-            padding-left: 24px;
-            position: relative;
-            font-size: 14px;
-            color: #065f46;
-            line-height: 1.6;
-        }
-        
-        .recommendations li:before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            font-weight: 600;
-        }
-        
-        button {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 20px;
-        }
-        
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-        }
-        
-        .footer {
-            text-align: center;
-            padding: 20px;
-            color: rgba(255,255,255,0.8);
-            font-size: 13px;
-        }
-        
-        .concept-box {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-left: 4px solid #667eea;
-        }
-        
-        .concept-title {
-            font-size: 15px;
-            font-weight: 600;
-            color: #1a1a2e;
-            margin-bottom: 8px;
-        }
-        
-        .concept-text {
-            font-size: 13px;
-            color: #666;
-            line-height: 1.6;
+        .site-footer .slogan{font-size:.85rem;color:#8a8885;margin-bottom:4px}
+        .site-footer .slogan span{color:#d4a853}
+        .site-footer .copyright{font-size:.72rem;color:#5a5855}
+
+        /* === Mobile === */
+        @media(max-width:480px){
+            body{padding:0}
+            .container{padding:0 16px 20px}
+            .card{padding:20px 16px}
+            .header{padding:28px 0 20px}
         }
     </style>
 </head>
@@ -537,10 +341,11 @@
             </div>
         </div>
         
-        <button onclick="saveResult()">💾 保存测算结果</button>
+        <button class="save-btn" onclick="saveResult()">💾 保存测算结果</button>
         
-        <div class="footer">
-            <p>私家智囊 · 守夜人值班 · 数据本地计算，不上传服务器</p>
+        <div class="site-footer">
+            <p class="slogan">家庭财富的<span>规划师</span>与<span>守夜人</span></p>
+            <p class="copyright">私家智囊 · 数据本地计算，不上传服务器</p>
         </div>
     </div>
     
@@ -651,7 +456,7 @@
                 <div class="progress-bar">
                     <div class="progress-fill ${status}" style="width: ${progress}%"></div>
                 </div>
-                <div style="font-size: 13px; opacity: 0.8;">达标进度：${progress}%（目标：36个月）</div>
+                <div class="progress-label">达标进度：${progress}%（目标：36个月）</div>
             `;
         }
         
@@ -721,17 +526,17 @@
                     <div class="scenario-card">
                         <div class="scenario-label">乐观情景</div>
                         <div class="scenario-value green">${optimistic.toFixed(1)}个月</div>
-                        <div style="font-size: 12px; color: #666; margin-top: 5px;">被动收入不中断</div>
+                        <div class="scenario-note">被动收入不中断</div>
                     </div>
                     <div class="scenario-card">
                         <div class="scenario-label">中性情景</div>
                         <div class="scenario-value">${neutral.toFixed(1)}个月</div>
-                        <div style="font-size: 12px; color: #666; margin-top: 5px;">被动收入按75%折扣</div>
+                        <div class="scenario-note">被动收入按75%折扣</div>
                     </div>
                     <div class="scenario-card">
                         <div class="scenario-label">悲观情景</div>
                         <div class="scenario-value red">${pessimistic.toFixed(1)}个月</div>
-                        <div style="font-size: 12px; color: #666; margin-top: 5px;">被动收入中断</div>
+                        <div class="scenario-note">被动收入中断</div>
                     </div>
                 </div>
             `;
