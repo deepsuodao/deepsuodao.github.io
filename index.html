@@ -34,7 +34,7 @@ a{color:#d4a853;text-decoration:none;transition:color .3s}
 a:hover{color:#f0c868}
 
 /* === Layout === */
-.container{max-width:900px;margin:0 auto;padding:0 24px}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
 .section{padding:100px 0}
 .section-title{
   font-size:.75rem;text-transform:uppercase;letter-spacing:.15em;
@@ -284,7 +284,8 @@ footer .copyright{font-size:.75rem;color:#5a5855}
 }
 
 /* === Tools Grid === */
-.tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tools-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:860px){.tools-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:640px){.tools-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:400px){.tools-grid{grid-template-columns:1fr}}
 .tool-card{
@@ -301,6 +302,16 @@ footer .copyright{font-size:.75rem;color:#5a5855}
 .tool-start{position:relative}
 .tool-start::before{content:"★ 起点";position:absolute;top:-1px;right:-1px;background:#d4a853;color:#0a0e1a;font-size:.65rem;padding:2px 6px;border-radius:0 4px 0 4px;z-index:1}
 
+/* === Hero CTA === */
+.hero-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:4px;font-size:.85rem;cursor:pointer;transition:all .3s;text-decoration:none;font-family:inherit}
+.hero-btn.primary{background:#d4a853;border:none;color:#0a0e1a;font-weight:500}
+.hero-btn.primary:hover{background:#f0c868}
+.hero-btn.ghost{border:1px solid rgba(212,168,83,.3);color:#d4a853;background:transparent}
+.hero-btn.ghost:hover{background:rgba(212,168,83,.08)}
+
+/* === Back to Top === */
+.back-to-top{position:fixed;bottom:32px;right:32px;width:44px;height:44px;border-radius:50%;background:rgba(212,168,83,.1);border:1px solid rgba(212,168,83,.2);color:#d4a853;font-size:1.2rem;cursor:pointer;transition:all .3s;z-index:999;display:flex;align-items:center;justify-content:center;text-decoration:none;backdrop-filter:blur(4px)}
+.back-to-top:hover{background:rgba(212,168,83,.2);border-color:rgba(212,168,83,.4)}
 </style>
 </head>
 <body>
@@ -372,8 +383,8 @@ footer .copyright{font-size:.75rem;color:#5a5855}
           守护那份至关重要的、让复利得以生长的<span style="color:#d4a853;">坚定与平静</span>。
         </p>
         <div class="hero-cta" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:24px;">
-          <a href="#tools" class="hero-cta" style="display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:#d4a853;border:none;border-radius:4px;color:#0a0e1a;font-size:.85rem;font-weight:500;cursor:pointer;transition:background .3s;text-decoration:none;" onmouseover="this.style.background='#f0c868'" onmouseout="this.style.background='#d4a853'">🏰 先测：五格结构图</a>
-          <a href="dialogue-07.html" style="display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border:1px solid rgba(212,168,83,.3);border-radius:4px;color:#d4a853;font-size:.85rem;cursor:pointer;transition:all .3s;text-decoration:none;" onmouseover="this.style.background='rgba(212,168,83,.08)'" onmouseout="this.style.background='transparent'">先读：建一座堡垒 →</a>
+          <a href="#tools" class="hero-btn primary">🏰 先测：五格结构图</a>
+          <a href="dialogue-07.html" class="hero-btn ghost">先读：建一座堡垒 →</a>
         </div>
         <p style="font-size:.75rem;color:#6a6865;margin-top:12px;">工具仅在浏览器本地计算，不上传服务器 · 免注册</p>
       </div>
@@ -930,6 +941,9 @@ footer .copyright{font-size:.75rem;color:#5a5855}
     </div>
   </div>
 </section>
+
+<a href="#" class="back-to-top" aria-label="回到顶部">↑</a>
+
 <footer>
   <div class="container">
     <p class="slogan">家庭财富的<span>规划师</span>与<span>守夜人</span></p>

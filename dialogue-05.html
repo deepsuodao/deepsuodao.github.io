@@ -33,7 +33,7 @@ a{color:#d4a853;text-decoration:none;transition:color .3s}
 a:hover{color:#f0c868}
 
 /* === Layout === */
-.container{max-width:900px;margin:0 auto;padding:0 24px}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
 .section{padding:100px 0}
 .section-title{
   font-size:.75rem;text-transform:uppercase;letter-spacing:.15em;
@@ -201,7 +201,7 @@ footer .copyright{font-size:.75rem;color:#5a5855}
   border-radius:4px;border:1px solid rgba(212,168,83,.1);
   box-shadow:0 8px 40px rgba(0,0,0,.4),0 0 60px rgba(212,168,83,.04)
 }
-.section-img.wide{max-width:900px}
+.section-img.wide{max-width:1100px}
 .section-img.square{max-width:500px}
 .section-img.portrait{max-width:320px;border-radius:50% 50% 4px 4px}
 
@@ -261,6 +261,10 @@ footer .copyright{font-size:.75rem;color:#5a5855}
   border:1px solid rgba(212,168,83,.15);opacity:.85;
   box-shadow:0 4px 24px rgba(0,0,0,.3)
 }
+/* === Back to Top === */
+.back-to-top{position:fixed;bottom:32px;right:32px;width:44px;height:44px;border-radius:50%;background:rgba(212,168,83,.1);border:1px solid rgba(212,168,83,.2);color:#d4a853;font-size:1.2rem;cursor:pointer;transition:all .3s;z-index:999;display:flex;align-items:center;justify-content:center;text-decoration:none;backdrop-filter:blur(4px)}
+.back-to-top:hover{background:rgba(212,168,83,.2);border-color:rgba(212,168,83,.4)}
+
 </style>
 </head>
 <body>
@@ -423,6 +427,7 @@ footer .copyright{font-size:.75rem;color:#5a5855}
     <p class="slogan">家庭财富的<span>规划师</span>与<span>守夜人</span></p>
     <p class="copyright">私家智囊 · 2026</p>
   </div>
+<a href="#" class="back-to-top" aria-label="回到顶部">↑</a>
 </footer>
 
 </body>
