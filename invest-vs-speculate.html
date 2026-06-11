@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="投资vs投机五问自测表——五个锚点帮你判断自己的行为是投资还是投机。适合18岁以上任何开始接触市场的人。">
+<meta property="og:title" content="投资vs投机五问自测表 — 私家智囊">
+<meta property="og:description" content="五个锚点，一分钟自测：你买的是什么、收益来源、时间框架、能否说清估值、下跌时的反应。先测后判，让数字说话。">
+<meta property="og:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<title>投资vs投机五问自测表 — 私家智囊</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC","Helvetica Neue",sans-serif;background:#0f1424;color:#e8e6e3;line-height:1.7;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:#d4a853;text-decoration:none;transition:color .3s}
+a:hover{color:#f0c868}
+.container{max-width:700px;margin:0 auto;padding:0 20px 40px}
+.header{text-align:center;padding:32px 0 20px}
+.header h1{font-size:clamp(1.4rem,3.5vw,2rem);font-weight:400;color:#d4a853;letter-spacing:-.02em;margin-bottom:4px}
+.header .subtitle{font-size:.82rem;color:#8a8885}
+.card{background:#1a1f30;border-radius:4px;padding:24px 20px;margin-bottom:16px;border:1px solid rgba(212,168,83,.12)}
+.card-title{font-size:.95rem;font-weight:500;color:#d4a853;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.question{margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.04)}
+.question:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.q-label{font-size:.85rem;color:#b0aeab;margin-bottom:8px}
+.q-text{font-size:.95rem;color:#e8e6e3;margin-bottom:10px;font-weight:500}
+.options{display:flex;flex-direction:column;gap:6px}
+.options label{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border:1px solid rgba(212,168,83,.1);border-radius:3px;cursor:pointer;transition:all .2s;font-size:.85rem;color:#b0aeab}
+.options label:hover{border-color:rgba(212,168,83,.25);background:rgba(212,168,83,.03)}
+.options input[type="radio"]{margin-top:3px;accent-color:#d4a853;flex-shrink:0}
+.options label.invest{color:#7db87d}
+.options label.speculate{color:#c97a7a}
+.save-btn{display:block;width:100%;padding:14px;margin-top:8px;background:#d4a853;border:none;border-radius:4px;color:#0a0e1a;font-size:.9rem;font-weight:500;cursor:pointer;transition:background .3s;font-family:inherit}
+.save-btn:hover{background:#f0c868}
+.result-box{display:none;background:rgba(212,168,83,.04);border:1px solid rgba(212,168,83,.12);border-radius:4px;padding:20px;margin-top:16px;text-align:center}
+.result-box .score{font-size:2.5rem;font-weight:300;color:#d4a853;margin-bottom:8px}
+.result-box .verdict{font-size:.9rem;margin-bottom:4px}
+.result-box .verdict.invest{color:#7db87d}
+.result-box .verdict.speculate{color:#c97a7a}
+.result-box .detail{font-size:.82rem;color:#8a8885;line-height:1.6}
+.site-footer{text-align:center;padding:28px 0 20px;border-top:1px solid rgba(255,255,255,.04);margin-top:16px}
+.site-footer .slogan{font-size:.82rem;color:#8a8885;margin-bottom:4px}
+.site-footer .slogan span{color:#d4a853}
+.site-footer .copyright{font-size:.7rem;color:#5a5855}
+@media(max-width:480px){.container{padding:0 14px 20px}.card{padding:18px 14px}.header{padding:24px 0 16px}}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>📊 投资 vs 投机</h1>
+    <div class="subtitle">五问自测表 · 先测后判，让情绪别替你下单</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>🎯</span> 五个锚点，一分钟自测</div>
+    <p style="font-size:.82rem;color:#6a6865;margin-bottom:16px;line-height:1.6;">针对你最近一次投资操作（或你想做的那笔操作），逐题选择最贴近你的描述。每选一个左边选项（投资）得+2分，右边选项（投机）得-2分。</p>
+
+    <div class="question" id="q1">
+      <div class="q-label">问题 1/5</div>
+      <div class="q-text">你买的是什么？</div>
+      <div class="options">
+        <label class="invest"><input type="radio" name="q1" value="invest"> 企业的内在价值——我看重它的业务、现金流和盈利能力</label>
+        <label class="speculate"><input type="radio" name="q1" value="speculate"> 价格的动量——我看重它最近涨得好、有故事、有热点</label>
+      </div>
+    </div>
+
+    <div class="question" id="q2">
+      <div class="q-label">问题 2/5</div>
+      <div class="q-text">你的收益来源是什么？</div>
+      <div class="options">
+        <label class="invest"><input type="radio" name="q2" value="invest"> 企业创造价值，价值反映在价格上——正和博弈</label>
+        <label class="speculate"><input type="radio" name="q2" value="speculate"> 价格涨了卖给下家——零和博弈</label>
+      </div>
+    </div>
+
+    <div class="question" id="q3">
+      <div class="q-label">问题 3/5</div>
+      <div class="q-text">你的时间框架是多久？</div>
+      <div class="options">
+        <label class="invest"><input type="radio" name="q3" value="invest"> 愿意持有3~5年以上，给企业运行周期发挥作用的时间</label>
+        <label class="speculate"><input type="radio" name="q3" value="speculate"> 几天到几周内赚价差，长了等不及</label>
+      </div>
+    </div>
+
+    <div class="question" id="q4">
+      <div class="q-label">问题 4/5</div>
+      <div class="q-text">你能说清它为什么值这个价吗？</div>
+      <div class="options">
+        <label class="invest"><input type="radio" name="q4" value="invest"> 能大致解释：估值逻辑、催化剂、风险点在哪里</label>
+        <label class="speculate"><input type="radio" name="q4" value="speculate"> "听说要涨""图形突破了""群里推荐的"</label>
+      </div>
+    </div>
+
+    <div class="question" id="q5">
+      <div class="q-label">问题 5/5</div>
+      <div class="q-text">如果价格跌了20%，你的第一反应是什么？</div>
+      <div class="options">
+        <label class="invest"><input type="radio" name="q5" value="invest"> 逻辑没破就持有，甚至考虑加仓</label>
+        <label class="speculate"><input type="radio" name="q5" value="speculate"> "完了，要不要割？"心慌、焦虑、想跑</label>
+      </div>
+    </div>
+
+    <button class="save-btn" onclick="calculate()">📊 查看结果</button>
+
+    <div class="result-box" id="result">
+      <div class="score" id="scoreDisplay">0</div>
+      <div class="verdict" id="verdictDisplay"></div>
+      <div class="detail" id="detailDisplay"></div>
+    </div>
+  </div>
+
+  <div class="card" style="font-size:.82rem;color:#8a8885;line-height:1.6;">
+    <p style="margin-bottom:6px;"><strong style="color:#d4a853;">评分说明：</strong></p>
+    <p>• 6~10分 → 你的行为模式偏投资 ✓</p>
+    <p>• -6~4分 → 混合型，要看具体标的</p>
+    <p>• -10~-6分 → 你的行为模式偏投机 ⚠️</p>
+    <p style="margin-top:8px;"><strong style="color:#d4a853;">重要提示：</strong>工具不决定你是投资者，行为模式才决定。即使买的是指数基金，每天盯盘追涨杀跌，行为仍然是投机。</p>
+    <p style="margin-top:8px;">💡 延伸阅读：<a href="./dialogue-20.html">第20篇（高考后的夏天）</a> · <a href="./dialogue-03.html">第3篇（复利的朋友）</a></p>
+  </div>
+
+  <div class="site-footer">
+    <p class="slogan">家庭财富的<span>规划师</span>与<span>守夜人</span></p>
+    <p class="copyright">私家智囊 · 数据本地计算，不上传服务器</p>
+  </div>
+</div>
+
+<script>
+function calculate() {
+  const questions = ['q1','q2','q3','q4','q5'];
+  let score = 0;
+  let answered = 0;
+
+  questions.forEach(id => {
+    const selected = document.querySelector(`input[name="${id}"]:checked`);
+    if (selected) {
+      answered++;
+      score += selected.value === 'invest' ? 2 : -2;
+    }
+  });
+
+  if (answered < 5) {
+    document.getElementById('result').style.display = 'block';
+    document.getElementById('scoreDisplay').textContent = '?';
+    document.getElementById('verdictDisplay').textContent = '⚠️ 还有题目没选完';
+    document.getElementById('verdictDisplay').className = 'verdict';
+    document.getElementById('detailDisplay').textContent = '选完所有5题才能出结果。';
+    return;
+  }
+
+  document.getElementById('result').style.display = 'block';
+  document.getElementById('scoreDisplay').textContent = score + '分';
+
+  const verdict = document.getElementById('verdictDisplay');
+  const detail = document.getElementById('detailDisplay');
+
+  if (score >= 6) {
+    verdict.textContent = '✅ 你的行为模式偏投资';
+    verdict.className = 'verdict invest';
+    detail.textContent = '你做到了大多数人做不到的事——用企业思维代替价格思维。继续坚持，时间站在你这边。核心挑战：在市场恐慌时保持冷静，别被短期波动带偏。';
+  } else if (score >= -4) {
+    verdict.textContent = '⚠️ 混合型——要看具体标的是什么';
+    verdict.className = 'verdict';
+    detail.textContent = '你的行为模式在不同标的上可能不同。建议：对你看得懂、愿意持有三年以上的标的用投资逻辑；对看不懂的、只想短期参与的，承认自己在投机，控制仓位和风险。';
+  } else {
+    verdict.textContent = '❌ 你的行为模式偏投机';
+    verdict.className = 'verdict speculate';
+    detail.textContent = '你倾向于追逐价格和热点。这不是错的——投机本身不违法。但你要清楚自己在做什么：你不是在"投资一家企业"，你是在"猜价格的涨跌"。建议：①只用闲钱；②设好止损；③把每笔交易记下来，三个月后回头看，看看猜对了几次。';
+  }
+}
+</script>
+</body>
+</html>

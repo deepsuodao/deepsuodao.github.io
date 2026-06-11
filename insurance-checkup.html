@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="家庭保险配置体检表——三步配置法：算缺口、定顺序、控预算。先测后买，让每一分保费都花在刀刃上。">
+<meta property="og:title" content="家庭保险配置体检表 — 私家智囊">
+<meta property="og:description" content="算保障缺口、定配置顺序、控保费预算。三步填完，知道你家保险有没有买对。先测后买。">
+<meta property="og:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<title>家庭保险配置体检表 — 私家智囊</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC","Helvetica Neue",sans-serif;background:#0f1424;color:#e8e6e3;line-height:1.7;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:#d4a853;text-decoration:none;transition:color .3s}
+a:hover{color:#f0c868}
+.container{max-width:700px;margin:0 auto;padding:0 20px 40px}
+.header{text-align:center;padding:32px 0 20px}
+.header h1{font-size:clamp(1.4rem,3.5vw,2rem);font-weight:400;color:#d4a853;letter-spacing:-.02em;margin-bottom:4px}
+.header .subtitle{font-size:.82rem;color:#8a8885}
+.card{background:#1a1f30;border-radius:4px;padding:24px 20px;margin-bottom:16px;border:1px solid rgba(212,168,83,.12)}
+.card-title{font-size:.95rem;font-weight:500;color:#d4a853;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.input-group{margin-bottom:14px}
+.input-label{display:block;font-size:.82rem;color:#b0aeab;margin-bottom:4px;font-weight:400}
+.input-label .hint{color:#6a6865;font-size:.75rem;margin-left:6px}
+input[type="number"],select{width:100%;padding:10px 12px;font-size:.9rem;background:#232840;border:1px solid #3a3f55;border-radius:4px;color:#e8e6e3;outline:none;transition:border-color .3s;font-family:inherit}
+input:focus,select:focus{border-color:#d4a853;background:#2a2f48}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:480px){.row{grid-template-columns:1fr}}
+.step-title{font-size:.88rem;color:#d4a853;margin-bottom:8px;font-weight:500}
+.step-desc{font-size:.8rem;color:#6a6865;margin-bottom:14px;padding:8px 12px;background:rgba(212,168,83,.03);border-left:2px solid rgba(212,168,83,.15);border-radius:2px}
+.result-box{display:none;margin-top:16px}
+.result-item{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.85rem}
+.result-item:last-child{border-bottom:none}
+.result-label{color:#8a8885}
+.result-value{color:#e8e6e3;font-weight:500}
+.result-value.green{color:#7db87d}
+.result-value.yellow{color:#d4a853}
+.result-value.red{color:#c97a7a}
+.save-btn{display:block;width:100%;padding:14px;margin-top:8px;background:#d4a853;border:none;border-radius:4px;color:#0a0e1a;font-size:.9rem;font-weight:500;cursor:pointer;transition:background .3s;font-family:inherit}
+.save-btn:hover{background:#f0c868}
+.site-footer{text-align:center;padding:28px 0 20px;border-top:1px solid rgba(255,255,255,.04);margin-top:16px}
+.site-footer .slogan{font-size:.82rem;color:#8a8885;margin-bottom:4px}
+.site-footer .slogan span{color:#d4a853}
+.site-footer .copyright{font-size:.7rem;color:#5a5855}
+@media(max-width:480px){.container{padding:0 14px 20px}.card{padding:18px 14px}.header{padding:24px 0 16px}}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>🏥 家庭保险配置体检表</h1>
+    <div class="subtitle">三步配置法：算缺口 → 定顺序 → 控预算 · 先测后买</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>📐</span> 第一步：算缺口</div>
+    <div class="step-desc">如果家庭主要收入来源突然中断，你的保障够不够？</div>
+
+    <div class="row">
+      <div class="input-group">
+        <label class="input-label">家庭年收入（税后）</label>
+        <input type="number" id="annualIncome" placeholder="如：300000" oninput="calcGap()">
+      </div>
+      <div class="input-group">
+        <label class="input-label">剩余房贷总额</label>
+        <input type="number" id="mortgage" placeholder="如：2000000" oninput="calcGap()">
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-group">
+        <label class="input-label">孩子教育剩余总费用</label>
+        <input type="number" id="education" placeholder="如：500000" oninput="calcGap()">
+      </div>
+      <div class="input-group">
+        <label class="input-label">家庭现有保障总额（含公司团险）</label>
+        <input type="number" id="existingCover" placeholder="如：500000" oninput="calcGap()">
+      </div>
+    </div>
+
+    <div id="gapResult" style="display:none;margin-top:12px;padding:12px;background:rgba(212,168,83,.04);border-radius:4px;text-align:center;">
+      <p style="font-size:.82rem;color:#8a8885;">建议保额缺口</p>
+      <p id="gapAmount" style="font-size:1.8rem;font-weight:300;color:#d4a853;"></p>
+      <p id="gapNote" style="font-size:.78rem;color:#6a6865;"></p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>📋</span> 第二步：定顺序</div>
+    <div class="step-desc">保障配置从最紧迫到最可选，逐层检查。</div>
+
+    <div id="orderChecklist">
+      <div class="input-group" style="margin-bottom:10px;display:flex;align-items:center;gap:10px;">
+        <input type="checkbox" id="order1" onchange="calcOrder()" style="width:16px;height:16px;accent-color:#d4a853;">
+        <label style="font-size:.85rem;color:#b0aeab;">✅ <strong>第一阶</strong>：定期寿险+意外险——保额≥房贷+教育费+5年生活费</label>
+      </div>
+      <div class="input-group" style="margin-bottom:10px;display:flex;align-items:center;gap:10px;">
+        <input type="checkbox" id="order2" onchange="calcOrder()" style="width:16px;height:16px;accent-color:#d4a853;">
+        <label style="font-size:.85rem;color:#b0aeab;">✅ <strong>第二阶</strong>：医疗险（报销型）+重疾险（给付型）——防止因病致贫</label>
+      </div>
+      <div class="input-group" style="margin-bottom:0;display:flex;align-items:center;gap:10px;">
+        <input type="checkbox" id="order3" onchange="calcOrder()" style="width:16px;height:16px;accent-color:#d4a853;">
+        <label style="font-size:.85rem;color:#b0aeab;">✅ <strong>第三阶</strong>：年金险/增额终身寿——长期储蓄（可选，不是必选）</label>
+      </div>
+    </div>
+
+    <div id="orderResult" style="display:none;margin-top:12px;padding:12px;background:rgba(212,168,83,.04);border-radius:4px;text-align:center;">
+      <p id="orderText" style="font-size:.85rem;color:#8a8885;"></p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>💰</span> 第三步：控预算</div>
+    <div class="step-desc">保费支出占年收入的比例是否合理？</div>
+    <div class="input-group">
+      <label class="input-label">当前家庭总保费（年缴）</label>
+      <input type="number" id="premium" placeholder="如：15000" oninput="calcBudget()">
+    </div>
+
+    <div id="budgetResult" style="display:none;margin-top:12px;padding:12px;background:rgba(212,168,83,.04);border-radius:4px;text-align:center;">
+      <p id="budgetRatio" style="font-size:1.5rem;font-weight:300;color:#d4a853;"></p>
+      <p id="budgetVerdict" style="font-size:.85rem;"></p>
+    </div>
+  </div>
+
+  <button class="save-btn" onclick="showSummary()">📊 生成体检报告</button>
+
+  <div id="summaryBox" class="card" style="display:none;border-color:rgba(212,168,83,.2);">
+    <div class="card-title"><span>📋</span> 保险配置体检报告</div>
+    <div id="summaryContent"></div>
+  </div>
+
+  <div class="card" style="font-size:.82rem;color:#8a8885;line-height:1.6;">
+    <p><strong style="color:#d4a853;">重要提示：</strong></p>
+    <p>• 保障型保费应占大头，分红型不能挤占保障预算</p>
+    <p>• 不要买"返还型"保险——保费比消费型贵一倍以上</p>
+    <p>• 保险是拿来睡的，不是拿来操心的</p>
+    <p style="margin-top:8px;">💡 延伸阅读：<a href="./dialogue-22.html">第22篇（保险配置的底层逻辑）</a> · <a href="./self-check-8q.html">八问自检表</a></p>
+  </div>
+
+  <div class="site-footer">
+    <p class="slogan">家庭财富的<span>规划师</span>与<span>守夜人</span></p>
+    <p class="copyright">私家智囊 · 数据本地计算，不上传服务器</p>
+  </div>
+</div>
+
+<script>
+function fmt(n){return n.toLocaleString('zh-CN')}
+
+function calcGap(){
+  const income = parseFloat(document.getElementById('annualIncome').value)||0;
+  const mortgage = parseFloat(document.getElementById('mortgage').value)||0;
+  const edu = parseFloat(document.getElementById('education').value)||0;
+  const exist = parseFloat(document.getElementById('existingCover').value)||0;
+  const gapResult = document.getElementById('gapResult');
+
+  if(income===0){gapResult.style.display='none';return}
+
+  const livingNeeds = income * 5; // 5年生活费
+  const suggested = Math.max(0, mortgage + edu + livingNeeds - exist);
+  const minSuggested = Math.max(0, mortgage + edu + income * 3 - exist);
+
+  gapResult.style.display='block';
+  document.getElementById('gapAmount').textContent = '≈ ' + fmt(suggested) + ' 元';
+  document.getElementById('gapNote').textContent = '最低建议 ' + fmt(minSuggested) + ' 元（含3年生活费）';
+  document.getElementById('gapAmount').style.color = suggested>0 ? (suggested>500000?'#c97a7a':'#d4a853') : '#7db87d';
+}
+
+function calcOrder(){
+  const o1=document.getElementById('order1').checked;
+  const o2=document.getElementById('order2').checked;
+  const o3=document.getElementById('order3').checked;
+  const r=document.getElementById('orderResult');
+  const t=document.getElementById('orderText');
+  r.style.display='block';
+  const done=[o1,o2,o3].filter(Boolean).length;
+  if(done===0){t.textContent='⬜ 尚未配置任何保障层级';t.style.color='#c97a7a'}
+  else if(done===1){t.textContent='⚠️ 已配置第一阶，建议补充第二阶（医疗+重疾）';t.style.color='#d4a853'}
+  else if(done===2){t.textContent='✅ 前两阶已配置，第三阶（储蓄型）按需求选配';t.style.color='#7db87d'}
+  else{t.textContent='✅ 三层全部覆盖，配置完整';t.style.color='#7db87d'}
+}
+
+function calcBudget(){
+  const income=parseFloat(document.getElementById('annualIncome').value)||0;
+  const premium=parseFloat(document.getElementById('premium').value)||0;
+  const r=document.getElementById('budgetResult');
+  const ratio=document.getElementById('budgetRatio');
+  const v=document.getElementById('budgetVerdict');
+  if(income===0||premium===0){r.style.display='none';return}
+  r.style.display='block';
+  const pct=(premium/income*100).toFixed(1);
+  ratio.textContent=pct+'%';
+  if(pct<=5){v.innerHTML='✅ 理想范围（5%以内），预算合理';v.style.color='#7db87d'}
+  else if(pct<=8){v.innerHTML='⚠️ 正常范围（5%-8%），检查保障型是否占大头';v.style.color='#d4a853'}
+  else if(pct<=10){v.innerHTML='⚠️ 偏高（8%-10%），建议检查是否买了过多储蓄型产品';v.style.color='#d4a853'}
+  else{v.innerHTML='❌ 超过10%，保费负担过重，建议重新评估配置';v.style.color='#c97a7a'}
+}
+
+function showSummary(){
+  const income=parseFloat(document.getElementById('annualIncome').value)||0;
+  const mortgage=parseFloat(document.getElementById('mortgage').value)||0;
+  const edu=parseFloat(document.getElementById('education').value)||0;
+  const exist=parseFloat(document.getElementById('existingCover').value)||0;
+  const premium=parseFloat(document.getElementById('premium').value)||0;
+
+  const box=document.getElementById('summaryBox');
+  const content=document.getElementById('summaryContent');
+  box.style.display='block';
+
+  const livingNeeds=income*5;
+  const gap=Math.max(0,mortgage+edu+livingNeeds-exist);
+  const pct=income>0?(premium/income*100).toFixed(1):'?';
+  const o1=document.getElementById('order1').checked?'✅':'⬜';
+  const o2=document.getElementById('order2').checked?'✅':'⬜';
+  const o3=document.getElementById('order3').checked?'✅':'⬜';
+  const orderCount=[document.getElementById('order1').checked,document.getElementById('order2').checked,document.getElementById('order3').checked].filter(Boolean).length;
+
+  let orderStatus='';
+  if(orderCount===0)orderStatus='❌ 未配置任何保障';
+  else if(orderCount===1)orderStatus='⚠️ 只覆盖了第一阶';
+  else if(orderCount===2)orderStatus='✅ 前两阶已覆盖';
+  else orderStatus='✅ 三层全部覆盖';
+
+  let budgetStatus='';
+  const pctNum=parseFloat(pct);
+  if(pctNum<=5)budgetStatus='✅ 合理（≤5%）';
+  else if(pctNum<=8)budgetStatus='⚠️ 正常（5%-8%）';
+  else if(pctNum<=10)budgetStatus='⚠️ 偏高（8%-10%）';
+  else budgetStatus='❌ 过重（>10%）';
+
+  content.innerHTML=`
+    <div class="result-item"><span class="result-label">保障缺口</span><span class="result-value ${gap>0?(gap>500000?'red':'yellow'):'green'}">${fmt(gap)} 元</span></div>
+    <div class="result-item"><span class="result-label">第一阶（寿险+意外）</span><span class="result-value">${o1}</span></div>
+    <div class="result-item"><span class="result-label">第二阶（医疗+重疾）</span><span class="result-value">${o2}</span></div>
+    <div class="result-item"><span class="result-label">第三阶（储蓄型）</span><span class="result-value">${o3}</span></div>
+    <div class="result-item"><span class="result-label">配置顺序</span><span class="result-value">${orderStatus}</span></div>
+    <div class="result-item"><span class="result-label">保费占比</span><span class="result-value">${pct}% — ${budgetStatus}</span></div>
+  `;
+}
+</script>
+</body>
+</html>
