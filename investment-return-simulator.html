@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="投资回报情景模拟 — 模拟不同市场情景下的投资回报。乐观/中性/悲观三情景对比，助你理解长期持有的力量。">
+    <meta property="og:title" content="投资回报情景模拟 - 私家智囊">
+    <meta property="og:description" content="模拟不同市场情景下的投资回报：乐观/中性/悲观三情景对比，看看时间+复利如何为你工作。">
+    <meta property="og:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://deepsuodao.github.io/investment-return-simulator.html">
+    <meta property="og:site_name" content="私家智囊">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
+    <title>投资回报情景模拟 - 私家智囊</title>
+    <style>
+        /* === Reset === */
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        html{scroll-behavior:smooth}
+        body{
+            font-family:-apple-system,"PingFang SC","Noto Sans SC","Helvetica Neue",sans-serif;
+            background:#0f1424;color:#e8e6e3;line-height:1.7;
+            -webkit-font-smoothing:antialiased;min-height:100vh
+        }
+        a{color:#d4a853;text-decoration:none;transition:color .3s}
+        a:hover{color:#f0c868}
+
+        /* === Layout === */
+        .container{max-width:800px;margin:0 auto;padding:0 20px 40px}
+
+        /* === Header === */
+        .header{text-align:center;padding:40px 0 28px}
+        .header h1{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:400;color:#d4a853;letter-spacing:-.02em}
+        .header p{font-size:.85rem;color:#8a8885;margin-top:8px}
+
+        /* === Card === */
+        .card{
+            background:#1a1f30;border-radius:4px;padding:28px 24px;margin-bottom:20px;
+            border:1px solid rgba(212,168,83,.12);
+            transition:border-color .3s
+        }
+        .card:hover{border-color:rgba(212,168,83,.25)}
+        .card-title{
+            font-size:1rem;font-weight:500;color:#d4a853;margin-bottom:20px;
+            display:flex;align-items:center;gap:10px;letter-spacing:.02em
+        }
+        .card-title span{font-size:1.2rem}
+
+        /* === Input === */
+        .input-group{margin-bottom:18px}
+        .input-label{
+            display:block;font-size:.82rem;color:#b0aeab;margin-bottom:6px;font-weight:400
+        }
+        .input-label .hint{color:#6a6865;font-size:.75rem;margin-left:6px}
+        input[type="number"],input[type="text"],select{
+            width:100%;padding:12px 14px;font-size:.95rem;
+            background:#232840;border:1px solid #3a3f55;border-radius:4px;
+            color:#e8e6e3;outline:none;transition:border-color .3s,background .3s;
+            font-family:inherit
+        }
+        input:focus,select:focus{
+            border-color:#d4a853;background:#2a2f48
+        }
+        input::placeholder{color:#5a5855}
+        select{appearance:auto;cursor:pointer}
+
+        /* === Slider === */
+        .slider-group{margin-bottom:18px}
+        .slider-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+        .slider-label{font-size:.82rem;color:#b0aeab;font-weight:400}
+        .slider-value{font-size:.82rem;color:#d4a853;font-weight:500}
+        input[type="range"]{
+            width:100%;height:6px;
+            -webkit-appearance:none;appearance:none;
+            background:#232840;border-radius:3px;outline:none
+        }
+        input[type="range"]::-webkit-slider-thumb{
+            -webkit-appearance:none;appearance:none;
+            width:18px;height:18px;border-radius:50%;
+            background:#d4a853;cursor:pointer;
+            border:2px solid #0f1424
+        }
+
+        /* === Grid Row === */
+        .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+        @media(max-width:640px){.row{grid-template-columns:1fr}}
+
+        /* === Toggle / Optional === */
+        .toggle-section{margin-top:16px;padding-top:16px;border-top:1px solid rgba(212,168,83,.08)}
+        .toggle-label{
+            display:flex;align-items:center;gap:10px;cursor:pointer;
+            font-size:.85rem;color:#d4a853
+        }
+        .toggle-label input[type="checkbox"]{width:16px;height:16px;accent-color:#d4a853}
+        .hidden{display:none}
+        .optional-badge{
+            display:inline-block;font-size:.7rem;padding:2px 8px;border-radius:2px;
+            background:rgba(212,168,83,.12);color:#d4a853;margin-left:6px
+        }
+
+        /* === Hint Box === */
+        .hint-box{
+            background:rgba(212,168,83,.04);border-radius:4px;padding:12px 16px;
+            margin-bottom:18px;font-size:.82rem;color:#8a8885;line-height:1.6;
+            border-left:2px solid rgba(212,168,83,.2)
+        }
+
+        /* === Concept Box === */
+        .concept-box{
+            background:rgba(255,255,255,.015);border-radius:4px;padding:16px 20px;
+            margin-bottom:18px;border-left:2px solid #d4a853
+        }
+        .concept-title{font-size:.9rem;color:#d4a853;margin-bottom:6px;font-weight:500}
+        .concept-text{font-size:.82rem;color:#b0aeab;line-height:1.6}
+        .concept-text strong{color:#e8e6e3}
+
+        /* === Result Section === */
+        .result-section{margin-top:0}
+
+        /* === Scenario Cards === */
+        .scenario-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
+        @media(max-width:480px){.scenario-grid{grid-template-columns:1fr}}
+        .scenario-card{
+            background:rgba(255,255,255,.015);border:1px solid rgba(212,168,83,.1);
+            border-radius:4px;padding:20px;text-align:center
+        }
+        .scenario-label{font-size:.82rem;color:#8a8885;margin-bottom:8px}
+        .scenario-value{font-size:1.8rem;font-weight:300;color:#d4a853;margin-bottom:4px}
+        .scenario-note{font-size:.75rem;color:#6a6865;margin-top:4px}
+        .scenario-detail{font-size:.78rem;color:#b0aeab;margin-top:8px;line-height:1.5}
+
+        /* === Comparison Table === */
+        .comparison-table{
+            width:100%;border-collapse:collapse;margin-bottom:20px;
+            background:rgba(255,255,255,.015);border-radius:4px;overflow:hidden
+        }
+        .comparison-table th{
+            background:rgba(212,168,83,.08);color:#d4a853;font-weight:500;
+            padding:12px 16px;font-size:.82rem;text-align:left
+        }
+        .comparison-table td{
+            padding:10px 16px;font-size:.82rem;color:#b0aeab;
+            border-bottom:1px solid rgba(255,255,255,.04)
+        }
+        .comparison-table tr:last-child td{border-bottom:none}
+        .comparison-table td.highlight{color:#e8e6e3;font-weight:500}
+
+        /* === Timeline === */
+        .timeline-section{margin-bottom:20px}
+        .timeline-title{font-size:.9rem;color:#d4a853;margin-bottom:14px;font-weight:500}
+        .timeline-item{
+            display:flex;justify-content:space-between;align-items:center;
+            padding:10px 16px;border-bottom:1px solid rgba(255,255,255,.04);
+            font-size:.82rem
+        }
+        .timeline-item:last-child{border-bottom:none}
+        .timeline-year{color:#8a8885;width:80px}
+        .timeline-value{color:#e8e6e3;font-weight:500;flex:1;text-align:right;margin-right:12px}
+        .timeline-detail{color:#b0aeab;font-size:.78rem;width:120px;text-align:right}
+
+        /* === Sensitivity === */
+        .sensitivity-section{margin-bottom:20px}
+        .sensitivity-title{font-size:.9rem;color:#d4a853;margin-bottom:14px;font-weight:500}
+        .sensitivity-item{
+            background:rgba(255,255,255,.015);border-radius:4px;
+            padding:12px 16px;margin-bottom:10px;
+            border-left:2px solid rgba(212,168,83,.2)
+        }
+        .sensitivity-text{font-size:.82rem;color:#b0aeab;line-height:1.6}
+
+        /* === Interruption Scenario === */
+        .interruption-section{
+            background:rgba(255,255,255,.015);border-radius:4px;padding:20px;margin-bottom:20px;
+            border:1px solid rgba(212,168,83,.08)
+        }
+        .interruption-title{font-size:.9rem;color:#d4a853;margin-bottom:12px;font-weight:500}
+        .interruption-text{font-size:.82rem;color:#b0aeab;line-height:1.6;margin-bottom:12px}
+        .interruption-result{
+            background:rgba(212,168,83,.04);border-radius:4px;padding:12px 16px;
+            font-size:.85rem;color:#e8e6e3;line-height:1.6
+        }
+
+        /* === Save Button === */
+        .save-btn{
+            display:block;width:100%;padding:14px;margin-top:4px;
+            background:#d4a853;border:none;border-radius:4px;
+            color:#0a0e1a;font-size:.9rem;font-weight:500;cursor:pointer;
+            transition:background .3s;font-family:inherit
+        }
+        .save-btn:hover{background:#f0c868}
+
+        /* === Footer === */
+        .site-footer{
+            text-align:center;padding:32px 0 24px;border-top:1px solid rgba(255,255,255,.04);
+            margin-top:20px
+        }
+        .site-footer .slogan{font-size:.85rem;color:#8a8885;margin-bottom:4px}
+        .site-footer .slogan span{color:#d4a853}
+        .site-footer .copyright{font-size:.72rem;color:#5a5855}
+
+        /* === Mobile === */
+        @media(max-width:480px){
+            body{padding:0}
+            .container{padding:0 16px 20px}
+            .card{padding:20px 16px}
+            .header{padding:28px 0 20px}
+            .scenario-value{font-size:1.4rem}
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📈 投资回报情景模拟</h1>
+            <p>不预测涨跌，只设计框架——看看时间+复利如何为你工作</p>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">
+                <span>🎯</span>
+                <span>情景参数设置</span>
+            </div>
+            
+            <div class="concept-box">
+                <div class="concept-title">💡 三情景模拟的意义</div>
+                <div class="concept-text">
+                    没有人能准确预测未来市场走势。<br>
+                    但我们可以用<strong>情景模拟</strong>来理解：<br>
+                    - 如果市场比较好（乐观），我的资产能到多少？<br>
+                    - 如果市场一般（中性），我能接受吗？<br>
+                    - 如果市场比较差（悲观），我会不会慌？<br>
+                    <strong>提前看到三种可能，投资时才能睡得着觉。</strong>
+                </div>
+            </div>
+            
+            <div class="hint-box">
+                💡 以下3项为核心输入，填写后即可看到三情景对比。下方"高级选项"可调整通胀和定投中断情景。
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">初始投入金额（元）<span class="hint">（必填）</span></label>
+                <input type="number" id="initialInvestment" placeholder="如：100000（10万元）" oninput="calculate()">
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">每月定投金额（元）<span class="hint">（必填）</span></label>
+                <input type="number" id="monthlyInvestment" placeholder="如：2000（每月定投2000元）" oninput="calculate()">
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">投资期限（年）<span class="hint">（必填，1-50年）</span></label>
+                <input type="number" id="investmentYears" placeholder="如：10（投资10年）" oninput="calculate()">
+            </div>
+            
+            <div class="row">
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <span class="slider-label">乐观情景年化收益（%）</span>
+                        <span class="slider-value" id="optimisticRateValue">12%</span>
+                    </div>
+                    <input type="range" id="optimisticRate" min="5" max="20" step="0.5" value="12" 
+                           oninput="updateSliderValue('optimisticRate');calculate()">
+                </div>
+                
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <span class="slider-label">中性情景年化收益（%）</span>
+                        <span class="slider-value" id="neutralRateValue">8%</span>
+                    </div>
+                    <input type="range" id="neutralRate" min="1" max="15" step="0.5" value="8" 
+                           oninput="updateSliderValue('neutralRate');calculate()">
+                </div>
+            </div>
+            
+            <div class="slider-group">
+                <div class="slider-header">
+                    <span class="slider-label">悲观情景年化收益（%）</span>
+                    <span class="slider-value" id="pessimisticRateValue">3%</span>
+                </div>
+                <input type="range" id="pessimisticRate" min="-5" max="10" step="0.5" value="3" 
+                       oninput="updateSliderValue('pessimisticRate');calculate()">
+            </div>
+            
+            <div class="toggle-section">
+                <label class="toggle-label" onclick="toggleAdvanced()">
+                    <input type="checkbox" id="showAdvanced">
+                    <span>高级选项<span class="optional-badge">可选</span></span>
+                </label>
+                
+                <div id="advancedSection" class="hidden" style="margin-top: 20px;">
+                    <div class="row">
+                        <div class="input-group">
+                            <label class="input-label">是否考虑通胀？</label>
+                            <select id="considerInflation" onchange="calculate()">
+                                <option value="yes" selected>是（推荐）</option>
+                                <option value="no">否</option>
+                            </select>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label class="input-label">通胀率（%）<span class="hint">（默认2.5%）</span></label>
+                            <input type="number" id="inflationRate" value="2.5" step="0.1" min="0" max="10" oninput="calculate()">
+                        </div>
+                    </div>
+                    
+                    <div class="toggle-section">
+                        <label class="toggle-label">
+                            <input type="checkbox" id="hasInterruption" onchange="toggleInterruption()">
+                            <span>模拟"定投中断"情景</span>
+                        </label>
+                        
+                        <div id="interruptionSection" class="hidden" style="margin-top: 15px;">
+                            <div class="row">
+                                <div class="input-group">
+                                    <label class="input-label">中断年份（第几年停止定投）</label>
+                                    <input type="number" id="interruptionYear" placeholder="如：5（第5年停止定投）" oninput="calculate()">
+                                </div>
+                                
+                                <div class="input-group">
+                                    <label class="input-label">中断后年化收益（%）</label>
+                                    <input type="number" id="interruptionReturn" placeholder="如：8（中断后按8%增长）" step="0.1" oninput="calculate()">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card result-section" id="resultCard">
+            <div class="card-title">
+                <span>📊</span>
+                <span>模拟结果</span>
+            </div>
+            
+            <div class="scenario-grid" id="scenarioGrid">
+                <!-- 动态生成 -->
+            </div>
+            
+            <div class="timeline-section" id="timelineSection">
+                <!-- 动态生成 -->
+            </div>
+            
+            <div class="sensitivity-section" id="sensitivitySection">
+                <!-- 动态生成 -->
+            </div>
+            
+            <div class="interruption-section hidden" id="interruptionResult">
+                <!-- 动态生成 -->
+            </div>
+        </div>
+        
+        <button class="save-btn" onclick="saveResult()">💾 保存模拟结果</button>
+        
+        <div class="site-footer">
+            <p class="slogan">家庭财富的<span>规划师</span>与<span>守夜人</span></p>
+            <p class="copyright">私家智囊 · 数据本地计算，不上传服务器</p>
+        </div>
+    </div>
+    
+    <script>
+        // 更新滑块显示值
+        function updateSliderValue(sliderId) {
+            const slider = document.getElementById(sliderId);
+            const valueDisplay = document.getElementById(sliderId + 'Value');
+            valueDisplay.textContent = slider.value + '%';
+        }
+        
+        // 切换高级选项显示
+        function toggleAdvanced() {
+            const checked = document.getElementById('showAdvanced').checked;
+            document.getElementById('advancedSection').classList.toggle('hidden', !checked);
+            calculate();
+        }
+        
+        // 切换定投中断输入框
+        function toggleInterruption() {
+            const checked = document.getElementById('hasInterruption').checked;
+            document.getElementById('interruptionSection').classList.toggle('hidden', !checked);
+            calculate();
+        }
+        
+        // 主计算函数
+        function calculate() {
+            const initial = parseFloat(document.getElementById('initialInvestment').value) || 0;
+            const monthly = parseFloat(document.getElementById('monthlyInvestment').value) || 0;
+            const years = parseFloat(document.getElementById('investmentYears').value) || 0;
+            
+            if (initial === 0 && monthly === 0) {
+                document.getElementById('resultCard').style.display = 'none';
+                return;
+            }
+            
+            if (years === 0 || years < 1) {
+                document.getElementById('resultCard').style.display = 'none';
+                return;
+            }
+            
+            document.getElementById('resultCard').style.display = 'block';
+            
+            // 获取收益率
+            const optimisticRate = parseFloat(document.getElementById('optimisticRate').value) / 100;
+            const neutralRate = parseFloat(document.getElementById('neutralRate').value) / 100;
+            const pessimisticRate = parseFloat(document.getElementById('pessimisticRate').value) / 100;
+            
+            // 计算三情景终值
+            const optimisticResult = calculateFV(initial, monthly, optimisticRate, years);
+            const neutralResult = calculateFV(initial, monthly, neutralRate, years);
+            const pessimisticResult = calculateFV(initial, monthly, pessimisticRate, years);
+            
+            // 考虑通胀
+            const considerInflation = document.getElementById('considerInflation').value === 'yes';
+            const inflationRate = considerInflation ? (parseFloat(document.getElementById('inflationRate').value) || 2.5) / 100 : 0;
+            
+            // 渲染结果
+            renderScenarioGrid(optimisticResult, neutralResult, pessimisticResult, considerInflation, inflationRate, years);
+            renderTimeline(neutralResult, years); // 默认显示中性情景时间线
+            renderSensitivity(initial, monthly, years, neutralRate, considerInflation, inflationRate);
+            
+            // 定投中断情景
+            if (document.getElementById('hasInterruption').checked) {
+                renderInterruptionScenario(initial, monthly, years, neutralRate, considerInflation, inflationRate);
+            } else {
+                document.getElementById('interruptionResult').classList.add('hidden');
+            }
+        }
+        
+        // 计算终值（考虑定投）
+        function calculateFV(initial, monthly, rate, years) {
+            const n = years;
+            const r = rate;
+            const pmt = monthly * 12; // 年定投金额
+            
+            // 复利公式：FV = 初始 × (1+r)^n + PMT × [((1+r)^n - 1] / r
+            let fvInitial = initial * Math.pow(1 + r, n);
+            let fvPMT = 0;
+            
+            if (r > 0) {
+                fvPMT = pmt * (Math.pow(1 + r, n) - 1) / r;
+            } else {
+                fvPMT = pmt * n; // 收益率为0时，只有本金
+            }
+            
+            const totalFV = fvInitial + fvPMT;
+            const totalInvested = initial + pmt * n;
+            const totalReturn = totalFV - totalInvested;
+            const irr = Math.pow(totalFV / totalInvested, 1 / n) - 1;
+            
+            return {
+                fv: totalFV,
+                invested: totalInvested,
+                return: totalReturn,
+                irr: irr
+            };
+        }
+        
+        // 考虑定投中断的终值计算
+        function calculateFVWithInterruption(initial, monthly, rate, years, interruptionYear, interruptionReturn) {
+            const n1 = interruptionYear;
+            const n2 = years - interruptionYear;
+            const r1 = rate;
+            const r2 = interruptionReturn / 100;
+            const pmt = monthly * 12;
+            
+            // 第一阶段：初始资金 + 定投
+            let fvStage1 = initial * Math.pow(1 + r1, n1);
+            if (r1 > 0) {
+                fvStage1 += pmt * (Math.pow(1 + r1, n1) - 1) / r1;
+            } else {
+                fvStage1 += pmt * n1;
+            }
+            
+            // 第二阶段：不再定投，只增长
+            const fvStage2 = fvStage1 * Math.pow(1 + r2, n2);
+            
+            const totalInvested = initial + pmt * n1;
+            const totalReturn = fvStage2 - totalInvested;
+            const irr = Math.pow(fvStage2 / totalInvested, 1 / years) - 1;
+            
+            return {
+                fv: fvStage2,
+                invested: totalInvested,
+                return: totalReturn,
+                irr: irr
+            };
+        }
+        
+        // 计算实际购买力（扣除通胀）
+        function calculateRealPurchasingPower(nominalFV, inflationRate, years) {
+            if (inflationRate === 0) return nominalFV;
+            return nominalFV / Math.pow(1 + inflationRate, years);
+        }
+        
+        // 渲染情景对比卡片
+        function renderScenarioGrid(optimistic, neutral, pessimistic, considerInflation, inflationRate, years) {
+            const grid = document.getElementById('scenarioGrid');
+            
+            // 计算实际购买力
+            const optimisticReal = considerInflation ? 
+                calculateRealPurchasingPower(optimistic.fv, inflationRate, years) : optimistic.fv;
+            const neutralReal = considerInflation ? 
+                calculateRealPurchasingPower(neutral.fv, inflationRate, years) : neutral.fv;
+            const pessimisticReal = considerInflation ? 
+                calculateRealPurchasingPower(pessimistic.fv, inflationRate, years) : pessimistic.fv;
+            
+            grid.innerHTML = `
+                <div class="scenario-card">
+                    <div class="scenario-label">乐观情景（${document.getElementById('optimisticRate').value}%）</div>
+                    <div class="scenario-value">${(optimisticReal / 10000).toFixed(1)}万</div>
+                    <div class="scenario-note">实际购买力终值</div>
+                    <div class="scenario-detail">
+                        名义终值：${(optimistic.fv / 10000).toFixed(1)}万<br>
+                        总投入：${(optimistic.invested / 10000).toFixed(1)}万<br>
+                        收益：${(optimistic.return / 10000).toFixed(1)}万<br>
+                        年化IRR：${(optimistic.irr * 100).toFixed(1)}%
+                    </div>
+                </div>
+                <div class="scenario-card">
+                    <div class="scenario-label">中性情景（${document.getElementById('neutralRate').value}%）</div>
+                    <div class="scenario-value">${(neutralReal / 10000).toFixed(1)}万</div>
+                    <div class="scenario-note">实际购买力终值</div>
+                    <div class="scenario-detail">
+                        名义终值：${(neutral.fv / 10000).toFixed(1)}万<br>
+                        总投入：${(neutral.invested / 10000).toFixed(1)}万<br>
+                        收益：${(neutral.return / 10000).toFixed(1)}万<br>
+                        年化IRR：${(neutral.irr * 100).toFixed(1)}%
+                    </div>
+                </div>
+                <div class="scenario-card">
+                    <div class="scenario-label">悲观情景（${document.getElementById('pessimisticRate').value}%）</div>
+                    <div class="scenario-value">${(pessimisticReal / 10000).toFixed(1)}万</div>
+                    <div class="scenario-note">实际购买力终值</div>
+                    <div class="scenario-detail">
+                        名义终值：${(pessimistic.fv / 10000).toFixed(1)}万<br>
+                        总投入：${(pessimistic.invested / 10000).toFixed(1)}万<br>
+                        收益：${(pessimistic.return / 10000).toFixed(1)}万<br>
+                        年化IRR：${(pessimistic.irr * 100).toFixed(1)}%
+                    </div>
+                </div>
+            `;
+        }
+        
+        // 渲染逐年增长时间线（简化版，只显示关键年份）
+        function renderTimeline(result, years) {
+            const section = document.getElementById('timelineSection');
+            
+            // 只显示第1年、第3年、第5年、第10年、第15年、第20年...（根据总年数动态调整）
+            const keyYears = [];
+            if (years >= 1) keyYears.push(1);
+            if (years >= 3) keyYears.push(3);
+            if (years >= 5) keyYears.push(5);
+            if (years >= 10) keyYears.push(10);
+            if (years >= 15) keyYears.push(15);
+            if (years >= 20) keyYears.push(20);
+            if (years >= 30) keyYears.push(30);
+            
+            // 确保最后一年显示
+            if (!keyYears.includes(years)) keyYears.push(years);
+            
+            let html = `
+                <div class="timeline-title">📅 逐年增长时间线（中性情景）</div>
+            `;
+            
+            const initial = parseFloat(document.getElementById('initialInvestment').value) || 0;
+            const monthly = parseFloat(document.getElementById('monthlyInvestment').value) || 0;
+            const rate = parseFloat(document.getElementById('neutralRate').value) / 100;
+            
+            keyYears.forEach(year => {
+                const resultAtYear = calculateFV(initial, monthly, rate, year);
+                const considerInflation = document.getElementById('considerInflation').value === 'yes';
+                const inflationRate = considerInflation ? (parseFloat(document.getElementById('inflationRate').value) || 2.5) / 100 : 0;
+                const realValue = considerInflation ? 
+                    calculateRealPurchasingPower(resultAtYear.fv, inflationRate, year) : resultAtYear.fv;
+                
+                html += `
+                    <div class="timeline-item">
+                        <div class="timeline-year">第${year}年</div>
+                        <div class="timeline-value">${(realValue / 10000).toFixed(1)}万</div>
+                        <div class="timeline-detail">投入${(resultAtYear.invested / 10000).toFixed(1)}万</div>
+                    </div>
+                `;
+            });
+            
+            section.innerHTML = html;
+        }
+        
+        // 渲染敏感性分析
+        function renderSensitivity(initial, monthly, years, rate, considerInflation, inflationRate) {
+            const section = document.getElementById('sensitivitySection');
+            
+            // 计算基准情景
+            const baseResult = calculateFV(initial, monthly, rate, years);
+            const baseReal = considerInflation ? 
+                calculateRealPurchasingPower(baseResult.fv, inflationRate, years) : baseResult.fv;
+            
+            // 敏感性分析：收益率±1%、期限±5年、每月定投±1000元
+            const sensitivityItems = [];
+            
+            // 收益率+1%
+            const r1 = calculateFV(initial, monthly, rate + 0.01, years);
+            const r1Real = considerInflation ? calculateRealPurchasingPower(r1.fv, inflationRate, years) : r1.fv;
+            sensitivityItems.push({
+                text: `收益率提高1%（至${(rate * 100 + 1).toFixed(1)}%），终值增加约${((r1Real - baseReal) / baseReal * 100).toFixed(1)}%`,
+                value: (r1Real - baseReal) / 10000
+            });
+            
+            // 收益率-1%
+            const r2 = calculateFV(initial, monthly, rate - 0.01, years);
+            const r2Real = considerInflation ? calculateRealPurchasingPower(r2.fv, inflationRate, years) : r2.fv;
+            sensitivityItems.push({
+                text: `收益率降低1%（至${(rate * 100 - 1).toFixed(1)}%），终值减少约${((baseReal - r2Real) / baseReal * 100).toFixed(1)}%`,
+                value: (r2Real - baseReal) / 10000
+            });
+            
+            // 期限+5年
+            if (years + 5 <= 50) {
+                const y1 = calculateFV(initial, monthly, rate, years + 5);
+                const y1Real = considerInflation ? calculateRealPurchasingPower(y1.fv, inflationRate, years + 5) : y1.fv;
+                sensitivityItems.push({
+                    text: `投资期限延长5年（至${years + 5}年），终值增加约${((y1Real - baseReal) / baseReal * 100).toFixed(1)}%`,
+                    value: (y1Real - baseReal) / 10000
+                });
+            }
+            
+            // 每月定投+1000元
+            const p1 = calculateFV(initial, monthly + 1000, rate, years);
+            const p1Real = considerInflation ? calculateRealPurchasingPower(p1.fv, inflationRate, years) : p1.fv;
+            sensitivityItems.push({
+                text: `每月多投1000元，终值增加约${((p1Real - baseReal) / baseReal * 100).toFixed(1)}%`,
+                value: (p1Real - baseReal) / 10000
+            });
+            
+            let html = `
+                <div class="sensitivity-title">🔍 敏感性分析（中性情景）</div>
+            `;
+            
+            sensitivityItems.forEach(item => {
+                html += `
+                    <div class="sensitivity-item">
+                        <div class="sensitivity-text">
+                            ${item.text}<br>
+                            <strong>影响：约${item.value > 0 ? '+' : ''}${(item.value).toFixed(1)}万元</strong>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            section.innerHTML = html;
+        }
+        
+        // 渲染定投中断情景
+        function renderInterruptionScenario(initial, monthly, years, rate, considerInflation, inflationRate) {
+            const interruptionYear = parseFloat(document.getElementById('interruptionYear').value) || 0;
+            const interruptionReturn = parseFloat(document.getElementById('interruptionReturn').value) || 0;
+            
+            if (interruptionYear <= 0 || interruptionYear >= years) {
+                document.getElementById('interruptionResult').classList.add('hidden');
+                return;
+            }
+            
+            const normalResult = calculateFV(initial, monthly, rate, years);
+            const interruptionResult = calculateFVWithInterruption(initial, monthly, rate, years, interruptionYear, interruptionReturn);
+            
+            const normalReal = considerInflation ? 
+                calculateRealPurchasingPower(normalResult.fv, inflationRate, years) : normalResult.fv;
+            const interruptionReal = considerInflation ? 
+                calculateRealPurchasingPower(interruptionResult.fv, inflationRate, years) : interruptionResult.fv;
+            
+            const section = document.getElementById('interruptionResult');
+            section.classList.remove('hidden');
+            
+            section.innerHTML = `
+                <div class="interruption-title">⚠️ 定投中断情景分析</div>
+                <div class="interruption-text">
+                    模拟情景：前${interruptionYear}年正常定投，第${interruptionYear + 1}年开始停止定投，之后资产按${interruptionReturn}%年化收益继续增长至第${years}年。
+                </div>
+                <div class="interruption-result">
+                    <div style="margin-bottom: 8px;">✅ <strong>正常定投终值（实际购买力）</strong>：${(normalReal / 10000).toFixed(1)}万元</div>
+                    <div style="margin-bottom: 8px;">⚠️ <strong>中断定投终值（实际购买力）</strong>：${(interruptionReal / 10000).toFixed(1)}万元</div>
+                    <div style="margin-bottom: 8px;">📉 <strong>差额</strong>：${((normalReal - interruptionReal) / 10000).toFixed(1)}万元（少${((normalReal - interruptionReal) / normalReal * 100).toFixed(1)}%）</div>
+                    <div style="margin-top: 12px; color: #d4a853;">💡 <strong>结论</strong>：持续定投的复利效应远超一次性投入。即使中断后市场继续上涨，失去的定投份额也无法挽回。</div>
+                </div>
+            `;
+        }
+        
+        // 保存结果
+        function saveResult() {
+            const data = {
+                initialInvestment: document.getElementById('initialInvestment').value,
+                monthlyInvestment: document.getElementById('monthlyInvestment').value,
+                investmentYears: document.getElementById('investmentYears').value,
+                optimisticRate: document.getElementById('optimisticRate').value,
+                neutralRate: document.getElementById('neutralRate').value,
+                pessimisticRate: document.getElementById('pessimisticRate').value,
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('investmentReturnSimulator', JSON.stringify(data));
+            alert('✅ 模拟结果已保存到本地！');
+        }
+        
+        // 页面加载时恢复数据
+        window.onload = function() {
+            const saved = localStorage.getItem('investmentReturnSimulator');
+            if (saved) {
+                const data = JSON.parse(saved);
+                document.getElementById('initialInvestment').value = data.initialInvestment || '';
+                document.getElementById('monthlyInvestment').value = data.monthlyInvestment || '';
+                document.getElementById('investmentYears').value = data.investmentYears || '';
+                document.getElementById('optimisticRate').value = data.optimisticRate || 12;
+                document.getElementById('neutralRate').value = data.neutralRate || 8;
+                document.getElementById('pessimisticRate').value = data.pessimisticRate || 3;
+                
+                // 更新滑块显示值
+                updateSliderValue('optimisticRate');
+                updateSliderValue('neutralRate');
+                updateSliderValue('pessimisticRate');
+                
+                calculate();
+            }
+        };
+    </script>
+</body>
+</html>

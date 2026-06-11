@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="财务自由时间线 — 计算按现在的积累速度，多少岁能实现财务自由。看到时间+复利的威力。">
+    <meta property="og:title" content="财务自由时间线 - 私家智囊">
+    <meta property="og:description" content="计算您的财务自由时间线：按现在的积累速度，多少岁能实现财务自由？看到时间+复利的威力。">
+    <meta property="og:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://deepsuodao.github.io/financial-freedom-timeline.html">
+    <meta property="og:site_name" content="私家智囊">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
+    <title>财务自由时间线 - 私家智囊</title>
+    <style>
+        /* === Reset === */
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        html{scroll-behavior:smooth}
+        body{
+            font-family:-apple-system,"PingFang SC","Noto Sans SC","Helvetica Neue",sans-serif;
+            background:#0f1424;color:#e8e6e3;line-height:1.7;
+            -webkit-font-smoothing:antialiased;min-height:100vh
+        }
+        a{color:#d4a853;text-decoration:none;transition:color .3s}
+        a:hover{color:#f0c868}
+
+        /* === Layout === */
+        .container{max-width:800px;margin:0 auto;padding:0 20px 40px}
+
+        /* === Header === */
+        .header{text-align:center;padding:40px 0 28px}
+        .header h1{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:400;color:#d4a853;letter-spacing:-.02em}
+        .header p{font-size:.85rem;color:#8a8885;margin-top:8px}
+
+        /* === Card === */
+        .card{
+            background:#1a1f30;border-radius:4px;padding:28px 24px;margin-bottom:20px;
+            border:1px solid rgba(212,168,83,.12);
+            transition:border-color .3s
+        }
+        .card:hover{border-color:rgba(212,168,83,.25)}
+        .card-title{
+            font-size:1rem;font-weight:500;color:#d4a853;margin-bottom:20px;
+            display:flex;align-items:center;gap:10px;letter-spacing:.02em
+        }
+        .card-title span{font-size:1.2rem}
+
+        /* === Input === */
+        .input-group{margin-bottom:18px}
+        .input-label{
+            display:block;font-size:.82rem;color:#b0aeab;margin-bottom:6px;font-weight:400
+        }
+        .input-label .hint{color:#6a6865;font-size:.75rem;margin-left:6px}
+        input[type="number"],input[type="text"],select{
+            width:100%;padding:12px 14px;font-size:.95rem;
+            background:#232840;border:1px solid #3a3f55;border-radius:4px;
+            color:#e8e6e3;outline:none;transition:border-color .3s,background .3s;
+            font-family:inherit
+        }
+        input:focus,select:focus{
+            border-color:#d4a853;background:#2a2f48
+        }
+        input::placeholder{color:#5a5855}
+        select{appearance:auto;cursor:pointer}
+
+        /* === Slider === */
+        .slider-group{margin-bottom:18px}
+        .slider-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+        .slider-label{font-size:.82rem;color:#b0aeab;font-weight:400}
+        .slider-value{font-size:.82rem;color:#d4a853;font-weight:500}
+        input[type="range"]{
+            width:100%;height:6px;
+            -webkit-appearance:none;appearance:none;
+            background:#232840;border-radius:3px;outline:none
+        }
+        input[type="range"]::-webkit-slider-thumb{
+            -webkit-appearance:none;appearance:none;
+            width:18px;height:18px;border-radius:50%;
+            background:#d4a853;cursor:pointer;
+            border:2px solid #0f1424
+        }
+
+        /* === Grid Row === */
+        .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+        @media(max-width:640px){.row{grid-template-columns:1fr}}
+
+        /* === Toggle / Optional === */
+        .toggle-section{margin-top:16px;padding-top:16px;border-top:1px solid rgba(212,168,83,.08)}
+        .toggle-label{
+            display:flex;align-items:center;gap:10px;cursor:pointer;
+            font-size:.85rem;color:#d4a853
+        }
+        .toggle-label input[type="checkbox"]{width:16px;height:16px;accent-color:#d4a853}
+        .hidden{display:none}
+        .optional-badge{
+            display:inline-block;font-size:.7rem;padding:2px 8px;border-radius:2px;
+            background:rgba(212,168,83,.12);color:#d4a853;margin-left:6px
+        }
+
+        /* === Hint Box === */
+        .hint-box{
+            background:rgba(212,168,83,.04);border-radius:4px;padding:12px 16px;
+            margin-bottom:18px;font-size:.82rem;color:#8a8885;line-height:1.6;
+            border-left:2px solid rgba(212,168,83,.2)
+        }
+
+        /* === Concept Box === */
+        .concept-box{
+            background:rgba(255,255,255,.015);border-radius:4px;padding:16px 20px;
+            margin-bottom:18px;border-left:2px solid #d4a853
+        }
+        .concept-title{font-size:.9rem;color:#d4a853;margin-bottom:6px;font-weight:500}
+        .concept-text{font-size:.82rem;color:#b0aeab;line-height:1.6}
+        .concept-text strong{color:#e8e6e3}
+
+        /* === Result Section === */
+        .result-section{margin-top:0}
+
+        /* === Result Card === */
+        .result-card{
+            background:linear-gradient(180deg,#1a1f30 0%,#1f2440 100%);
+            border:1px solid rgba(212,168,83,.15);border-radius:4px;
+            padding:36px 24px;text-align:center;margin-bottom:20px
+        }
+        .result-label{font-size:.85rem;color:#8a8885;margin-bottom:12px}
+        .result-value{
+            font-size:clamp(2.5rem,5vw,4rem);font-weight:300;color:#d4a853;margin-bottom:8px
+        }
+        .result-unit{font-size:1.2rem;font-weight:400;color:#b0aeab;margin-left:4px}
+        .result-status{font-size:1.1rem;font-weight:500;margin-bottom:16px}
+        .result-status.green{color:#7db87d}
+        .result-status.yellow{color:#d4a853}
+        .result-status.red{color:#c97a7a}
+
+        /* === Timeline === */
+        .timeline-section{margin-bottom:20px}
+        .timeline-title{font-size:.9rem;color:#d4a853;margin-bottom:14px;font-weight:500}
+        .timeline-bar{
+            width:100%;height:60px;background:rgba(255,255,255,.015);
+            border-radius:4px;position:relative;margin-bottom:12px;
+            border:1px solid rgba(212,168,83,.08)
+        }
+        .timeline-now{
+            position:absolute;left:0;top:0;bottom:0;width:4px;
+            background:#d4a853;border-radius:2px
+        }
+        .timeline-freedom{
+            position:absolute;right:0;top:0;bottom:0;width:4px;
+            background:#7db87d;border-radius:2px
+        }
+        .timeline-marker{
+            position:absolute;top:50%;transform:translateY(-50%);
+            width:12px;height:12px;border-radius:50%;
+            border:2px solid #0f1424
+        }
+        .timeline-marker.now{left:0;background:#d4a853;margin-left:-4px}
+        .timeline-marker.freedom{right:0;background:#7db87d;margin-right:-4px}
+        .timeline-label{
+            position:absolute;top:8px;font-size:.75rem;color:#b0aeab
+        }
+        .timeline-label.now{left:12px}
+        .timeline-label.freedom{right:12px;text-align:right}
+        .timeline-year{
+            position:absolute;bottom:8px;font-size:.82rem;color:#d4a853;font-weight:500
+        }
+        .timeline-year.now{left:12px}
+        .timeline-year.freedom{right:12px}
+
+        /* === Scenario Cards === */
+        .scenario-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+        @media(max-width:480px){.scenario-grid{grid-template-columns:1fr}}
+        .scenario-card{
+            background:rgba(255,255,255,.015);border:1px solid rgba(212,168,83,.1);
+            border-radius:4px;padding:16px;text-align:center
+        }
+        .scenario-label{font-size:.78rem;color:#8a8885;margin-bottom:6px}
+        .scenario-value{font-size:1.3rem;font-weight:500;color:#e8e6e3}
+        .scenario-note{font-size:.72rem;color:#6a6865;margin-top:4px}
+
+        /* === Leverage Analysis === */
+        .leverage-section{margin-bottom:20px}
+        .leverage-title{font-size:.9rem;color:#d4a853;margin-bottom:14px;font-weight:500}
+        .leverage-item{
+            background:rgba(255,255,255,.015);border-radius:4px;padding:12px 16px;
+            margin-bottom:10px;border-left:2px solid rgba(212,168,83,.2)
+        }
+        .leverage-text{font-size:.82rem;color:#b0aeab;line-height:1.6}
+        .leverage-impact{
+            font-size:.85rem;font-weight:500;color:#d4a853;margin-top:4px
+        }
+
+        /* === Milestone Table === */
+        .milestone-table{
+            width:100%;border-collapse:collapse;margin-bottom:20px;
+            background:rgba(255,255,255,.015);border-radius:4px;overflow:hidden
+        }
+        .milestone-table th{
+            background:rgba(212,168,83,.08);color:#d4a853;font-weight:500;
+            padding:12px 16px;font-size:.82rem;text-align:left
+        }
+        .milestone-table td{
+            padding:10px 16px;font-size:.82rem;color:#b0aeab;
+            border-bottom:1px solid rgba(255,255,255,.04)
+        }
+        .milestone-table tr:last-child td{border-bottom:none}
+        .milestone-table td.highlight{color:#e8e6e3;font-weight:500}
+
+        /* === Save Button === */
+        .save-btn{
+            display:block;width:100%;padding:14px;margin-top:4px;
+            background:#d4a853;border:none;border-radius:4px;
+            color:#0a0e1a;font-size:.9rem;font-weight:500;cursor:pointer;
+            transition:background .3s;font-family:inherit
+        }
+        .save-btn:hover{background:#f0c868}
+
+        /* === Footer === */
+        .site-footer{
+            text-align:center;padding:32px 0 24px;border-top:1px solid rgba(255,255,255,.04);
+            margin-top:20px
+        }
+        .site-footer .slogan{font-size:.85rem;color:#8a8885;margin-bottom:4px}
+        .site-footer .slogan span{color:#d4a853}
+        .site-footer .copyright{font-size:.72rem;color:#5a5855}
+
+        /* === Mobile === */
+        @media(max-width:480px){
+            body{padding:0}
+            .container{padding:0 16px 20px}
+            .card{padding:20px 16px}
+            .header{padding:28px 0 20px}
+            .result-value{font-size:2rem}
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 财务自由时间线</h1>
+            <p>看到时间+复利的威力，增强长期投资动力</p>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">
+                <span>📊</span>
+                <span>数据输入</span>
+            </div>
+            
+            <div class="concept-box">
+                <div class="concept-title">💡 什么是财务自由？</div>
+                <div class="concept-text">
+                    本工具采用定义：<br>
+                    <strong>被动收入 ≥ （家庭年支出 × 1.5 + 年度储备金）</strong><br><br>
+                    其中：<br>
+                    - <strong>家庭年支出</strong> = 固定支出 + 可预计的年度支出（如保险费、学费、物业费等）<br>
+                    - <strong>年度储备金</strong> = 不可预计但可灵活使用的一笔资金（由您自定，用于应对突发需求）<br><br>
+                    这个定义比传统的"被动收入 ≥ 支出"更保守，确保即使遇到意外支出，也不会打破财务自由状态。
+                </div>
+            </div>
+            
+            <div class="hint-box">
+                💡 以下5项为核心输入，填写后即可看到您的时间线。下方"选填项"填得越全，算得越准。
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">当前年龄 <span class="hint">（必填，18-70岁）</span></label>
+                <input type="number" id="currentAge" placeholder="如：30" min="18" max="70" oninput="calculate()">
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">家庭年支出（元）<span class="hint">（必填，固定+可预计的年度支出）</span></label>
+                <input type="number" id="annualExpense" placeholder="如：180000（年支出18万）" oninput="calculate()">
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">年度储备金（元）<span class="hint">（必填，不可预计的突发支出储备）</span></label>
+                <input type="number" id="annualReserve" placeholder="如：50000（5万元）" oninput="calculate()">
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">当前可投资资产（元）<span class="hint">（必填，不含自住房、不含急用金）</span></label>
+                <input type="number" id="investableAssets" placeholder="如：500000（50万元）" oninput="calculate()">
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">每月新增投资（元）<span class="hint">（必填，储蓄率的核心体现）</span></label>
+                <input type="number" id="monthlyInvestment" placeholder="如：5000（每月投5000元）" oninput="calculate()">
+            </div>
+            
+            <div class="slider-group">
+                <div class="slider-header">
+                    <span class="slider-label">预期年化收益率（%）</span>
+                    <span class="slider-value" id="returnRateValue">8%</span>
+                </div>
+                <input type="range" id="returnRate" min="3" max="15" step="0.5" value="8" 
+                       oninput="updateSliderValue('returnRate');calculate()">
+            </div>
+            
+            <div class="toggle-section">
+                <label class="toggle-label" onclick="toggleOptional()">
+                    <input type="checkbox" id="showOptional">
+                    <span>选填项（填越全算越准）<span class="optional-badge">可选</span></span>
+                </label>
+                
+                <div id="optionalSection" class="hidden" style="margin-top: 20px;">
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <span class="slider-label">通胀率（%）</span>
+                            <span class="slider-value" id="inflationRateValue">2.5%</span>
+                        </div>
+                        <input type="range" id="inflationRate" min="1" max="5" step="0.5" value="2.5" 
+                               oninput="updateSliderValue('inflationRate');calculate()">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label class="input-label">安全系数 <span class="hint">（默认1.5，越保守设越高）</span></label>
+                        <select id="safetyFactor" onchange="calculate()">
+                            <option value="1.2">1.2（较激进）</option>
+                            <option value="1.5" selected>1.5（推荐）</option>
+                            <option value="2.0">2.0（较保守）</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card result-section" id="resultCard">
+            <div class="card-title">
+                <span>🎯</span>
+                <span>您的时间线</span>
+            </div>
+            
+            <div class="result-card" id="resultCardInner">
+                <!-- 动态生成 -->
+            </div>
+            
+            <div class="timeline-section" id="timelineSection">
+                <!-- 动态生成 -->
+            </div>
+            
+            <div class="scenario-grid" id="scenarioGrid">
+                <!-- 动态生成 -->
+            </div>
+            
+            <div class="leverage-section" id="leverageSection">
+                <!-- 动态生成 -->
+            </div>
+            
+            <div class="milestone-table" id="milestoneTable">
+                <!-- 动态生成 -->
+            </div>
+        </div>
+        
+        <button class="save-btn" onclick="saveResult()">💾 保存时间线</button>
+        
+        <div class="site-footer">
+            <p class="slogan">家庭财富的<span>规划师</span>与<span>守夜人</span></p>
+            <p class="copyright">私家智囊 · 数据本地计算，不上传服务器</p>
+        </div>
+    </div>
+    
+    <script>
+        // 更新滑块显示值
+        function updateSliderValue(sliderId) {
+            const slider = document.getElementById(sliderId);
+            const valueDisplay = document.getElementById(sliderId + 'Value');
+            valueDisplay.textContent = slider.value + '%';
+        }
+        
+        // 切换选填项显示
+        function toggleOptional() {
+            const checked = document.getElementById('showOptional').checked;
+            document.getElementById('optionalSection').classList.toggle('hidden', !checked);
+            calculate();
+        }
+        
+        // 主计算函数
+        function calculate() {
+            const currentAge = parseFloat(document.getElementById('currentAge').value) || 0;
+            const annualExpense = parseFloat(document.getElementById('annualExpense').value) || 0;
+            const annualReserve = parseFloat(document.getElementById('annualReserve').value) || 0;
+            const investableAssets = parseFloat(document.getElementById('investableAssets').value) || 0;
+            const monthlyInvestment = parseFloat(document.getElementById('monthlyInvestment').value) || 0;
+            const returnRate = parseFloat(document.getElementById('returnRate').value) / 100;
+            
+            if (currentAge === 0 || annualExpense === 0) {
+                document.getElementById('resultCard').style.display = 'none';
+                return;
+            }
+            
+            document.getElementById('resultCard').style.display = 'block';
+            
+            // 计算财务自由门槛
+            const safetyFactor = parseFloat(document.getElementById('safetyFactor').value) || 1.5;
+            const freedomThreshold = (annualExpense * safetyFactor + annualReserve);
+            
+            // 逐年模拟
+            let assets = investableAssets;
+            let monthly = monthlyInvestment;
+            let freedomAge = -1;
+            let freedomAssets = 0;
+            const maxYears = 50;
+            
+            for (let i = 1; i <= maxYears; i++) {
+                // 每年新增投资
+                assets += monthly * 12;
+                
+                // 每年复利增长
+                assets = assets * (1 + returnRate);
+                
+                // 计算年被动收入
+                const passiveIncome = assets * returnRate;
+                
+                // 检查是否达到财务自由
+                if (passiveIncome >= freedomThreshold && freedomAge === -1) {
+                    freedomAge = currentAge + i;
+                    freedomAssets = assets;
+                }
+                
+                // 如果已经超过50年还没自由，退出
+                if (currentAge + i > 70) break;
+            }
+            
+            // 渲染结果
+            renderResult(freedomAge, currentAge, freedomAssets, freedomThreshold);
+            renderTimeline(currentAge, freedomAge);
+            renderScenario(currentAge, annualExpense, annualReserve, investableAssets, monthlyInvestment, returnRate, safetyFactor);
+            renderLeverage(currentAge, annualExpense, annualReserve, investableAssets, monthlyInvestment, returnRate, safetyFactor);
+            renderMilestones(currentAge, annualExpense, annualReserve, investableAssets, monthlyInvestment, returnRate, safetyFactor);
+        }
+        
+        // 渲染核心结果
+        function renderResult(freedomAge, currentAge, freedomAssets, freedomThreshold) {
+            const card = document.getElementById('resultCardInner');
+            
+            let status, statusText, statusColor;
+            const yearsToFreedom = freedomAge - currentAge;
+            
+            if (freedomAge === -1 || freedomAge > 70) {
+                status = 'red';
+                statusText = '🔴 按当前节奏，70岁前难以实现财务自由';
+                statusColor = 'red';
+            } else if (yearsToFreedom <= 20) {
+                status = 'green';
+                statusText = '✅ 财务自由可期！';
+                statusColor = 'green';
+            } else if (yearsToFreedom <= 30) {
+                status = 'yellow';
+                statusText = '⚠️ 财务自由偏晚，建议优化';
+                statusColor = 'yellow';
+            } else {
+                status = 'red';
+                statusText = '🔴 财务自由较困难，建议调整';
+                statusColor = 'red';
+            }
+            
+            let resultHTML = '';
+            
+            if (freedomAge === -1 || freedomAge > 70) {
+                resultHTML = `
+                    <div class="result-label">财务自由时间线</div>
+                    <div class="result-value" style="font-size: 2rem;">暂未达到</div>
+                    <div class="result-status ${statusColor}">${statusText}</div>
+                    <div style="font-size: 14px; margin-bottom: 15px;">自由门槛：${(freedomThreshold / 10000).toFixed(1)}万元/年</div>
+                    <div style="font-size: 14px; color: #8a8885;">建议：提高储蓄率或年化收益率</div>
+                `;
+            } else {
+                resultHTML = `
+                    <div class="result-label">财务自由时间线</div>
+                    <div class="result-value">${freedomAge}<span class="result-unit">岁</span></div>
+                    <div class="result-status ${statusColor}">${statusText}</div>
+                    <div style="font-size: 14px; margin-bottom: 15px;">距现在还有 ${freedomAge - currentAge} 年</div>
+                    <div style="font-size: 14px; color: #8a8885;">自由门槛：${(freedomThreshold / 10000).toFixed(1)}万元/年 | 届时资产：${(freedomAssets / 10000).toFixed(1)}万元</div>
+                `;
+            }
+            
+            card.innerHTML = resultHTML;
+        }
+        
+        // 渲染时间线（简化版）
+        function renderTimeline(currentAge, freedomAge) {
+            const section = document.getElementById('timelineSection');
+            
+            if (freedomAge === -1 || freedomAge > 70) {
+                section.innerHTML = '';
+                return;
+            }
+            
+            section.innerHTML = `
+                <div class="timeline-title">📅 时间线可视化</div>
+                <div class="timeline-bar">
+                    <div class="timeline-now"></div>
+                    <div class="timeline-freedom"></div>
+                    <div class="timeline-marker now"></div>
+                    <div class="timeline-marker freedom"></div>
+                    <div class="timeline-label now">现在</div>
+                    <div class="timeline-label freedom">财务自由</div>
+                    <div class="timeline-year now">${currentAge}岁</div>
+                    <div class="timeline-year freedom">${freedomAge}岁</div>
+                </div>
+            `;
+        }
+        
+        // 渲染情景对比
+        function renderScenario(currentAge, annualExpense, annualReserve, investableAssets, monthlyInvestment, returnRate, safetyFactor) {
+            const grid = document.getElementById('scenarioGrid');
+            
+            // 计算三种情景
+            const optimisticRate = returnRate + 0.02; // 乐观：+2%
+            const neutralRate = returnRate; // 中性：默认
+            const pessimisticRate = returnRate - 0.03; // 悲观：-3%
+            
+            const optimisticAge = calculateFreedomAge(currentAge, annualExpense, annualReserve, investableAssets, monthlyInvestment, optimisticRate, safetyFactor);
+            const neutralAge = calculateFreedomAge(currentAge, annualExpense, annualReserve, investableAssets, monthlyInvestment, neutralRate, safetyFactor);
+            const pessimisticAge = calculateFreedomAge(currentAge, annualExpense, annualReserve, investableAssets, monthlyInvestment, pessimisticRate, safetyFactor);
+            
+            grid.innerHTML = `
+                <div class="scenario-card">
+                    <div class="scenario-label">乐观情景（${(optimisticRate * 100).toFixed(1)}%）</div>
+                    <div class="scenario-value">${optimisticAge === -1 ? '70岁后' : optimisticAge + '岁'}</div>
+                    <div class="scenario-note">提前 ${neutralAge - optimisticAge} 年</div>
+                </div>
+                <div class="scenario-card">
+                    <div class="scenario-label">中性情景（${(neutralRate * 100).toFixed(1)}%）</div>
+                    <div class="scenario-value">${neutralAge === -1 ? '70岁后' : neutralAge + '岁'}</div>
+                    <div class="scenario-note">基准情景</div>
+                </div>
+                <div class="scenario-card">
+                    <div class="scenario-label">悲观情景（${(pessimisticRate * 100).toFixed(1)}%）</div>
+                    <div class="scenario-value">${pessimisticAge === -1 ? '70岁后' : pessimisticAge + '岁'}</div>
+                    <div class="scenario-note">延后 ${pessimisticAge - neutralAge} 年</div>
+                </div>
+            `;
+        }
+        
+        // 计算财务自由年龄（辅助函数）
+        function calculateFreedomAge(currentAge, annualExpense, annualReserve, investableAssets, monthlyInvestment, returnRate, safetyFactor) {
+            const freedomThreshold = (annualExpense * safetyFactor + annualReserve);
+            
+            let assets = investableAssets;
+            let monthly = monthlyInvestment;
+            
+            for (let i = 1; i <= 50; i++) {
+                assets += monthly * 12;
+                assets = assets * (1 + returnRate);
+                
+                const passiveIncome = assets * returnRate;
+                
+                if (passiveIncome >= freedomThreshold) {
+                    return currentAge + i;
+                }
+                
+                if (currentAge + i > 70) break;
+            }
+            
+            return -1; // 70岁前未达到
+        }
+        
+        // 渲染杠杆分析
+        function renderLeverage(currentAge, annualExpense, annualReserve, investableAssets, monthlyInvestment, returnRate, safetyFactor) {
+            const section = document.getElementById('leverageSection');
+            
+            const baseFreedomAge = calculateFreedomAge(currentAge, annualExpense, annualReserve, investableAssets, monthlyInvestment, returnRate, safetyFactor);
+            
+            if (baseFreedomAge === -1) {
+                section.innerHTML = '';
+                return;
+            }
+            
+            // 计算各种杠杆的影响
+            const leverageItems = [];
+            
+            // 每月多投1000元
+            const scenario1 = calculateFreedomAge(currentAge, annualExpense, annualReserve, investableAssets, monthlyInvestment + 1000, returnRate, safetyFactor);
+            if (scenario1 !== -1) {
+                leverageItems.push({
+                    text: `如果你每月多投1000元`,
+                    impact: `提前 ${baseFreedomAge - scenario1} 年自由`
+                });
+            }
+            
+            // 年化收益提高2%
+            const scenario2 = calculateFreedomAge(currentAge, annualExpense, annualReserve, investableAssets, monthlyInvestment, returnRate + 0.02, safetyFactor);
+            if (scenario2 !== -1) {
+                leverageItems.push({
+                    text: `如果你年化收益提高2%（至${(returnRate * 100 + 2).toFixed(1)}%）`,
+                    impact: `提前 ${baseFreedomAge - scenario2} 年自由`
+                });
+            }
+            
+            // 年支出降低10%
+            const scenario3 = calculateFreedomAge(currentAge, annualExpense * 0.9, annualReserve, investableAssets, monthlyInvestment, returnRate, safetyFactor);
+            if (scenario3 !== -1) {
+                leverageItems.push({
+                    text: `如果你年支出降低10%（至${(annualExpense * 0.9 / 10000).toFixed(1)}万元）`,
+                    impact: `提前 ${baseFreedomAge - scenario3} 年自由`
+                });
+            }
+            
+            let html = `
+                <div class="leverage-title">🔧 关键杠杆分析</div>
+            `;
+            
+            leverageItems.forEach(item => {
+                html += `
+                    <div class="leverage-item">
+                        <div class="leverage-text">${item.text}</div>
+                        <div class="leverage-impact">${item.impact}</div>
+                    </div>
+                `;
+            });
+            
+            section.innerHTML = html;
+        }
+        
+        // 渲染里程碑表格
+        function renderMilestones(currentAge, annualExpense, annualReserve, investableAssets, monthlyInvestment, returnRate, safetyFactor) {
+            const table = document.getElementById('milestoneTable');
+            
+            const freedomAge = calculateFreedomAge(currentAge, annualExpense, annualReserve, investableAssets, monthlyInvestment, returnRate, safetyFactor);
+            
+            if (freedomAge === -1) {
+                table.innerHTML = '';
+                return;
+            }
+            
+            // 计算关键年份的资产规模
+            const keyAges = [];
+            if (currentAge + 5 <= freedomAge) keyAges.push(currentAge + 5);
+            if (currentAge + 10 <= freedomAge) keyAges.push(currentAge + 10);
+            if (currentAge + 15 <= freedomAge) keyAges.push(currentAge + 15);
+            keyAges.push(freedomAge);
+            
+            let html = `
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                        <th>年龄</th>
+                        <th>资产规模</th>
+                        <th>年被动收入</th>
+                        <th>进度</th>
+                    </tr>
+            `;
+            
+            keyAges.forEach(age => {
+                const years = age - currentAge;
+                let assets = investableAssets;
+                let monthly = monthlyInvestment;
+                
+                for (let i = 1; i <= years; i++) {
+                    assets += monthly * 12;
+                    assets = assets * (1 + returnRate);
+                }
+                
+                const passiveIncome = assets * returnRate;
+                const freedomThreshold = (annualExpense * safetyFactor + annualReserve);
+                const progress = Math.min(100, passiveIncome / freedomThreshold * 100).toFixed(1);
+                
+                html += `
+                    <tr>
+                        <td class="highlight">${age}岁</td>
+                        <td>${(assets / 10000).toFixed(1)}万元</td>
+                        <td>${(passiveIncome / 10000).toFixed(1)}万元</td>
+                        <td>${progress}%</td>
+                    </tr>
+                `;
+            });
+            
+            html += `
+                </table>
+            `;
+            
+            table.innerHTML = html;
+        }
+        
+        // 保存结果
+        function saveResult() {
+            const data = {
+                currentAge: document.getElementById('currentAge').value,
+                annualExpense: document.getElementById('annualExpense').value,
+                annualReserve: document.getElementById('annualReserve').value,
+                investableAssets: document.getElementById('investableAssets').value,
+                monthlyInvestment: document.getElementById('monthlyInvestment').value,
+                returnRate: document.getElementById('returnRate').value,
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('financialFreedomTimeline', JSON.stringify(data));
+            alert('✅ 时间线已保存到本地！');
+        }
+        
+        // 页面加载时恢复数据
+        window.onload = function() {
+            const saved = localStorage.getItem('financialFreedomTimeline');
+            if (saved) {
+                const data = JSON.parse(saved);
+                document.getElementById('currentAge').value = data.currentAge || '';
+                document.getElementById('annualExpense').value = data.annualExpense || '';
+                document.getElementById('annualReserve').value = data.annualReserve || '';
+                document.getElementById('investableAssets').value = data.investableAssets || '';
+                document.getElementById('monthlyInvestment').value = data.monthlyInvestment || '';
+                document.getElementById('returnRate').value = data.returnRate || 8;
+                
+                // 更新滑块显示值
+                updateSliderValue('returnRate');
+                
+                calculate();
+            }
+        };
+    </script>
+</body>
+</html>

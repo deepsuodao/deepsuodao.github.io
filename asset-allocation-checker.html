@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="资产配置检查器 — 检查您的资产配置是否合理，给出再平衡建议。支持生命周期配置。">
+    <meta property="og:title" content="资产配置检查器 - 私家智囊">
+    <meta property="og:description" content="检查您的资产配置是否合理：对比推荐配置，计算偏离度，给出再平衡建议。支持生命周期配置。">
+    <meta property="og:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://deepsuodao.github.io/asset-allocation-checker.html">
+    <meta property="og:site_name" content="私家智囊">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
+    <title>资产配置检查器 - 私家智囊</title>
+    <style>
+        /* === Reset === */
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        html{scroll-behavior:smooth}
+        body{
+            font-family:-apple-system,"PingFang SC","Noto Sans SC","Helvetica Neue",sans-serif;
+            background:#0f1424;color:#e8e6e3;line-height:1.7;
+            -webkit-font-smoothing:antialiased;min-height:100vh
+        }
+        a{color:#d4a853;text-decoration:none;transition:color .3s}
+        a:hover{color:#f0c868}
+
+        /* === Layout === */
+        .container{max-width:800px;margin:0 auto;padding:0 20px 40px}
+
+        /* === Header === */
+        .header{text-align:center;padding:40px 0 28px}
+        .header h1{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:400;color:#d4a853;letter-spacing:-.02em}
+        .header p{font-size:.85rem;color:#8a8885;margin-top:8px}
+
+        /* === Card === */
+        .card{
+            background:#1a1f30;border-radius:4px;padding:28px 24px;margin-bottom:20px;
+            border:1px solid rgba(212,168,83,.12);
+            transition:border-color .3s
+        }
+        .card:hover{border-color:rgba(212,168,83,.25)}
+        .card-title{
+            font-size:1rem;font-weight:500;color:#d4a853;margin-bottom:20px;
+            display:flex;align-items:center;gap:10px;letter-spacing:.02em
+        }
+        .card-title span{font-size:1.2rem}
+
+        /* === Input === */
+        .input-group{margin-bottom:18px}
+        .input-label{
+            display:block;font-size:.82rem;color:#b0aeab;margin-bottom:6px;font-weight:400
+        }
+        .input-label .hint{color:#6a6865;font-size:.75rem;margin-left:6px}
+        input[type="number"],input[type="text"],select{
+            width:100%;padding:12px 14px;font-size:.95rem;
+            background:#232840;border:1px solid #3a3f55;border-radius:4px;
+            color:#e8e6e3;outline:none;transition:border-color .3s,background .3s;
+            font-family:inherit
+        }
+        input:focus,select:focus{
+            border-color:#d4a853;background:#2a2f48
+        }
+        input::placeholder{color:#5a5855}
+        select{appearance:auto;cursor:pointer}
+
+        /* === Grid Row === */
+        .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+        @media(max-width:640px){.row{grid-template-columns:1fr}}
+
+        /* === Asset Input Row === */
+        .asset-row{
+            display:grid;grid-template-columns:1fr 100px 100px;gap:12px;
+            margin-bottom:12px;align-items:center
+        }
+        @media(max-width:640px){.asset-row{grid-template-columns:1fr}}
+        .asset-name{font-size:.85rem;color:#b0aeab}
+        .asset-amount input{text-align:right}
+        .asset-percent{font-size:.85rem;color:#d4a853;text-align:right;padding:12px 0}
+
+        /* === Button === */
+        .add-btn{
+            display:inline-block;padding:8px 16px;font-size:.85rem;
+            background:rgba(212,168,83,.08);color:#d4a853;border:1px solid rgba(212,168,83,.2);
+            border-radius:4px;cursor:pointer;transition:background .3s;font-family:inherit
+        }
+        .add-btn:hover{background:rgba(212,168,83,.15)}
+
+        /* === Result Section === */
+        .result-section{margin-top:0}
+
+        /* === Comparison Table === */
+        .comparison-table{
+            width:100%;border-collapse:collapse;margin-bottom:20px;
+            background:rgba(255,255,255,.015);border-radius:4px;overflow:hidden
+        }
+        .comparison-table th{
+            background:rgba(212,168,83,.08);color:#d4a853;font-weight:500;
+            padding:12px 16px;font-size:.82rem;text-align:left
+        }
+        .comparison-table td{
+            padding:10px 16px;font-size:.82rem;color:#b0aeab;
+            border-bottom:1px solid rgba(255,255,255,.04)
+        }
+        .comparison-table tr:last-child td{border-bottom:none}
+        .comparison-table td.highlight{color:#e8e6e3;font-weight:500}
+        .comparison-table .status-col{text-align:center;width:80px}
+
+        /* === Score Card === */
+        .score-card{
+            background:linear-gradient(180deg,#1a1f30 0%,#1f2440 100%);
+            border:1px solid rgba(212,168,83,.15);border-radius:4px;
+            padding:36px 24px;text-align:center;margin-bottom:20px
+        }
+        .score-label{font-size:.85rem;color:#8a8885;margin-bottom:12px}
+        .score-value{
+            font-size:clamp(2.5rem,5vw,4rem);font-weight:300;color:#d4a853;margin-bottom:8px
+        }
+        .score-status{font-size:1.1rem;font-weight:500;margin-bottom:16px}
+        .score-status.green{color:#7db87d}
+        .score-status.yellow{color:#d4a853}
+        .score-status.red{color:#c97a7a}
+
+        /* === Progress Bar === */
+        .progress-bar{
+            width:100%;height:8px;background:rgba(255,255,255,.06);
+            border-radius:4px;overflow:hidden;margin:16px 0 8px
+        }
+        .progress-fill{height:100%;border-radius:4px;transition:width 1s ease-in-out}
+        .progress-fill.green{background:#7db87d}
+        .progress-fill.yellow{background:#d4a853}
+        .progress-fill.red{background:#c97a7a}
+        .progress-label{font-size:.78rem;color:#6a6865}
+
+        /* === Recommendation === */
+        .recommendation{
+            background:rgba(125,184,125,.04);border-radius:4px;padding:20px;margin-bottom:20px;
+            border:1px solid rgba(125,184,125,.12)
+        }
+        .recommendation h4{font-size:.9rem;color:#7db87d;margin-bottom:12px;font-weight:500}
+        .recommendation ul{list-style:none;padding:0}
+        .recommendation li{
+            padding:6px 0 6px 20px;position:relative;font-size:.85rem;color:#b0aeab;line-height:1.6
+        }
+        .recommendation li:before{content:"→";position:absolute;left:0;color:#d4a853}
+
+        /* === Save Button === */
+        .save-btn{
+            display:block;width:100%;padding:14px;margin-top:4px;
+            background:#d4a853;border:none;border-radius:4px;
+            color:#0a0e1a;font-size:.9rem;font-weight:500;cursor:pointer;
+            transition:background .3s;font-family:inherit
+        }
+        .save-btn:hover{background:#f0c868}
+
+        /* === Footer === */
+        .site-footer{
+            text-align:center;padding:32px 0 24px;border-top:1px solid rgba(255,255,255,.04);
+            margin-top:20px
+        }
+        .site-footer .slogan{font-size:.85rem;color:#8a8885;margin-bottom:4px}
+        .site-footer .slogan span{color:#d4a853}
+        .site-footer .copyright{font-size:.72rem;color:#5a5855}
+
+        /* === Mobile === */
+        @media(max-width:480px){
+            body{padding:0}
+            .container{padding:0 16px 20px}
+            .card{padding:20px 16px}
+            .header{padding:28px 0 20px}
+            .score-value{font-size:2rem}
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 资产配置检查器</h1>
+            <p>检查您的资产配置是否合理，给出再平衡建议</p>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">
+                <span>📊</span>
+                <span>资产输入</span>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">年龄 <span class="hint">（必填，用于推荐生命周期配置）</span></label>
+                <input type="number" id="age" placeholder="如：35" min="18" max="70" oninput="calculate()">
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">风险承受能力 <span class="hint">（必填）</span></label>
+                <select id="riskTolerance" onchange="calculate()">
+                    <option value="conservative">保守型</option>
+                    <option value="balanced" selected>均衡型</option>
+                    <option value="aggressive">激进型</option>
+                </select>
+            </div>
+            
+            <div class="hint-box" style="background:rgba(212,168,83,.04);border-radius:4px;padding:12px 16px;margin-bottom:18px;font-size:.82rem;color:#8a8885;line-height:1.6;border-left:2px solid rgba(212,168,83,.2)">
+                💡 以下输入您的当前资产配置（金额或占比，自动计算另一项）
+            </div>
+            
+            <div id="assetList">
+                <!-- 动态生成资产输入行 -->
+            </div>
+            
+            <button class="add-btn" onclick="addAssetRow()">+ 添加资产类别</button>
+        </div>
+        
+        <div class="card result-section" id="resultCard">
+            <div class="card-title">
+                <span>📊</span>
+                <span>配置对比</span>
+            </div>
+            
+            <div class="score-card" id="scoreCard">
+                <!-- 动态生成 -->
+            </div>
+            
+            <div id="comparisonTable">
+                <!-- 动态生成 -->
+            </div>
+            
+            <div class="recommendation" id="recommendation">
+                <!-- 动态生成 -->
+            </div>
+        </div>
+        
+        <button class="save-btn" onclick="saveResult()">💾 保存检查结果</button>
+        
+        <div class="site-footer">
+            <p class="slogan">家庭财富的<span>规划师</span>与<span>守夜人</span></p>
+            <p class="copyright">私家智囊 · 数据本地计算，不上传服务器</p>
+        </div>
+    </div>
+    
+    <script>
+        // 初始资产类别
+        const defaultAssets = [
+            { name: '现金/活期/货币基金', amount: 0 },
+            { name: '债券/债券基金', amount: 0 },
+            { name: '股票/股票基金', amount: 0 },
+            { name: '房产（投资型）', amount: 0 }
+        ];
+        
+        // 页面加载时初始化
+        window.onload = function() {
+            initAssetList();
+            calculate();
+        };
+        
+        // 初始化资产列表
+        function initAssetList() {
+            const assetList = document.getElementById('assetList');
+            assetList.innerHTML = '';
+            
+            defaultAssets.forEach((asset, index) => {
+                addAssetRow(asset.name, asset.amount);
+            });
+        }
+        
+        // 添加资产输入行
+        function addAssetRow(name = '', amount = 0) {
+            const assetList = document.getElementById('assetList');
+            const rowCount = assetList.children.length;
+            
+            const row = document.createElement('div');
+            row.className = 'asset-row';
+            row.innerHTML = `
+                <div class="asset-name">
+                    <input type="text" value="${name}" placeholder="资产类别名称" oninput="calculate()">
+                </div>
+                <div class="asset-amount">
+                    <input type="number" value="${amount > 0 ? amount : ''}" placeholder="金额" oninput="calculate()">
+                </div>
+                <div class="asset-percent" id="percent-${rowCount}">0%</div>
+            `;
+            
+            assetList.appendChild(row);
+        }
+        
+        // 主计算函数
+        function calculate() {
+            const age = parseFloat(document.getElementById('age').value) || 0;
+            const riskTolerance = document.getElementById('riskTolerance').value;
+            
+            if (age === 0) {
+                document.getElementById('resultCard').style.display = 'none';
+                return;
+            }
+            
+            // 获取所有资产输入
+            const assetRows = document.getElementById('assetList').children;
+            const assets = [];
+            let totalAmount = 0;
+            
+            for (let i = 0; i < assetRows.length; i++) {
+                const nameInput = assetRows[i].querySelector('input[type="text"]');
+                const amountInput = assetRows[i].querySelector('input[type="number"]');
+                
+                const name = nameInput ? nameInput.value : '';
+                const amount = amountInput ? (parseFloat(amountInput.value) || 0) : 0;
+                
+                if (name || amount > 0) {
+                    assets.push({ name, amount });
+                    totalAmount += amount;
+                }
+            }
+            
+            if (assets.length === 0) {
+                document.getElementById('resultCard').style.display = 'none';
+                return;
+            }
+            
+            document.getElementById('resultCard').style.display = 'block';
+            
+            // 计算占比
+            assets.forEach((asset, index) => {
+                asset.percent = totalAmount > 0 ? (asset.amount / totalAmount * 100) : 0;
+                const percentDisplay = document.getElementById(`percent-${index}`);
+                if (percentDisplay) {
+                    percentDisplay.textContent = asset.percent.toFixed(1) + '%';
+                }
+            });
+            
+            // 获取推荐配置
+            const recommended = getRecommendedAllocation(age, riskTolerance);
+            
+            // 计算偏离度
+            const deviation = calculateDeviation(assets, recommended);
+            
+            // 渲染结果
+            renderScore(deviation.totalDeviation);
+            renderComparisonTable(assets, recommended);
+            renderRecommendation(deviation);
+        }
+        
+        // 获取推荐配置
+        function getRecommendedAllocation(age, riskTolerance) {
+            // 生命周期配置（根据黄总意见）
+            let lifeCycleModel;
+            if (age < 30) {
+                lifeCycleModel = { stock: 80, bond: 15, cash: 5, other: 0 };
+            } else if (age <= 55) {
+                lifeCycleModel = { stock: 60, bond: 30, cash: 10, other: 0 };
+            } else {
+                lifeCycleModel = { stock: 40, bond: 50, cash: 10, other: 0 };
+            }
+            
+            // 根据风险承受能力调整
+            let riskModel;
+            if (riskTolerance === 'conservative') {
+                riskModel = { stock: 20, bond: 60, cash: 20, other: 0 };
+            } else if (riskTolerance === 'balanced') {
+                riskModel = { stock: 50, bond: 30, cash: 10, other: 10 };
+            } else {
+                riskModel = { stock: 70, bond: 20, cash: 5, other: 5 };
+            }
+            
+            // 返回生命周期配置（优先）或风险配置（用户可选择）
+            return {
+                lifeCycle: lifeCycleModel,
+                riskBased: riskModel
+            };
+        }
+        
+        // 计算偏离度
+        function calculateDeviation(assets, recommended) {
+            // 简化版：只计算股票、债券、现金的偏离度
+            const current = { stock: 0, bond: 0, cash: 0, other: 0 };
+            
+            assets.forEach(asset => {
+                const name = asset.name.toLowerCase();
+                if (name.includes('股票') || name.includes('基金')) {
+                    current.stock += asset.percent;
+                } else if (name.includes('债券')) {
+                    current.bond += asset.percent;
+                } else if (name.includes('现金') || name.includes('货币') || name.includes('活期')) {
+                    current.cash += asset.percent;
+                } else {
+                    current.other += asset.percent;
+                }
+            });
+            
+            const recommendedModel = recommended.lifeCycle; // 默认使用生命周期配置
+            
+            const deviation = {
+                stock: Math.abs(current.stock - recommendedModel.stock),
+                bond: Math.abs(current.bond - recommendedModel.bond),
+                cash: Math.abs(current.cash - recommendedModel.cash),
+                other: Math.abs(current.other - recommendedModel.other),
+                totalDeviation: 0
+            };
+            
+            deviation.totalDeviation = (deviation.stock + deviation.bond + deviation.cash + deviation.other) / 2;
+            
+            return {
+                current,
+                recommended: recommendedModel,
+                deviation
+            };
+        }
+        
+        // 渲染评分
+        function renderScore(totalDeviation) {
+            const card = document.getElementById('scoreCard');
+            
+            let status, statusText, statusColor;
+            if (totalDeviation <= 10) {
+                status = 'green';
+                statusText = '✅ 配置合理';
+            } else if (totalDeviation <= 20) {
+                status = 'yellow';
+                statusText = '⚠️ 配置略有偏离';
+            } else {
+                status = 'red';
+                statusText = '🔴 配置偏离较大';
+            }
+            
+            const score = Math.max(0, 100 - totalDeviation * 5).toFixed(0);
+            
+            card.innerHTML = `
+                <div class="score-label">资产配置健康分</div>
+                <div class="score-value">${score}<span style="font-size: 1.2rem; font-weight: 400; color: #b0aeab; margin-left: 4px;">分</span></div>
+                <div class="score-status ${statusColor}">${statusText}</div>
+                <div class="progress-bar">
+                    <div class="progress-fill ${status}" style="width: ${score}%"></div>
+                </div>
+                <div class="progress-label">偏离度：${totalDeviation.toFixed(1)}%（越低越好）</div>
+            `;
+        }
+        
+        // 渲染对比表
+        function renderComparisonTable(assets, recommended) {
+            const table = document.getElementById('comparisonTable');
+            
+            let html = `
+                <table class="comparison-table">
+                    <tr>
+                        <th>资产类别</th>
+                        <th>当前配置</th>
+                        <th>推荐配置</th>
+                        <th class="status-col">状态</th>
+                    </tr>
+            `;
+            
+            // 简化版：只显示股票、债券、现金
+            const current = { stock: 0, bond: 0, cash: 0 };
+            assets.forEach(asset => {
+                const name = asset.name.toLowerCase();
+                if (name.includes('股票') || name.includes('基金')) {
+                    current.stock += asset.percent;
+                } else if (name.includes('债券')) {
+                    current.bond += asset.percent;
+                } else if (name.includes('现金') || name.includes('货币') || name.includes('活期')) {
+                    current.cash += asset.percent;
+                }
+            });
+            
+            const recommendedModel = recommended.lifeCycle;
+            
+            const items = [
+                { name: '股票/股票基金', current: current.stock, recommended: recommendedModel.stock },
+                { name: '债券/债券基金', current: current.bond, recommended: recommendedModel.bond },
+                { name: '现金/货币基金', current: current.cash, recommended: recommendedModel.cash }
+            ];
+            
+            items.forEach(item => {
+                const deviation = item.current - item.recommended;
+                let status, statusText;
+                if (Math.abs(deviation) <= 5) {
+                    status = 'green';
+                    statusText = '✅';
+                } else if (deviation > 0) {
+                    status = 'red';
+                    statusText = '🔴 偏高';
+                } else {
+                    status = 'yellow';
+                    statusText = '⚠️ 偏低';
+                }
+                
+                html += `
+                    <tr>
+                        <td class="highlight">${item.name}</td>
+                        <td>${item.current.toFixed(1)}%</td>
+                        <td>${item.recommended}%</td>
+                        <td class="status-col" style="color: ${status === 'green' ? '#7db87d' : status === 'yellow' ? '#d4a853' : '#c97a7a'}">${statusText}</td>
+                    </tr>
+                `;
+            });
+            
+            html += `
+                </table>
+            `;
+            
+            table.innerHTML = html;
+        }
+        
+        // 渲染建议
+        function renderRecommendation(deviation) {
+            const section = document.getElementById('recommendation');
+            
+            const recommendations = [];
+            
+            if (deviation.deviation.stock > 10) {
+                if (deviation.current.stock > deviation.recommended.stock) {
+                    recommendations.push(`【减配】股票类资产占比偏高（${deviation.current.stock.toFixed(1)}% vs 推荐${deviation.recommended.stock}%），建议适当降低`);
+                } else {
+                    recommendations.push(`【增配】股票类资产占比偏低（${deviation.current.stock.toFixed(1)}% vs 推荐${deviation.recommended.stock}%），建议适当提高`);
+                }
+            }
+            
+            if (deviation.deviation.bond > 10) {
+                if (deviation.current.bond > deviation.recommended.bond) {
+                    recommendations.push(`【减配】债券类资产占比偏高（${deviation.current.bond.toFixed(1)}% vs 推荐${deviation.recommended.bond}%），建议适当降低`);
+                } else {
+                    recommendations.push(`【增配】债券类资产占比偏低（${deviation.current.bond.toFixed(1)}% vs 推荐${deviation.recommended.bond}%），建议适当提高`);
+                }
+            }
+            
+            if (deviation.deviation.cash > 10) {
+                if (deviation.current.cash > deviation.recommended.cash) {
+                    recommendations.push(`【减配】现金类资产占比偏高（${deviation.current.cash.toFixed(1)}% vs 推荐${deviation.recommended.cash}%），会拖累长期收益`);
+                } else {
+                    recommendations.push(`【增配】现金类资产占比偏低（${deviation.current.cash.toFixed(1)}% vs 推荐${deviation.recommended.cash}%），建议适当提高`);
+                }
+            }
+            
+            if (recommendations.length === 0) {
+                recommendations.push('配置合理，无需大幅调整。建议每季度复盘一次，偏离超5%再平衡。');
+            }
+            
+            section.innerHTML = `
+                <h4>💡 再平衡建议（按优先级排列）</h4>
+                <ul>
+                    ${recommendations.map(r => `<li>${r}</li>`).join('')}
+                </ul>
+            `;
+        }
+        
+        // 保存结果
+        function saveResult() {
+            const data = {
+                age: document.getElementById('age').value,
+                riskTolerance: document.getElementById('riskTolerance').value,
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('assetAllocationChecker', JSON.stringify(data));
+            alert('✅ 检查结果已保存到本地！');
+        }
+    </script>
+</body>
+</html>
