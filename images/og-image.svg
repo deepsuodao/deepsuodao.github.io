@@ -1,0 +1,37 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0a0e1a"/>
+  
+  <!-- Subtle gradient glow -->
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#d4a853" stop-opacity=".08"/>
+      <stop offset="100%" stop-color="#0a0e1a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- Main title - Golden large -->
+  <text x="80" y="240" font-family="'PingFang SC','Noto Sans SC','Helvetica Neue',sans-serif" font-size="72" font-weight="300" fill="#d4a853" letter-spacing="4">私家智囊</text>
+
+  <!-- Subtitle - White smaller -->
+  <text x="80" y="310" font-family="'PingFang SC','Noto Sans SC','Helvetica Neue',sans-serif" font-size="28" font-weight="300" fill="#e8e6e3" letter-spacing="3">先测后读 · 五格结构图</text>
+
+  <!-- Tagline -->
+  <text x="80" y="360" font-family="'PingFang SC','Noto Sans SC','Helvetica Neue',sans-serif" font-size="16" fill="#6a6865" letter-spacing="2">家庭财富的规划师与守夜人</text>
+
+  <!-- Decorative five-grid outline in bottom-right corner -->
+  <g transform="translate(920, 380)" stroke="#d4a853" stroke-opacity="0.25" fill="none" stroke-width="1.5">
+    <!-- Five grid squares -->
+    <rect x="0" y="0" width="70" height="70" rx="2"/>
+    <rect x="76" y="0" width="70" height="70" rx="2"/>
+    <rect x="152" y="0" width="70" height="70" rx="2"/>
+    <rect x="38" y="76" width="70" height="70" rx="2"/>
+    <rect x="114" y="76" width="70" height="70" rx="2"/>
+    <!-- Center dot -->
+    <circle cx="187" cy="35" r="2" fill="#d4a853" opacity="0.3"/>
+  </g>
+
+  <!-- URL at bottom -->
+  <text x="80" y="570" font-family="'PingFang SC','Noto Sans SC','Helvetica Neue',sans-serif" font-size="14" fill="#5a5855" letter-spacing="1">deepsuodao.github.io</text>
+</svg>

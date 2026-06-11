@@ -3,14 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="私家智囊 — 您家庭财富的规划师与守夜人。每周一篇，不讲代码，只聊怎么拿住。信心是复利不中断的核动力。">
-<meta property="og:title" content="私家智囊 — 您家庭财富的规划师与守夜人">
-<meta property="og:description" content="信心是复利不中断的核动力。致力于帮助您在漫长的投资旅途中，守护那份让复利得以生长的坚定与平静。">
-<meta property="og:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
+<meta name="description" content="不荐股、不带单。帮您画好一张家庭财务结构图，盯住五条安全底线。含五格结构图、八问自检表、保障金测算器等在线工具，数据仅本地计算。">
+<meta property="og:title" content="私家智囊 — 家庭财富的规划师与守夜人：五格结构图·自检工具·守夜人底线">
+<meta property="og:description" content="先测后读：用五格结构图看清风险，再回来读对话理解每一格。工具免注册，数据仅本地。">
+<meta property="og:image" content="https://deepsuodao.github.io/images/og-image.jpg">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://deepsuodao.github.io/">
+<meta property="og:site_name" content="私家智囊">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://deepsuodao.github.io/images/og-image.jpg">
 <meta name="google-site-verification" content="HT1saV2pVleBck_SXOfnNazi_twq48lU2nnfVZ_-ocI" />
-<title>私家智囊 — 您家庭财富的规划师与守夜人</title>
+<title>私家智囊 — 家庭财富的规划师与守夜人：五格结构图·自检工具·守夜人底线</title>
 <style>
 /* === Reset === */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -294,6 +297,9 @@ footer .copyright{font-size:.75rem;color:#5a5855}
 .tool-card p{font-size:.8rem;color:#8a8885;line-height:1.4;margin:0}
 .tool-card .tool-link{font-size:.72rem;color:#6a6865;margin-top:8px;display:inline-block}
 .tool-card:hover .tool-link{color:#d4a853}
+.tool-tag{font-size:.7rem;color:#d4a853;display:block;margin-top:4px;letter-spacing:.5px}
+.tool-start{position:relative}
+.tool-start::before{content:"★ 起点";position:absolute;top:-1px;right:-1px;background:#d4a853;color:#0a0e1a;font-size:.65rem;padding:2px 6px;border-radius:0 4px 0 4px;z-index:1}
 
 </style>
 </head>
@@ -365,7 +371,11 @@ footer .copyright{font-size:.75rem;color:#5a5855}
           致力于帮助您在漫长的投资旅途中<br>
           守护那份至关重要的、让复利得以生长的<span style="color:#d4a853;">坚定与平静</span>。
         </p>
-        <a href="#content" class="hero-cta">阅读对话 →</a>
+        <div class="hero-cta" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:24px;">
+          <a href="#tools" class="hero-cta" style="display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:#d4a853;border:none;border-radius:4px;color:#0a0e1a;font-size:.85rem;font-weight:500;cursor:pointer;transition:background .3s;text-decoration:none;" onmouseover="this.style.background='#f0c868'" onmouseout="this.style.background='#d4a853'">🏰 先测：五格结构图</a>
+          <a href="dialogue-07.html" style="display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border:1px solid rgba(212,168,83,.3);border-radius:4px;color:#d4a853;font-size:.85rem;cursor:pointer;transition:all .3s;text-decoration:none;" onmouseover="this.style.background='rgba(212,168,83,.08)'" onmouseout="this.style.background='transparent'">先读：建一座堡垒 →</a>
+        </div>
+        <p style="font-size:.75rem;color:#6a6865;margin-top:12px;">工具仅在浏览器本地计算，不上传服务器 · 免注册</p>
       </div>
       <div class="hero-brand">
         <img src="./images/hero-brand.jpg" alt="私家智囊 · 家庭财富的规划师与守夜人 · 信心是复利不中断的核动力" />
@@ -728,60 +738,70 @@ footer .copyright{font-size:.75rem;color:#5a5855}
         <span class="tool-icon">📐</span>
         <h3>复利计算器</h3>
         <p>F=P(1+r)^n · 72法则 · 定投</p>
+        <span class="tool-tag">⏱ 2分钟 · 计算器</span>
         <span class="tool-link">对话03 →</span>
       </a>
       <a href="mortgage-comparison.html" class="tool-card">
         <span class="tool-icon">🏠</span>
         <h3>提前还贷对比器</h3>
         <p>三步拆解法 · 20年差距一目了然</p>
+        <span class="tool-tag">⏱ 3分钟 · 计算器</span>
         <span class="tool-link">对话05 →</span>
       </a>
-      <a href="self-check-8q.html" class="tool-card">
+      <a href="self-check-8q.html" class="tool-card tool-start">
         <span class="tool-icon">📋</span>
         <h3>八问自检表</h3>
         <p>15分钟在线打钩 · 自动出分诊断</p>
+        <span class="tool-tag">⏱ 15分钟 · 在线打钩 ★ 推荐</span>
         <span class="tool-link">对话10 →</span>
       </a>
-      <a href="five-grid.html" class="tool-card">
+      <a href="five-grid.html" class="tool-card tool-start">
         <span class="tool-icon">🏰</span>
         <h3>五格家庭结构图</h3>
         <p>填五个格子 · 看清风险所在</p>
+        <span class="tool-tag">⏱ 5分钟 · 填5个数 ★ 从这里开始</span>
         <span class="tool-link">对话07 →</span>
       </a>
       <a href="life-checklist.html" class="tool-card">
         <span class="tool-icon">📝</span>
         <h3>人生愿望清单</h3>
         <p>目标·金额·时间 → 缺口一目了然</p>
+        <span class="tool-tag">⏱ 10分钟 · 清单填写</span>
         <span class="tool-link">对话01 →</span>
       </a>
       <a href="security-fund-calculator.html" class="tool-card" style="border-color:rgba(212,168,83,.3);">
         <span class="tool-icon">🛡️</span>
         <h3>保障金测算器</h3>
         <p>8项资金来源 · 三色预警 · 36个月标准</p>
+        <span class="tool-tag">⏱ 10分钟 · 8项盘点</span>
         <span class="tool-link">新上线 →</span>
       </a>
       <a href="debt-stress-test.html" class="tool-card">
         <span class="tool-icon">💳</span>
         <h3>负债压力测试</h3>
         <p>5种情景 · DTI指标 · 利率/收入/担保</p>
+        <span class="tool-tag">⏱ 5分钟 · 情景测试</span>
         <span class="tool-link">新上线 →</span>
       </a>
       <a href="health-checkup.html" class="tool-card">
         <span class="tool-icon">🏥</span>
         <h3>家庭财务体检报告</h3>
         <p>五条底线综合评分 · 雷达图 · 行动建议</p>
+        <span class="tool-tag">⏱ 20分钟 · 综合评分</span>
         <span class="tool-link">新上线 →</span>
       </a>
       <a href="invest-vs-speculate.html" class="tool-card">
         <span class="tool-icon">📊</span>
         <h3>投资vs投机五问自测表</h3>
         <p>五个锚点一分钟自测 · 先测后判</p>
+        <span class="tool-tag">⏱ 2分钟 · 五问自测</span>
         <span class="tool-link">对话20 →</span>
       </a>
       <a href="insurance-checkup.html" class="tool-card">
         <span class="tool-icon">🏥</span>
         <h3>家庭保险配置体检表</h3>
         <p>三步配置法 · 算缺口 · 定顺序 · 控预算</p>
+        <span class="tool-tag">⏱ 10分钟 · 三步填写</span>
         <span class="tool-link">对话22 →</span>
       </a>
     </div>
