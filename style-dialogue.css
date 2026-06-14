@@ -1,0 +1,189 @@
+/* ============================================================
+   style-dialogue.css — 私家智囊 · 对话页面样式
+   浅色系 · 配合首页统一风格
+   ============================================================ */
+
+:root {
+  --bg-body: #f8f7f4;
+  --bg-white: #ffffff;
+  --bg-card: #ffffff;
+  --bg-section-alt: #f2f0eb;
+  --bg-highlight: rgba(212, 168, 83, 0.06);
+  --text-primary: #1a1d23;
+  --text-secondary: #4a4d54;
+  --text-muted: #8a8d94;
+  --text-inverse: #ffffff;
+  --gold: #c8962e;
+  --gold-light: #d4a853;
+  --gold-dark: #a67c1e;
+  --blue: #1a5276;
+  --blue-light: #2980b9;
+  --blue-dark: #0e334a;
+  --border-light: rgba(0, 0, 0, 0.06);
+  --border-gold: rgba(200, 150, 46, 0.2);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
+  --font-family: -apple-system, "PingFang SC", "Noto Sans SC", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* === Reset === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-family);
+  background: var(--bg-body);
+  color: var(--text-primary);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { font-weight: 500; letter-spacing: -0.02em; color: var(--text-primary); }
+h1 { font-size: clamp(1.6rem, 4.5vw, 2.8rem); margin-bottom: 16px; }
+h2 { font-size: clamp(1.3rem, 2.8vw, 1.8rem); margin-top: 48px; margin-bottom: 16px; }
+h3 { font-size: clamp(1rem, 2vw, 1.3rem); }
+p { font-size: clamp(0.9rem, 1.5vw, 1.05rem); color: var(--text-secondary); margin-bottom: 12px; line-height: 1.8; }
+a { color: var(--blue); text-decoration: none; transition: color 0.3s; }
+a:hover { color: var(--blue-light); }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 100px 0; }
+.section-title {
+  font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em;
+  color: var(--gold); margin-bottom: 12px; font-weight: 500;
+}
+
+/* === Header === */
+header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-light);
+}
+header .container { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.logo { font-size: 1rem; font-weight: 600; color: var(--text-primary); letter-spacing: 0.05em; }
+.logo span { color: var(--gold); }
+nav a { font-size: 0.8rem; margin-left: 24px; color: var(--text-muted); }
+nav a:hover { color: var(--text-primary); }
+
+/* === Dialogue Content Block === */
+.dialogue-block {
+  padding: 24px; border-left: 2px solid var(--border-gold);
+  background: var(--bg-white); font-size: 0.95rem; line-height: 1.8;
+  margin-bottom: 20px; border-radius: 0 4px 4px 0;
+}
+.dialogue-block .speaker { font-weight: 600; color: var(--gold); }
+.dialogue-block .speaker-a { color: var(--blue); }
+.dialogue-block .speaker-k { color: #b5651d; }
+.dialogue-block .scene {
+  font-style: italic; color: var(--text-muted); font-size: 0.85rem; margin-bottom: 16px;
+}
+.dialogue-block .epilogue { margin-top: 24px; color: var(--text-muted); font-style: italic; font-size: 0.9rem; }
+.dialogue-block .quote-line {
+  margin-top: 20px; padding: 16px 20px; border-left: 2px solid var(--gold);
+  color: var(--text-primary); font-style: italic; font-size: 0.9rem;
+}
+/* Lists inside dialogue */
+.dialogue-block ul, .dialogue-block ol { padding-left: 20px; margin: 8px 0 12px; color: var(--text-secondary); }
+.dialogue-block ul li, .dialogue-block ol li { margin-bottom: 6px; font-size: 0.93rem; }
+.dialogue-block ul li strong, .dialogue-block ol li strong { color: var(--text-primary); }
+
+/* === Summary Table (财富五层框架等) === */
+.summary-table {
+  margin: 16px 0; width: 100%; border-collapse: collapse; font-size: 0.85rem;
+}
+.summary-table td, .summary-table th {
+  padding: 10px 14px; border: 1px solid var(--border-light); text-align: left;
+}
+.summary-table th {
+  color: var(--text-inverse); font-weight: 500; background: var(--blue);
+}
+.summary-table td { color: var(--text-secondary); }
+.summary-table td strong { color: var(--text-primary); }
+
+/* === Case Box (dark card) === */
+.case-box {
+  border: 1px solid var(--border-light);
+  background: var(--bg-white);
+  padding: 20px; border-radius: 4px; margin: 16px 0;
+  box-shadow: var(--shadow-sm);
+}
+.case-box p { color: var(--text-secondary); font-size: 0.93rem; }
+.case-box strong { color: var(--text-primary); }
+.case-box ul { padding-left: 20px; margin: 8px 0; }
+.case-box ul li { font-size: 0.93rem; color: var(--text-secondary); margin-bottom: 4px; }
+
+/* === Conclusion (gold emphasis) === */
+.conclusion {
+  border-left: 3px solid var(--gold);
+  background: var(--bg-highlight);
+  padding: 24px; border-radius: 4px; margin: 32px 0;
+}
+.conclusion h3 { color: var(--gold); margin-bottom: 12px; font-size: 1.1rem; }
+.conclusion p { color: var(--text-secondary); }
+.conclusion strong { color: var(--text-primary); }
+
+/* === Interactive (dashed card) === */
+.interactive {
+  border: 1px dashed var(--border-gold);
+  background: var(--bg-white);
+  padding: 20px; border-radius: 4px; margin: 24px 0;
+}
+.interactive p { color: var(--text-secondary); }
+.interactive strong { color: var(--gold); }
+
+/* === Inline highlight (gold color) === */
+.highlight { color: var(--gold); font-weight: 500; }
+
+/* === Principle Box (规划师三原则) === */
+.principle-box {
+  border-left: 3px solid var(--gold);
+  background: var(--bg-highlight);
+  padding: 20px; border-radius: 4px; margin: 16px 0;
+}
+.principle-box p { color: var(--text-secondary); }
+.principle-box strong { color: var(--text-primary); }
+.principle-box ol { padding-left: 20px; margin: 8px 0; }
+.principle-box ol li { font-size: 0.93rem; color: var(--text-secondary); margin-bottom: 6px; }
+
+/* === Bottom Line Box (守夜人五底线) === */
+.bottom-line-box {
+  border-left: 3px solid var(--blue);
+  background: rgba(26, 82, 118, 0.04);
+  padding: 20px; border-radius: 4px; margin: 16px 0;
+}
+.bottom-line-box p { color: var(--text-secondary); }
+.bottom-line-box strong { color: var(--text-primary); }
+.bottom-line-box ol { padding-left: 20px; margin: 8px 0; }
+.bottom-line-box ol li { font-size: 0.93rem; color: var(--text-secondary); margin-bottom: 6px; }
+
+/* === Meta / References === */
+.meta { color: var(--text-muted); font-size: 0.85rem; margin: 16px 0; line-height: 1.8; }
+.meta strong { color: var(--text-secondary); }
+.meta ol { color: var(--text-muted); padding-left: 20px; margin: 8px 0; }
+.meta ol li { margin-bottom: 4px; }
+.meta em { color: var(--text-muted); }
+.meta ul { padding-left: 20px; margin: 8px 0; }
+.meta ul li { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 4px; }
+
+/* === Footer === */
+footer { border-top: 1px solid var(--border-light); padding: 48px 0 32px; text-align: center; }
+footer .slogan { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 8px; }
+footer .slogan span { color: var(--gold); }
+footer .copyright { font-size: 0.75rem; color: var(--text-muted); }
+.back-to-top {
+  position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px;
+  border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-light);
+  color: var(--gold); font-size: 1.2rem; cursor: pointer; transition: all 0.3s;
+  z-index: 999; display: flex; align-items: center; justify-content: center;
+  text-decoration: none; box-shadow: var(--shadow-sm);
+}
+.back-to-top:hover { border-color: var(--gold); box-shadow: var(--shadow-md); }
+
+/* === Mobile Fine-tune === */
+@media (max-width: 480px) {
+  .section { padding: 64px 0; }
+  nav a { margin-left: 14px; font-size: 0.75rem; }
+}
+
+/* === Horizontal Rule === */
+hr { border: none; border-top: 1px solid var(--border-light); margin: 40px 0; }
