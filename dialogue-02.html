@@ -1,196 +1,125 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="深索道×安德路：从加法到指数，财富增长的数学结构，第一性原理追问自由与勤奋劳动的正确用法。">
-<meta property="og:title" content="[7分钟] 第二篇 · 江边对话录 — 私家智囊">
-<meta property="og:description" content="深索道×安德路：从加法到指数，财富增长的数学结构，第一性原理追问自由与勤奋劳动的正确用法。">
-<meta property="og:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://deepsuodao.github.io/dialogue-02.html">
-<meta property="og:site_name" content="私家智囊">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
-<title>[7分钟] 第二篇 · 江边对话录 — 私家智囊</title>
-<style>
-/* === Reset === */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-  font-family:-apple-system,"PingFang SC","Noto Sans SC","Helvetica Neue",sans-serif;
-  background:#0a0e1a;color:#e8e6e3;line-height:1.7;
-  -webkit-font-smoothing:antialiased
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="深索道×安德路从加法到指数，财富增长的数学结构，第一性原理追问自由与勤奋劳动的正确用法。">
+  <meta property="og:title" content="[7分钟] 第二篇 · 江边对话录 — 私家智囊">
+  <meta property="og:description" content="深索道×安德路从加法到指数，财富增长的数学结构，第一性原理追问自由与勤奋劳动的正确用法。">
+  <meta property="og:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://deepsuodao.github.io/dialogue-02.html">
+  <meta property="og:site_name" content="私家智囊">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
+  <title>[7分钟] 第二篇 · 江边对话录 — 私家智囊</title>
+  <link rel="stylesheet" href="dialogue.css">
 
-/* === Typography === */
-h1,h2,h3{font-weight:400;letter-spacing:-0.02em}
-h1{font-size:clamp(2rem,5vw,3.5rem)}
-h2{font-size:clamp(1.4rem,3vw,2rem)}
-h3{font-size:clamp(1rem,2vw,1.3rem)}
-p{font-size:clamp(0.9rem,1.5vw,1.05rem);color:#b0aeab}
-a{color:#d4a853;text-decoration:none;transition:color .3s}
-a:hover{color:#f0c868}
-
-/* === Layout === */
-.container{max-width:1100px;margin:0 auto;padding:0 24px}
-.section{padding:100px 0}
-.section-title{
-  font-size:.75rem;text-transform:uppercase;letter-spacing:.15em;
-  color:#d4a853;margin-bottom:12px;font-weight:500
-}
-
-/* === Header === */
-header{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  background:rgba(10,14,26,.85);backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(212,168,83,.08)
-}
-header .container{display:flex;align-items:center;justify-content:space-between;height:60px}
-.logo{font-size:1rem;font-weight:500;color:#e8e6e3;letter-spacing:.05em}
-.logo span{color:#d4a853}
-nav a{font-size:.8rem;margin-left:24px;color:#8a8885}
-nav a:hover{color:#e8e6e3}
-
-/* === Dialogue Content === */
-.dialogue-block{
-  padding:24px;border-left:2px solid rgba(212,168,83,.15);
-  background:rgba(255,255,255,.015);font-size:.95rem;line-height:1.8;color:#c8c6c2
-}
-.dialogue-block .speaker{font-weight:500;color:#d4a853}
-.dialogue-block .speaker-a{color:#7aa8d8}
-.dialogue-block .speaker-k{color:#c9897a}
-.dialogue-block .scene{
-  font-style:italic;color:#6a6865;font-size:.85rem;margin-bottom:16px;padding-left:0
-}
-.dialogue-block .epilogue{
-  margin-top:24px;color:#8a8885;font-style:italic;font-size:.9rem
-}
-.dialogue-block .quote-line{
-  margin-top:20px;padding:16px 20px;border-left:2px solid #d4a853;
-  color:#b0aeab;font-style:italic;font-size:.9rem
-}
-.dialogue-block .summary-table{
-  margin:16px 0;width:100%;border-collapse:collapse;font-size:.85rem
-}
-.dialogue-block .summary-table td,.dialogue-block .summary-table th{
-  padding:8px 12px;border:1px solid rgba(255,255,255,.06);text-align:left
-}
-.dialogue-block .summary-table th{color:#d4a853;font-weight:500;background:rgba(212,168,83,.04)}
-
-/* === Footer === */
-footer{border-top:1px solid rgba(255,255,255,.04);padding:48px 0 32px;text-align:center}
-footer .slogan{font-size:.9rem;color:#8a8885;margin-bottom:8px}
-footer .slogan span{color:#d4a853}
-footer .copyright{font-size:.75rem;color:#5a5855}
-
-/* === Mobile Fine-tune === */
-@media(max-width:480px){
-  .section{padding:64px 0}
-  nav a{margin-left:14px;font-size:.75rem}
-}
-/* === Back to Top === */
-.back-to-top{position:fixed;bottom:32px;right:32px;width:44px;height:44px;border-radius:50%;background:rgba(212,168,83,.1);border:1px solid rgba(212,168,83,.2);color:#d4a853;font-size:1.2rem;cursor:pointer;transition:all .3s;z-index:999;display:flex;align-items:center;justify-content:center;text-decoration:none;backdrop-filter:blur(4px)}
-.back-to-top:hover{background:rgba(212,168,83,.2);border-color:rgba(212,168,83,.4)}
-
-</style>
 </head>
+
 <body>
 
-<!-- ===== Header ===== -->
-<header>
-  <div class="container">
-    <div class="logo">私家<span>智囊</span></div>
-    <nav>
-      <a href="./index.html#belief">理念</a>
-      <a href="./index.html#content">对话列表</a>
-      <a href="./index.html#about">关于</a>
-    </nav>
-  </div>
-</header>
-
-<!-- ===== Dialogue 2 ===== -->
-<section class="section" id="d2">
-  <div class="container">
-    <div class="section-title">对话 · 随笔</div>
-    <h2>深索道先生 × 安德路</h2>
-
-    <div class="dialogue-block">
-      <p class="scene">场景：盘后散步至江边旧码头，从"财富自由后想做的工作，就是现在应该做的工作"这个命题开始，一路用第一性原理拆到天黑。</p>
-<p style="font-size:.75rem;color:#8a8885;margin-top:8px;">阅读时间约 7分钟</p>
-
-      <p style="font-size:.8rem;color:#d4a853;letter-spacing:.1em;margin-bottom:16px;">第一幕 · 命题拆解</p>
-
-      <p><span class="speaker speaker-a">安德路：</span>深总，我最近看到一个说法——"财富自由后想做的工作，就是现在应该做的工作"。您怎么看？</p>
-      <p><span class="speaker">深索道：</span>我们先确认一下——你理解的"财富自由"是什么？别用流行词定义，用你自己的话。</p>
-      <p><span class="speaker speaker-a">安德路：</span>就是……不用为了钱工作了。被动收入覆盖所有生活开支，不再需要出卖时间换钱。</p>
-      <p><span class="speaker">深索道：</span>好。那我们再问一层——"想做的工作"去掉财富自由这个条件后，剩下的是什么？换句话说，你现在量化交易的工作，如果去掉薪水，你还做不做？</p>
-      <p><span class="speaker speaker-a">安德路：</span>做。但不是每天那些回测、调参数、写日报的事情。我会做个策略研究沙盒，只研究我自己好奇的东西——不对超额收益负责，不向任何人汇报。</p>
-      <p><span class="speaker">深索道：</span>所以这句话对你来说基本成立。但我要追问你：你怎么笃定"没有金钱压力下的你"就是"真实的你"？你29岁开始做量化，到今天32岁，你的职业身份、朋友圈、获取成就感的方式——这些已经被交易塑造了。不是财富自由解放了你，是交易把你变成了现在这个"想做交易"的人。这是自由选择，还是路径锁定？</p>
-
-      <div class="quote-line">"如果一件事情要等到'财富自由'才开始做，那财富自由后你大概率也不会开始——因为你习惯了'等条件满足再行动'的思维模式。"</div>
-
-      <p style="font-size:.8rem;color:#d4a853;letter-spacing:.1em;margin:24px 0 16px;">第二幕 · 财富增长的数学结构</p>
-
-      <p><span class="speaker speaker-a">安德路：</span>我在想——财富积累的数学结构，是加法、乘法、还是指数？</p>
-      <p><span class="speaker">深索道：</span>我们需要先定义这几个运算在财富语境下的含义：<br>
-      <span style="color:#8a8885;">加法：</span>一份时间换一份钱。典型的劳动收入。线性。<br>
-      <span style="color:#8a8885;">乘法：</span>一份时间换多份钱，或者通过杠杆放大。线性系数 > 1。<br>
-      <span style="color:#8a8885;">指数：</span>收益基座在自我增长。本金创造收益，收益并回本金再创造新收益。纯粹复利。</p>
-      <p><span class="speaker speaker-a">安德路：</span>大多数人一辈子在加法象限。打工就是。我见过最焦虑的人就是年薪200万但每天被钉在工位上的合伙人——他的收入系数很高，但他的时间被完全锁定，自由度为0。</p>
-      <p><span class="speaker">深索道：</span>讨论增长率的时候，不要只讨论钱的增长率，要同时讨论时间的释放率。</p>
-
-      <p style="font-size:.8rem;color:#d4a853;letter-spacing:.1em;margin:24px 0 16px;">第三幕 · 勤奋劳动的正确用法</p>
-
-      <p><span class="speaker speaker-a">安德路：</span>勤奋劳动放在投资里，被翻译成"每天看盘12小时"、"研究每个季报的每个脚注"。但真正有效的投资劳动是找对关键问题的机会成本。</p>
-      <p><span class="speaker">深索道：</span>我补充一个观察：勤奋劳动有一个隐藏害处——它挤占了你"什么都不做"的时间。我最好的投资决策，有一半不是在办公室想出来的，是在钓鱼的时候。</p>
-
-      <div class="quote-line">"40岁以前的'无效勤奋'和40岁以后的'自由度'呈负相关。"</div>
-
-      <p style="font-size:.8rem;color:#d4a853;letter-spacing:.1em;margin:24px 0 16px;">终幕 · 总结</p>
-
-      <p><span class="speaker speaker-a">安德路：</span>（低头看江水）让我总结一下今晚我们走到这里的结论——</p>
-
-      <table class="summary-table">
-        <tr><th>#</th><th>结论</th></tr>
-        <tr><td>1</td><td>财富增长结构：加法 → 乘法 → 指数。但进入指数之前，必须有扎实的加法积累。</td></tr>
-        <tr><td>2</td><td>效率应算 (资本回报 ÷ 时间锁定度)。很多人赚乘法收入但时间被锁死，效率为负。</td></tr>
-        <tr><td>3</td><td>勤奋劳动的正确用法：建立可挂机的资产——知识体系、可信赖关系、一次性的框架。</td></tr>
-        <tr><td>4</td><td>自由不是财富自由。自由是"说不"的能力。今天就能开始训练。</td></tr>
-        <tr><td>5</td><td>空闲不是浪费，是战略输入。把散步、发呆写进你的工作系统里。</td></tr>
-      </table>
-
-      <p><span class="speaker">深索道：</span>你漏了最后一条——复利公式里最容易被忽略的是n，不是r。大多数人穷尽一生追求收益率r，而真正改变命运的是时间的持续在场。</p>
-      <p><span class="speaker speaker-a">安德路：</span>那您现在最大的恐惧是什么？钱够了，时间也够自由了。</p>
-      <p><span class="speaker">深索道：</span>被自己的过去锚定。怕自己在新的象限里，还在用旧象限的方法论。怕一辈子只能做"风控"这个动词，而不是做"判断"。</p>
-
-      <div class="quote-line">"大多数人穷尽一生追求收益率r，而真正改变命运的是时间的持续在场——n。"</div>
-
-      <p><span class="speaker">深索道：</span>走吧，去吃碗面。</p>
-
-      <p class="epilogue">对话记录于 2026年5月某日盘后。</p>
+  <header>
+    <div class="container">
+      <div class="logo">私家<span>智囊</span></div>
+      <nav>
+        <a href="./index.html#belief">理念</a>
+        <a href="./principles.html">原则</a>
+        <a href="./index.html#content">对话列表</a>
+        <a href="./index.html#tools">工具箱</a>
+        <a href="./index.html#about">关于</a>
+        <a href="./index.html#wechat">公众号</a>
+      </nav>
     </div>
+  </header>
 
-    <div style="text-align:center;margin-top:40px;">
-      <a href="./index.html" style="display:inline-block;padding:12px 28px;border:1px solid rgba(212,168,83,.25);color:#d4a853;font-size:.85rem;letter-spacing:.05em;text-decoration:none;">← 返回全部对话</a>
+  <!-- ===== Dialogue 2 ===== -->
+  <section class="section" id="content">
+    <div class="container">
+      <div class="section-title">对话 · 第二篇</div>
+      <div class="dialogue-block">
+        <h2>深索道先生 × 安德路</h2>
+        <p class="scene">盘后散步至江边旧码头，从"财富自由后想做的工作，就是现在应该做的工作"这个命题开始，一路用第一性原理拆到天黑。</p>
+        <p class="read-time">阅读时间约 7分钟</p>
+
+        <p class="dialogue-act">第一幕 · 命题拆解</p>
+
+        <p><span class="speaker-b">安德路</span>深总，我最近看到一个说法——"财富自由后想做的工作，就是现在应该做的工作"。您怎么看？</p>
+        <p><span class="speaker">深索道</span>我们先确认一下——你理解的"财富自由"是什么？别用流行词定义，用你自己的话。</p>
+        <p><span class="speaker-b">安德路</span>就是……不用为了钱工作了。被动收入覆盖所有生活开支，不再需要出卖时间换钱。</p>
+        <p><span class="speaker">深索道</span>好。那我们再问一层——"想做的工作"去掉财富自由这个条件后，剩下的是什么？换句话说，你现在量化交易的工作，如果去掉薪水，你还做不做？</p>
+        <p><span class="speaker-b">安德路</span>做。但不是每天那些回测、调参数、写日报的事情。我会做个策略研究沙盒，只研究我自己好奇的东西——不对超额收益负责，不向任何人汇报。
+        </p>
+        <p><span
+            class="speaker">深索道</span>所以这句话对你来说基本成立。但我要追问你：你怎么笃定"没有金钱压力下的你"就是"真实的你"？你29岁开始做量化，到今天32岁，你的职业身份、朋友圈、获取成就感的方式——这些已经被交易塑造了。不是财富自由解放了你，是交易把你变成了现在这个"想做交易"的人。这是自由选择，还是路径锁定？
+        </p>
+
+        <div class="quote-line">"如果一件事情要等到'财富自由'才开始做，那财富自由后你大概率也不会开始——因为你习惯了'等条件满足再行动'的思维模式。"</div>
+
+        <p class="dialogue-act">第二幕 · 财富增长的数学结构</p>
+
+        <p><span class="speaker-b">安德路</span>我在想——财富积累的数学结构，是加法、乘法、还是指数？</p>
+        <p><span class="speaker">深索道</span>我们需要先定义这几个运算在财富语境下的含义：<br>
+        <ul class="concept-list">
+          <li><span class="keyword">加法：</span>一份时间换一份钱。典型的劳动收入。线性。</li>
+          <li><span class="keyword">乘法：</span>一份时间换多份钱，或者通过杠杆放大。线性系数 > 1。</li>
+          <li><span class="keyword">指数：</span>收益基座在自我增长。本金创造收益，收益并回本金再创造新收益。纯粹复利。</li>
+        </ul>
+        </p>
+        <p><span class="speaker-b">安德路</span>大多数人一辈子在加法象限。打工就是。我见过最焦虑的人就是年薪200万但每天被钉在工位上的合伙人——他的收入系数很高，但他的时间被完全锁定，自由度为0。
+        </p>
+        <p><span class="speaker">深索道</span>讨论增长率的时候，不要只讨论钱的增长率，要同时讨论时间的释放率。</p>
+
+        <p class="dialogue-act">第三幕 · 勤奋劳动的正确用法</p>
+
+        <p><span class="speaker-b">安德路</span>勤奋劳动放在投资里，被翻译成"每天看盘12小时"、"研究每个季报的每个脚注"。但真正有效的投资劳动是找对关键问题的机会成本。</p>
+        <p><span class="speaker">深索道</span>我补充一个观察：勤奋劳动有一个隐藏害处——它挤占了你"什么都不做"的时间。我最好的投资决策，有一半不是在办公室想出来的，是在钓鱼的时候。</p>
+
+        <div class="quote-line">"40岁以前的'无效勤奋'和40岁以后的'自由度'呈负相关。"</div>
+
+        <p class="dialogue-act">终幕 · 总结</p>
+
+        <p><span class="speaker-b">安德路</span>（低头看江水）让我总结一下今晚我们走到这里的结论——</p>
+
+        <ul class="ordered-list">
+          <li>财富增长结构：加法 → 乘法 → 指数。但进入指数之前，必须有扎实的加法积累。</li>
+          <li>效率应算 (资本回报 ÷ 时间锁定度)。很多人赚乘法收入但时间被锁死，效率为负。</li>
+          <li>勤奋劳动的正确用法：建立可挂机的资产——知识体系、可信赖关系、一次性的框架。</li>
+          <li>自由不是财富自由。自由是"说不"的能力。今天就能开始训练。</li>
+          <li>空闲不是浪费，是战略输入。把散步、发呆写进你的工作系统里。</li>
+        </ul>
+
+        <p><span class="speaker">深索道</span>你漏了最后一条——复利公式里最容易被忽略的是n，不是r。大多数人穷尽一生追求收益率r，而真正改变命运的是时间的持续在场。</p>
+        <p><span class="speaker-b">安德路</span>那您现在最大的恐惧是什么？钱够了，时间也够自由了。</p>
+        <p><span class="speaker">深索道</span>被自己的过去锚定。怕自己在新的象限里，还在用旧象限的方法论。怕一辈子只能做"风控"这个动词，而不是做"判断"。</p>
+
+        <div class="quote-line">"大多数人穷尽一生追求收益率r，而真正改变命运的是时间的持续在场——n。"</div>
+
+        <p><span class="speaker">深索道</span>走吧，去吃碗面。</p>
+
+        <p class="epilogue">对话记录于 2026年5月某日盘后。</p>
+      </div>
+
+      <div style="text-align:center;margin-top:40px;">
+        <a href="./index.html" class="btn-back">← 返回全部对话</a>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===== Post Tags ===== -->
-<div style="text-align:center;margin-top:20px;padding:12px 0;">
-  <span style="display:inline-block;font-size:.75rem;padding:4px 12px;border-radius:2px;background:rgba(212,168,83,.15);color:#d4a853;margin:3px;letter-spacing:.02em;">规划师</span>
-  <span style="display:inline-block;font-size:.75rem;padding:4px 12px;border-radius:2px;background:rgba(122,168,216,.15);color:#7aa8d8;margin:3px;letter-spacing:.02em;">原则总览</span>
-  <span style="display:inline-block;font-size:.7rem;padding:4px 10px;border-radius:2px;border:1px solid rgba(255,255,255,.08);color:#6a6865;margin:3px;">阅读时间 7 分钟</span>
-</div>
-<!-- ===== Footer ===== -->
-<footer>
-  <div class="container">
-    <p class="slogan">家庭财富的<span>规划师</span>与<span>守夜人</span></p>
-    <p class="copyright">私家智囊 · 2026</p>
+  <div class="post-tags">
+    <span class="tag">规划师</span>
+    <span class="tag">原则总览</span>
+    <span class="tag">阅读时间 7 分钟</span>
   </div>
-<a href="#" class="back-to-top" aria-label="回到顶部">↑</a>
-</footer>
+  <footer>
+    <div class="container">
+      <p class="slogan">家庭财富的<span>规划师</span>与<span>守夜人</span></p>
+      <p class="copyright">私家智囊 · 2026</p>
+    </div>
+    <a href="#" class="back-to-top" aria-label="回到顶部">↑</a>
+  </footer>
 
 </body>
+
 </html>

@@ -1,263 +1,271 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="深索道×安德路×格林格·金：连带担保、隐性借贷、利率风险——负债边界的三条红线。先计算后判断。">
-<meta property="og:title" content="[8分钟] 第十三篇 · 连带担保：签个字，一套房子就没了 — 私家智囊">
-<meta property="og:description" content="深索道×安德路×格林格·金：连带担保、隐性借贷、利率风险。负债边界的三条红线与自检清单。负债压力测试引导。">
-<meta property="og:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://deepsuodao.github.io/dialogue-13.html">
-<meta property="og:site_name" content="私家智囊">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
-<title>[8分钟] 第十三篇 · 连带担保：签个字，一套房子就没了 — 私家智囊</title>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:-apple-system,"PingFang SC","Noto Sans SC","Helvetica Neue",sans-serif;background:#0a0e1a;color:#e8e6e3;line-height:1.7;-webkit-font-smoothing:antialiased}
-h1,h2,h3{font-weight:400;letter-spacing:-0.02em}
-h1{font-size:clamp(2rem,5vw,3.5rem)}
-h2{font-size:clamp(1.4rem,3vw,2rem);margin-bottom:16px}
-h3{font-size:clamp(1rem,2vw,1.3rem);color:#d4a853;margin-bottom:8px;font-weight:500}
-p{font-size:clamp(0.9rem,1.5vw,1.05rem);color:#b0aeab;margin-bottom:12px}
-a{color:#d4a853;text-decoration:none;transition:color .3s}
-a:hover{color:#f0c868}
-.container{max-width:1100px;margin:0 auto;padding:0 24px}
-.section{padding:80px 0}
-.section-title{font-size:.75rem;text-transform:uppercase;letter-spacing:.15em;color:#d4a853;margin-bottom:12px;font-weight:500}
-header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,14,26,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,168,83,.08)}
-header .container{display:flex;align-items:center;justify-content:space-between;height:60px}
-.logo{font-size:1rem;font-weight:500;color:#e8e6e3;letter-spacing:.05em}
-.logo span{color:#d4a853}
-nav a{font-size:.8rem;margin-left:24px;color:#8a8885}
-nav a:hover{color:#e8e6e3}
-.dialogue-block{padding:24px;border-left:2px solid rgba(212,168,83,.15);background:rgba(255,255,255,.015);font-size:.95rem;line-height:1.8;color:#c8c6c2}
-.dialogue-block .speaker{font-weight:500;color:#d4a853}
-.dialogue-block .scene{font-style:italic;color:#6a6865;font-size:.85rem;margin-bottom:16px}
-.dialogue-block .quote-line{margin-top:16px;padding:12px 20px;border-left:2px solid #d4a853;color:#b0aeab;font-style:italic;font-size:.9rem}
-.dialogue-block .summary-table{margin:16px 0;width:100%;border-collapse:collapse;font-size:.85rem}
-.dialogue-block .summary-table td,.dialogue-block .summary-table th{padding:8px 12px;border:1px solid rgba(255,255,255,.06);text-align:left}
-.dialogue-block .summary-table th{color:#d4a853;font-weight:500;background:rgba(212,168,83,.04)}
-footer{border-top:1px solid rgba(255,255,255,.04);padding:48px 0 32px;text-align:center}
-footer .slogan{font-size:.9rem;color:#8a8885;margin-bottom:8px}
-footer .slogan span{color:#d4a853}
-footer .copyright{font-size:.75rem;color:#5a5855}
-@media(max-width:480px){.section{padding:48px 0}nav a{margin-left:14px;font-size:.75rem}.dialogue-block{padding:16px}}
-/* === Back to Top === */
-.back-to-top{position:fixed;bottom:32px;right:32px;width:44px;height:44px;border-radius:50%;background:rgba(212,168,83,.1);border:1px solid rgba(212,168,83,.2);color:#d4a853;font-size:1.2rem;cursor:pointer;transition:all .3s;z-index:999;display:flex;align-items:center;justify-content:center;text-decoration:none;backdrop-filter:blur(4px)}
-.back-to-top:hover{background:rgba(212,168,83,.2);border-color:rgba(212,168,83,.4)}
 
-</style>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="深索道×安德路×格林格·金：连带担保、隐性借贷、利率风险——负债边界的三条红线。先计算后判断。">
+  <meta property="og:title" content="[8分钟] 第十三篇 · 连带担保：签个字，一套房子就没了 — 私家智囊">
+  <meta property="og:description" content="深索道×安德路×格林格·金：连带担保、隐性借贷、利率风险。负债边界的三条红线与自检清单。负债压力测试引导。">
+  <meta property="og:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://deepsuodao.github.io/dialogue-13.html">
+  <meta property="og:site_name" content="私家智囊">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
+  <title>[8分钟] 第十三篇 · 连带担保：签个字，一套房子就没了 — 私家智囊</title>
+  <link rel="stylesheet" href="dialogue.css">
+
 </head>
+
 <body>
 
-<header>
-  <div class="container">
-    <div class="logo">私家<span>智囊</span></div>
-    <nav>
-      <a href="./index.html#belief">理念</a>
-      <a href="./principles.html">原则</a>
-      <a href="./index.html#content">对话列表</a>
-      <a href="./index.html#tools">工具箱</a>
-      <a href="./index.html#about">关于</a>
-      <a href="./index.html#wechat">公众号</a>
-    </nav>
-  </div>
-</header>
-
-<section class="section" style="padding-top:120px;">
-  <div class="container">
-    <div class="section-title">对话 · 第十三篇</div>
-    <h2>连带担保：签个字，一套房子就没了<br>——守夜人底线② · 负债边界（Debt Boundary）</h2>
-  </div>
-</section>
-
-<section class="section" style="padding-top:0;">
-  <div class="container">
-    <div class="dialogue-block">
-
-<p class="scene">深索道的书房。安德路到的时候，格林格·金正坐在窗边翻一本旧笔记本，领口那枚珍珠胸针在灯光下泛着柔光。</p>
-
-<p><span class="speaker">安德路：</span> （坐下）金姐，我今天想问一个具体的事。</p>
-
-<p><span class="speaker">格林格·金：</span> （合上本子）你说。</p>
-
-<p><span class="speaker">安德路：</span> 上周我一个朋友，做生意周转，让我给他做个担保（guarantor）。他说就是"走个形式"。我差点就签了。</p>
-
-<p><span class="speaker">格林格·金：</span> （看了深索道一眼）你签了吗？</p>
-
-<p><span class="speaker">安德路：</span> 还没。但总觉得不帮好像不够意思。</p>
-
-<p><span class="speaker">深索道：</span> （放下手中的笔）担保的事，我昨天正好翻到一个唐朝的故事，听完你就不纠结了。</p>
-
-<p><span class="speaker">安德路：</span> 唐朝的事跟今天能有什么关系？</p>
-
-<p><span class="speaker">深索道：</span> 唐德宗贞元年间，京城长安实行"宫市"制度——皇宫里需要的日用品，由宦官出宫采购。听起来挺正常对吧？但实际操作中，宦官根本不付钱，或者只付极少一点钱，强行拿走商贩的货物。更狠的是——他们逼商铺互相担保，今天抢了张家的布匹，明天让李家来"补税"，后天又让王家替张家还"欠款"。铺主们叫苦不迭，却不敢不从，因为宦官手里握着"圣旨"的名义。诗人白居易在《卖炭翁》里写的就是这个——"一车炭，千余斤，宫使驱将惜不得。半匹红纱一丈绫，系向牛头充炭直。"那个卖炭的老翁，等着这一车炭的钱过冬，结果被强征走了，什么都没剩下。</p>
-
-<p><span class="speaker">安德路：</span> 所以担保的问题，一千多年前就有了？</p>
-
-<p><span class="speaker">深索道：</span> 对。那时候没有银行、没有征信，但担保的风险逻辑一模一样——你只要签了字，别人的债就成了你的债。卖炭翁被强征走的是炭，你今天被强征走的是一套房。</p>
-
-<p><span class="speaker">格林格·金：</span> （轻轻碰了一下胸针）担保的风险自古就有。我前两年亲眼见过一个当代版的"宫市"。我们公司有个合伙人，帮他哥哥的公司做过一笔银行贷款的连带担保，金额不算大，200万。他签的时候想的是——"我哥的公司经营了十几年，从没出过问题。"</p>
-
-<p><span class="speaker">安德路：</span> 然后呢？</p>
-
-<p><span class="speaker">格林格·金：</span> 一年后，哥哥的公司因下游客户破产导致资金链断裂，无法偿还贷款。银行直接找到担保人——这位合伙人。他拿不出200万现金，最后把自己住的房子抵押了。</p>
-
-<p><span class="speaker">安德路：</span> 他事先不知道会这样？</p>
-
-<p><span class="speaker">格林格·金：</span> 他知道。但他签的时候想的是"不会出事"。<strong>这就是问题——所有人签担保的时候都不觉得会出事。</strong></p>
-
-<p><span class="speaker">深索道：</span> 这里要特别说清楚一个很多人搞混的概念。担保分两种：<strong>一般保证</strong>和<strong>连带保证</strong>。一般保证的意思是——银行必须先找主债务人（你朋友），把他的资产都执行完了还不够，才能来找你。这叫"先执行主债务人"原则。但<strong>连带保证</strong>——也就是你朋友让你签的这种——银行可以绕开主债务人，直接来找你，你的房子、存款、工资，同步被执行。<strong>连带责任（joint liability）的核心就是四个字：连坐你。</strong>所以签之前，看清楚合同上写的是哪一种。</p>
-
-<p><span class="speaker">安德路：</span> 那我怎么知道合同上写的是哪种？</p>
-
-<p><span class="speaker">格林格·金：</span> 很简单。找"连带"两个字。合同里如果出现"连带责任保证""承担连带担保责任"这些字眼，那就是连带保证。如果写的是"一般保证"或者说"先就债务人财产依法强制执行"，那就是一般保证。普通人最容易踩的坑就是——朋友拿来的合同，看都不看直接翻到最后一页签名字。</p>
-
-<hr style="border:none;border-top:1px solid rgba(212,168,83,.12);margin:32px 0;">
-
-<h3>一、负债边界的红线</h3>
-
-<p><span class="speaker">深索道：</span> 负债边界这条底线，我们把它拆成三条红线（red lines）：</p>
-
-<p><strong>第一条红线：任何形式的担保，签之前先问守夜人。</strong>不管你觉得自己多了解那个人，不管你多信任那家公司——担保一旦签了，就不是你的事了，是法律的事了。</p>
-
-<p><strong>第二条红线：隐性借贷（implicit debt）月还款不能超过月收入的50%。</strong>借呗、白条、微粒贷——这些东西单笔金额不大，但加起来可能很可怕。</p>
-
-<p><strong>第三条红线：浮动利率贷款（floating-rate loan），每年查一次LPR走势。</strong>利率如果涨了，你的月供会涨多少？你现在扛得住，涨了之后还扛得住吗？</p>
-
-<hr style="border:none;border-top:1px solid rgba(212,168,83,.12);margin:32px 0;">
-
-<h3>二、隐性借贷：被忽视的"碎钞机"</h3>
-
-<p><span class="speaker">格林格·金：</span> 我给你们讲一个我自己的教训。</p>
-
-<p>去年我查了一次征信报告（credit report），发现我名下有七八个循环贷账户——有借呗、有白条、有信用卡分期。每个单笔都不大，几百、几千。</p>
-
-<p><span class="speaker">安德路：</span> 那加起来呢？</p>
-
-<p><span class="speaker">格林格·金：</span> 加起来三万多。利息加起来——你猜多少？一年下来，光利息就交了五千多。<strong>五千多够买一件不错的羽绒服了，而我什么都没买到——只是"提前用了几个月"。</strong></p>
-
-<p><span class="speaker">安德路：</span> 所以它叫"隐性借贷"（implicit debt），意思是——隐藏的债？</p>
-
-<p><span class="speaker">深索道：</span> 对，为什么叫"隐藏的债"？因为它不像房贷那样一笔大数字摆在你面前提醒你每个月要还。它是一笔一笔小钱分散在各个App里——你今天借呗用300，明天白条用500，后天信用卡刷个2000，每个单独看都不起眼。但征信报告一拉出来，汇总数字能吓你一跳。更关键的是，<strong>它隐藏的不是本金，是利息</strong>。房贷的利率你一眼能看到，但借呗的日息万三、万四——放在年化里是多少？大概10%到15%——比房贷高好几倍。</p>
-
-<p><span class="speaker">格林格·金：</span> 这就是守夜人盯隐性借贷的方法——不看绝对值，看占比。<strong>月还款（含所有隐性借贷）÷月收入 ≤ 50%</strong>。超过这个比例，就开始吃现金流了。</p>
-
-<hr style="border:none;border-top:1px solid rgba(212,168,83,.12);margin:32px 0;">
-
-<h3>三、利率风险：你扛得住LPR涨吗？</h3>
-
-<p><span class="speaker">安德路：</span> 那利率风险呢？我身边有房贷的朋友好像都不太在意这个。</p>
-
-<p><span class="speaker">格林格·金：</span> 因为他们没有经历过利率上涨。中国的LPR从2019年推出以来，总体是在降的——从4.85%降到现在不到4%。降的时候大家没感觉，但如果调转方向呢？</p>
-
-<p><span class="speaker">深索道：</span> 我给你讲一个发生在美国的真实故事。2008年金融危机之后，美联储为了救经济，把基准利率降到接近零，一直维持到2015年。那几年，美国买房的人特别多——因为贷款便宜，月供低。一个普通家庭借30万美元的房贷，30年固定利率最低的时候只有3.5%左右，月供大概1350美元，大家觉得毫无压力。然后从2015年底开始，美联储连续加息——2015年加一次，2016年加一次，2017年加三次，2018年加四次。到2019年，基准利率从几乎零涨到了2.25%到2.5%。听起来不多对吧？但对于那些选了浮动利率贷款（Adjustable-Rate Mortgage, ARM）的美国房主来说，月供从1350美元涨到了1900甚至2000美元——每个月多还五六百美元。很多家庭扛不住，断供、法拍、信用记录崩塌。</p>
-
-<p><span class="speaker">安德路：</span> 这不是跟中国的LPR一样？</p>
-
-<p><span class="speaker">深索道：</span> 逻辑完全一样。LPR（Loan Prime Rate，贷款市场报价利率）就是中国的浮动利率锚。很多人问我：<strong>LPR跟以前的基准利率什么关系？</strong>简单说——过去央行直接定一个基准利率，各家银行在这个基础上上浮或打折。现在改成LPR机制——由18家银行每个月报价一次，取平均值，央行不再直接定利率，而是通过政策影响LPR。你的房贷利率= LPR + 加点（BP）。</p>
-
-<p><span class="speaker">安德路：</span> BP是什么？</p>
-
-<p><span class="speaker">深索道：</span> BP是基点（Basis Point）。<strong>一个百分点等于100个基点。</strong>1个基点是万分之一，也就是0.01%。所以说LPR"上升50个基点"，就是利率涨了0.5个百分点。</p>
-
-<p><span class="speaker">格林格·金：</span> 我每年做一次利率敏感度测试（rate sensitivity test）。用一个简化计算来演示。假设你房贷200万，30年期，当前LPR是3.95%。月供大约9500元。</p>
-
-<p>如果LPR上升50个BP（变成4.45%）——月供变成约10070元。<strong>每个月多还570元。</strong></p>
-
-<p>如果LPR上升100个BP（变成4.95%）——月供变成约10670元。<strong>每个月多还1170元。</strong></p>
-
-<p><span class="speaker">安德路：</span> 一年多还14000？</p>
-
-<p><span class="speaker">深索道：</span> 一年14000，30年就是42万。<strong>这42万不是你借的钱，是利率变化带来的额外成本。</strong></p>
-
-<hr style="border:none;border-top:1px solid rgba(212,168,83,.12);margin:32px 0;">
-
-<h3>四、担保风险：一个人签的字，一家人的房子</h3>
-
-<p><span class="speaker">安德路：</span> 回到担保的问题。我那个朋友如果真出事了，我作为担保人要承担什么？</p>
-
-<p><span class="speaker">深索道：</span> 你签的如果是连带责任保证（joint and several liability）——银行可以直接找你，不需要先找他。你的房子、存款、工资，都可以被执行。</p>
-
-<p><span class="speaker">安德路：</span> 我的房子？我老婆没签字也要被执行？</p>
-
-<p><span class="speaker">格林格·金：</span> 这个看情况。2023年有过一个真实的案例——某科技公司中层，为朋友的300万经营贷做个人连带担保。朋友的公司倒闭，他被起诉，名下唯一住房被查封拍卖。他的妻子和孩子在法院贴封条前三天才得知这件事。</p>
-
-<p><span class="speaker">安德路：</span> 他没告诉妻子？</p>
-
-<p><span class="speaker">格林格·金：</span> 没告诉。"不想让她担心。"结果法院认定——该住房为担保人名下唯一住房，即便配偶未签字，仍然可以执行。</p>
-
-<p><span class="speaker">安德路：</span> （沉默了几秒）我今晚回去跟我朋友说——这个担保，我不能签。</p>
-
-<hr style="border:none;border-top:1px solid rgba(212,168,83,.12);margin:32px 0;">
-
-<h3>五、负债边界的自检清单</h3>
-
-<p><span class="speaker">深索道：</span> 三个问题，每季度看一次：</p>
-
-<table class="summary-table">
-<tr><th>底线</th><th>检查项</th><th>✅ 安全</th><th>⚠️ 关注</th><th>❌ 红色</th></tr>
-<tr><td>担保</td><td>有没有新增任何形式的担保？</td><td>无新增</td><td>有，未超年收入20%</td><td>有，超年收入20%</td></tr>
-<tr><td>隐性借贷</td><td>月还款（含借呗/白条/信用卡）≤月收入50%？</td><td>≤40%</td><td>40-50%</td><td>>50%</td></tr>
-<tr><td>利率</td><td>浮动利率贷款，LPR涨100BP后扛得住吗？</td><td>扛得住</td><td>月供涨但能接受</td><td>扛不住</td></tr>
-</table>
-
-<p><span class="speaker">格林格·金：</span> 担保和隐性借贷，<strong>每季度</strong>看一眼。利率，<strong>每年</strong>查一次LPR走势。</p>
-
-<hr style="border:none;border-top:1px solid rgba(212,168,83,.12);margin:32px 0;">
-
-<h3>六、动手测一测：先计算后判断</h3>
-
-<p><span class="speaker">安德路：</span> 有没有工具可以帮我算这些？</p>
-
-<p><span class="speaker">深索道：</span> 有。网站工具箱里的<strong>负债压力测试</strong>（debt stress test），可以帮你算你的DTI（负债收入比，Debt-to-Income ratio）、流动性覆盖倍数、LPR上升后月供变化、担保触发后的财务冲击。</p>
-
-<p><span class="speaker">格林格·金：</span> 记住一个方法：<strong>先计算后判断</strong>（calculate first, judge later）。不要凭感觉说"应该没问题"，把数字填进去，算出来再说。</p>
-
-<div style="text-align:center;margin:24px 0;">
-  <a href="./debt-stress-test.html" style="display:inline-block;padding:12px 28px;border:1px solid #d4a853;color:#d4a853;font-size:.85rem;letter-spacing:.05em;text-decoration:none;border-radius:3px;transition:all .3s;" onmouseover="this.style.background='#d4a853';this.style.color='#0a0e1a';" onmouseout="this.style.background='transparent';this.style.color='#d4a853';">💳 打开负债压力测试 →</a>
-</div>
-
-<p style="text-align:center;font-size:.8rem;color:#6a6865;">所有数据在浏览器本地计算，不上传服务器。</p>
-
-<hr style="border:none;border-top:1px solid rgba(212,168,83,.12);margin:32px 0;">
-
-<h3>核心结论（Key Takeaways）</h3>
-
-<div class="quote-line"><strong>担保不是"帮个忙"，是"把自己的房子押上去"。</strong></div>
-<div class="quote-line"><strong>隐性借贷最可怕的不是欠了多少，是花了多少利息却什么都没买到。</strong></div>
-<div class="quote-line"><strong>利率风险不是"会不会涨"的问题——是"涨了之后你扛不扛得住"的问题。</strong></div>
-<div class="quote-line"><strong>负债边界的核心不是"不借钱"，是"借钱之前先知道最坏会怎样"。</strong></div>
-
-<br>
-
-<p style="color:#8a8885;font-style:italic;">规划师画图，守夜人值班。不荐股、不带单、不给代码。只做两件事：画好一张图，盯住五条底线。</p>
-<p style="color:#8a8885;font-style:italic;">「私家智囊」——您家庭财富的规划师与守夜人</p>
-
-</div>
-
-    <div style="text-align:center;margin-top:40px;">
-      <a href="./index.html" style="display:inline-block;padding:12px 28px;border:1px solid rgba(212,168,83,.25);color:#d4a853;font-size:.85rem;letter-spacing:.05em;text-decoration:none;">← 返回全部对话</a>
+  <header>
+    <div class="container">
+      <div class="logo">私家<span>智囊</span></div>
+      <nav>
+        <a href="./index.html#belief">理念</a>
+        <a href="./principles.html">原则</a>
+        <a href="./index.html#content">对话列表</a>
+        <a href="./index.html#tools">工具箱</a>
+        <a href="./index.html#about">关于</a>
+        <a href="./index.html#wechat">公众号</a>
+      </nav>
     </div>
-  </div>
-</section>
+  </header>
 
-<div style="text-align:center;margin-top:20px;padding:12px 0;">
-  <span style="display:inline-block;font-size:.75rem;padding:4px 12px;border-radius:2px;background:rgba(212,168,83,.15);color:#d4a853;margin:3px;letter-spacing:.02em;">守夜人</span>
-  <span style="display:inline-block;font-size:.75rem;padding:4px 12px;border-radius:2px;background:rgba(122,168,216,.15);color:#7aa8d8;margin:3px;letter-spacing:.02em;">负债边界</span>
-  <span style="display:inline-block;font-size:.7rem;padding:4px 10px;border-radius:2px;border:1px solid rgba(255,255,255,.08);color:#6a6865;margin:3px;">阅读时间 8 分钟</span>
-</div>
+  <section class="section" id="content">
+    <div class="container">
+      <div class="section-title">对话 · 第十三篇</div>
 
-<footer>
-  <div class="container">
-    <p class="slogan">家庭财富的<span>规划师</span>与<span>守夜人</span></p>
-    <p class="copyright">私家智囊 · 2026</p>
+      <div class="dialogue-block">
+        <h2>连带担保：签个字，一套房子就没了<br>守夜人底线 ② · 负债边界（Debt Boundary）</h2>
+        <p class="scene">深索道的书房。安德路到的时候，格林格·金正坐在窗边翻一本旧笔记本，领口那枚珍珠胸针在灯光下泛着柔光。</p>
+        <p class="read-time">阅读时间约 8分钟</p>
+        <p><span class="speaker-b">安德路</span> （坐下）金姐，我今天想问一个具体的事。</p>
+
+        <p><span class="speaker-c">格林格·金</span> （合上本子）你说。</p>
+
+        <p><span class="speaker-b">安德路</span> 上周我一个朋友，做生意周转，让我给他做个担保（guarantor）。他说就是"走个形式"。我差点就签了。</p>
+
+        <p><span class="speaker-c">格林格·金</span> （看了深索道一眼）你签了吗？</p>
+
+        <p><span class="speaker-b">安德路</span> 还没。但总觉得不帮好像不够意思。</p>
+
+        <p><span class="speaker">深索道</span> （放下手中的笔）担保的事，我昨天正好翻到一个唐朝的故事，听完你就不纠结了。</p>
+
+        <p><span class="speaker-b">安德路</span> 唐朝的事跟今天能有什么关系？</p>
+
+        <p><span class="speaker">深索道</span>
+          唐德宗贞元年间，京城长安实行"宫市"制度——皇宫里需要的日用品，由宦官出宫采购。听起来挺正常对吧？但实际操作中，宦官根本不付钱，或者只付极少一点钱，强行拿走商贩的货物。更狠的是——他们逼商铺互相担保，今天抢了张家的布匹，明天让李家来"补税"，后天又让王家替张家还"欠款"。铺主们叫苦不迭，却不敢不从，因为宦官手里握着"圣旨"的名义。诗人白居易在《卖炭翁》里写的就是这个——"一车炭，千余斤，宫使驱将惜不得。半匹红纱一丈绫，系向牛头充炭直。"那个卖炭的老翁，等着这一车炭的钱过冬，结果被强征走了，什么都没剩下。
+        </p>
+
+        <p><span class="speaker-b">安德路</span> 所以担保的问题，一千多年前就有了？</p>
+
+        <p><span class="speaker">深索道</span> 对。那时候没有银行、没有征信，但担保的风险逻辑一模一样——你只要签了字，别人的债就成了你的债。卖炭翁被强征走的是炭，你今天被强征走的是一套房。</p>
+
+        <p><span class="speaker-c">格林格·金</span>
+          （轻轻碰了一下胸针）担保的风险自古就有。我前两年亲眼见过一个当代版的"宫市"。我们公司有个合伙人，帮他哥哥的公司做过一笔银行贷款的连带担保，金额不算大，200万。他签的时候想的是——"我哥的公司经营了十几年，从没出过问题。"
+        </p>
+
+        <p><span class="speaker-b">安德路</span> 然后呢？</p>
+
+        <p><span class="speaker-c">格林格·金</span> 一年后，哥哥的公司因下游客户破产导致资金链断裂，无法偿还贷款。银行直接找到担保人——这位合伙人。他拿不出200万现金，最后把自己住的房子抵押了。
+        </p>
+
+        <p><span class="speaker-b">安德路</span> 他事先不知道会这样？</p>
+
+        <p><span class="speaker-c">格林格·金</span> 他知道。但他签的时候想的是"不会出事"。<strong>这就是问题——所有人签担保的时候都不觉得会出事。</strong></p>
+
+        <p><span class="speaker">深索道</span>
+          这里要特别说清楚一个很多人搞混的概念。担保分两种：<strong>一般保证</strong>和<strong>连带保证</strong>。一般保证的意思是——银行必须先找主债务人（你朋友），把他的资产都执行完了还不够，才能来找你。这叫"先执行主债务人"原则。但<strong>连带保证</strong>——也就是你朋友让你签的这种——银行可以绕开主债务人，直接来找你，你的房子、存款、工资，同步被执行。<strong>连带责任（joint
+            liability）的核心就是四个字：连坐你。</strong>所以签之前，看清楚合同上写的是哪一种。</p>
+
+        <p><span class="speaker-b">安德路</span> 那我怎么知道合同上写的是哪种？</p>
+
+        <p><span class="speaker-c">格林格·金</span>
+          很简单。找"连带"两个字。合同里如果出现"连带责任保证""承担连带担保责任"这些字眼，那就是连带保证。如果写的是"一般保证"或者说"先就债务人财产依法强制执行"，那就是一般保证。普通人最容易踩的坑就是——朋友拿来的合同，看都不看直接翻到最后一页签名字。
+        </p>
+
+        <hr>
+
+        <h3>一、负债边界的红线</h3>
+
+        <p><span class="speaker">深索道</span> 负债边界这条底线，我们把它拆成三条红线（red lines）：</p>
+
+        <p><strong>第一条红线：任何形式的担保，签之前先问守夜人。</strong>不管你觉得自己多了解那个人，不管你多信任那家公司——担保一旦签了，就不是你的事了，是法律的事了。</p>
+
+        <p><strong>第二条红线：隐性借贷（implicit debt）月还款不能超过月收入的50%。</strong>借呗、白条、微粒贷——这些东西单笔金额不大，但加起来可能很可怕。</p>
+
+        <p><strong>第三条红线：浮动利率贷款（floating-rate loan），每年查一次LPR走势。</strong>利率如果涨了，你的月供会涨多少？你现在扛得住，涨了之后还扛得住吗？</p>
+
+        <hr>
+
+        <h3>二、隐性借贷：被忽视的"碎钞机"</h3>
+
+        <p><span class="speaker-c">格林格·金</span> 我给你们讲一个我自己的教训。</p>
+
+        <p>去年我查了一次征信报告（credit report），发现我名下有七八个循环贷账户——有借呗、有白条、有信用卡分期。每个单笔都不大，几百、几千。</p>
+
+        <p><span class="speaker-b">安德路</span> 那加起来呢？</p>
+
+        <p><span class="speaker-c">格林格·金</span>
+          加起来三万多。利息加起来——你猜多少？一年下来，光利息就交了五千多。<strong>五千多够买一件不错的羽绒服了，而我什么都没买到——只是"提前用了几个月"。</strong></p>
+
+        <p><span class="speaker-b">安德路</span> 所以它叫"隐性借贷"（implicit debt），意思是——隐藏的债？</p>
+
+        <p><span class="speaker">深索道</span>
+          对，为什么叫"隐藏的债"？因为它不像房贷那样一笔大数字摆在你面前提醒你每个月要还。它是一笔一笔小钱分散在各个App里——你今天借呗用300，明天白条用500，后天信用卡刷个2000，每个单独看都不起眼。但征信报告一拉出来，汇总数字能吓你一跳。更关键的是，<strong>它隐藏的不是本金，是利息</strong>。房贷的利率你一眼能看到，但借呗的日息万三、万四——放在年化里是多少？大概10%到15%——比房贷高好几倍。
+        </p>
+
+        <p><span class="speaker-c">格林格·金</span> 这就是守夜人盯隐性借贷的方法——不看绝对值，看占比。<strong>月还款（含所有隐性借贷）÷月收入 ≤
+            50%</strong>。超过这个比例，就开始吃现金流了。</p>
+
+        <hr>
+
+        <h3>三、利率风险：你扛得住LPR涨吗？</h3>
+
+        <p><span class="speaker-b">安德路</span> 那利率风险呢？我身边有房贷的朋友好像都不太在意这个。</p>
+
+        <p><span class="speaker-c">格林格·金</span>
+          因为他们没有经历过利率上涨。中国的LPR从2019年推出以来，总体是在降的——从4.85%降到现在不到4%。降的时候大家没感觉，但如果调转方向呢？
+        </p>
+
+        <p><span class="speaker">深索道</span>
+          我给你讲一个发生在美国的真实故事。2008年金融危机之后，美联储为了救经济，把基准利率降到接近零，一直维持到2015年。那几年，美国买房的人特别多——因为贷款便宜，月供低。一个普通家庭借30万美元的房贷，30年固定利率最低的时候只有3.5%左右，月供大概1350美元，大家觉得毫无压力。然后从2015年底开始，美联储连续加息——2015年加一次，2016年加一次，2017年加三次，2018年加四次。到2019年，基准利率从几乎零涨到了2.25%到2.5%。听起来不多对吧？但对于那些选了浮动利率贷款（Adjustable-Rate
+          Mortgage, ARM）的美国房主来说，月供从1350美元涨到了1900甚至2000美元——每个月多还五六百美元。很多家庭扛不住，断供、法拍、信用记录崩塌。</p>
+
+        <p><span class="speaker-b">安德路</span> 这不是跟中国的LPR一样？</p>
+
+        <p><span class="speaker">深索道</span> 逻辑完全一样。LPR（Loan Prime
+          Rate，贷款市场报价利率）就是中国的浮动利率锚。很多人问我：<strong>LPR跟以前的基准利率什么关系？</strong>简单说——过去央行直接定一个基准利率，各家银行在这个基础上上浮或打折。现在改成LPR机制——由18家银行每个月报价一次，取平均值，央行不再直接定利率，而是通过政策影响LPR。你的房贷利率=
+          LPR + 加点（BP）。</p>
+
+        <p><span class="speaker-b">安德路</span> BP是什么？</p>
+
+        <p><span class="speaker">深索道</span> BP是基点（Basis
+          Point）。<strong>一个百分点等于100个基点。</strong>1个基点是万分之一，也就是0.01%。所以说LPR"上升50个基点"，就是利率涨了0.5个百分点。</p>
+
+        <p><span class="speaker-c">格林格·金</span> 我每年做一次利率敏感度测试（rate sensitivity
+          test）。用一个简化计算来演示。假设你房贷200万，30年期，当前LPR是3.95%。月供大约9500元。</p>
+
+        <p>如果LPR上升50个BP（变成4.45%）——月供变成约10070元。<strong>每个月多还570元。</strong></p>
+
+        <p>如果LPR上升100个BP（变成4.95%）——月供变成约10670元。<strong>每个月多还1170元。</strong></p>
+
+        <p><span class="speaker-b">安德路</span> 一年多还14000？</p>
+
+        <p><span class="speaker">深索道</span> 一年14000，30年就是42万。<strong>这42万不是你借的钱，是利率变化带来的额外成本。</strong></p>
+
+        <hr>
+
+        <h3>四、担保风险：一个人签的字，一家人的房子</h3>
+
+        <p><span class="speaker-b">安德路</span> 回到担保的问题。我那个朋友如果真出事了，我作为担保人要承担什么？</p>
+
+        <p><span class="speaker">深索道</span> 你签的如果是连带责任保证（joint and several
+          liability）——银行可以直接找你，不需要先找他。你的房子、存款、工资，都可以被执行。</p>
+
+        <p><span class="speaker-b">安德路</span> 我的房子？我老婆没签字也要被执行？</p>
+
+        <p><span class="speaker-c">格林格·金</span>
+          这个看情况。2023年有过一个真实的案例——某科技公司中层，为朋友的300万经营贷做个人连带担保。朋友的公司倒闭，他被起诉，名下唯一住房被查封拍卖。他的妻子和孩子在法院贴封条前三天才得知这件事。</p>
+
+        <p><span class="speaker-b">安德路</span> 他没告诉妻子？</p>
+
+        <p><span class="speaker-c">格林格·金</span> 没告诉。"不想让她担心。"结果法院认定——该住房为担保人名下唯一住房，即便配偶未签字，仍然可以执行。</p>
+
+        <p><span class="speaker-b">安德路</span> （沉默了几秒）我今晚回去跟我朋友说——这个担保，我不能签。</p>
+
+        <hr>
+
+        <h3>五、负债边界的自检清单</h3>
+
+        <p><span class="speaker">深索道</span> 三个问题，每季度看一次：</p>
+
+        <table class="summary-table">
+          <tr>
+            <th>底线</th>
+            <th>检查项</th>
+            <th>✅ 安全</th>
+            <th>⚠️ 关注</th>
+            <th>❌ 红色</th>
+          </tr>
+          <tr>
+            <td>担保</td>
+            <td>有没有新增任何形式的担保？</td>
+            <td>无新增</td>
+            <td>有，未超年收入20%</td>
+            <td>有，超年收入20%</td>
+          </tr>
+          <tr>
+            <td>隐性借贷</td>
+            <td>月还款（含借呗/白条/信用卡）≤月收入50%？</td>
+            <td>≤40%</td>
+            <td>40-50%</td>
+            <td>>50%</td>
+          </tr>
+          <tr>
+            <td>利率</td>
+            <td>浮动利率贷款，LPR涨100BP后扛得住吗？</td>
+            <td>扛得住</td>
+            <td>月供涨但能接受</td>
+            <td>扛不住</td>
+          </tr>
+        </table>
+
+        <p><span class="speaker-c">格林格·金</span> 担保和隐性借贷，<strong>每季度</strong>看一眼。利率，<strong>每年</strong>查一次LPR走势。</p>
+
+        <hr>
+
+        <h3>六、动手测一测：先计算后判断</h3>
+
+        <p><span class="speaker-b">安德路</span> 有没有工具可以帮我算这些？</p>
+
+        <p><span class="speaker">深索道</span> 有。网站工具箱里的<strong>负债压力测试</strong>（debt stress
+          test），可以帮你算你的DTI（负债收入比，Debt-to-Income ratio）、流动性覆盖倍数、LPR上升后月供变化、担保触发后的财务冲击。</p>
+
+        <p><span class="speaker-c">格林格·金</span> 记住一个方法：<strong>先计算后判断</strong>（calculate first, judge
+          later）。不要凭感觉说"应该没问题"，把数字填进去，算出来再说。</p>
+
+        <div class="tool-guide">
+          <a href="./tool-debt-stress-test.html">💳 打开负债压力测试 →</a>
+        </div>
+
+        <p style="text-align:center;font-size:.8rem;color:#6a6865;">所有数据在浏览器本地计算，不上传服务器。</p>
+
+        <hr>
+
+
+        <div class="epilogue">
+          担保不是"帮个忙"，是"把自己的房子押上去"。<br>隐性借贷最可怕的不是欠了多少，是花了多少利息却什么都没买到。<br>利率风险不是"会不会涨"的问题——是"涨了之后你扛不扛得住"的问题。<br>负债边界的核心不是"不借钱"，是"借钱之前先知道最坏会怎样"。
+        </div>
+
+
+      </div>
+
+
+      <div style="text-align:center;margin-top:40px;">
+        <a href="./index.html" class="btn-back">← 返回全部对话</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="post-tags">
+    <span class="tag">守夜人</span>
+    <span class="tag">负债边界</span>
+    <span class="tag">阅读时间
+      8 分钟</span>
   </div>
-<a href="#" class="back-to-top" aria-label="回到顶部">↑</a>
-</footer>
+
+  <footer>
+    <div class="container">
+      <p class="slogan">家庭财富的<span>规划师</span>与<span>守夜人</span></p>
+      <p class="copyright">私家智囊 · 2026</p>
+    </div>
+    <a href="#" class="back-to-top" aria-label="回到顶部">↑</a>
+  </footer>
 
 </body>
+
 </html>

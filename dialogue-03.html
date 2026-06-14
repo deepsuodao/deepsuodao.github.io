@@ -1,217 +1,125 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="深索道×安德路：复利公式F=P(1+r)^n中，n才是命。复利的朋友三条标准，负利的敌人交易摩擦与融资利息。">
-<meta property="og:title" content="[9分钟] 第三篇 · 复利的朋友与负利的敌人 — 私家智囊">
-<meta property="og:description" content="深索道×安德路：复利公式F=P(1+r)^n中，n才是命。复利的朋友三条标准，负利的敌人交易摩擦与融资利息。">
-<meta property="og:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://deepsuodao.github.io/dialogue-03.html">
-<meta property="og:site_name" content="私家智囊">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
-<title>[9分钟] 第三篇 · 复利的朋友与负利的敌人 — 私家智囊</title>
-<style>
-/* === Reset === */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-  font-family:-apple-system,"PingFang SC","Noto Sans SC","Helvetica Neue",sans-serif;
-  background:#0a0e1a;color:#e8e6e3;line-height:1.7;
-  -webkit-font-smoothing:antialiased
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="深索道×安德路复利公式F=P(1+r)^n中，n才是命。复利的朋友三条标准，负利的敌人交易摩擦与融资利息。">
+  <meta property="og:title" content="[9分钟] 第三篇 · 复利的朋友与负利的敌人 — 私家智囊">
+  <meta property="og:description" content="深索道×安德路复利公式F=P(1+r)^n中，n才是命。复利的朋友三条标准，负利的敌人交易摩擦与融资利息。">
+  <meta property="og:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://deepsuodao.github.io/dialogue-03.html">
+  <meta property="og:site_name" content="私家智囊">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
+  <title>[9分钟] 第三篇 · 复利的朋友与负利的敌人 — 私家智囊</title>
+  <link rel="stylesheet" href="dialogue.css">
 
-/* === Typography === */
-h1,h2,h3{font-weight:400;letter-spacing:-0.02em}
-h1{font-size:clamp(2rem,5vw,3.5rem)}
-h2{font-size:clamp(1.4rem,3vw,2rem)}
-h3{font-size:clamp(1rem,2vw,1.3rem)}
-p{font-size:clamp(0.9rem,1.5vw,1.05rem);color:#b0aeab}
-a{color:#d4a853;text-decoration:none;transition:color .3s}
-a:hover{color:#f0c868}
-
-/* === Layout === */
-.container{max-width:1100px;margin:0 auto;padding:0 24px}
-.section{padding:100px 0}
-.section-title{
-  font-size:.75rem;text-transform:uppercase;letter-spacing:.15em;
-  color:#d4a853;margin-bottom:12px;font-weight:500
-}
-
-/* === Header === */
-header{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  background:rgba(10,14,26,.85);backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(212,168,83,.08)
-}
-header .container{display:flex;align-items:center;justify-content:space-between;height:60px}
-.logo{font-size:1rem;font-weight:500;color:#e8e6e3;letter-spacing:.05em}
-.logo span{color:#d4a853}
-nav a{font-size:.8rem;margin-left:24px;color:#8a8885}
-nav a:hover{color:#e8e6e3}
-
-/* === Dialogue Content === */
-.dialogue-block{
-  padding:24px;border-left:2px solid rgba(212,168,83,.15);
-  background:rgba(255,255,255,.015);font-size:.95rem;line-height:1.8;color:#c8c6c2
-}
-.dialogue-block .speaker{font-weight:500;color:#d4a853}
-.dialogue-block .speaker-a{color:#7aa8d8}
-.dialogue-block .speaker-k{color:#c9897a}
-.dialogue-block .scene{
-  font-style:italic;color:#6a6865;font-size:.85rem;margin-bottom:16px;padding-left:0
-}
-.dialogue-block .epilogue{
-  margin-top:24px;color:#8a8885;font-style:italic;font-size:.9rem
-}
-.dialogue-block .quote-line{
-  margin-top:20px;padding:16px 20px;border-left:2px solid #d4a853;
-  color:#b0aeab;font-style:italic;font-size:.9rem
-}
-.dialogue-block .summary-table{
-  margin:16px 0;width:100%;border-collapse:collapse;font-size:.85rem
-}
-.dialogue-block .summary-table td,.dialogue-block .summary-table th{
-  padding:8px 12px;border:1px solid rgba(255,255,255,.06);text-align:left
-}
-.dialogue-block .summary-table th{color:#d4a853;font-weight:500;background:rgba(212,168,83,.04)}
-
-/* === About === */
-.about-text{border-top:1px solid rgba(212,168,83,.15);padding-top:40px;margin-top:20px}
-.about-text .tagline{font-size:1rem;color:#d4a853;margin-bottom:20px;font-weight:500}
-
-/* === Footer === */
-footer{border-top:1px solid rgba(255,255,255,.04);padding:48px 0 32px;text-align:center}
-footer .slogan{font-size:.9rem;color:#8a8885;margin-bottom:8px}
-footer .slogan span{color:#d4a853}
-footer .copyright{font-size:.75rem;color:#5a5855}
-
-/* === Mobile Fine-tune === */
-@media(max-width:480px){
-  .section{padding:64px 0}
-  nav a{margin-left:14px;font-size:.75rem}
-}
-
-/* === Dialogue Banner Image === */
-.dialogue-banner{
-  margin-bottom:32px;border-radius:4px;overflow:hidden;
-  border:1px solid rgba(212,168,83,.12);
-  box-shadow:0 4px 24px rgba(0,0,0,.3)
-}
-.dialogue-banner img{
-  width:100%;height:auto;display:block;opacity:.75;
-  filter:brightness(.9) contrast(1.08);transition:opacity .5s
-}
-.dialogue-banner:hover img{opacity:.9}
-
-/* === Section Images === */
-.section-img{
-  display:block;margin:48px auto 0;max-width:100%;height:auto;
-  border-radius:4px;border:1px solid rgba(212,168,83,.1);
-  box-shadow:0 8px 40px rgba(0,0,0,.4),0 0 60px rgba(212,168,83,.04)
-}
-.section-img.wide{max-width:1100px}
-.section-img.square{max-width:500px}
-.section-img.portrait{max-width:320px;border-radius:50% 50% 4px 4px}
-/* === Back to Top === */
-.back-to-top{position:fixed;bottom:32px;right:32px;width:44px;height:44px;border-radius:50%;background:rgba(212,168,83,.1);border:1px solid rgba(212,168,83,.2);color:#d4a853;font-size:1.2rem;cursor:pointer;transition:all .3s;z-index:999;display:flex;align-items:center;justify-content:center;text-decoration:none;backdrop-filter:blur(4px)}
-.back-to-top:hover{background:rgba(212,168,83,.2);border-color:rgba(212,168,83,.4)}
-
-</style>
 </head>
+
 <body>
 
-<!-- ===== Header ===== -->
-<header>
-  <div class="container">
-    <div class="logo">私家<span>智囊</span></div>
-    <nav>
-      <a href="./index.html#belief">理念</a>
-      <a href="./index.html#content">对话列表</a>
-      <a href="./index.html#about">关于</a>
-    </nav>
-  </div>
-</header>
-
-<!-- ===== Dialogue 3 ===== -->
-<section class="section" style="padding-top:120px;">
-  <div class="container">
-    <div class="section-title">对话 · 随笔</div>
-    <h2>第三篇 · 复利的朋友与负利的敌人</h2>
-
-    <div class="dialogue-block">
-      <p class="scene">江边。安德路先到了，手里捏着一张对账单，盯着看了半晌不说话。</p>
-<p style="font-size:.75rem;color:#8a8885;margin-top:8px;">阅读时间约 9分钟</p>
-
-      <p><span class="speaker">深索道：</span>（走过来扫了一眼）怎么了？</p>
-      <p><span class="speaker speaker-a">安德路：</span>深总，我去年量化策略跑下来，扣除融资利息和交易损耗，净收益比毛收益少了四成。四成。</p>
-      <p><span class="speaker">深索道：</span>我问你一个问题——你知道为什么巴菲特年化只有20%出头，却能成为全球首富吗？</p>
-      <p><span class="speaker speaker-a">安德路：</span>时间长？</p>
-      <p><span class="speaker">深索道：</span>对，但也不全对。更准确地说——他找到了复利的朋友，同时一辈子没碰过复利的敌人。</p>
-
-      <p style="font-size:.8rem;color:#d4a853;letter-spacing:.1em;margin:20px 0 12px;">上篇 · 复利的朋友</p>
-
-      <p><span class="speaker">深索道：</span>先说朋友。复利公式 F = P(1+r)^n 里，绝大多数人一辈子在追 r——收益率。但改变命运的是 n——时间。</p>
-      <p><span class="speaker">深索道：</span>标普500从1926年至今，年化回报约10%。听起来不高，但1美元放进去到今天变成了两万美金。杰里米·西格尔的《股市长线法宝》里算过这笔账。</p>
-      <p><span class="speaker speaker-a">安德路：</span>这我知道。</p>
-      <p><span class="speaker">深索道：</span>你不知道的是另一组数据。JP摩根做过统计：2003到2022这二十年，标普500年化8.2%。如果你错过最好的10个交易日——二十年里最好的10天——你的年化掉到3.6%。错过最好的30天，直接变成亏损。</p>
-      <p><span class="speaker">深索道：</span>二十年里，你只要偏离了30天，所有的复利就没了。</p>
-      <p><span class="speaker speaker-a">安德路：</span>所以"长坡厚雪"的真正含义，不是找多厚的雪，是别从坡上摔下来。</p>
-      <p><span class="speaker">深索道：</span>对。巴菲特的原话是——"Life is like a snowball. The important thing is finding wet snow and a really long hill."湿雪是优质资产，长坡是时间。大部分人找到了湿雪，但在坡上站不稳。</p>
-      <p><span class="speaker speaker-a">安德路：</span>那什么是"复利的朋友"？</p>
-
-      <p><span class="speaker">深索道：</span>三条标准。第一，能想象它十年后还在。你买入一个东西，问自己：十年后这家公司还在吗？如果答案是"不确定"，它就不配放进复利公式里。</p>
-      <p><span class="speaker">深索道：</span>第二，有持续现金流产出。分红、利息、租金——不是靠别人接手才能变现的价格差。复利最怕中断，现金流是唯一能让你在低谷期不必卖的底气。</p>
-      <p><span class="speaker">深索道：</span>第三，波动不致命。跌50%需要涨100%才能回本。复利路上最大的敌人不是跌，是你被迫在跌的时候卖。</p>
-      <p><span class="speaker speaker-a">安德路：</span>这第三条，就是行为金融学说的——散户持有基金的平均期限只有2.8年。不是资产不行，是人拿不住。</p>
-
-      <p style="font-size:.8rem;color:#d4a853;letter-spacing:.1em;margin:20px 0 12px;">下篇 · 负利的敌人</p>
-
-      <p><span class="speaker">深索道：</span>现在说敌人。你刚才说的融资利息，典型的负利——Negative Carry。那些随着时间推移不断消耗你现金流的负债或资产，都是复利的敌人。</p>
-      <p><span class="speaker">深索道：</span>2015年A股融资余额峰值2.27万亿，股灾后强行平仓了1.2万亿。这些人的共同特征是什么？他们拿着高杠杆，每天睁眼就欠利息，跌了必须卖。复利还没开始，已经被利息吃掉了。</p>
-      <p><span class="speaker">深索道：</span>执行标准只有一条：绝不长期持有高杠杆、高损耗且无现金流产出的合约类工具。</p>
-      <p><span class="speaker speaker-a">安德路：</span>那房贷呢？我每个月还利息，算不算负利？</p>
-      <p><span class="speaker">深索道：</span>算，但它是被驯服的负利。房贷利率3%，你的资产收益如果能做到12%，时间反而是你的朋友——它在用通胀稀释你的债务本金。区别在于：房贷有不动产做底，你不是在赌；融资买股票没有安全垫，你是在用时间换一个概率。</p>
-      <p><span class="speaker">深索道：</span>所以关键是用复利的朋友去对冲负利的敌人。只要分红大于利息，你就把负利驯服成了可控的成本。否则——你在给时间打工。</p>
-
-      <p><span class="speaker speaker-a">安德路：</span>（沉默）深总，你再说一遍那句话。</p>
-      <p><span class="speaker">深索道：</span>哪句？</p>
-      <p><span class="speaker speaker-a">安德路：</span>信心是复利不中断的核动力。</p>
-      <p><span class="speaker">深索道：</span>大多数人穷尽一生追求收益率r，而真正改变命运的是时间的持续在场——n。你找到了复利的朋友，又看清了负利的敌人，中间差的那一步，就是敢不敢在整个市场都在卖的时候，按住自己的手。</p>
-      <p><span class="speaker">深索道：</span>（站起来，拍拍裤子）走吧，今晚我请。</p>
-      <p><span class="speaker speaker-a">安德路：</span>那复利的公式呢？</p>
-      <p><span class="speaker">深索道：</span>你已经记住了。F = P(1+r)^n。P是你现在有的，r是眼光，n是命。还有一条——信心，是让n不中断的唯一燃料。</p>
-
-      <p class="epilogue" style="margin-top:20px;color:#d4a853;">核心词：信心是复利不中断的核动力。最重要的是复利的"n"期限，不是"r"复利率。</p>
+  <header>
+    <div class="container">
+      <div class="logo">私家<span>智囊</span></div>
+      <nav>
+        <a href="./index.html#belief">理念</a>
+        <a href="./principles.html">原则</a>
+        <a href="./index.html#content">对话列表</a>
+        <a href="./index.html#tools">工具箱</a>
+        <a href="./index.html#about">关于</a>
+        <a href="./index.html#wechat">公众号</a>
+      </nav>
     </div>
+  </header>
 
-    <div style="text-align:center;margin-top:40px;">
-      <a href="./index.html" style="display:inline-block;padding:12px 28px;border:1px solid rgba(212,168,83,.25);color:#d4a853;font-size:.85rem;letter-spacing:.05em;text-decoration:none;">← 返回全部对话</a>
+  <!-- ===== Dialogue 3 ===== -->
+  <section class="section" id="content">
+    <div class="container">
+      <div class="section-title">对话 · 第三篇</div>
+
+      <div class="dialogue-block">
+        <h2>第三篇 · 复利的朋友与负利的敌人</h2>
+        <p class="scene">江边。安德路先到了，手里捏着一张对账单，盯着看了半晌不说话。</p>
+        <p class="read-time">阅读时间约 9分钟</p>
+
+        <p><span class="speaker">深索道</span>（走过来扫了一眼）怎么了？</p>
+        <p><span class="speaker-b">安德路</span>深总，我去年量化策略跑下来，扣除融资利息和交易损耗，净收益比毛收益少了四成。四成。</p>
+        <p><span class="speaker">深索道</span>我问你一个问题——你知道为什么巴菲特年化只有20%出头，却能成为全球首富吗？</p>
+        <p><span class="speaker-b">安德路</span>时间长？</p>
+        <p><span class="speaker">深索道</span>对，但也不全对。更准确地说——他找到了复利的朋友，同时一辈子没碰过复利的敌人。</p>
+
+        <p class="dialogue-act">上篇 · 复利的朋友</p>
+
+        <p><span class="speaker">深索道</span>先说朋友。复利公式 F = P(1+r)^n 里，绝大多数人一辈子在追 r——收益率。但改变命运的是 n——时间。</p>
+        <p><span class="speaker">深索道</span>标普500从1926年至今，年化回报约10%。听起来不高，但1美元放进去到今天变成了两万美金。杰里米·西格尔的《股市长线法宝》里算过这笔账。</p>
+        <p><span class="speaker-b">安德路</span>这我知道。</p>
+        <p><span
+            class="speaker">深索道</span>你不知道的是另一组数据。JP摩根做过统计：2003到2022这二十年，标普500年化8.2%。如果你错过最好的10个交易日——二十年里最好的10天——你的年化掉到3.6%。错过最好的30天，直接变成亏损。
+        </p>
+        <p><span class="speaker">深索道</span>二十年里，你只要偏离了30天，所有的复利就没了。</p>
+        <p><span class="speaker-b">安德路</span>所以"长坡厚雪"的真正含义，不是找多厚的雪，是别从坡上摔下来。</p>
+        <p><span class="speaker">深索道</span>对。巴菲特的原话是——"Life is like a snowball. The important thing is finding wet snow
+          and a really long hill." 湿雪是优质资产，长坡是时间。大部分人找到了湿雪，但在坡上站不稳。</p>
+        <p><span class="speaker-b">安德路</span>那什么是"复利的朋友"？</p>
+
+        <p><span class="speaker">深索道</span>三条标准。第一，能想象它十年后还在。你买入一个东西，问自己：十年后这家公司还在吗？如果答案是"不确定"，它就不配放进复利公式里。</p>
+        <p><span class="speaker">深索道</span>第二，有持续现金流产出。分红、利息、租金——不是靠别人接手才能变现的价格差。复利最怕中断，现金流是唯一能让你在低谷期不必卖的底气。</p>
+        <p><span class="speaker">深索道</span>第三，波动不致命。跌50%需要涨100%才能回本。复利路上最大的敌人不是跌，是你被迫在跌的时候卖。</p>
+        <p><span class="speaker-b">安德路</span>这第三条，就是行为金融学说的——散户持有基金的平均期限只有2.8年。不是资产不行，是人拿不住。</p>
+
+        <p class="dialogue-act">下篇 · 负利的敌人</p>
+
+        <p><span class="speaker">深索道</span>现在说敌人。你刚才说的融资利息，典型的负利——Negative Carry。那些随着时间推移不断消耗你现金流的负债或资产，都是复利的敌人。</p>
+        <p><span
+            class="speaker">深索道</span>2015年A股融资余额峰值2.27万亿，股灾后强行平仓了1.2万亿。这些人的共同特征是什么？他们拿着高杠杆，每天睁眼就欠利息，跌了必须卖。复利还没开始，已经被利息吃掉了。
+        </p>
+        <p><span class="speaker">深索道</span>执行标准只有一条：绝不长期持有高杠杆、高损耗且无现金流产出的合约类工具。</p>
+        <p><span class="speaker-b">安德路</span>那房贷呢？我每个月还利息，算不算负利？</p>
+        <p><span
+            class="speaker">深索道</span>算，但它是被驯服的负利。房贷利率3%，你的资产收益如果能做到12%，时间反而是你的朋友——它在用通胀稀释你的债务本金。区别在于：房贷有不动产做底，你不是在赌；融资买股票没有安全垫，你是在用时间换一个概率。
+        </p>
+        <p><span class="speaker">深索道</span>所以关键是用复利的朋友去对冲负利的敌人。只要分红大于利息，你就把负利驯服成了可控的成本。否则——你在给时间打工。</p>
+
+        <p><span class="speaker-b">安德路</span>（沉默）深总，你再说一遍那句话。</p>
+        <p><span class="speaker">深索道</span>哪句？</p>
+        <p><span class="speaker-b">安德路</span>信心是复利不中断的核动力。</p>
+        <p><span
+            class="speaker">深索道</span>大多数人穷尽一生追求收益率r，而真正改变命运的是时间的持续在场——n。你找到了复利的朋友，又看清了负利的敌人，中间差的那一步，就是敢不敢在整个市场都在卖的时候，按住自己的手。
+        </p>
+        <p><span class="speaker">深索道</span>（站起来，拍拍裤子）走吧，今晚我请。</p>
+        <p><span class="speaker-b">安德路</span>那复利的公式呢？</p>
+        <p><span class="speaker">深索道</span>你已经记住了。F = P(1+r)^n。P是你现在有的，r是眼光，n是命。还有一条——信心，是让n不中断的唯一燃料。</p>
+
+        <p class="epilogue">信心是复利不中断的核动力。最重要的是复利的"n"期限，不是"r"复利率。</p>
+      </div>
+
+
+      <div style="text-align:center;margin-top:40px;">
+        <a href="./index.html" class="btn-back">← 返回全部对话</a>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===== Post Tags ===== -->
-<div style="text-align:center;margin-top:20px;padding:12px 0;">
-  <span style="display:inline-block;font-size:.75rem;padding:4px 12px;border-radius:2px;background:rgba(212,168,83,.15);color:#d4a853;margin:3px;letter-spacing:.02em;">规划师</span>
-  <span style="display:inline-block;font-size:.75rem;padding:4px 12px;border-radius:2px;background:rgba(122,168,216,.15);color:#7aa8d8;margin:3px;letter-spacing:.02em;">时间朋友</span>
-  <span style="display:inline-block;font-size:.7rem;padding:4px 10px;border-radius:2px;border:1px solid rgba(255,255,255,.08);color:#6a6865;margin:3px;">阅读时间 9 分钟</span>
-</div>
-<!-- ===== Tool Guide ===== -->
-<div style="text-align:center;margin-top:12px;padding:16px 20px;border:1px solid rgba(212,168,83,.12);border-radius:4px;background:rgba(212,168,83,.02);">
-  <p style="font-size:.82rem;color:#8a8885;margin-bottom:6px;">📊 动手算一算</p>
-  <a href="./compound-calculator.html" style="display:inline-block;padding:8px 20px;border:1px solid rgba(212,168,83,.25);color:#d4a853;font-size:.82rem;text-decoration:none;border-radius:3px;transition:all .2s;" onmouseover="this.style.background=\\"rgba(212,168,83,.08)\\" onmouseout="this.style.background=\\"transparent\\"">📐 打开复利计算器 →</a>
-</div>
-<!-- ===== Footer ===== -->
-<footer>
-  <div class="container">
-    <p class="slogan">家庭财富的<span>规划师</span>与<span>守夜人</span></p>
-    <p class="copyright">私家智囊 · 2026</p>
+  <div class="post-tags">
+    <span class="tag">规划师</span>
+    <span class="tag">时间朋友</span>
+    <span class="tag">阅读时间 9 分钟</span>
   </div>
-<a href="#" class="back-to-top" aria-label="回到顶部">↑</a>
-</footer>
+
+  <div class="tool-guide">
+    <p>📊 动手算一算</p>
+    <a href="./tool-compound-calculator.html">📐 打开复利计算器 →</a>
+  </div>
+  <footer>
+    <div class="container">
+      <p class="slogan">家庭财富的<span>规划师</span>与<span>守夜人</span></p>
+      <p class="copyright">私家智囊 · 2026</p>
+    </div>
+    <a href="#" class="back-to-top" aria-label="回到顶部">↑</a>
+  </footer>
 
 </body>
+
 </html>
