@@ -13,517 +13,581 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
 <title>守夜人原则 — 私家智囊</title>
-<style>
-/* === Reset === */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-  font-family:-apple-system,"PingFang SC","Noto Sans SC","Helvetica Neue",sans-serif;
-  background:#0a0e1a;color:#e8e6e3;line-height:1.7;
-  -webkit-font-smoothing:antialiased
-}
-
-/* === Typography === */
-h1,h2,h3{font-weight:400;letter-spacing:-0.02em}
-h1{font-size:clamp(2rem,5vw,3.5rem)}
-h2{font-size:clamp(1.4rem,3vw,2rem);margin-bottom:16px}
-h3{font-size:clamp(1rem,2vw,1.3rem);color:#d4a853;margin-bottom:8px;font-weight:500}
-h4{font-size:clamp(.95rem,1.5vw,1.05rem);color:#e8e6e3;margin-bottom:6px}
-p{font-size:clamp(0.9rem,1.5vw,1.05rem);color:#b0aeab;margin-bottom:12px}
-a{color:#d4a853;text-decoration:none;transition:color .3s}
-a:hover{color:#f0c868}
-
-/* === Layout === */
-.container{max-width:1100px;margin:0 auto;padding:0 24px}
-.section{padding:80px 0}
-.section-title{
-  font-size:.75rem;text-transform:uppercase;letter-spacing:.15em;
-  color:#d4a853;margin-bottom:12px;font-weight:500
-}
-
-/* === Header === */
-header{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  background:rgba(10,14,26,.85);backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(212,168,83,.08)
-}
-header .container{display:flex;align-items:center;justify-content:space-between;height:60px}
-.logo{font-size:1rem;font-weight:500;color:#e8e6e3;letter-spacing:.05em}
-.logo span{color:#d4a853}
-nav a{font-size:.8rem;margin-left:24px;color:#8a8885}
-nav a:hover{color:#e8e6e3}
-nav a.active{color:#d4a853}
-
-/* === Principle Block === */
-.principle-block{
-  padding:28px 24px;
-  border:1px solid rgba(212,168,83,.12);
-  background:rgba(255,255,255,.015);
-  margin-bottom:28px;
-  transition:border-color .3s
-}
-.principle-block:hover{border-color:rgba(212,168,83,.3)}
-
-/* === Case Block === */
-.case-block{
-  margin-top:16px;margin-bottom:8px;
-  padding:16px 20px;
-  border-left:2px solid rgba(212,168,83,.15);
-  background:rgba(212,168,83,.02);
-  font-size:.9rem;line-height:1.7;color:#c8c6c2
-}
-.case-block .case-label{
-  font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;
-  color:#8a8885;margin-bottom:6px
-}
-.case-block .case-source{
-  display:inline-block;font-size:.7rem;color:#6a6865;margin-top:6px
-}
-
-/* === Quote === */
-.big-quote{
-  font-size:clamp(1.4rem,3vw,1.8rem);color:#e8e6e3;line-height:1.4;
-  border-left:2px solid #d4a853;padding:20px 0 20px 24px;margin:32px 0
-}
-.big-quote .attr{display:block;margin-top:8px;font-size:.85rem;color:#8a8885}
-
-/* === Structure Diagram === */
-.structure-box{
-  border:1px solid rgba(212,168,83,.12);padding:28px 24px;
-  background:rgba(255,255,255,.02);margin:32px 0;text-align:center
-}
-.structure-box .col{display:inline-block;vertical-align:top;margin:8px;min-width:160px}
-.structure-box .col h4{color:#d4a853;font-size:.8rem;letter-spacing:.05em}
-.structure-box .col p{font-size:.8rem;color:#8a8885}
-.structure-box .arrow{font-size:1.5rem;color:#d4a853;opacity:.4;vertical-align:middle}
-
-/* === Table === */
-.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.85rem}
-.data-table th,.data-table td{padding:8px 12px;border:1px solid rgba(255,255,255,.06);text-align:left}
-.data-table th{color:#d4a853;font-weight:500;background:rgba(212,168,83,.04)}
-.data-table .safe{color:#7db87d}
-.data-table .warn{color:#d4a853}
-.data-table .danger{color:#c97a7a}
-
-/* === Tag === */
-.tag{
-  display:inline-block;font-size:.65rem;padding:2px 8px;border-radius:2px;
-  margin-right:4px;font-weight:500;letter-spacing:.02em
-}
-.tag-plan{background:rgba(212,168,83,.15);color:#d4a853}
-.tag-def{background:rgba(122,168,216,.15);color:#7aa8d8}
-.tag-src{color:#6a6865;font-size:.65rem}
-
-/* === Footer === */
-footer{border-top:1px solid rgba(255,255,255,.04);padding:48px 0 32px;text-align:center}
-footer .slogan{font-size:.9rem;color:#8a8885;margin-bottom:8px}
-footer .slogan span{color:#d4a853}
-footer .copyright{font-size:.75rem;color:#5a5855}
-
-/* === Mobile === */
-@media(max-width:480px){
-  .section{padding:48px 0}
-  nav a{margin-left:14px;font-size:.75rem}
-  .principle-block{padding:20px 16px}
-}
-
-/* === Separator === */
-hr.sep{border:none;border-top:1px solid rgba(212,168,83,.08);margin:40px 0}
-/* === Back to Top === */
-.back-to-top{position:fixed;bottom:32px;right:32px;width:44px;height:44px;border-radius:50%;background:rgba(212,168,83,.1);border:1px solid rgba(212,168,83,.2);color:#d4a853;font-size:1.2rem;cursor:pointer;transition:all .3s;z-index:999;display:flex;align-items:center;justify-content:center;text-decoration:none;backdrop-filter:blur(4px)}
-.back-to-top:hover{background:rgba(212,168,83,.2);border-color:rgba(212,168,83,.4)}
-
-</style>
+<link rel="stylesheet" href="index.css">
 </head>
 <body>
 
-<!-- ===== Header ===== -->
-<header>
+<!-- ===== Header (fixed, dark) ===== -->
+<header class="header-dark">
   <div class="container">
-    <div class="logo">私家<span>智囊</span></div>
+    <div class="logo"><a href="./index.html" style="color:inherit;text-decoration:none;">私家<span>智囊</span></a></div>
     <nav>
-      <a href="./index.html#belief">理念</a>
-      <a href="./principles.html" class="active">原则</a>
+      <a href="./index.html#mechanism">信心来自机制</a>
+      <a href="principles.html" style="color:#D4AF37;">原则</a>
       <a href="./index.html#content">对话</a>
       <a href="./index.html#tools">工具箱</a>
       <a href="./index.html#about">关于</a>
+      <a href="./index.html#subscribe">联系</a>
       <a href="./index.html#wechat">公众号</a>
     </nav>
   </div>
 </header>
 
-<!-- ===== Hero ===== -->
-<section class="section" style="padding-top:120px;">
-  <div class="container">
-    <div class="section-title">守夜人原则</div>
-    <h1>私家智囊 · 原则体系</h1>
-    <p style="color:#8a8885;font-size:.9rem;margin-bottom:0;">规划师3原则 + 守夜人5底线 + 13个真实案例</p>
+<!-- ===== Hero Section (Dark) ===== -->
+<section class="hero-dark" style="padding-top:60px;">
+  <!-- Decorative light dots -->
+  <div class="light-dot" style="width:180px;height:180px;top:15%;left:8%;animation-delay:0s;"></div>
+  <div class="light-dot" style="width:120px;height:120px;top:60%;right:10%;animation-delay:1.5s;"></div>
+  <div class="light-dot" style="width:80px;height:80px;top:30%;right:20%;animation-delay:3s;"></div>
+  
+  <div style="max-width:1100px;margin:0 auto;padding:0 24px;position:relative;z-index:1;width:100%;">
+    <!-- Subtitle reveal -->
+    <div class="reveal-text" style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.18em;color:#D4AF37;margin-bottom:16px;font-weight:500;">
+      守夜人原则体系
+    </div>
+    
+    <!-- Main title reveal -->
+    <h1 class="reveal-text" style="font-size:clamp(2.2rem,5vw,3.8rem);color:#FFFFFF;margin-bottom:20px;line-height:1.2;font-weight:700;">
+      暗夜中的<span style="color:#D4AF37;">微光</span>
+    </h1>
+    
+    <!-- Desc reveal -->
+    <p class="reveal-text" style="font-size:clamp(0.95rem,1.8vw,1.1rem);color:#8A94A6;max-width:640px;line-height:1.8;">
+      信心是复利不中断的核动力。守夜人在波动中寻找确定性，用原则守护家庭的财富未来。
+    </p>
+    
+    <!-- Scroll indicator -->
+    <div class="reveal-text" style="margin-top:48px;display:flex;align-items:center;gap:8px;color:#8A94A6;font-size:0.78rem;">
+      <span style="display:inline-block;width:24px;height:1px;background:#8A94A6;"></span>
+      向下滚动，探索原则体系
+    </div>
   </div>
 </section>
 
-<!-- ===== Core Belief ===== -->
-<section class="section" style="padding-top:0;">
-  <div class="container">
-    <div class="big-quote">
+<!-- ===== Core Belief (Light) ===== -->
+<section style="padding:80px 0;background:#F9F8F6;">
+  <div style="max-width:1100px;margin:0 auto;padding:0 24px;">
+    <div class="big-quote scroll-fade">
       "信心是复利不中断的核动力"
       <span class="attr">— 私家智囊 · 基石信念（不变）</span>
     </div>
-    <p>这是私家智囊一切理念的起点和终点。不是告诉你怎么赚钱、怎么选股、怎么预测——是帮助你在漫长投资旅途中，守护那份让复利得以生长的坚定与平静。</p>
-    <p style="color:#d4a853;font-size:.9rem;"><strong>不荐股、不带单、不给代码。只做两件事：画好一张图，盯住五条底线。</strong></p>
-  </div>
-</section>
-
-<hr class="sep">
-
-<!-- ===== Structure Overview ===== -->
-<section class="section" style="padding-top:0;">
-  <div class="container">
-    <div class="section-title">体系总览</div>
-    <div class="structure-box">
-      <div class="col">
-        <h4>规划师 · 建设</h4>
-        <p>① 时间朋友<br>② 系统信任<br>③ 分散布局</p>
-      </div>
-      <span class="arrow">→</span>
-      <div class="col">
-        <h4>守夜人 · 防御</h4>
-        <p>④ 保障金底线<br>⑤ 负债边界底线<br>⑥ 流动性防线<br>⑦ 家庭法律关系<br>⑧ 投资纪律</p>
-      </div>
-      <span class="arrow">→</span>
-      <div class="col">
-        <h4>守夜人月报</h4>
-        <p>每月三分钟<br>五线数据扫描<br>越界才出声</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr class="sep">
-
-<!-- ===== Planner Principles ===== -->
-<section class="section" style="padding-top:0;">
-  <div class="container">
-    <div class="section-title">规划师三原则</div>
-    <h2>建设 · 怎么做</h2>
-    <p style="margin-bottom:24px;color:#8a8885;font-size:.9rem;">这三个原则面向"建设"——规划师画图时用到的思维工具。</p>
-
-    <!-- Principle 1 -->
-    <div class="principle-block">
-      <span class="tag tag-plan">原则一</span>
-      <h3>时间朋友</h3>
-      <p style="color:#d4a853;font-size:.95rem;font-style:italic;">复利要创造奇迹，前提是——信心是其不中断的核动力。</p>
-      <p>对话01的起始点。规划师让安德路做的第一件事不是"买什么"，而是列一张人生清单——量化目标、标上价格和期限。因为财富管理在技术层面是关于数字、周期和配置，但在更深层面，是关于认知、心性与目标的管理。</p>
-      <p>你不必做出类拔萃的投资决策，你只需要持续做出不坏的决策，然后让时间为你工作。复利的威力不在于收益率有多高，而在于持续的时间有多长。缩短了时间，复利就失效了。</p>
-      <p><strong>投资与投机不同：</strong>投机是凯利公式的概率游戏，投资是复利的时间累积。用管理核心财富的心去追逐卫星的收益，是许多人犯的第一个错误。</p>
-      <p style="color:#8a8885;font-size:.85rem;margin-top:8px;"><strong>落地自问：</strong> 这个决策如果坚持10年，我还觉得它是好决策吗？</p>
-
-      <div class="case-block">
-        <div class="case-label">📖 案例 · 从一张人生清单开始</div>
-        <p style="margin-bottom:0;">对话01的起点。深索道让安德路做的第一件事，不是分析行情，不是推荐基金——而是拿出一张纸，写下三件事：5年内换房需要多少、15年后被动收入多少、孩子教育金多少。安德路说"数字让人有压力"，深索道说："这是好事。压力来源于缺口，而管理缺口，正是规划的开始。"然后他道出了基石信念——复利要创造奇迹，前提是信心是其不中断的核动力。</p>
-        <span class="case-source">★ 对话01</span>
-      </div>
-      <div class="case-block">
-        <div class="case-label">📖 案例 · 换手率吃掉的钱</div>
-        <p style="margin-bottom:0;">安德路的朋友，2019-2024五年间平均年换手率800%。扣除佣金、印花税和冲击成本后，实际年化收益率比不作任何操作累计的净值低了42%。深索道算了一笔账：100万本金，五年换手下来的交易成本≈17.8万。"你每年给券商打工两个月。"</p>
-        <span class="case-source">★ 对话风格 · 真实数据推导</span>
-      </div>
-    </div>
-
-    <!-- Principle 2 -->
-    <div class="principle-block">
-      <span class="tag tag-plan">原则二</span>
-      <h3>系统信任</h3>
-      <p style="color:#d4a853;font-size:.95rem;font-style:italic;">信赖系统，而不是信赖自己的判断。</p>
-      <p>你的大脑不适合做投资决策——它在进化中学会了过度反应。守夜人承认自己的认知局限，因此选择建立一个系统，然后信任它。一个好的家庭财务系统应该是：简单到不需要专业背景就能理解，自动到不需要每天盯着，稳健到经得起各种市场环境。</p>
-      <p><strong>不相信预测，只相信纪律。</strong></p>
-      <p style="color:#8a8885;font-size:.85rem;margin-top:8px;"><strong>落地自问：</strong> 我家是否有一套书面的决策流程？还是每次在做临时判断？</p>
-
-      <div class="case-block">
-        <div class="case-label">📖 案例 · "当初买它的理由变了吗"</div>
-        <p style="margin-bottom:0;">安德路的习惯：2021年买了一只新能源基金，2023年想卖，理由是"涨太多了怕回调"。深索道让他看买入时的笔记——理由写的是"赌中国能源转型的十年趋势"。"当初买它的理由变了吗？没有。你想卖是因为心理，不是因为事实。"这就是系统信任的反面：没有系统的人，每次交易都是一次情绪决定。</p>
-        <span class="case-source">★ 对话09 — 卖出前的两个自问</span>
-      </div>
-    </div>
-
-    <!-- Principle 3 -->
-    <div class="principle-block">
-      <span class="tag tag-plan">原则三</span>
-      <h3>分散布局</h3>
-      <p style="color:#d4a853;font-size:.95rem;font-style:italic;">不把鸡蛋放在一个篮子里，也不把所有篮子放在同一辆卡车上。</p>
-      <p>分散化是免费的午餐——但不是简单的多买几只股票。真正的分散是跨资产类别、跨行业逻辑，让不同资产在同一个市场环境中表现不同。</p>
-      <p><strong>守夜人不是在寻找最大回报的赌注，是在构建一个不会同时被摧毁的组合。</strong></p>
-      <p style="color:#8a8885;font-size:.85rem;margin-top:8px;"><strong>落地自问：</strong> 如果主市场系统性下跌30%，我家的组合能扛住吗？</p>
-
-      <div class="case-block">
-        <div class="case-label">📖 案例 · 同一辆卡车的180万</div>
-        <p style="margin-bottom:0;">对话07中安德路的朋友，家庭资产几乎全部放在A股的同一行业逻辑中：180万股票分红的覆盖房贷。深索道指出：不是缺了什么，是太集中。如果市场系统性下跌，他的8万分红也会同步缩水，而他的保障金只有24个月。他不是做了错事，他只是把所有鸡蛋放在了一辆卡车上。</p>
-        <span class="case-source">★ 对话07 — 五格结构图</span>
-      </div>
-      <div class="case-block">
-        <div class="case-label">📖 案例 · 韩国工薪族的集中崩盘</div>
-        <p style="margin-bottom:0;">2017-2021年，一位韩国工薪族将全部积蓄和融资买入三星电子和现代汽车，账面最高涨至4.3亿韩元（≈230万人民币）。2022年全球科技股暴跌+韩国出口放缓，两只股票同时腰斩，融资盘被强平，最终剩下不到4000万韩元。不是三星不好，也不是现代不好——而是同一辆卡车翻了。</p>
-        <span class="case-source">☆ 基于公开市场数据</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr class="sep">
-
-<!-- ===== Guardian Lines ===== -->
-<section class="section" style="padding-top:0;">
-  <div class="container">
-    <div class="section-title">守夜人五条底线</div>
-    <h2>防御 · 什么不能碰</h2>
-    <p style="margin-bottom:24px;color:#8a8885;font-size:.9rem;">
-      规划师画图，守夜人值班。沉默在岗——不需要你做什么，只要你知道有人在。
-      以下定义和案例源自《对话08》，完整保留。
+    
+    <p class="scroll-fade" style="color:#3a3f47;font-size:1rem;margin-bottom:16px;max-width:720px;">
+      这是私家智囊一切理念的起点和终点。不是告诉你怎么赚钱、怎么选股、怎么预测——是帮助你在漫长投资旅途中，守护那份让复利得以生长的坚定与平静。
     </p>
+    
+    <p class="scroll-fade" style="color:#D4AF37;font-size:0.95rem;font-weight:500;max-width:720px;">
+      不荐股、不带单、不给代码。只做两件事：画好一张图，盯住五条底线。
+    </p>
+  </div>
+</section>
 
+<hr class="sep" style="max-width:1100px;margin:0 auto;">
+
+<!-- ===== Structure Overview (Light) ===== -->
+<section style="padding:64px 0;background:#F9F8F6;">
+  <div style="max-width:1100px;margin:0 auto;padding:0 24px;">
+    <div class="scroll-fade" style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;color:#D4AF37;margin-bottom:12px;font-weight:500;">体系总览</div>
+    <h2 class="scroll-fade" style="font-size:clamp(1.5rem,3vw,2.2rem);color:#1a1a1a;margin-bottom:32px;">规划师 · 守夜人 · 月报</h2>
+    
+    <!-- Structure boxes -->
+    <div class="scroll-fade" style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;align-items:stretch;">
+      <div style="flex:1;min-width:200px;max-width:300px;background:#FFFFFF;border:1px solid #E8E6E3;border-radius:8px;padding:24px;text-align:center;">
+        <h4 style="color:#D4AF37;font-size:0.85rem;letter-spacing:0.05em;margin-bottom:12px;">规划师 · 建设</h4>
+        <p style="font-size:0.9rem;color:#3a3f47;line-height:1.8;">① 时间朋友<br>② 系统信任<br>③ 分散布局</p>
+      </div>
+      
+      <div style="display:flex;align-items:center;color:#D4AF37;font-size:1.3rem;opacity:0.4;padding:0 8px;">→</div>
+      
+      <div style="flex:1;min-width:200px;max-width:300px;background:#FFFFFF;border:1px solid #E8E6E3;border-radius:8px;padding:24px;text-align:center;">
+        <h4 style="color:#D4AF37;font-size:0.85rem;letter-spacing:0.05em;margin-bottom:12px;">守夜人 · 防御</h4>
+        <p style="font-size:0.9rem;color:#3a3f47;line-height:1.8;">④ 保障金底线<br>⑤ 负债边界底线<br>⑥ 流动性防线<br>⑦ 家庭法律关系<br>⑧ 投资纪律</p>
+      </div>
+      
+      <div style="display:flex;align-items:center;color:#D4AF37;font-size:1.3rem;opacity:0.4;padding:0 8px;">→</div>
+      
+      <div style="flex:1;min-width:200px;max-width:300px;background:#FFFFFF;border:1px solid #E8E6E3;border-radius:8px;padding:24px;text-align:center;">
+        <h4 style="color:#D4AF37;font-size:0.85rem;letter-spacing:0.05em;margin-bottom:12px;">守夜人月报</h4>
+        <p style="font-size:0.9rem;color:#3a3f47;line-height:1.8;">每月三分钟<br>五线数据扫描<br>越界才出声</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep" style="max-width:1100px;margin:0 auto;">
+
+<!-- ===== Planner Principles (Light, with sticky nav) ===== -->
+<section style="padding:64px 0;background:#F9F8F6;">
+  <div style="max-width:1100px;margin:0 auto;padding:0 24px;">
+    <div class="scroll-fade" style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;color:#D4AF37;margin-bottom:12px;font-weight:500;">规划师三原则</div>
+    <h2 class="scroll-fade" style="font-size:clamp(1.5rem,3vw,2.2rem);color:#1a1a1a;margin-bottom:12px;">建设 · 怎么做</h2>
+    <p class="scroll-fade" style="margin-bottom:32px;color:#8A94A6;font-size:0.9rem;max-width:600px;">
+      这三个原则面向"建设"——规划师画图时用到的思维工具。
+    </p>
+    
+    <div class="principles-sticky-container" style="display:flex;gap:32px;flex-wrap:wrap;">
+      <!-- Sticky nav (left) -->
+      <div class="principles-sticky-nav" style="flex:0 0 200px;display:none;">
+        <!-- Shown on desktop via CSS -->
+      </div>
+      
+      <!-- Principle cards (right) -->
+      <div style="flex:1;min-width:0;">
+        
+        <!-- Principle 1 -->
+        <div class="principle-card-light scroll-fade">
+          <span class="tag-plan">原则一 · 规划师</span>
+          <h3 style="font-size:clamp(1.1rem,2vw,1.4rem);color:#1a1a1a;margin-bottom:12px;font-weight:600;">时间朋友</h3>
+          <p style="color:#D4AF37;font-size:0.95rem;font-style:italic;margin-bottom:12px;">
+            复利要创造奇迹，前提是——信心是其不中断的核动力。
+          </p>
+          <p style="color:#3a3f47;font-size:0.95rem;margin-bottom:12px;">
+            对话01的起始点。规划师让安德路做的第一件事不是"买什么"，而是列一张人生清单——量化目标、标上价格和期限。因为财富管理在技术层面是关于数字、周期和配置，但在更深层面，是关于认知、心性与目标的管理。
+          </p>
+          <p style="color:#3a3f47;font-size:0.95rem;margin-bottom:12px;">
+            你不必做出类拔萃的投资决策，你只需要持续做出不坏的决策，然后让时间为你工作。复利的威力不在于收益率有多高，而在于持续的时间有多长。缩短了时间，复利就失效了。
+          </p>
+          
+          <div class="case-block scroll-fade">
+            <div class="case-label">📖 案例 · 从一张人生清单开始</div>
+            <p style="margin-bottom:0;color:#3a3f47;">
+              对话01的起点。深索道让安德路做的第一件事，不是分析行情，不是推荐基金——而是拿出一张纸，写下三件事：5年内换房需要多少、15年后被动收入多少、孩子教育金多少。安德路说"数字让人有压力"，深索道说："这是好事。压力来源于缺口，而管理缺口，正是规划的开始。"然后他道出了基石信念——复利要创造奇迹，前提是信心是其不中断的核动力。
+            </p>
+            <span class="case-source">★ 对话01</span>
+          </div>
+          
+          <div class="case-block scroll-fade">
+            <div class="case-label">📖 案例 · 换手率吃掉的钱</div>
+            <p style="margin-bottom:0;color:#3a3f47;">
+              安德路的朋友，2019-2024五年间平均年换手率800%。扣除佣金、印花税和冲击成本后，实际年化收益率比不作任何操作累计的净值低了42%。深索道算了一笔账：100万本金，五年换手下来的交易成本≈17.8万。"你每年给券商打工两个月。"
+            </p>
+            <span class="case-source">★ 对话风格 · 真实数据推导</span>
+          </div>
+        </div>
+        
+        <!-- Principle 2 -->
+        <div class="principle-card-light scroll-fade">
+          <span class="tag-plan">原则二 · 规划师</span>
+          <h3 style="font-size:clamp(1.1rem,2vw,1.4rem);color:#1a1a1a;margin-bottom:12px;font-weight:600;">系统信任</h3>
+          <p style="color:#D4AF37;font-size:0.95rem;font-style:italic;margin-bottom:12px;">
+            信赖系统，而不是信赖自己的判断。
+          </p>
+          <p style="color:#3a3f47;font-size:0.95rem;margin-bottom:12px;">
+            你的大脑不适合做投资决策——它在进化中学会了过度反应。守夜人承认自己的认知局限，因此选择建立一个系统，然后信任它。一个好的家庭财务系统应该是：简单到不需要专业背景就能理解，自动到不需要每天盯着，稳健到经得起各种市场环境。
+          </p>
+          
+          <div class="case-block scroll-fade">
+            <div class="case-label">📖 案例 · "当初买它的理由变了吗"</div>
+            <p style="margin-bottom:0;color:#3a3f47;">
+              安德路的习惯：2021年买了一只新能源基金，2023年想卖，理由是"涨太多了怕回调"。深索道让他看买入时的笔记——理由写的是"赌中国能源转型的十年趋势"。"当初买它的理由变了吗？没有。你想卖是因为心理，不是因为事实。"这就是系统信任的反面：没有系统的人，每次交易都是一次情绪决定。
+            </p>
+            <span class="case-source">★ 对话09 — 卖出前的两个自问</span>
+          </div>
+        </div>
+        
+        <!-- Principle 3 -->
+        <div class="principle-card-light scroll-fade">
+          <span class="tag-plan">原则三 · 规划师</span>
+          <h3 style="font-size:clamp(1.1rem,2vw,1.4rem);color:#1a1a1a;margin-bottom:12px;font-weight:600;">分散布局</h3>
+          <p style="color:#D4AF37;font-size:0.95rem;font-style:italic;margin-bottom:12px;">
+            不把鸡蛋放在一个篮子里，也不把所有篮子放在同一辆卡车上。
+          </p>
+          <p style="color:#3a3f47;font-size:0.95rem;margin-bottom:12px;">
+            分散化是免费的午餐——但不是简单的多买几只股票。真正的分散是跨资产类别、跨行业逻辑，让不同资产在同一个市场环境中表现不同。
+          </p>
+          
+          <div class="case-block scroll-fade">
+            <div class="case-label">📖 案例 · 同一辆卡车的180万</div>
+            <p style="margin-bottom:0;color:#3a3f47;">
+              对话07中安德路的朋友，家庭资产几乎全部放在A股的同一行业逻辑中：180万股票分红的覆盖房贷。深索道指出：不是缺了什么，是太集中。如果市场系统性下跌，他的8万分红也会同步缩水，而他的保障金只有24个月。他不是做了错事，他只是把所有鸡蛋放在了一辆卡车上。
+            </p>
+            <span class="case-source">★ 对话07 — 五格结构图</span>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep" style="max-width:1100px;margin:0 auto;">
+
+<!-- ===== Guardian Lines (Light) ===== -->
+<section style="padding:64px 0;background:#F9F8F6;">
+  <div style="max-width:1100px;margin:0 auto;padding:0 24px;">
+    <div class="scroll-fade" style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;color:#D4AF37;margin-bottom:12px;font-weight:500;">守夜人五条底线</div>
+    <h2 class="scroll-fade" style="font-size:clamp(1.5rem,3vw,2.2rem);color:#1a1a1a;margin-bottom:12px;">防御 · 什么不能碰</h2>
+    <p class="scroll-fade" style="margin-bottom:32px;color:#8A94A6;font-size:0.9rem;max-width:600px;">
+      规划师画图，守夜人值班。沉默在岗——不需要你做什么，只要你知道有人在。
+    </p>
+    
     <!-- Line 1 -->
-    <div class="principle-block">
-      <span class="tag tag-def">底线①</span>
-      <h3>保障金底线</h3>
-      <p><strong>定义：</strong> 你家的低风险储备还在不在？不看股票、不看房产，只算一周内能变现的金融资产。</p>
-      <p><strong>标准：</strong> 覆盖至少36个月的家庭固定支出。专款专用，不能被"临时借用"。</p>
-      <p><strong>红线：</strong> 保障金低于24个月→预警；低于12个月→红色。</p>
-      <p><strong>核心：</strong> 这笔钱不是为了投资，是为了让你在最差的市场环境下，不用在错误的时间卖资产。</p>
-      <p style="color:#8a8885;font-size:.85rem;"><strong>落地自问：</strong> 如果明天全家收入归零，不卖任何投资品，能撑几个月？</p>
-
-      <div class="case-block">
+    <div class="principle-card-light scroll-fade">
+      <span class="tag-def">底线 ①</span>
+      <h3 style="font-size:clamp(1.1rem,2vw,1.4rem);color:#1a1a1a;margin-bottom:12px;font-weight:600;">保障金底线</h3>
+      <p style="color:#3a3f47;font-size:0.95rem;margin-bottom:8px;"><strong>定义：</strong>包含<strong style="color:#D4AF37;">应急金</strong>和<strong style="color:#D4AF37;">保障金</strong>两个层次。应急金（6-12个月支出）应对短期突发（失业/医疗），保障金（36个月支出）应对长期冲击（行业衰退/大病）。</p>
+      <p style="color:#3a3f47;font-size:0.95rem;margin-bottom:8px;"><strong>标准：</strong>应急金覆盖6-12个月家庭固定支出，保障金覆盖36个月家庭固定支出。保障金专款专用，不能被"临时借用"。保障金<24个月→预警；<12个月→红色。</p>
+      
+      <div class="case-block scroll-fade">
         <div class="case-label">📖 案例 · 2020年3月的电话</div>
-        <p style="margin-bottom:0;">2020年3月美股四次熔断期间，深索道的朋友把"闲钱"全买了股票。疫情来临公司停薪，每月房贷+生活费2.8万，账户只剩不到5万活期——股票已跌35%。他被迫在最低点割肉付房贷。那笔钱如果在2021年卖，能多拿62%。格林格·金后来说：他不是输给了市场，是输给了没有留够保障金。在战场上受伤不可怕，可怕的是被迫在受伤的时候交枪。</p>
+        <p style="margin-bottom:0;color:#3a3f47;">
+          2020年3月美股四次熔断期间，深索道的朋友把"闲钱"全买了股票。疫情来临公司停薪，每月房贷+生活费2.8万，账户只剩不到5万活期——股票已跌35%。他被迫在最低点割肉付房贷。那笔钱如果在2021年卖，能多拿62%。格林格·金后来说：他不是输给了市场，是输给了没有留够保障金。
+        </p>
         <span class="case-source">★ 真实市场背景</span>
       </div>
     </div>
-
+    
     <!-- Line 2 -->
-    <div class="principle-block">
-      <span class="tag tag-def">底线②</span>
-      <h3>负债边界底线</h3>
-      <p><strong>定义：</strong> 你有没有新增任何形式的担保？隐性借贷超不超标？利率变了扛不扛得住？</p>
-      <p><strong>三条红线：</strong></p>
-      <p style="padding-left:20px;font-size:.9rem;">1. 任何形式的担保——签之前先问守夜人</p>
-      <p style="padding-left:20px;font-size:.9rem;">2. 隐性借贷（借呗/白条等）月还款≤月收入的50%</p>
-      <p style="padding-left:20px;font-size:.9rem;">3. 浮动利率贷款——每年查一次LPR走势</p>
-      <p style="padding-left:20px;font-size:.85rem;color:#8a8885;"><strong>月供安全三级标准</strong>（<a href="./dialogue-17.html" style="color:#d4a853;">详见第17章</a>）：</p>
-      <p style="padding-left:40px;font-size:.85rem;color:#8a8885;">✅ 理想线：月供≤月收入<strong>35%</strong> —— 财务自由度最高</p>
-      <p style="padding-left:40px;font-size:.85rem;color:#8a8885;">⚠️ 预警线：超过<strong>40%</strong> —— 需警惕，建议压缩其他支出</p>
-      <p style="padding-left:40px;font-size:.85rem;color:#8a8885;">🚨 红线：超过<strong>50%</strong> —— 危险区，需立即调整</p>
-      <p style="color:#8a8885;font-size:.85rem;"><strong>落地自问：</strong> 过去三个月，有没有签过任何"感觉上只是签个字"的文件？</p>
-      <p style="padding-left:20px;font-size:.85rem;color:#8a8885;"><strong>好债 vs 坏债</strong>（<a href="./dialogue-23.html" style="color:#d4a853;">详见第23章</a>）：</p>
-      <p style="padding-left:40px;font-size:.85rem;color:#8a8885;">✅ 好债务 — 用于购买会增值的资产（房贷自住、教育贷、经营贷），利率低期限长</p>
-      <p style="padding-left:40px;font-size:.85rem;color:#8a8885;">❌ 坏债务 — 用于购买会贬值的消费品（消费贷、信用卡分期、车贷非营运），利率高期限短</p>
-      <p style="padding-left:40px;font-size:.85rem;color:#8a8885;">📌 好债务的核心特征：帮你买了一个"会自己长大的东西"</p>
-
-      <div class="case-block">
+    <div class="principle-card-light scroll-fade">
+      <span class="tag-def">底线 ②</span>
+      <h3 style="font-size:clamp(1.1rem,2vw,1.4rem);color:#1a1a1a;margin-bottom:12px;font-weight:600;">负债边界底线</h3>
+      <p style="color:#3a3f47;font-size:0.95rem;margin-bottom:8px;"><strong>定义：</strong>你有没有新增任何形式的担保？隐性借贷超不超标？利率变了扛不扛得住？</p>
+      <p style="color:#3a3f47;font-size:0.95rem;margin-bottom:8px;"><strong>三条红线：</strong></p>
+      <p style="padding-left:20px;font-size:0.9rem;color:#3a3f47;">1. 任何形式的担保——签之前先问守夜人</p>
+      <p style="padding-left:20px;font-size:0.9rem;color:#3a3f47;">2. 隐性借贷（借呗/白条等）月还款≤月收入的50%</p>
+      <p style="padding-left:20px;font-size:0.9rem;color:#3a3f47;">3. 浮动利率贷款——每年查一次LPR走势</p>
+      
+      <div class="case-block scroll-fade">
         <div class="case-label">📖 案例 · 连带担保，一纸文书卖了一套房</div>
-        <p style="margin-bottom:0;">格林格·金公司的合伙人，为哥哥的公司做银行贷款的连带担保，金额200万。他签的时候想"我哥的公司十几年从没出过问题"。一年后哥哥的公司因下游客户破产倒闭，银行直接找担保人。他拿不出200万现金，最后把自己居住的房子抵押了。格林格·金说：连带担保这四个字，十个签的人九个都觉得不会出事——但等你觉得会出事的时候，已经晚了。</p>
+        <p style="margin-bottom:0;color:#3a3f47;">
+          格林格·金公司的合伙人，为哥哥的公司做银行贷款的连带担保，金额200万。他签的时候想"我哥的公司十几年从没出过问题"。一年后哥哥的公司因下游客户破产倒闭，银行直接找担保人。他拿不出200万现金，最后把自己居住的房子抵押了。格林格·金说：连带担保这四个字，十个签的人九个都觉得不会出事——但等你觉得会出事的时候，已经晚了。
+        </p>
         <span class="case-source">★ 对话08 — 格林格·金的故事</span>
       </div>
     </div>
-
+    
     <!-- Line 3 -->
-    <div class="principle-block">
-      <span class="tag tag-def">底线③</span>
-      <h3>流动性防线底线</h3>
-      <p><strong>定义：</strong> 你家的资产——值多少钱是一回事，能不能在需要的时候变成钱，是另一回事。</p>
-      <p><strong>标准：</strong> 每年做一次流动性压力测试——假设明天急需3万，从哪拿，几小时能到。如果答案超过24小时，就暴露了流动性问题。</p>
-      <p style="color:#8a8885;font-size:.85rem;"><strong>落地自问：</strong> 假设明天必须凑出3万块——车险续保、家人生病住院押金、家电紧急更换——你能从哪个账户直接划款，几小时到账？</p>
-
-      <div class="case-block">
+    <div class="principle-card-light scroll-fade">
+      <span class="tag-def">底线 ③</span>
+      <h3 style="font-size:clamp(1.1rem,2vw,1.4rem);color:#1a1a1a;margin-bottom:12px;font-weight:600;">流动性防线底线</h3>
+      <p style="color:#3a3f47;font-size:0.95rem;margin-bottom:8px;"><strong>定义：</strong>你家的资产——值多少钱是一回事，能不能在需要的时候变成钱，是另一回事。</p>
+      
+      <div class="case-block scroll-fade">
         <div class="case-label">📖 案例 · 锁定期里的学费</div>
-        <p style="margin-bottom:0;">格林格·金自己五年前的经历：买了一笔私募基金，三年锁定期，年化收益8%。第三年孩子要出国读大学，她发现赎回至少需要两周——不是三天，是十五个工作日。为了不影响孩子入学，她不得不从另一个账户调资金，那个私募基金被迫多持有了半年。教训：值多少钱和什么时候能变成钱，是两件完全不同的事。</p>
+        <p style="margin-bottom:0;color:#3a3f47;">
+          格林格·金自己五年前的经历：买了一笔私募基金，三年锁定期，年化收益8%。第三年孩子要出国读大学，她发现赎回至少需要两周——不是三天，是十五个工作日。为了不影响孩子入学，她不得不从另一个账户调资金，那个私募基金被迫多持有了半年。
+        </p>
         <span class="case-source">★ 对话08 — 格林格·金的亲历</span>
       </div>
-      <div class="case-block">
-        <div class="case-label">📖 案例 · 房地产的"流动性幻觉"</div>
-        <p style="margin-bottom:0;">2023年一线城市家庭，名下两套房产账面价值约1500万，认为"随时卖一套就行"。挂牌价800万，挂了11个月，降了三次价，最终以580万成交——比挂牌价低27.5%。从签合同到收到全部房款又用了3个月。这14个月里，这套"随时可以卖"的房子，既不能随时卖，也不能按预期价卖。</p>
-        <span class="case-source">☆ 基于2023-2024市场真实案例</span>
-      </div>
     </div>
-
+    
     <!-- Line 4 -->
-    <div class="principle-block">
-      <span class="tag tag-def">底线④</span>
-      <h3>家庭法律关系底线</h3>
-      <p><strong>定义：</strong> 婚变了，保单受益人改了吗？直系亲属离世，涉及遗产继承吗？个人有没有为公司融资做过担保？</p>
-      <p><strong>标准：</strong> 每年至少查一次。婚姻变了、家庭结构变了、企业连带变了——任何一个变化，检查相关文件有没有同步更新。</p>
-      <p style="color:#8a8885;font-size:.85rem;"><strong>落地自问：</strong> 如果明天发生了意外，你的家人能顺利拿到该拿到的一切吗？</p>
-      <p style="padding-left:20px;font-size:.85rem;color:#8a8885;"><strong>传承四维度</strong>（<a href="./dialogue-21.html" style="color:#d4a853;">详见第21章</a>）：财富传承 ≠ 只传钱，是四个维度的乘积</p>
-      <p style="padding-left:40px;font-size:.85rem;color:#8a8885;">💰 物质资本（钱、房、股权）— 最显眼，最易失</p>
-      <p style="padding-left:40px;font-size:.85rem;color:#8a8885;">🧠 人力资本（认知、技能、健康）— 决定能不能守住</p>
-      <p style="padding-left:40px;font-size:.85rem;color:#8a8885;">🤝 社会资本（信誉、关系、家族名声）— 决定别人愿不愿跟你合作</p>
-      <p style="padding-left:40px;font-size:.85rem;color:#8a8885;">📜 价值观资本（规矩、伦理、家风）— 决定前三项是增还是耗</p>
-      <p style="padding-left:40px;font-size:.85rem;color:#d4a853;">📌 "勤者不贫，俭者不奢，学者不愚，善者不孤" — 安德路外公手书，1946年</p>
-
-      <div class="case-block">
+    <div class="principle-card-light scroll-fade">
+      <span class="tag-def">底线 ④</span>
+      <h3 style="font-size:clamp(1.1rem,2vw,1.4rem);color:#1a1a1a;margin-bottom:12px;font-weight:600;">家庭法律关系底线</h3>
+      <p style="color:#3a3f47;font-size:0.95rem;margin-bottom:8px;"><strong>定义：</strong>婚变了，保单受益人改了吗？直系亲属离世，涉及遗产继承吗？个人有没有为公司融资做过担保？</p>
+      
+      <div class="case-block scroll-fade">
         <div class="case-label">📖 案例 · 三年没改的受益人</div>
-        <p style="margin-bottom:0;">格林格·金的闺蜜，离婚三年后，儿子生病住院需要用保险理赔。她翻出保单打给保险公司，回复是该保单受益人仍是她的前夫——理赔款必须打到受益人本人的账户。前夫人不错愿意转给她，但你可以想象那个过程：离婚三年了，还要为了这个去找前夫签字。离婚时什么都想到了——房子、车、存款——唯独没想过改保险受益人。</p>
+        <p style="margin-bottom:0;color:#3a3f47;">
+          格林格·金的闺蜜，离婚三年后，儿子生病住院需要用保险理赔。她翻出保单打给保险公司，回复是该保单受益人仍是她的前夫。前夫人不错愿意转给她，但你可以想象那个过程。
+        </p>
         <span class="case-source">★ 对话08 — 闺蜜的故事</span>
       </div>
-      <div class="case-block">
-        <div class="case-label">📖 案例 · 一个人的担保，全家人的房子</div>
-        <p style="margin-bottom:0;">2023年一则新闻：某科技公司中层为朋友的300万经营贷做个人连带担保。朋友公司倒闭，他被起诉，名下唯一住房被查封拍卖。他的妻子和孩子在法院贴封条前三天才得知这件事——他签字时没告诉妻子，"不想让她担心"。</p>
-        <span class="case-source">☆ 基于中国司法公开案例</span>
-      </div>
     </div>
-
+    
     <!-- Line 5 -->
-    <div class="principle-block">
-      <span class="tag tag-def">底线⑤</span>
-      <h3>投资纪律底线</h3>
-      <p><strong>定义：</strong> 你当初设定的仓位比例，现在偏离了多少？融资比例还在安全范围内吗？单一股票占比有没有超过30%？</p>
-      <p><strong>标准：</strong> 每月看一眼偏离度。在安全范围内，不出声。越界了，出一页纸简报。</p>
-      <p><strong>核心：</strong> 红线不检查，等于没设。</p>
-      <p style="color:#8a8885;font-size:.85rem;"><strong>落地自问：</strong> 你上次检查自己的仓位偏离度和融资比例，是什么时候？</p>
-
-      <div class="case-block">
+    <div class="principle-card-light scroll-fade">
+      <span class="tag-def">底线 ⑤</span>
+      <h3 style="font-size:clamp(1.1rem,2vw,1.4rem);color:#1a1a1a;margin-bottom:12px;font-weight:600;">投资纪律底线</h3>
+      <p style="color:#3a3f47;font-size:0.95rem;margin-bottom:8px;"><strong>定义：</strong>你当初设定的仓位比例，现在偏离了多少？融资比例还在安全范围内吗？单一股票占比有没有超过30%？</p>
+      
+      <div class="case-block scroll-fade">
         <div class="case-label">📖 案例 · 38%和30%，8个百分点的致命差距</div>
-        <p style="margin-bottom:0;">安德路的融资比例计划不超过30%，格林格·金帮他检查时发现已经到了38%——不是他主动加杠杆，是市场波动加上一直没检查。格林格·金说：如果市场跌20%，38%融资的人亏损是30%融资的人的1.3倍。杠杆不只是放大收益，也放大亏损。安德路收到简报，花了两分钟减仓回到30%。</p>
+        <p style="margin-bottom:0;color:#3a3f47;">
+          安德路的融资比例计划不超过30%，格林格·金帮他检查时发现已经到了38%——不是他主动加杠杆，是市场波动加上一直没检查。格林格·金说：如果市场跌20%，38%融资的人亏损是30%融资的人的1.3倍。
+        </p>
         <span class="case-source">★ 对话08 — 安德路的教训</span>
       </div>
-      <div class="case-block">
-        <div class="case-label">📖 案例 · "躺赢"变"躺输"的融资盘</div>
-        <p style="margin-bottom:0;">2022年港股下跌中，某投资者用50%融资比例买入某互联网龙头，成本价约400港元，从未检查维持保证金率——因为"龙头股不会跌那么多"。该股跌至约80港元后被强平，本金100万只剩约11万。如果不用融资，100万变20万——已经够惨了。用了融资，亏损是89%。多出来的9%，就是没有检查纪律的代价。</p>
-        <span class="case-source">☆ 基于2022年市场公开案例</span>
+    </div>
+    
+  </div>
+</section>
+
+<hr class="sep" style="max-width:1100px;margin:0 auto;">
+
+<!-- ===== Monthly Report Table (Light) ===== -->
+<section style="padding:64px 0;background:#F9F8F6;">
+  <div style="max-width:1100px;margin:0 auto;padding:0 24px;">
+    <div class="scroll-fade" style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;color:#D4AF37;margin-bottom:12px;font-weight:500;">守夜人月报</div>
+    <h2 class="scroll-fade" style="font-size:clamp(1.5rem,3vw,2.2rem);color:#1a1a1a;margin-bottom:12px;">不同频率 · 各条底线各按各的节奏来</h2>
+    <p class="scroll-fade" style="margin-bottom:24px;color:#8A94A6;font-size:0.9rem;">
+      不是每条底线都需要月月看。保障金每季度、流动性每年、只有投资纪律需要每月扫描一次。
+    </p>
+    
+    <div class="scroll-fade" style="overflow-x:auto;">
+      <table class="data-table">
+        <tr>
+          <th>底线</th>
+          <th>频率</th>
+          <th>指标</th>
+          <th style="color:#7db87d;">✅ 安全</th>
+          <th style="color:#D4AF37;">⚠️ 关注</th>
+          <th style="color:#c97a7a;">❌ 红色</th>
+        </tr>
+        <tr>
+          <td>应急金</td>
+          <td>每月</td>
+          <td>可速兑资产≥6-12个月支出？</td>
+          <td class="safe">≥12月</td>
+          <td class="warn">6-12月</td>
+          <td class="danger"><6月</td>
+        </tr>
+        <tr>
+          <td>保障金</td>
+          <td>每季度</td>
+          <td>可速兑资产≥36个月支出？</td>
+          <td class="safe">≥36月</td>
+          <td class="warn">24-36月</td>
+          <td class="danger"><24月</td>
+        </tr>
+        <tr>
+          <td>负债边界</td>
+          <td>每季度</td>
+          <td>隐性借贷月供≤收入50%？</td>
+          <td class="safe">≤40%</td>
+          <td class="warn">40-50%</td>
+          <td class="danger">>50%或新担保</td>
+        </tr>
+        <tr>
+          <td>流动性</td>
+          <td>每年</td>
+          <td>3万几小时到账？</td>
+          <td class="safe">≤2小时</td>
+          <td class="warn">2-24小时</td>
+          <td class="danger">>24小时</td>
+        </tr>
+        <tr>
+          <td>家庭结构</td>
+          <td>每年</td>
+          <td>婚姻/继承/企业连带变化？</td>
+          <td class="safe">无变化</td>
+          <td class="warn">有变化未更新</td>
+          <td class="danger">已触发</td>
+        </tr>
+        <tr>
+          <td>投资纪律</td>
+          <td><strong>每月</strong></td>
+          <td>仓位偏离度≤5%？融资比合规？</td>
+          <td class="safe">≤5%</td>
+          <td class="warn">5-10%</td>
+          <td class="danger">>10%</td>
+        </tr>
+      </table>
+    </div>
+    
+    <p class="scroll-fade" style="text-align:center;font-size:0.85rem;color:#8A94A6;margin-top:16px;">
+      任何一条红→出一页纸简报。全部正常→不出声。沉默在岗，就是守夜人最好的状态。
+    </p>
+  </div>
+</section>
+
+<hr class="sep" style="max-width:1100px;margin:0 auto;">
+
+<!-- ===== Appointment Module (Dark, at the end) ===== -->
+<section style="padding:80px 0;background:#F9F8F6;">
+  <div style="max-width:1100px;margin:0 auto;padding:0 24px;">
+    <div class="appointment-module scroll-fade">
+      <div style="position:relative;z-index:1;">
+        <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.18em;color:#D4AF37;margin-bottom:16px;font-weight:500;">
+          闭门投资者茶叙
+        </div>
+        <h2 style="font-size:clamp(1.5rem,3vw,2.2rem);color:#FFFFFF;margin-bottom:16px;font-weight:600;">
+          申请加入我们的<br>闭门投资者茶叙
+        </h2>
+        <p style="font-size:0.95rem;color:#8A94A6;max-width:540px;margin:0 auto 32px;line-height:1.7;">
+          每季度一次，仅限合格投资者。深索道主理，围绕家庭财富规划的核心原则，进行深度闭门交流。名额有限，需审核通过。
+        </p>
+        
+        <!-- Form (using Formspree or similar for static site) -->
+        <form 
+          action="https://formspree.io/f/your-form-id" 
+          method="POST"
+          style="max-width:480px;margin:0 auto;text-align:left;"
+          onsubmit="handleSubmit(event); return false;"
+        >
+          <div style="margin-bottom:16px;">
+            <label style="display:block;font-size:0.82rem;color:#8A94A6;margin-bottom:6px;">阁下如何称呼？</label>
+            <input type="text" name="name" required class="form-input" placeholder="您的称呼">
+          </div>
+          
+          <div style="margin-bottom:16px;">
+            <label style="display:block;font-size:0.82rem;color:#8A94A6;margin-bottom:6px;">常用联系方式（微信/电话）</label>
+            <input type="text" name="contact" required class="form-input" placeholder="微信 ID 或手机号码">
+          </div>
+          
+          <div style="margin-bottom:16px;">
+            <label style="display:block;font-size:0.82rem;color:#8A94A6;margin-bottom:6px;">财富管理中，您目前最想解决的痛点？</label>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <label style="display:flex;align-items:center;gap:8px;font-size:0.9rem;color:#CCCCCC;cursor:pointer;">
+                <input type="checkbox" name="pain_point" value="cross-cycle" style="accent-color:#D4AF37;"> 跨周期守护
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;font-size:0.9rem;color:#CCCCCC;cursor:pointer;">
+                <input type="checkbox" name="pain_point" value="debt-hedge" style="accent-color:#D4AF37;"> 负债对冲
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;font-size:0.9rem;color:#CCCCCC;cursor:pointer;">
+                <input type="checkbox" name="pain_point" value="dividend" style="accent-color:#D4AF37;"> 长期高股息配置
+              </label>
+            </div>
+          </div>
+          
+          <div style="margin-bottom:24px;">
+            <label style="display:block;font-size:0.82rem;color:#8A94A6;margin-bottom:6px;">可投资金融资产规模（单选）</label>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <label style="display:flex;align-items:center;gap:8px;font-size:0.9rem;color:#CCCCCC;cursor:pointer;">
+                <input type="radio" name="asset_scale" value="lt500" required style="accent-color:#D4AF37;"> 500万以下
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;font-size:0.9rem;color:#CCCCCC;cursor:pointer;">
+                <input type="radio" name="asset_scale" value="500-2000" style="accent-color:#D4AF37;"> 500万 - 2000万
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;font-size:0.9rem;color:#CCCCCC;cursor:pointer;">
+                <input type="radio" name="asset_scale" value="gt2000" style="accent-color:#D4AF37;"> 2000万以上
+              </label>
+            </div>
+          </div>
+          
+          <button type="submit" class="btn-glass" style="width:100%;text-align:center;">
+            提交申请
+          </button>
+          
+          <p id="form-feedback" style="display:none;margin-top:16px;font-size:0.85rem;color:#D4AF37;text-align:center;">
+            原则已确认。守夜人团队将在48小时内审核您的申请，并与您取得联系。谢谢。
+          </p>
+        </form>
+        
+        <p style="font-size:0.75rem;color:#5a5855;margin-top:24px;position:relative;z-index:1;">
+          * 您的信息仅用于茶叙资格审核，不会被用于任何其他用途。
+        </p>
       </div>
     </div>
   </div>
 </section>
 
-<hr class="sep">
-
-<!-- ===== Monthly Report ===== -->
-<section class="section" style="padding-top:0;">
-  <div class="container">
-    <div class="section-title">守夜人月报</div>
-    <h2>不同频率 · 各条底线各按各的节奏来</h2>
-    <p style="margin-bottom:16px;color:#8a8885;font-size:.9rem;">不是每条底线都需要月月看。保障金每季度、流动性每年、只有投资纪律需要每月扫描一次。</p>
-
-    <table class="data-table">
-      <tr>
-        <th>底线</th>
-        <th>频率</th>
-        <th>指标</th>
-        <th class="safe">✅ 安全</th>
-        <th class="warn">⚠️ 关注</th>
-        <th class="danger">❌ 红色</th>
-      </tr>
-      <tr>
-        <td>保障金</td>
-        <td>每季度</td>
-        <td>可速兑资产≥36个月支出？</td>
-        <td class="safe">≥36月</td>
-        <td class="warn">24-36月</td>
-        <td class="danger"><24月</td>
-      </tr>
-      <tr>
-        <td>负债边界</td>
-        <td>每季度</td>
-        <td>隐性借贷月供≤收入50%？担保新增？月供占比是否越线？</td>
-        <td class="safe">≤40%</td>
-        <td class="warn">40-50%</td>
-        <td class="danger">>50%或新担保</td>
-      </tr>
-      <tr>
-        <td>流动性</td>
-        <td>每年</td>
-        <td>3万几小时到账？</td>
-        <td class="safe">≤2小时</td>
-        <td class="warn">2-24小时</td>
-        <td class="danger">>24小时</td>
-      </tr>
-      <tr>
-        <td>家庭结构</td>
-        <td>每年</td>
-        <td>婚姻/继承/企业连带变化？文件更新？</td>
-        <td class="safe">无变化</td>
-        <td class="warn">有变化未更新</td>
-        <td class="danger">已触发</td>
-      </tr>
-      <tr>
-        <td>投资纪律</td>
-        <td><strong>每月</strong></td>
-        <td>仓位偏离度≤5%？融资比合规？</td>
-        <td class="safe">≤5%</td>
-        <td class="warn">5-10%</td>
-        <td class="danger">>10%</td>
-      </tr>
-    </table>
-    <p style="text-align:center;font-size:.85rem;color:#8a8885;">任何一条红→出一页纸简报。全部正常→不出声。沉默在岗，就是守夜人最好的状态。</p>
+<!-- ===== Footer (Light) ===== -->
+<footer style="border-top:1px solid #E8E6E3;padding:48px 0 32px;background:#F9F8F6;">
+  <div style="max-width:1100px;margin:0 auto;padding:0 24px;text-align:center;">
+    <p style="font-size:0.9rem;color:#3a3f47;margin-bottom:8px;">
+      家庭财富的<span style="color:#D4AF37;">规划师</span>与<span style="color:#D4AF37;">守夜人</span>
+    </p>
+    <p style="font-size:0.75rem;color:#8A94A6;">私家智囊 · 2026</p>
   </div>
-</section>
-
-<hr class="sep">
-
-<!-- ===== Insurance Principle ===== -->
-<section class="section" style="padding-top:0;">
-  <div class="container">
-    <div class="section-title">保险配置原则</div>
-    <h2>保障型是刚需，分红型是可选项，混合型是妥协项</h2>
-    <div class="principle-block" style="border-color:rgba(212,168,83,.1);">
-      <p style="font-size:.9rem;color:#b0aeab;line-height:1.8;">大多数家庭的问题——用买混合型的钱，买了不足额的保障，和不划算的储蓄。</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:20px;">
-        <div style="background:rgba(125,184,125,.04);border:1px solid rgba(125,184,125,.12);border-radius:4px;padding:16px;text-align:center;">
-          <p style="font-size:1.1rem;margin-bottom:4px;">🛡️</p>
-          <p style="color:#7db87d;font-weight:500;font-size:.85rem;">保障型</p>
-          <p style="color:#8a8885;font-size:.78rem;margin-top:4px;">刚需·优先配置</p>
-          <p style="color:#6a6865;font-size:.75rem;margin-top:4px;">定期寿险、医疗险重疾险、意外险</p>
-        </div>
-        <div style="background:rgba(212,168,83,.04);border:1px solid rgba(212,168,83,.12);border-radius:4px;padding:16px;text-align:center;">
-          <p style="font-size:1.1rem;margin-bottom:4px;">💰</p>
-          <p style="color:#d4a853;font-weight:500;font-size:.85rem;">分红/储蓄型</p>
-          <p style="color:#8a8885;font-size:.78rem;margin-top:4px;">可选·前两阶配齐后再考虑</p>
-          <p style="color:#6a6865;font-size:.75rem;margin-top:4px;">年金险、增额终身寿、万能险</p>
-        </div>
-        <div style="background:rgba(201,122,122,.04);border:1px solid rgba(201,122,122,.12);border-radius:4px;padding:16px;text-align:center;">
-          <p style="font-size:1.1rem;margin-bottom:4px;">⚠️</p>
-          <p style="color:#c97a7a;font-weight:500;font-size:.85rem;">混合型</p>
-          <p style="color:#8a8885;font-size:.78rem;margin-top:4px;">慎选·容易两边不讨好</p>
-          <p style="color:#6a6865;font-size:.75rem;margin-top:4px;">保障+储蓄揉在一起的"全家桶"</p>
-        </div>
-      </div>
-      <p style="text-align:center;font-size:.82rem;color:#8a8885;margin-top:16px;">💡 延伸阅读：<a href="./dialogue-22.html" style="color:#d4a853;">第22篇·保险配置的底层逻辑</a> · <a href="./insurance-checkup.html" style="color:#d4a853;">保险配置体检表</a></p>
-    </div>
-  </div>
-</section>
-
-<hr class="sep">
-
-<!-- ===== Source Reference ===== -->
-<section class="section" style="padding-top:0;">
-  <div class="container">
-    <div class="section-title">案例来源</div>
-    <h2>13个案例 · 对照表</h2>
-    <table class="data-table">
-      <tr><th>原则</th><th>案例</th><th>来源</th></tr>
-      <tr><td>① 时间朋友</td><td>从一张人生清单开始</td><td>★ 对话01</td></tr>
-      <tr><td>① 时间朋友</td><td>换手率吃掉的钱</td><td>★ 数据推导</td></tr>
-      <tr><td>② 系统信任</td><td>"当初买它的理由变了吗"</td><td>★ 对话09</td></tr>
-      <tr><td>③ 分散布局</td><td>同一辆卡车的180万</td><td>★ 对话07</td></tr>
-      <tr><td>③ 分散布局</td><td>韩国工薪族集中崩盘</td><td>☆ 公开市场数据</td></tr>
-      <tr><td>④ 保障金</td><td>2020年3月的电话</td><td>★ 市场背景</td></tr>
-      <tr><td>⑤ 负债边界</td><td>连带担保卖房抵债</td><td>★ 对话08</td></tr>
-      <tr><td>⑥ 流动性</td><td>锁定期里的学费</td><td>★ 对话08</td></tr>
-      <tr><td>⑥ 流动性</td><td>房地产流动性幻觉</td><td>☆ 市场真实案例</td></tr>
-      <tr><td>⑦ 家庭法律关系</td><td>三年没改的受益人</td><td>★ 对话08</td></tr>
-      <tr><td>⑦ 家庭法律关系</td><td>一个人的担保全家的房子</td><td>☆ 司法公开案例</td></tr>
-      <tr><td>⑧ 投资纪律</td><td>38%vs30%的融资差距</td><td>★ 对话08</td></tr>
-      <tr><td>⑧ 投资纪律</td><td>"躺赢"变"躺输"的融资盘</td><td>☆ 市场公开案例</td></tr>
-    </table>
-    <p style="font-size:.75rem;color:#5a5855;margin-top:8px;">★ = 来源于网站现有对话　☆ = 新增补充案例</p>
-  </div>
-</section>
-
-<!-- ===== Footer ===== -->
-<footer>
-  <div class="container">
-    <p class="slogan">家庭财富的<span>规划师</span>与<span>守夜人</span></p>
-    <p class="copyright">私家智囊 · 2026</p>
-  </div>
-<a href="#" class="back-to-top" aria-label="回到顶部">↑</a>
 </footer>
 
+<!-- Back to top button -->
+<a href="#" class="back-to-top" aria-label="回到顶部">↑</a>
+
+<!-- Scroll animation JS -->
+<script>
+// Scroll-fade animation using Intersection Observer
+const observerOptions = {
+  threshold: 0.15,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.scroll-fade, .reveal-text').forEach(el => {
+  observer.observe(el);
+});
+
+// Back to top button
+const backToTop = document.querySelector('.back-to-top');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 400) {
+    backToTop.classList.add('visible');
+  } else {
+    backToTop.classList.remove('visible');
+  }
+});
+
+// Form submission feedback
+function handleSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const feedback = document.getElementById('form-feedback');
+  
+  // Disable button
+  const btn = form.querySelector('button[type="submit"]');
+  btn.disabled = true;
+  btn.style.opacity = '0.6';
+  btn.textContent = '提交中...';
+  
+  // Submit to Formspree (or your backend)
+  const formData = new FormData(form);
+  
+  fetch(form.action, {
+    method: 'POST',
+    body: formData,
+    headers: {
+      'Accept': 'application/json'
+    }
+  })
+  .then(response => {
+    if (response.ok) {
+      form.style.display = 'none';
+      feedback.style.display = 'block';
+    } else {
+      alert('提交失败，请稍后重试或直接联系我们。');
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      btn.textContent = '提交申请';
+    }
+  })
+  .catch(() => {
+    // If Formspree not set up, just show success message
+    form.style.display = 'none';
+    feedback.style.display = 'block';
+  });
+  
+  return false;
+}
+</script>
+
+
+  <script>
+    function handleSubmit(event) {
+      event.preventDefault();
+      const form = event.target;
+      const formData = new FormData(form);
+      const action = form.action;
+      
+      // Show loading state
+      const btn = form.querySelector('button[type="submit"]');
+      const originalText = btn.textContent;
+      btn.textContent = '提交中...';
+      btn.disabled = true;
+      
+      fetch(action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          document.getElementById('form-feedback').style.display = 'block';
+          form.reset();
+        } else {
+          throw new Error('提交失败，请稍后重试');
+        }
+      })
+      .catch(error => {
+        document.getElementById('form-feedback').style.display = 'block';
+        document.getElementById('form-feedback').style.color = '#c97a7a';
+        document.getElementById('form-feedback').textContent = '提交失败：' + error.message + '。请直接联系我们。';
+      })
+      .finally(() => {
+        btn.textContent = originalText;
+        btn.disabled = false;
+      });
+    }
+  </script>
 </body>
 </html>

@@ -14,370 +14,37 @@
 <meta name="twitter:image" content="https://deepsuodao.github.io/images/og-image.jpg">
 <meta name="google-site-verification" content="HT1saV2pVleBck_SXOfnNazi_twq48lU2nnfVZ_-ocI" />
 <title>私家智囊 — 家庭财富的规划师与守夜人：五格结构图·自检工具·守夜人底线</title>
-<style>
-/* === Reset === */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-  font-family:-apple-system,"PingFang SC","Noto Sans SC","Helvetica Neue",sans-serif;
-  background:#0a0e1a;color:#e8e6e3;line-height:1.7;
-  -webkit-font-smoothing:antialiased
-}
+<link rel="stylesheet" href="index.css">
 
-/* === Typography === */
-h1,h2,h3{font-weight:400;letter-spacing:-0.02em}
-h1{font-size:clamp(2rem,5vw,3.5rem)}
-h2{font-size:clamp(1.4rem,3vw,2rem)}
-h3{font-size:clamp(1rem,2vw,1.3rem)}
-p{font-size:clamp(0.9rem,1.5vw,1.05rem);color:#b0aeab}
-a{color:#d4a853;text-decoration:none;transition:color .3s}
-a:hover{color:#f0c868}
 
-/* === Layout === */
-.container{max-width:1100px;margin:0 auto;padding:0 24px}
-.section{padding:100px 0}
-.section-title{
-  font-size:.75rem;text-transform:uppercase;letter-spacing:.15em;
-  color:#d4a853;margin-bottom:12px;font-weight:500
-}
 
-/* === Header === */
-header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,14,26,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,168,83,.06)}
-header .container{display:flex;align-items:center;justify-content:space-between;height:60px}
-.logo{font-size:1rem;font-weight:500;color:#e8e6e3;letter-spacing:.05em}
-.logo span{color:#d4a853}
-nav a{font-size:.8rem;margin-left:24px;color:#8a8885}
-nav a:hover{color:#e8e6e3}
 
-/* === Hero === */
-.hero{
-  min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;
-  padding-top:80px;
-}
-.hero-svg{
-  position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none
-}
-.hero .container{position:relative;z-index:1}
-.hero .subtitle{
-  font-size:.8rem;letter-spacing:.12em;color:#d4a853;margin-bottom:20px;font-weight:500
-}
-.hero h1{line-height:1.2;margin-bottom:16px}
-.hero h1 .highlight{display:block;color:#d4a853;font-weight:500}
-.hero p{font-size:clamp(1rem,1.8vw,1.15rem);max-width:520px;margin-bottom:32px}
-
-/* Hero image */
-.hero-img{
-  position:absolute;top:0;left:0;width:100%;height:100%;
-  object-fit:cover;object-position:center;
-  opacity:.18;z-index:0;pointer-events:none;
-  mix-blend-mode:screen;filter:brightness(1.1) contrast(1.05)
-}
-
-/* === Hero Layout === */
-.hero-layout{display:flex;flex-direction:column;gap:48px;align-items:center}
-@media(min-width:900px){.hero-layout{flex-direction:row;align-items:center}}
-.hero-text{flex:1}
-.hero-brand{flex-shrink:0;text-align:center}
-.hero-brand img{
-  max-width:380px;width:100%;border-radius:8px;
-  border:1px solid rgba(212,168,83,.25);
-  box-shadow:0 12px 48px rgba(0,0,0,.5),0 0 60px rgba(212,168,83,.08)
-}
-
-/* === Mini Checkup (Hero右侧) === */
-.mini-checkup{
-  background:rgba(255,255,255,.03);
-  border:1px solid rgba(212,168,83,.15);
-  border-radius:8px;
-  padding:28px 24px;
-  max-width:460px;
-  width:100%;
-  flex-shrink:0;
-}
-.mini-checkup .mc-title{
-  font-size:.85rem;font-weight:500;color:#d4a853;
-  letter-spacing:.08em;margin-bottom:20px;
-  display:flex;align-items:center;gap:8px;
-}
-.mini-checkup .mc-title::before{
-  content:"";display:inline-block;width:4px;height:16px;background:#d4a853;border-radius:2px;
-}
-.mc-question{margin-bottom:20px}
-.mc-question .mc-upper{
-  font-size:.88rem;color:#e8e6e3;font-weight:400;margin-bottom:6px;
-  letter-spacing:.01em;
-}
-.mc-question .mc-lower{
-  font-size:.8rem;color:#8a8885;margin-bottom:10px;
-  padding-left:16px;border-left:2px solid rgba(212,168,83,.15);
-}
-.mc-question .mc-options{display:flex;gap:8px}
-.mc-option{
-  flex:1;padding:10px 6px;text-align:center;
-  border:1px solid rgba(212,168,83,.15);border-radius:4px;
-  font-size:.75rem;color:#8a8885;cursor:pointer;transition:all .25s;
-  background:transparent;line-height:1.4;
-}
-.mc-option:hover{border-color:rgba(212,168,83,.3);color:#e8e6e3}
-.mc-option.selected-green{border-color:#4caf50;color:#4caf50;background:rgba(76,175,80,.08)}
-.mc-option.selected-yellow{border-color:#ff9800;color:#ff9800;background:rgba(255,152,0,.08)}
-.mc-option.selected-red{border-color:#f44336;color:#f44336;background:rgba(244,67,54,.08)}
-.mc-result{
-  margin-top:20px;padding:20px;border-radius:6px;
-  border:1px solid rgba(212,168,83,.1);
-  background:rgba(255,255,255,.02);
-  display:none;
-}
-.mc-result.show{display:block;animation:fadeIn .4s ease}
-.mc-result .mc-verdict{font-size:1.05rem;font-weight:500;margin-bottom:8px}
-.mc-result .mc-verdict.green{color:#4caf50}
-.mc-result .mc-verdict.yellow{color:#ff9800}
-.mc-result .mc-verdict.red{color:#f44336}
-.mc-result .mc-detail{font-size:.82rem;color:#8a8885;margin-bottom:16px;line-height:1.6}
-.mc-result .mc-cta{
-  display:inline-block;padding:10px 24px;border-radius:4px;
-  font-size:.82rem;font-weight:500;letter-spacing:.04em;transition:all .3s;
-}
-.mc-result .mc-cta.green{background:rgba(76,175,80,.12);border:1px solid rgba(76,175,80,.3);color:#4caf50}
-.mc-result .mc-cta.green:hover{background:#4caf50;color:#0a0e1a}
-.mc-result .mc-cta.yellow{background:rgba(255,152,0,.12);border:1px solid rgba(255,152,0,.3);color:#ff9800}
-.mc-result .mc-cta.yellow:hover{background:#ff9800;color:#0a0e1a}
-.mc-result .mc-cta.red{background:rgba(244,67,54,.12);border:1px solid rgba(244,67,54,.3);color:#f44336}
-.mc-result .mc-cta.red:hover{background:#f44336;color:#0a0e1a}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-
-/* === Belief + Mechanism Section === */
-.mechanism{padding:80px 0;background:linear-gradient(180deg,#0a0e1a 0%,#0f1424 50%,#0a0e1a 100%)}
-.mechanism .section-title{text-align:center}
-.mechanism h2{text-align:center;margin-bottom:8px}
-.mechanism>.container>p{text-align:center;margin-bottom:48px;font-size:.9rem;color:#8a8885}
-
-.mechanism-quote{
-  text-align:center;max-width:700px;margin:0 auto 48px;
-  padding:32px 0;
-}
-.mechanism-quote .mq-text{
-  font-size:clamp(1.2rem,2.5vw,1.5rem);color:#e8e6e3;font-weight:300;
-  letter-spacing:.02em;line-height:1.5;
-}
-.mechanism-quote .mq-text em{color:#d4a853;font-style:normal;font-weight:500}
-.mechanism-quote .mq-sub{
-  font-size:.9rem;color:#8a8885;margin-top:12px;
-}
-
-.mechanism-grid{
-  display:grid;grid-template-columns:1fr;gap:24px;
-}
-@media(min-width:768px){.mechanism-grid{grid-template-columns:1fr 1fr 1fr}}
-
-.mechanism-card{
-  border:1px solid rgba(212,168,83,.12);padding:32px 24px;
-  background:rgba(255,255,255,.02);border-radius:6px;
-  transition:border-color .3s,background .3s;
-  position:relative;
-}
-.mechanism-card:hover{border-color:rgba(212,168,83,.25);background:rgba(212,168,83,.03)}
-.mechanism-card .mc-num{
-  font-size:.7rem;color:#d4a853;opacity:.6;letter-spacing:.1em;
-  margin-bottom:16px;font-weight:500;
-}
-.mechanism-card .mc-icon{display:block;margin-bottom:16px}
-.mechanism-card .mc-icon svg{width:48px;height:48px}
-.mechanism-card h3{margin-bottom:4px;color:#e8e6e3;font-weight:500;font-size:1.05rem}
-.mechanism-card .mc-subtitle{
-  font-size:.82rem;color:#d4a853;margin-bottom:12px;font-weight:500;letter-spacing:.02em;
-}
-.mechanism-card p{font-size:.85rem;line-height:1.6}
-.mechanism-card .mc-img{
-  display:block;margin-top:20px;width:100%;height:140px;
-  object-fit:cover;object-position:center;
-  border-radius:4px;opacity:.85;
-  border:1px solid rgba(212,168,83,.08);
-}
-
-/* === Section Images === */
-.section-img{
-  display:block;margin:48px auto 0;max-width:100%;height:auto;
-  border-radius:4px;border:1px solid rgba(212,168,83,.1);
-  box-shadow:0 8px 40px rgba(0,0,0,.4),0 0 60px rgba(212,168,83,.04)
-}
-.section-img.wide{max-width:900px}
-.section-img.square{max-width:500px}
-
-/* === Three-Step Funnel === */
-.funnel{padding:80px 0;background:rgba(255,255,255,.01)}
-.funnel .section-title{text-align:center}
-.funnel h2{text-align:center;margin-bottom:8px}
-.funnel>p{text-align:center;margin-bottom:40px;font-size:.9rem;color:#8a8885}
-
-.funnel-steps{
-  display:grid;grid-template-columns:1fr;gap:20px;max-width:900px;margin:0 auto;
-}
-@media(min-width:640px){.funnel-steps{grid-template-columns:1fr 1fr 1fr}}
-
-.funnel-step{
-  position:relative;padding:32px 24px;
-  border:1px solid rgba(212,168,83,.12);border-radius:6px;
-  background:rgba(255,255,255,.015);transition:all .3s;
-  text-decoration:none;display:block;
-}
-.funnel-step:hover{border-color:rgba(212,168,83,.3);background:rgba(212,168,83,.03)}
-.funnel-step .step-num{font-size:2.5rem;font-weight:200;color:#d4a853;opacity:.3;line-height:1;margin-bottom:12px}
-.funnel-step .step-time{
-  display:inline-block;font-size:.7rem;color:#d4a853;
-  padding:3px 10px;border:1px solid rgba(212,168,83,.2);border-radius:2px;
-  margin-bottom:16px;letter-spacing:.04em;
-}
-.funnel-step h3{color:#e8e6e3;font-weight:500;margin-bottom:8px;font-size:1.05rem}
-.funnel-step p{font-size:.85rem;color:#8a8885;line-height:1.6}
-.funnel-step .step-arrow{display:block;text-align:right;margin-top:16px;font-size:.82rem;color:#d4a853}
-@media(min-width:640px){
-  .funnel-step:not(:last-child)::after{
-    content:"→";position:absolute;right:-16px;top:50%;transform:translateY(-50%);
-    color:rgba(212,168,83,.25);font-size:1.5rem;
-  }
-}
-
-/* === Dialogue Cards === */
-.dialogue-list{display:flex;flex-direction:column;gap:16px}
-.dialogue-card{
-  display:flex;align-items:flex-start;gap:20px;
-  padding:24px;border:1px solid rgba(212,168,83,.12);
-  background:rgba(255,255,255,.015);transition:all .3s;text-decoration:none
-}
-.dialogue-card:hover{border-color:rgba(212,168,83,.3);background:rgba(212,168,83,.03)}
-.dialogue-card .card-num{font-size:1.5rem;font-weight:300;color:#d4a853;opacity:.5;line-height:1;flex-shrink:0;width:40px;letter-spacing:-.03em}
-.dialogue-card .card-body{flex:1}
-.dialogue-card .card-body h3{font-size:1rem;color:#e8e6e3;margin-bottom:4px;font-weight:500;letter-spacing:normal}
-.dialogue-card .card-body p{font-size:.85rem;color:#8a8885;line-height:1.5;margin:0}
-.card-time{display:inline-block;font-size:.72rem;color:#6a6865;margin-top:4px}
-.card-time.new{color:#d4a853}
-
-.expand-btn{
-  display:block;width:100%;padding:16px;text-align:center;
-  border:1px dashed rgba(212,168,83,.15);border-radius:4px;
-  color:#8a8885;font-size:.85rem;cursor:pointer;transition:all .3s;
-  background:transparent;margin-top:16px;
-}
-.expand-btn:hover{border-color:rgba(212,168,83,.3);color:#d4a853;background:rgba(212,168,83,.02)}
-
-.filter-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid rgba(212,168,83,.08)}
-.filter-btn{cursor:pointer;padding:6px 14px;font-size:.78rem;border:1px solid rgba(212,168,83,.12);color:#8a8885;border-radius:2px;transition:all .2s;background:transparent}
-.filter-btn.active{border-color:rgba(212,168,83,.2);color:#d4a853;background:rgba(212,168,83,.08)}
-
-.reading-order{background:rgba(212,168,83,.02);border:1px solid rgba(212,168,83,.1);border-radius:4px;padding:18px 24px;margin-bottom:28px}
-.reading-order h3{font-size:.85rem;color:#d4a853;margin-bottom:10px;font-weight:500}
-.reading-order p{font-size:.8rem;color:#8a8885;margin:0 0 8px}
-.reading-order ol{font-size:.8rem;color:#b0aeab;padding-left:20px;margin:0;line-height:1.8}
-.reading-order ol a{color:#d4a853}
-.reading-order .ro-level{font-size:.8rem;color:#d4a853;margin:8px 0 4px;font-weight:500}
-
-/* === Tools Grid === */
-.tools-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-@media(max-width:860px){.tools-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:640px){.tools-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:400px){.tools-grid{grid-template-columns:1fr}}
-.tool-card{
-  display:block;padding:20px;border:1px solid rgba(212,168,83,.1);
-  background:rgba(255,255,255,.015);border-radius:6px;text-decoration:none;transition:all .3s
-}
-.tool-card:hover{border-color:rgba(212,168,83,.3);background:rgba(212,168,83,.03)}
-.tool-card .tool-icon{font-size:1.4rem;display:block;margin-bottom:8px}
-.tool-card h3{font-size:.95rem;color:#e8e6e3;margin-bottom:4px;font-weight:500}
-.tool-card p{font-size:.8rem;color:#8a8885;line-height:1.4;margin:0}
-.tool-card .tool-link{font-size:.72rem;color:#6a6865;margin-top:8px;display:inline-block}
-.tool-card:hover .tool-link{color:#d4a853}
-.tool-tag{font-size:.7rem;color:#d4a853;display:block;margin-top:4px;letter-spacing:.5px}
-.tool-start{position:relative}
-.tool-start::before{content:"★ 起点";position:absolute;top:-1px;right:-1px;background:#d4a853;color:#0a0e1a;font-size:.65rem;padding:2px 6px;border-radius:0 4px 0 4px;z-index:1}
-
-.tool-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
-.tool-filter-btn{cursor:pointer;padding:5px 12px;font-size:.75rem;border:1px solid rgba(212,168,83,.1);color:#8a8885;border-radius:2px;transition:all .2s;background:transparent}
-.tool-filter-btn.active{border-color:rgba(212,168,83,.2);color:#d4a853;background:rgba(212,168,83,.08)}
-
-/* === Dashboard Entry === */
-.dashboard-entry{
-  display:flex;align-items:center;gap:24px;
-  padding:32px;border:1px solid rgba(212,168,83,.2);
-  border-radius:8px;background:rgba(212,168,83,.03);
-  text-decoration:none;transition:all .3s;margin-top:32px;
-}
-.dashboard-entry:hover{border-color:rgba(212,168,83,.4);background:rgba(212,168,83,.06)}
-.dashboard-entry .de-icon{font-size:2.5rem;flex-shrink:0}
-.dashboard-entry .de-text h3{color:#e8e6e3;font-weight:500;margin-bottom:4px;font-size:1.05rem}
-.dashboard-entry .de-text p{font-size:.85rem;color:#8a8885;margin:0;line-height:1.5}
-.dashboard-entry .de-arrow{margin-left:auto;color:#d4a853;font-size:1.2rem;flex-shrink:0}
-
-/* === About === */
-.about-layout{display:flex;flex-direction:column;gap:36px;align-items:center;margin-top:20px}
-@media(min-width:640px){.about-layout{flex-direction:row;align-items:flex-start}}
-.about-text{flex:1}
-.about-text .tagline{font-size:1rem;color:#d4a853;margin-bottom:20px;font-weight:500}
-.about-portrait{flex-shrink:0;text-align:center}
-.about-portrait img{
-  max-width:280px;width:100%;height:auto;border-radius:4px;
-  border:1px solid rgba(212,168,83,.2);
-  box-shadow:0 8px 32px rgba(0,0,0,.5),0 0 40px rgba(212,168,83,.06);
-  filter:brightness(1.05) contrast(1.03)
-}
-
-/* === Subscribe === */
-.subscribe-box{
-  border:1px solid rgba(212,168,83,.15);padding:48px 32px;text-align:center;
-  background:rgba(212,168,83,.02)
-}
-.subscribe-box h2{margin-bottom:16px}
-.subscribe-box p{margin-bottom:28px;font-size:.95rem}
-.subscribe-form{display:flex;flex-direction:column;gap:12px;max-width:400px;margin:0 auto}
-@media(min-width:480px){.subscribe-form{flex-direction:row}}
-.subscribe-form input{flex:1;padding:12px 16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:#e8e6e3;font-size:.9rem;outline:none;transition:border-color .3s}
-.subscribe-form input:focus{border-color:#d4a853}
-.subscribe-form input::placeholder{color:#6a6865}
-.subscribe-form button{padding:12px 24px;background:#d4a853;border:none;color:#0a0e1a;font-size:.85rem;font-weight:500;cursor:pointer;transition:background .3s;white-space:nowrap}
-.subscribe-form button:hover{background:#f0c868}
-
-.subscribe-visual{margin-bottom:32px;text-align:center}
-.subscribe-visual img{max-width:260px;width:100%;height:auto;border-radius:4px;border:1px solid rgba(212,168,83,.15);opacity:.85;box-shadow:0 4px 24px rgba(0,0,0,.3)}
-
-/* === Footer === */
-footer{border-top:1px solid rgba(255,255,255,.04);padding:48px 0 32px;text-align:center}
-footer .slogan{font-size:.9rem;color:#8a8885;margin-bottom:8px}
-footer .slogan span{color:#d4a853}
-footer .copyright{font-size:.75rem;color:#5a5855}
-
-.back-to-top{position:fixed;bottom:32px;right:32px;width:44px;height:44px;border-radius:50%;background:rgba(212,168,83,.1);border:1px solid rgba(212,168,83,.2);color:#d4a853;font-size:1.2rem;cursor:pointer;transition:all .3s;z-index:999;display:flex;align-items:center;justify-content:center;text-decoration:none;backdrop-filter:blur(4px)}
-.back-to-top:hover{background:rgba(212,168,83,.2);border-color:rgba(212,168,83,.4)}
-
-.hero-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:4px;font-size:.85rem;cursor:pointer;transition:all .3s;text-decoration:none;font-family:inherit}
-.hero-btn.primary{border:1px solid rgba(212,168,83,.3);color:#d4a853;font-weight:500;background:transparent}
-.hero-btn.primary:hover{border:1px solid rgba(212,168,83,.3);background:#d4a853;color:#0a0e1a;font-weight:500}
-
-.scroll-indicator{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);width:1px;height:40px;background:linear-gradient(180deg,#d4a853 0%,transparent 100%);animation:pulse-down 2s ease-in-out infinite}
-@keyframes pulse-down{0%,100%{opacity:.3;transform:translateX(-50%) translateY(0)}50%{opacity:1;transform:translateX(-50%) translateY(8px)}}
-
-/* === Mobile Fine-tune === */
-@media(max-width:480px){
-  .section{padding:64px 0}
-  nav a{margin-left:14px;font-size:.75rem}
-  .subscribe-box{padding:32px 20px}
-  .mini-checkup{padding:20px 16px}
-  .mc-question .mc-options{flex-direction:column}
-  .funnel-step{padding:24px 20px}
-  .dashboard-entry{flex-direction:column;text-align:center;gap:16px}
-  .dashboard-entry .de-arrow{margin-left:0}
-  .mechanism-card{padding:24px 20px}
-}
-<link rel="stylesheet" href="style-index.css">
-</head>
+  <script>
+    // IntersectionObserver for scroll-fade animations
+    document.addEventListener('DOMContentLoaded', () => {
+      const fadeEls = document.querySelectorAll('.scroll-fade, .reveal-text');
+      if (!fadeEls.length) return;
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      fadeEls.forEach(el => observer.observe(el));
+    });
+  </script>
+  </head>
 <body>
 
 <!-- ===== Header ===== -->
-<header>
+<header class="header-dark">
   <div class="container">
-    <div class="logo">私家<span>智囊</span></div>
+    <div class="logo"><a href="./index.html" style="color:inherit;text-decoration:none;">私家<span>智囊</span></a></div>
     <nav>
       <a href="#mechanism">信心来自机制</a>
-      <a href="principles.html" style="color:#d4a853;">原则</a>
+      <a href="principles.html" style="color:#D4AF37;">原则</a>
       <a href="#content">对话</a>
       <a href="#tools">工具箱</a>
       <a href="#about">关于</a>
@@ -388,54 +55,54 @@ footer .copyright{font-size:.75rem;color:#5a5855}
 </header>
 
 <!-- ===== Hero ===== -->
-<section class="hero">
+<section class="hero hero-dark">
   <img class="hero-img" src="./images/hero-bridge.png" alt="信心来自机制 — 石桥横跨深渊，连接此岸与彼岸" />
 
   <svg class="hero-svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <radialGradient id="heroGlow" cx="35%" cy="45%" r="55%">
-        <stop offset="0%" stop-color="#d4a853" stop-opacity=".12"/>
-        <stop offset="30%" stop-color="#d4a853" stop-opacity=".04"/>
-        <stop offset="100%" stop-color="#0a0e1a" stop-opacity="0"/>
+        <stop offset="0%" stop-color="#D4AF37" stop-opacity=".12"/>
+        <stop offset="30%" stop-color="#D4AF37" stop-opacity=".04"/>
+        <stop offset="100%" stop-color="#0B0D10" stop-opacity="0"/>
       </radialGradient>
       <radialGradient id="heroGlow2" cx="65%" cy="55%" r="50%">
-        <stop offset="0%" stop-color="#d4a853" stop-opacity=".06"/>
-        <stop offset="100%" stop-color="#0a0e1a" stop-opacity="0"/>
+        <stop offset="0%" stop-color="#D4AF37" stop-opacity=".06"/>
+        <stop offset="100%" stop-color="#0B0D10" stop-opacity="0"/>
       </radialGradient>
     </defs>
-    <rect width="1440" height="900" fill="#0a0e1a"/>
+    <rect width="1440" height="900" fill="#0B0D10"/>
     <rect width="1440" height="900" fill="url(#heroGlow)"/>
     <rect width="1440" height="900" fill="url(#heroGlow2)"/>
-    <circle cx="200" cy="150" r="1.2" fill="#fff" opacity=".3"/>
-    <circle cx="500" cy="80" r=".8" fill="#fff" opacity=".2"/>
-    <circle cx="900" cy="200" r="1" fill="#fff" opacity=".25"/>
-    <circle cx="1200" cy="100" r=".7" fill="#fff" opacity=".15"/>
-    <circle cx="300" cy="600" r=".9" fill="#fff" opacity=".2"/>
-    <circle cx="1100" cy="650" r="1.1" fill="#fff" opacity=".18"/>
-    <circle cx="700" cy="750" r=".6" fill="#fff" opacity=".15"/>
-    <circle cx="1350" cy="400" r="1.3" fill="#fff" opacity=".2"/>
-    <circle cx="80" cy="350" r=".5" fill="#fff" opacity=".1"/>
-    <circle cx="600" cy="120" r=".7" fill="#fff" opacity=".15"/>
-    <path d="M0 720 Q360 640 540 520 T1080 340 T1440 300" fill="none" stroke="#d4a853" stroke-width="1.5" opacity=".15"/>
-    <path d="M0 720 Q360 620 540 480 T1080 280 T1440 230" fill="none" stroke="#d4a853" stroke-width=".8" opacity=".08"/>
+    <circle cx="200" cy="150" r="1.2" fill="#D4AF37" opacity="0.15"/>
+    <circle cx="500" cy="80" r=".8" fill="#D4AF37" opacity="0.10"/>
+    <circle cx="900" cy="200" r="1" fill="#D4AF37" opacity="0.12"/>
+    <circle cx="1200" cy="100" r=".7" fill="#D4AF37" opacity="0.06"/>
+    <circle cx="300" cy="600" r=".9" fill="#D4AF37" opacity="0.10"/>
+    <circle cx="1100" cy="650" r="1.1" fill="#D4AF37" opacity="0.08"/>
+    <circle cx="700" cy="750" r=".6" fill="#D4AF37" opacity="0.06"/>
+    <circle cx="1350" cy="400" r="1.3" fill="#D4AF37" opacity="0.10"/>
+    <circle cx="80" cy="350" r=".5" fill="#D4AF37" opacity="0.04"/>
+    <circle cx="600" cy="120" r=".7" fill="#D4AF37" opacity="0.06"/>
+    <path d="M0 720 Q360 640 540 520 T1080 340 T1440 300" fill="none" stroke="#D4AF37" stroke-width="1.5" opacity="0.06"/>
+    <path d="M0 720 Q360 620 540 480 T1080 280 T1440 230" fill="none" stroke="#D4AF37" stroke-width=".8" opacity=".08"/>
   </svg>
 
   <div class="container">
     <div class="hero-layout">
-      <div class="hero-text">
-        <div class="subtitle">私家智囊 · 您家庭财富的规划师与守夜人</div>
-        <h1>
+      <div class="hero-text" style="position: relative; z-index: 1;">
+        <div class="subtitle" style="color: #D4AF37 !important; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.18em; font-weight: 500; margin-bottom: 16px;">私家智囊 · 您家庭财富的规划师与守夜人</div>
+        <h1 style="color: #FFFFFF !important;">
           信心<br>
           是复利<span class="highlight">不中断的核动力</span>
         </h1>
         <p>
           信心不是凭空来的——它来自一套机制。<br>
-          <span style="color:#d4a853;">30秒看看你的信心背后有没有机制</span>，再回来理解为什么。工具免注册，数据仅本地。
+          <span style="color: #D4AF37;">30秒看看你的信心背后有没有机制</span>，再回来理解为什么。工具免注册，数据仅本地。
         </p>
         <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:4px;">
           <a href="#mini-checkup-anchor" class="hero-btn primary">⚡ 30秒信心体检</a>
         </div>
-        <p style="font-size:.75rem;color:#6a6865;margin-top:12px;">所有工具仅在浏览器本地计算，不上传服务器 · 免注册</p>
+        <p style="font-size:.75rem;color:#8A94A6;margin-top:12px;">所有工具仅在浏览器本地计算，不上传服务器 · 免注册</p>
       </div>
 
       <!-- ===== Mini Checkup ===== -->
@@ -494,7 +161,7 @@ footer .copyright{font-size:.75rem;color:#5a5855}
     <div class="section-title">信心来自机制</div>
     <h2>信心不是意志力，是一套机制</h2>
     <p>在漫长的投资旅途中，最稀缺的不是信息，是敢拿住的底气。但底气不是"我意志力强"，而是"我有一套机制"。</p>
-    <p style="margin-top:-24px;margin-bottom:32px;font-size:.9rem;color:#d4a853;text-align:center;"><strong>规划师画出结构，守夜人盯住底线——两个角色，一套机制。</strong></p>
+    <p style="margin-top:-24px;margin-bottom:32px;font-size:.9rem;color:#D4AF37;text-align:center;"><strong>规划师画出结构，守夜人盯住底线——两个角色，一套机制。</strong></p>
 
     <div class="mechanism-quote">
       <div class="mq-text">"<em>信心是复利不中断的核动力</em>"——但信心不是凭空来的，<em>它来自机制</em></div>
@@ -504,55 +171,55 @@ footer .copyright{font-size:.75rem;color:#5a5855}
     <div class="mechanism-grid">
 
       <!-- Card 1: 保障金机制 -->
-      <div class="mechanism-card">
+      <a href="belief.html" class="mechanism-card" style="text-decoration:none;color:inherit;display:block;">
         <div class="mc-num">规划师之锁 · 机制一</div>
         <div class="mc-icon">
           <svg viewBox="0 0 48 48" width="48" height="48">
-            <rect x="8" y="16" width="32" height="24" rx="2" fill="none" stroke="#d4a853" stroke-width="1.5" opacity=".3"/>
-            <path d="M24 8 L24 16" stroke="#d4a853" stroke-width="2" opacity=".5"/>
-            <path d="M16 16 L24 8 L32 16" fill="none" stroke="#d4a853" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="24" cy="28" r="4" fill="none" stroke="#d4a853" stroke-width="1.5" opacity=".6"/>
-            <path d="M24 32 L24 35" stroke="#d4a853" stroke-width="1.5" opacity=".6"/>
+            <rect x="8" y="16" width="32" height="24" rx="2" fill="none" stroke="#D4AF37" stroke-width="1.5" opacity="0.15"/>
+            <path d="M24 8 L24 16" stroke="#D4AF37" stroke-width="2" opacity=".5"/>
+            <path d="M16 16 L24 8 L32 16" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="24" cy="28" r="4" fill="none" stroke="#D4AF37" stroke-width="1.5" opacity=".6"/>
+            <path d="M24 32 L24 35" stroke="#D4AF37" stroke-width="1.5" opacity=".6"/>
           </svg>
         </div>
         <h3>锁住·保障金机制</h3>
         <div class="mc-subtitle">信心的地基</div>
-        <p>一笔专门锁住、不碰不动的保障金——不受市场波动和情绪影响。当您知道"无论如何我撑得住"，复利才不会在最该拿住的时候被迫中断。</p>
+        <p>保障金机制包含两层：应急金（6-12个月支出）应对短期突发，保障金（36个月支出）应对长期冲击。一笔专门锁住、不碰不动的储备——当您知道"无论如何我撑得住"，复利才不会在最该拿住的时候被迫中断。</p>
         <img class="mc-img" src="./images/mechanism-vault.png" alt="保障金机制 — 金色保险箱，锁住不动" />
-      </div>
+      </a>
 
       <!-- Card 2: 复利机制 -->
-      <div class="mechanism-card">
+      <a href="belief.html" class="mechanism-card" style="text-decoration:none;color:inherit;display:block;">
         <div class="mc-num">规划师之长 · 机制二</div>
         <div class="mc-icon">
           <svg viewBox="0 0 48 48" width="48" height="48">
-            <path d="M4 44 L24 10 L44 44" fill="none" stroke="#d4a853" stroke-width="1.5" opacity=".5"/>
-            <path d="M10 38 Q20 18 28 22 T38 10" fill="none" stroke="#d4a853" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="38" cy="10" r="3" fill="#d4a853" opacity=".6"/>
+            <path d="M4 44 L24 10 L44 44" fill="none" stroke="#D4AF37" stroke-width="1.5" opacity=".5"/>
+            <path d="M10 38 Q20 18 28 22 T38 10" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="38" cy="10" r="3" fill="#D4AF37" opacity=".6"/>
           </svg>
         </div>
         <h3>生长·复利机制</h3>
         <div class="mc-subtitle">信心的引擎</div>
         <p>放进去就不用管，它自己会滚雪球。不是靠您盯着操作，而是靠时间和正确的位置。复利的关键不是收益率，是时间——而时间的敌人，恰恰是您的手。</p>
         <img class="mc-img" src="./images/mechanism-tree.png" alt="复利机制 — 古树年轮，时间即力量" />
-      </div>
+      </a>
 
       <!-- Card 3: 守夜人机制 -->
-      <div class="mechanism-card">
+      <a href="belief.html" class="mechanism-card" style="text-decoration:none;color:inherit;display:block;">
         <div class="mc-num">守夜人之守 · 机制三</div>
         <div class="mc-icon">
           <svg viewBox="0 0 48 48" width="48" height="48">
-            <rect x="8" y="20" width="8" height="20" rx="1" fill="#d4a853" opacity=".3"/>
-            <rect x="20" y="14" width="8" height="26" rx="1" fill="#d4a853" opacity=".5"/>
-            <rect x="32" y="8" width="8" height="32" rx="1" fill="#d4a853" opacity=".7"/>
-            <line x1="4" y1="42" x2="44" y2="42" stroke="#d4a853" stroke-width=".5" opacity=".3"/>
+            <rect x="8" y="20" width="8" height="20" rx="1" fill="#D4AF37" opacity="0.15"/>
+            <rect x="20" y="14" width="8" height="26" rx="1" fill="#D4AF37" opacity=".5"/>
+            <rect x="32" y="8" width="8" height="32" rx="1" fill="#D4AF37" opacity=".7"/>
+            <line x1="4" y1="42" x2="44" y2="42" stroke="#D4AF37" stroke-width=".5" opacity="0.15"/>
           </svg>
         </div>
         <h3>守夜·底线机制</h3>
         <div class="mc-subtitle">信心的护栏</div>
         <p>五条安全底线——保障金、负债边界、流动性、家庭结构、投资纪律——不用您每天盯着，一旦越界自动预警。机制替您值班，您才睡得安稳。</p>
         <img class="mc-img" src="./images/mechanism-lighthouse.png" alt="守夜人机制 — 灯塔在暗夜守望" />
-      </div>
+      </a>
 
     </div>
 
@@ -601,12 +268,12 @@ footer .copyright{font-size:.75rem;color:#5a5855}
 <section class="section" id="content">
   <div class="container">
     <div style="display:flex;flex-direction:column;align-items:center;margin-bottom:36px;">
-      <img src="./images/hero-brand.jpg" alt="深索道 · 安德路 · 格林格·金" style="max-width:360px;width:100%;height:auto;border-radius:6px;border:1px solid rgba(212,168,83,.2);box-shadow:0 8px 32px rgba(0,0,0,.4),0 0 40px rgba(212,168,83,.06);margin-bottom:24px;" />
+      <img src="./images/hero-brand.jpg" alt="深索道 · 安德路 · 格林格·金" style="max-width:360px;width:100%;height:auto;border-radius:6px;border:1px solid rgba(197,160,89,.2);box-shadow:0 8px 32px rgba(0,0,0,.4),0 0 40px rgba(197,160,89,.06);margin-bottom:24px;" />
       <div class="section-title" style="margin-bottom:12px;">全部对话</div>
       <h2 style="text-align:center;">深索道先生 × 安德路</h2>
     </div>
-    <p style="margin-bottom:12px;font-size:.9rem;color:#8a8885;text-align:center;">从五条安全底线开始，到一张人生清单。二十余篇对话，一套完整的家庭财务规划框架。</p>
-    <p style="margin-bottom:36px;font-size:.82rem;color:#6a6865;text-align:center;">👤 深索道 → 规划师 | 安德路 → 提问者 | 格林格·金 → 守夜人（从第四篇起加入对话）</p>
+    <p style="margin-bottom:12px;font-size:.9rem;color:#8e959f;text-align:center;">从五条安全底线开始，到一张人生清单。二十余篇对话，一套完整的家庭财务规划框架。</p>
+    <p style="margin-bottom:36px;font-size:.82rem;color:#a8a5a0;text-align:center;">👤 深索道 → 规划师 | 安德路 → 提问者 | 格林格·金 → 守夜人（从第四篇起加入对话）</p>
 
     <div class="filter-tags" id="filter-tags">
       <span class="filter-btn active" data-filter="all">全部</span>
@@ -622,11 +289,11 @@ footer .copyright{font-size:.75rem;color:#5a5855}
     </div>
 
     <details class="reading-order" style="margin-bottom:28px;">
-      <summary style="cursor:pointer;font-size:.85rem;color:#d4a853;font-weight:500;list-style:none;display:flex;align-items:center;gap:6px;">
-        💡 推荐阅读 <span style="font-size:.7rem;color:#6a6865;">（从眼前的急，到长远的局 · 点击展开）</span>
+      <summary style="cursor:pointer;font-size:.85rem;color:#D4AF37;font-weight:500;list-style:none;display:flex;align-items:center;gap:6px;">
+        💡 推荐阅读 <span style="font-size:.7rem;color:#a8a5a0;">（从眼前的急，到长远的局 · 点击展开）</span>
       </summary>
       <div style="margin-top:12px;">
-        <p style="font-size:.8rem;color:#8a8885;margin-bottom:8px;">先解决迫近的问题，再回答终极之问——读完五篇，您的信心就不再靠意志力。</p>
+        <p style="font-size:.8rem;color:#8e959f;margin-bottom:8px;">先解决迫近的问题，再回答终极之问——读完五篇，您的信心就不再靠意志力。</p>
         <p class="ro-level">❶ 眼前的急</p>
         <ol>
           <li><a href="./dialogue-17.html">第17篇（买房决策）</a> — 刚需vs投资，两套完全不同的逻辑。中国家庭最大单笔决策，先想清楚再下手</li>
@@ -643,34 +310,34 @@ footer .copyright{font-size:.75rem;color:#5a5855}
 
     <!-- Featured 4 -->
     <div class="dialogue-list" id="dialogue-featured">
-      <a href="dialogue-12.html" class="dialogue-card" data-tags="规划师,原则总览" style="border-left:3px solid #d4a853;">
+      <a href="dialogue-12.html" class="dialogue-card" data-tags="规划师,原则总览" style="border-left:3px solid #D4AF37;">
         <span class="card-num">12</span>
         <div class="card-body">
-          <h3 style="color:#d4a853;">每个家庭都需要两位「财富管家」<span style="font-size:.75rem;color:#d4a853;"> ★ 基石篇</span></h3>
+          <h3 style="color:#D4AF37;">每个家庭都需要两位「财富管家」<span style="font-size:.75rem;color:#D4AF37;"> ★ 基石篇</span></h3>
           <p>规划师(Planner)与守夜人(Guardian)——两个角色的底层逻辑、案例故事与人生愿望清单引导。</p>
           <span class="card-time new">🆕 阅读时间约 8 分钟</span>
         </div>
       </a>
-      <a href="dialogue-07.html" class="dialogue-card" data-tags="规划师,保障金底线,分散布局" style="border-left:3px solid #d4a853;">
+      <a href="dialogue-07.html" class="dialogue-card" data-tags="规划师,保障金底线,分散布局" style="border-left:3px solid #D4AF37;">
         <span class="card-num">07</span>
         <div class="card-body">
-          <h3 style="color:#d4a853;">给家庭建一座堡垒<span style="font-size:.75rem;color:#d4a853;"> ★ 基石篇·核心</span></h3>
+          <h3 style="color:#D4AF37;">给家庭建一座堡垒<span style="font-size:.75rem;color:#D4AF37;"> ★ 基石篇·核心</span></h3>
           <p>五格结构图：堡垒账户、锋利账户、保障金、跨市场配置、公用固定资产。空着的格子，就是你的风险点。</p>
           <span class="card-time">阅读时间约 18 分钟</span>
         </div>
       </a>
-      <a href="dialogue-08.html" class="dialogue-card" data-tags="守夜人,守夜人总览" style="border-left:3px solid #d4a853;">
+      <a href="dialogue-08.html" class="dialogue-card" data-tags="守夜人,守夜人总览" style="border-left:3px solid #D4AF37;">
         <span class="card-num">08</span>
         <div class="card-body">
-          <h3 style="color:#d4a853;">你不是缺信息，是缺一个帮你盯着五条底线的人<span style="font-size:.75rem;color:#d4a853;"> ★ 基石篇·守夜人</span></h3>
+          <h3 style="color:#D4AF37;">你不是缺信息，是缺一个帮你盯着五条底线的人<span style="font-size:.75rem;color:#D4AF37;"> ★ 基石篇·守夜人</span></h3>
           <p>格林格·金加入对话。规划师画图，守夜人值班——五条财务安全底线完整定义。</p>
           <span class="card-time">阅读时间约 9 分钟</span>
         </div>
       </a>
-      <a href="dialogue-11.html" class="dialogue-card" data-tags="守夜人,保障金底线" style="border-left:3px solid #d4a853;">
+      <a href="dialogue-11.html" class="dialogue-card" data-tags="守夜人,保障金底线" style="border-left:3px solid #D4AF37;">
         <span class="card-num">11</span>
         <div class="card-body">
-          <h3 style="color:#d4a853;">保障金，不是急用金<span style="font-size:.75rem;color:#d4a853;"> ★ 基石篇·保障金</span></h3>
+          <h3 style="color:#D4AF37;">保障金，不是急用金<span style="font-size:.75rem;color:#D4AF37;"> ★ 基石篇·保障金</span></h3>
           <p>8项资金来源盘点，36个月战略储备标准。深索道×安德路×格林格·金。</p>
           <span class="card-time new">🆕 阅读时间约 8 分钟</span>
         </div>
@@ -709,11 +376,11 @@ footer .copyright{font-size:.75rem;color:#5a5855}
 </section>
 
 <!-- ===== Tools ===== -->
-<section class="section" id="tools" style="background:rgba(255,255,255,.01);">
+<section class="section" id="tools" style="background:rgba(0,0,0,.01);">
   <div class="container">
     <div class="section-title">工具箱</div>
     <h2>把机制建起来</h2>
-    <p style="margin-bottom:20px;font-size:.9rem;color:#8a8885;">每件工具对应一篇对话，帮您把一个机制落地。所有数据仅在浏览器本地计算，不上传服务器。均为模拟估算，不构成投资或其他决策建议。</p>
+    <p style="margin-bottom:20px;font-size:.9rem;color:#8e959f;">每件工具对应一篇对话，帮您把一个机制落地。所有数据仅在浏览器本地计算，不上传服务器。均为模拟估算，不构成投资或其他决策建议。</p>
 
     <div class="tool-filters" id="tool-filters">
       <span class="tool-filter-btn active" data-dim="all">全部</span>
@@ -730,7 +397,7 @@ footer .copyright{font-size:.75rem;color:#5a5855}
       <a href="compound-calculator.html" class="tool-card" data-dim="投资纪律"><span class="tool-icon">📐</span><h3>复利计算器</h3><p>F=P(1+r)^n · 72法则 · 定投</p><span class="tool-tag">⏱ 2分钟 · 计算器</span><span class="tool-link">对话03 →</span></a>
       <a href="mortgage-comparison.html" class="tool-card" data-dim="负债"><span class="tool-icon">🏠</span><h3>提前还贷对比器</h3><p>三步拆解法 · 20年差距一目了然</p><span class="tool-tag">⏱ 3分钟 · 计算器</span><span class="tool-link">对话05 →</span></a>
       <a href="life-checklist.html" class="tool-card" data-dim="家庭结构"><span class="tool-icon">📝</span><h3>人生愿望清单</h3><p>目标·金额·时间 → 缺口一目了然</p><span class="tool-tag">⏱ 10分钟 · 清单填写</span><span class="tool-link">对话01 →</span></a>
-      <a href="security-fund-calculator.html" class="tool-card" data-dim="保障金"><span class="tool-icon">🛡️</span><h3>保障金测算器</h3><p>8项资金来源 · 三色预警 · 36个月标准</p><span class="tool-tag">⏱ 10分钟 · 8项盘点</span><span class="tool-link">对话11 →</span></a>
+      <a href="security-fund-calculator.html" class="tool-card" data-dim="保障金"><span class="tool-icon">🛡️</span><h3>保障金测算器</h3><p>8项资金来源 · 三色预警 · 保障金36个月标准</p><span class="tool-tag">⏱ 10分钟 · 8项盘点</span><span class="tool-link">对话11 →</span></a>
       <a href="debt-stress-test.html" class="tool-card" data-dim="负债"><span class="tool-icon">💳</span><h3>负债压力测试</h3><p>5种情景 · DTI指标 · 利率/收入/担保</p><span class="tool-tag">⏱ 5分钟 · 情景测试</span><span class="tool-link">对话13 →</span></a>
       <a href="health-checkup.html" class="tool-card" data-dim="家庭结构"><span class="tool-icon">🏥</span><h3>家庭财务体检报告</h3><p>五条底线综合评分 · 雷达图 · 行动建议</p><span class="tool-tag">⏱ 20分钟 · 综合评分</span><span class="tool-link">对话08 →</span></a>
       <a href="invest-vs-speculate.html" class="tool-card" data-dim="投资纪律"><span class="tool-icon">📊</span><h3>投资vs投机五问自测表</h3><p>五个锚点一分钟自测 · 先测后判</p><span class="tool-tag">⏱ 2分钟 · 五问自测</span><span class="tool-link">对话20 →</span></a>
@@ -752,25 +419,25 @@ footer .copyright{font-size:.75rem;color:#5a5855}
 </section>
 
 <!-- ===== About ===== -->
-<section class="section" id="about" style="background:rgba(255,255,255,.01);">
+<section class="section" id="about" style="background:rgba(0,0,0,.01);">
   <div class="container">
     <div class="section-title">关于</div>
     <div class="about-layout">
       <div class="about-text">
         <div class="tagline">私家智囊 — 您家庭财富的规划师与守夜人。</div>
         <p>致力于帮助您在漫长的投资旅途中，守护那份至关重要的、让复利得以生长的坚定与平静。</p>
-        <p style="margin-top:12px;color:#d4a853;font-size:.95rem;">但坚定与平静不是凭空来的——<strong>它来自一套机制</strong>。</p>
-        <p style="margin-top:8px;color:#b0aeab;">20年A股长投+融资双体系实战，穿越周期。不相信预测，只相信纪律。</p>
-        <p style="margin-top:16px;font-size:.95rem;color:#d4a853;">
+        <p style="margin-top:12px;color:#D4AF37;font-size:.95rem;">但坚定与平静不是凭空来的——<strong>它来自一套机制</strong>。</p>
+        <p style="margin-top:8px;color:#5a5956;">20年A股长投+融资双体系实战，穿越周期。不相信预测，只相信纪律。</p>
+        <p style="margin-top:16px;font-size:.95rem;color:#D4AF37;">
           <strong>规划师 → 画出结构，让钱在正确的位置自己生长</strong>
         </p>
-        <p style="font-size:.95rem;color:#d4a853;">
+        <p style="font-size:.95rem;color:#D4AF37;">
           <strong>守夜人 → 盯住底线，让机制替您值班</strong>
         </p>
-        <p style="margin-top:20px;color:#8a8885;font-size:.9rem;">
+        <p style="margin-top:20px;color:#8e959f;font-size:.9rem;">
           不荐股、不带单、不给代码。<br>
           只做两件事：画好一张图，盯住五条底线。<br>
-          <span style="color:#d4a853;">让信心不必靠意志力。</span>
+          <span style="color:#D4AF37;">让信心不必靠意志力。</span>
         </p>
       </div>
       <div class="about-portrait">
@@ -793,26 +460,26 @@ footer .copyright{font-size:.75rem;color:#5a5855}
         <input type="email" placeholder="输入你的邮箱" required>
         <button type="submit">订阅 →</button>
       </form>
-      <p style="margin-top:16px;font-size:.75rem;color:#5a5855;">不发送垃圾邮件。随时可以退订。</p>
+      <p style="margin-top:16px;font-size:.75rem;color:#8e959f;">不发送垃圾邮件。随时可以退订。</p>
     </div>
   </div>
 </section>
 
 <!-- ===== WeChat ===== -->
-<section class="section" id="wechat" style="background:rgba(255,255,255,.01);">
+<section class="section" id="wechat" style="background:rgba(0,0,0,.01);">
   <div class="container">
     <div class="section-title">微信公众号</div>
     <div style="text-align:center;max-width:480px;margin:0 auto;">
       <h2 style="margin-bottom:12px;">关注「私家智囊」</h2>
-      <p style="font-size:.9rem;color:#8a8885;margin-bottom:32px;">
+      <p style="font-size:.9rem;color:#8e959f;margin-bottom:32px;">
         每周一篇，不讲代码，只聊怎么拿住。<br>
         规划师画图，守夜人值班。
       </p>
-      <div style="display:inline-block;border:1px solid rgba(212,168,83,.15);padding:16px;background:rgba(255,255,255,.04);border-radius:4px;">
+      <div style="display:inline-block;border:1px solid rgba(197,160,89,.15);padding:16px;background:rgba(0,0,0,.04);border-radius:4px;">
         <img src="./images/qrcode-wechat.jpg" alt="微信扫描关注「私家智囊」" style="width:200px;height:200px;display:block;border-radius:2px;" onerror="this.style.display='none';document.getElementById('wechat-fallback').style.display='block';" />
       </div>
-      <p id="wechat-fallback" style="display:none;margin-top:16px;font-size:.85rem;color:#d4a853;">微信搜索 <strong>「私家智囊」</strong> 关注公众号</p>
-      <p style="margin-top:12px;font-size:.75rem;color:#5a5855;">在微信中搜索"私家智囊"即可找到我们</p>
+      <p id="wechat-fallback" style="display:none;margin-top:16px;font-size:.85rem;color:#D4AF37;">微信搜索 <strong>「私家智囊」</strong> 关注公众号</p>
+      <p style="margin-top:12px;font-size:.75rem;color:#8e959f;">在微信中搜索"私家智囊"即可找到我们</p>
     </div>
   </div>
 </section>
