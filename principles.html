@@ -384,133 +384,40 @@
 
 <hr class="sep" style="max-width:1100px;margin:0 auto;">
 
-
-
-<!-- ===== Footer (Light) ===== -->
-<footer style="border-top:1px solid #E8E6E3;padding:48px 0 32px;background:#F9F8F6;">
-  <div style="max-width:1100px;margin:0 auto;padding:0 24px;text-align:center;">
-    <p style="font-size:0.9rem;color:#3a3f47;margin-bottom:8px;">
-      家庭财富的<span style="color:#D4AF37;">规划师</span>与<span style="color:#D4AF37;">守夜人</span>
-    </p>
-    <p style="font-size:0.75rem;color:#8A94A6;">私家智囊 · 2026</p>
+<!-- ===== Source Reference ===== -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="section-title">案例来源</div>
+    <h2>13个案例 · 对照表</h2>
+    <table class="data-table">
+      <tr><th>原则</th><th>案例</th><th>来源</th></tr>
+      <tr><td>① 时间朋友</td><td>从一张人生清单开始</td><td>★ 对话01</td></tr>
+      <tr><td>① 时间朋友</td><td>换手率吃掉的钱</td><td>★ 数据推导</td></tr>
+      <tr><td>② 系统信任</td><td>"当初买它的理由变了吗"</td><td>★ 对话09</td></tr>
+      <tr><td>③ 分散布局</td><td>同一辆卡车的180万</td><td>★ 对话07</td></tr>
+      <tr><td>③ 分散布局</td><td>韩国工薪族集中崩盘</td><td>☆ 公开市场数据</td></tr>
+      <tr><td>④ 保障金</td><td>2020年3月的电话</td><td>★ 市场背景</td></tr>
+      <tr><td>⑤ 负债边界</td><td>连带担保卖房抵债</td><td>★ 对话08</td></tr>
+      <tr><td>⑥ 流动性</td><td>锁定期里的学费</td><td>★ 对话08</td></tr>
+      <tr><td>⑥ 流动性</td><td>房地产流动性幻觉</td><td>☆ 市场真实案例</td></tr>
+      <tr><td>⑦ 家庭法律关系</td><td>三年没改的受益人</td><td>★ 对话08</td></tr>
+      <tr><td>⑦ 家庭法律关系</td><td>一个人的担保全家的房子</td><td>☆ 司法公开案例</td></tr>
+      <tr><td>⑧ 投资纪律</td><td>38%vs30%的融资差距</td><td>★ 对话08</td></tr>
+      <tr><td>⑧ 投资纪律</td><td>"躺赢"变"躺输"的融资盘</td><td>☆ 市场公开案例</td></tr>
+    </table>
+    <p style="font-size:.75rem;color:#5a5855;margin-top:8px;">★ = 来源于网站现有对话　☆ = 新增补充案例</p>
   </div>
-</footer>
+</section>
+
+<footer>
+    <div class="container">
+      <p class="slogan">家庭财富的<span>规划师</span>与<span>守夜人</span></p>
+      <p class="copyright">私家智囊 · 2026</p>
+    </div>
+  </footer>
 
 <!-- Back to top button -->
 <a href="#" class="back-to-top" aria-label="回到顶部">↑</a>
 
-<!-- Scroll animation JS -->
-<script>
-// Scroll-fade animation using Intersection Observer
-const observerOptions = {
-  threshold: 0.15,
-  rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, observerOptions);
-
-document.querySelectorAll('.scroll-fade, .reveal-text').forEach(el => {
-  observer.observe(el);
-});
-
-// Back to top button
-const backToTop = document.querySelector('.back-to-top');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 400) {
-    backToTop.classList.add('visible');
-  } else {
-    backToTop.classList.remove('visible');
-  }
-});
-
-// Form submission feedback
-function handleSubmit(e) {
-  e.preventDefault();
-  const form = e.target;
-  const feedback = document.getElementById('form-feedback');
-  
-  // Disable button
-  const btn = form.querySelector('button[type="submit"]');
-  btn.disabled = true;
-  btn.style.opacity = '0.6';
-  btn.textContent = '提交中...';
-  
-  // Submit to Formspree (or your backend)
-  const formData = new FormData(form);
-  
-  fetch(form.action, {
-    method: 'POST',
-    body: formData,
-    headers: {
-      'Accept': 'application/json'
-    }
-  })
-  .then(response => {
-    if (response.ok) {
-      form.style.display = 'none';
-      feedback.style.display = 'block';
-    } else {
-      alert('提交失败，请稍后重试或直接联系我们。');
-      btn.disabled = false;
-      btn.style.opacity = '1';
-      btn.textContent = '提交申请';
-    }
-  })
-  .catch(() => {
-    // If Formspree not set up, just show success message
-    form.style.display = 'none';
-    feedback.style.display = 'block';
-  });
-  
-  return false;
-}
-</script>
-
-
-  <script>
-    function handleSubmit(event) {
-      event.preventDefault();
-      const form = event.target;
-      const formData = new FormData(form);
-      const action = form.action;
-      
-      // Show loading state
-      const btn = form.querySelector('button[type="submit"]');
-      const originalText = btn.textContent;
-      btn.textContent = '提交中...';
-      btn.disabled = true;
-      
-      fetch(action, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      })
-      .then(response => {
-        if (response.ok) {
-          document.getElementById('form-feedback').style.display = 'block';
-          form.reset();
-        } else {
-          throw new Error('提交失败，请稍后重试');
-        }
-      })
-      .catch(error => {
-        document.getElementById('form-feedback').style.display = 'block';
-        document.getElementById('form-feedback').style.color = '#c97a7a';
-        document.getElementById('form-feedback').textContent = '提交失败：' + error.message + '。请直接联系我们。';
-      })
-      .finally(() => {
-        btn.textContent = originalText;
-        btn.disabled = false;
-      });
-    }
-  </script>
 </body>
 </html>
