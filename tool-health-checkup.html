@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="家庭财务体检报告 — 八大维度全面检测：保障金、负债安全、流动性、结构健康、资产配置、收入韧性、风险敞口、财务纪律。数据说话，不看感觉。">
+<meta property="og:title" content="家庭财务体检报告 - 私家智囊工具箱">
+<meta property="og:description" content="八大维度评估家庭财务健康：保障金、负债边界、流动性、结构平衡、资产配置、收入韧性、风险敞口、纪律得分。先测后判。">
+<meta property="og:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://deepsuodao.github.io/health-checkup.html">
+<meta property="og:site_name" content="私家智囊">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
+    <title>家庭财务体检报告 - 私家智囊工具箱</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            body {
+                font-family:-apple-system,"PingFang SC","Noto Sans SC","Helvetica Neue",sans-serif;
+                background:#0f1424;
+                color:#e8e6e3;
+                line-height:1.7;
+                -webkit-font-smoothing:antialiased;
+                min-height:100vh;
+                padding:0
+            }
+        
+            a{color:#d4a853;text-decoration:none;transition:color .3s}
+            a:hover{color:#f0c868}
+        
+            .container {
+                max-width: 900px;
+                margin: 0 auto;
+                padding:0 20px 40px
+            }
+        
+            .header {
+                text-align:center;
+                padding:32px 0 20px;
+                color:#e8e6e3;
+                margin-bottom:0
+            }
+        
+            .header h1 {
+                font-size:clamp(1.4rem,3.5vw,2rem);
+                font-weight:400;
+                color:#d4a853;
+                letter-spacing:-.02em;
+                margin-bottom:4px
+            }
+        
+            .header p,
+            .header .subtitle {
+                font-size:.82rem;
+                color:#8a8885
+            }
+        
+            .card {
+                background:#1a1f30;
+                border-radius:4px;
+                padding:24px 20px;
+                margin-bottom:16px;
+                border:1px solid rgba(212,168,83,.12);
+                transition:border-color .3s;
+                box-shadow:none
+            }
+            .card:hover{border-color:rgba(212,168,83,.25)}
+        
+            .card-title {
+                font-size:.95rem;
+                font-weight:500;
+                color:#d4a853;
+                margin-bottom:16px;
+                display:flex;
+                align-items:center;
+                gap:8px;
+                letter-spacing:.02em
+            }
+            .card-title span{font-size:1.2rem}
+        
+        .hint-box {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .import-section {
+            background: #f0f9ff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid #0ea5e9;
+        }
+        
+        .import-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0c4a6e;
+            margin-bottom: 12px;
+        }
+        
+        .import-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .import-btn {
+            padding: 10px 20px;
+            background: white;
+            border: 2px solid #0ea5e9;
+            border-radius: 8px;
+            color: #0ea5e9;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .import-btn:hover {
+            background: #0ea5e9;
+            color: white;
+        }
+        
+        .import-btn.success {
+            background: #10b981;
+            border-color: #10b981;
+            color: white;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .input-label .hint {
+            font-weight: 400;
+            color: #999;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+        
+        input[type="number"], select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background: #fafafa;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+        }
+        
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .section-divider {
+            height: 1px;
+            background: #f0f0f0;
+            margin: 25px 0;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 15px;
+            padding-left: 12px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .toggle-section {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .toggle-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #667eea;
+            font-weight: 500;
+        }
+        
+        .toggle-label input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .optional-badge {
+            display: inline-block;
+            background: #f0f0f0;
+            color: #666;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 8px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .chart-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .score-display {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .score-label {
+            font-size: 18px;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+        
+        .score-value {
+            font-size: 80px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .score-grade {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .score-desc {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .dimension-scores {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .dimension-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .dimension-card.green { border-left: 4px solid #10b981; }
+        .dimension-card.yellow { border-left: 4px solid #f59e0b; }
+        .dimension-card.red { border-left: 4px solid #ef4444; }
+        
+        .dimension-name {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .dimension-score {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 4px;
+        }
+        
+        .dimension-status {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        .status-green { background: #d1fae5; color: #065f46; }
+        .status-yellow { background: #fef3c7; color: #92400e; }
+        .status-red { background: #fee2e2; color: #991b1b; }
+        
+        .risk-list {
+            margin-top: 25px;
+        }
+        
+        .risk-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 15px;
+            background: #fef2f2;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid #ef4444;
+        }
+        
+        .risk-item.yellow {
+            background: #fffbeb;
+            border-left-color: #f59e0b;
+        }
+        
+        .risk-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        
+        .risk-content {
+            flex: 1;
+        }
+        
+        .risk-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #991b1b;
+            margin-bottom: 4px;
+        }
+        
+        .risk-item.yellow .risk-title {
+            color: #92400e;
+        }
+        
+        .risk-desc {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .recommendations {
+            margin-top: 25px;
+            background: #f0fdf4;
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid #10b981;
+        }
+        
+        .recommendations h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #065f46;
+            margin-bottom: 12px;
+        }
+        
+        .recommendations ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .recommendations li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+            font-size: 14px;
+            color: #065f46;
+            line-height: 1.6;
+        }
+        
+        .recommendations li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            font-weight: 600;
+        }
+        
+        button {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .footer {
+            text-align:center;padding:28px 0 20px;border-top:1px solid rgba(255,255,255,.04);margin-top:16px
+        }
+        .footer .slogan{font-size:.82rem;color:#8a8885;margin-bottom:4px}
+        .footer .slogan span{color:#d4a853}
+        .footer .copyright{font-size:.7rem;color:#5a5855}
+        
+        .result-section {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏥 家庭财务体检报告</h1>
+            <div class="subtitle">对应守夜人五条底线 → 全面评估家庭财务健康状况</div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">
+                <span>📋</span>
+                <span>数据导入与输入</span>
+            </div>
+            
+            <div class="import-section">
+                <div class="import-title">💾 从已有工具导入数据（可选）</div>
+                <div class="import-buttons">
+                    <button class="import-btn" onclick="importFromTool1()">导入保障金测算数据</button>
+                    <button class="import-btn" onclick="importFromTool2()">导入负债压力测试数据</button>
+                </div>
+            </div>
+            
+            <div class="hint-box">
+                💡 以下4项为必填项，填写后即可得到基本体检报告。下方"选填项"填得越全，体检结果越精准。
+            </div>
+            
+            <div class="section-title">核心输入（必填）</div>
+            
+            <div class="row">
+                <div class="input-group">
+                    <label class="input-label">家庭月基本支出 <span class="hint">（必填）</span></label>
+                    <input type="number" id="monthlyExpense" placeholder="如：15000" oninput="calculate()">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">可速兑金融资产 <span class="hint">（必填）</span></label>
+                    <input type="number" id="liquidAssets" placeholder="如：200000" oninput="calculate()">
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="input-group">
+                    <label class="input-label">家庭月总收入 <span class="hint">（必填）</span></label>
+                    <input type="number" id="monthlyIncome" placeholder="如：30000" oninput="calculate()">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">家庭月还款总额 <span class="hint">（必填）</span></label>
+                    <input type="number" id="monthlyRepayment" placeholder="如：15000" oninput="calculate()">
+                </div>
+            </div>
+            
+            <div class="toggle-section">
+                <label class="toggle-label" onclick="toggleOptional()">
+                    <input type="checkbox" id="showOptional">
+                    <span>选填项（填越全算越准）<span class="optional-badge">可选</span></span>
+                </label>
+                
+                <div id="optionalSection" class="hidden" style="margin-top: 20px;">
+                    <div class="section-divider"></div>
+                    
+                    <div class="section-title">投资纪律（选填）</div>
+                    <div class="row">
+                        <div class="input-group">
+                            <label class="input-label">投资组合集中度 <span class="hint">（最大单一持仓占比）</span></label>
+                            <input type="number" id="maxPosition" placeholder="如：40" oninput="calculate()">
+                            <div class="hint" style="margin-top: 5px;">填写百分比，如40表示40%</div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label class="input-label">过去1年交易频率 <span class="hint">（大致次数）</span></label>
+                            <input type="number" id="tradeFrequency" placeholder="如：12" oninput="calculate()">
+                        </div>
+                    </div>
+                    
+                    <div class="section-divider"></div>
+                    
+                    <div class="section-title">家庭法律关系（选填）</div>
+                    <div class="row">
+                        <div class="input-group">
+                            <label class="input-label">婚姻财产协议 <span class="hint">（是否有婚前/婚内协议）</span></label>
+                            <select id="marriageAgreement" onchange="calculate()">
+                                <option value="none">无</option>
+                                <option value="prenup">有婚前协议</option>
+                                <option value="postnup">有婚内协议</option>
+                            </select>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label class="input-label">遗嘱/传承安排 <span class="hint">（是否有遗嘱）</span></label>
+                            <select id="willArrangement" onchange="calculate()">
+                                <option value="none">无</option>
+                                <option value="simple">有简单安排</option>
+                                <option value="professional">有专业安排</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="section-divider"></div>
+                    
+                    <div class="section-title">保险保障（选填）</div>
+                    <div class="row">
+                        <div class="input-group">
+                            <label class="input-label">寿险保额 <span class="hint">（所有家庭成员合计）</span></label>
+                            <input type="number" id="lifeInsurance" placeholder="如：1000000" oninput="calculate()">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label class="input-label">重疾险保额 <span class="hint">（所有家庭成员合计）</span></label>
+                            <input type="number" id="criticalIllness" placeholder="如：500000" oninput="calculate()">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card result-section" id="resultCard">
+            <div class="card-title">
+                <span>🎯</span>
+                <span>体检报告结果</span>
+            </div>
+            
+            <div class="score-display" id="scoreDisplay">
+                <!-- 动态生成 -->
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="radarChart"></canvas>
+            </div>
+            
+            <div class="dimension-scores" id="dimensionScores">
+                <!-- 动态生成 -->
+            </div>
+            
+            <div class="risk-list" id="riskList">
+                <!-- 动态生成 -->
+            </div>
+            
+            <div class="recommendations" id="recommendations">
+                <!-- 动态生成 -->
+            </div>
+        </div>
+        
+        <button onclick="saveReport()">💾 保存体检报告</button>
+        
+        <div class="footer" style="text-align:center;padding:28px 0 20px;border-top:1px solid rgba(255,255,255,.04);margin-top:16px">
+            <p class="slogan">家庭财富的<span>规划师</span>与<span>守夜人</span></p><p class="copyright">私家智囊 · 数据本地计算，不上传服务器</p>
+        </div>
+    </div>
+    
+    <script>
+        let radarChart = null;
+        
+        // 切换选填项显示
+        function toggleOptional() {
+            const checked = document.getElementById('showOptional').checked;
+            document.getElementById('optionalSection').classList.toggle('hidden', !checked);
+            calculate();
+        }
+        
+        // 从工具1导入
+        function importFromTool1() {
+            const saved = localStorage.getItem('securityFund');
+            if (!saved) {
+                alert('未找到保障金测算数据，请先完成保障金测算。');
+                return;
+            }
+            
+            const data = JSON.parse(saved);
+            document.getElementById('monthlyExpense').value = data.monthlyExpense || '';
+            document.getElementById('liquidAssets').value = data.liquidAssets || '';
+            
+            const btn = event.target;
+            btn.classList.add('success');
+            btn.textContent = '✅ 已导入保障金数据';
+            
+            calculate();
+        }
+        
+        // 从工具2导入
+        function importFromTool2() {
+            const saved = localStorage.getItem('debtStressTest');
+            if (!saved) {
+                alert('未找到负债压力测试数据，请先完成负债压力测试。');
+                return;
+            }
+            
+            const data = JSON.parse(saved);
+            document.getElementById('monthlyIncome').value = data.income || '';
+            document.getElementById('monthlyRepayment').value = data.repayment || '';
+            
+            const btn = event.target;
+            btn.classList.add('success');
+            btn.textContent = '✅ 已导入负债测试数据';
+            
+            calculate();
+        }
+        
+        // 主计算函数
+        function calculate() {
+            const expense = parseFloat(document.getElementById('monthlyExpense').value) || 0;
+            const liquid = parseFloat(document.getElementById('liquidAssets').value) || 0;
+            const income = parseFloat(document.getElementById('monthlyIncome').value) || 0;
+            const repayment = parseFloat(document.getElementById('monthlyRepayment').value) || 0;
+            const maxPos = parseFloat(document.getElementById('maxPosition').value) || 0;
+            const tradeFreq = parseFloat(document.getElementById('tradeFrequency').value) || 0;
+            const marriage = document.getElementById('marriageAgreement').value;
+            const will = document.getElementById('willArrangement').value;
+            const lifeIns = parseFloat(document.getElementById('lifeInsurance').value) || 0;
+            const criticalIns = parseFloat(document.getElementById('criticalIllness').value) || 0;
+            
+            if (expense === 0 || income === 0) {
+                document.getElementById('resultCard').style.display = 'none';
+                return;
+            }
+            
+            document.getElementById('resultCard').style.display = 'block';
+            
+            // 计算五条底线得分
+            const scores = {
+                security: calculateSecurityScore(liquid, expense), // 保障金
+                debt: calculateDebtScore(repayment, income, liquid), // 负债
+                investment: calculateInvestmentScore(maxPos, tradeFreq), // 投资纪律
+                legal: calculateLegalScore(marriage, will), // 家庭法律关系
+                insurance: calculateInsuranceScore(lifeIns, criticalIns, income) // 保险保障
+            };
+            
+            // 计算综合得分
+            const totalScore = Math.round((scores.security + scores.debt + scores.investment + scores.legal + scores.insurance) / 5);
+            
+            // 渲染结果
+            renderScore(totalScore, scores);
+            renderRadarChart(scores);
+            renderDimensionScores(scores);
+            renderRisks(scores, { expense, liquid, income, repayment, maxPos, tradeFreq, marriage, will, lifeIns, criticalIns });
+            renderRecommendations(scores, { expense, liquid, income, repayment, maxPos, tradeFreq, lifeIns, criticalIns });
+        }
+        
+        // 计算保障金得分
+        function calculateSecurityScore(liquid, expense) {
+            if (expense === 0) return 0;
+            const months = liquid / expense;
+            if (months >= 36) return 100;
+            if (months >= 24) return 80;
+            if (months >= 12) return 60;
+            if (months >= 6) return 40;
+            return 20;
+        }
+        
+        // 计算负债得分
+        function calculateDebtScore(repayment, income, liquid) {
+            if (income === 0) return 0;
+            const dti = repayment / income * 100;
+            const liquidity = repayment > 0 ? liquid / repayment : 999;
+            
+            let score = 100;
+            if (dti > 70) score -= 30;
+            else if (dti > 50) score -= 15;
+            
+            if (liquidity < 3) score -= 25;
+            else if (liquidity < 6) score -= 10;
+            
+            return Math.max(0, score);
+        }
+        
+        // 计算投资纪律得分
+        function calculateInvestmentScore(maxPos, tradeFreq) {
+            let score = 100;
+            
+            // 集中度扣分
+            if (maxPos > 50) score -= 30;
+            else if (maxPos > 30) score -= 15;
+            
+            // 交易频率扣分（假设每月交易>2次为过度交易）
+            const monthlyTrades = tradeFreq / 12;
+            if (monthlyTrades > 4) score -= 20;
+            else if (monthlyTrades > 2) score -= 10;
+            
+            return Math.max(0, score);
+        }
+        
+        // 计算家庭法律关系得分
+        function calculateLegalScore(marriage, will) {
+            let score = 60; // 基础分
+            
+            if (marriage !== 'none') score += 20;
+            if (will === 'professional') score += 20;
+            else if (will === 'simple') score += 10;
+            
+            return Math.min(100, score);
+        }
+        
+        // 计算保险保障得分
+        function calculateInsuranceScore(lifeIns, criticalIns, income) {
+            if (income === 0) return 0;
+            const annualIncome = income * 12;
+            
+            // 寿险保额应为年收入5-10倍
+            const lifeRatio = lifeIns / annualIncome;
+            // 重疾险保额应为年收入3-5倍
+            const criticalRatio = criticalIns / annualIncome;
+            
+            let score = 0;
+            if (lifeRatio >= 5) score += 50;
+            else if (lifeRatio >= 3) score += 30;
+            
+            if (criticalRatio >= 3) score += 50;
+            else if (criticalRatio >= 1) score += 30;
+            
+            return Math.min(100, score);
+        }
+        
+        // 渲染综合评分
+        function renderScore(totalScore, scores) {
+            const display = document.getElementById('scoreDisplay');
+            
+            let grade, gradeText, gradeDesc;
+            if (totalScore >= 80) {
+                grade = 'A';
+                gradeText = '财务健康';
+                gradeDesc = '您的家庭财务状况良好，五条底线均有保障';
+            } else if (totalScore >= 60) {
+                grade = 'B';
+                gradeText = '基本健康';
+                gradeDesc = '财务基础尚可，但部分底线需加强';
+            } else if (totalScore >= 40) {
+                grade = 'C';
+                gradeText = '存在隐患';
+                gradeDesc = '多条底线存在风险，建议尽快优化';
+            } else {
+                grade = 'D';
+                gradeText = '急需调整';
+                gradeDesc = '财务健康状况堪忧，建议立即采取行动！';
+            }
+            
+            display.innerHTML = `
+                <div class="score-label">家庭财务健康综合评分</div>
+                <div class="score-value">${totalScore}</div>
+                <div class="score-grade">${grade}级 - ${gradeText}</div>
+                <div class="score-desc">${gradeDesc}</div>
+            `;
+        }
+        
+        // 渲染雷达图
+        function renderRadarChart(scores) {
+            const ctx = document.getElementById('radarChart').getContext('2d');
+            
+            if (radarChart) {
+                radarChart.destroy();
+            }
+            
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['保障金', '负债安全', '投资纪律', '家庭法律关系', '保险保障'],
+                    datasets: [{
+                        label: '您的得分',
+                        data: [scores.security, scores.debt, scores.investment, scores.legal, scores.insurance],
+                        backgroundColor: 'rgba(102, 126, 234, 0.2)',
+                        borderColor: 'rgba(102, 126, 234, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(102, 126, 234, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                stepSize: 20
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        }
+        
+        // 渲染各维度得分
+        function renderDimensionScores(scores) {
+            const container = document.getElementById('dimensionScores');
+            
+            const dimensions = [
+                { key: 'security', name: '保障金', score: scores.security },
+                { key: 'debt', name: '负债安全', score: scores.debt },
+                { key: 'investment', name: '投资纪律', score: scores.investment },
+                { key: 'legal', name: '家庭法律关系', score: scores.legal },
+                { key: 'insurance', name: '保险保障', score: scores.insurance }
+            ];
+            
+            container.innerHTML = dimensions.map(d => {
+                const status = d.score >= 80 ? 'green' : (d.score >= 60 ? 'yellow' : 'red');
+                const statusText = d.score >= 80 ? '安全' : (d.score >= 60 ? '关注' : '危险');
+                return `
+                    <div class="dimension-card ${status}">
+                        <div class="dimension-name">${d.name}</div>
+                        <div class="dimension-score">${d.score}</div>
+                        <span class="dimension-status status-${status}">${statusText}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // 渲染风险点
+        function renderRisks(scores, data) {
+            const container = document.getElementById('riskList');
+            const risks = [];
+            
+            if (scores.security < 60) {
+                risks.push({
+                    level: 'red',
+                    title: '保障金严重不足',
+                    desc: `当前仅能支撑 ${(data.liquid / data.expense).toFixed(1)} 个月，远低于36个月标准。优先补充保障金至24个月。`
+                });
+            } else if (scores.security < 80) {
+                risks.push({
+                    level: 'yellow',
+                    title: '保障金偏低',
+                    desc: `当前能支撑 ${(data.liquid / data.expense).toFixed(1)} 个月，建议逐步补充至36个月。`
+                });
+            }
+            
+            if (scores.debt < 60) {
+                risks.push({
+                    level: 'red',
+                    title: '负债压力过大',
+                    desc: `DTI为 ${(data.repayment / data.income * 100).toFixed(1)}%，超过安全线。优先降低负债或增加收入。`
+                });
+            } else if (scores.debt < 80) {
+                risks.push({
+                    level: 'yellow',
+                    title: '负债需关注',
+                    desc: `DTI为 ${(data.repayment / data.income * 100).toFixed(1)}%，处于关注区间。建议增强流动性储备。`
+                });
+            }
+            
+            if (scores.investment < 60) {
+                risks.push({
+                    level: 'yellow',
+                    title: '投资纪律待加强',
+                    desc: `最大持仓占比${data.maxPos}%，交易频率较高。建议控制集中度，减少频繁交易。`
+                });
+            }
+            
+            if (scores.legal < 60) {
+                risks.push({
+                    level: 'yellow',
+                    title: '家庭法律关系未安排',
+                    desc: '缺乏婚姻财产协议和遗嘱安排，建议咨询专业人士进行规划。'
+                });
+            }
+            
+            if (scores.insurance < 60) {
+                risks.push({
+                    level: 'yellow',
+                    title: '保险保障不足',
+                    desc: '寿险和重疾险保额低于建议标准，建议补充保障。'
+                });
+            }
+            
+            if (risks.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 20px; color: #10b981; font-size: 16px;">
+                        ✅ 未发现重大风险点，继续保持！
+                    </div>
+                `;
+            } else {
+                container.innerHTML = risks.map(r => `
+                    <div class="risk-item ${r.level === 'yellow' ? 'yellow' : ''}">
+                        <div class="risk-icon">${r.level === 'red' ? '🔴' : '🟡'}</div>
+                        <div class="risk-content">
+                            <div class="risk-title">${r.title}</div>
+                            <div class="risk-desc">${r.desc}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+        
+        // 渲染改进建议
+        function renderRecommendations(scores, data) {
+            const container = document.getElementById('recommendations');
+            const recommendations = [];
+            
+            if (scores.security < 80) {
+                const target = data.expense * 36;
+                const gap = target - data.liquid;
+                recommendations.push(`优先补充保障金至36个月（需再准备${(gap / 10000).toFixed(1)}万元）`);
+            }
+            
+            if (scores.debt < 80) {
+                recommendations.push(`降低DTI至50%以下（提前还贷或增加收入）`);
+            }
+            
+            if (scores.investment < 80) {
+                recommendations.push(`控制最大持仓占比在30%以内，减少频繁交易`);
+            }
+            
+            if (scores.legal < 80) {
+                recommendations.push(`咨询专业人士，安排婚姻财产协议和遗嘱`);
+            }
+            
+            if (scores.insurance < 80) {
+                const annualIncome = data.income * 12;
+                const lifeTarget = annualIncome * 5;
+                const criticalTarget = annualIncome * 3;
+                recommendations.push(`补充寿险至${(lifeTarget / 10000).toFixed(0)}万，重疾险至${(criticalTarget / 10000).toFixed(0)}万`);
+            }
+            
+            if (recommendations.length === 0) {
+                container.innerHTML = `
+                    <h4>✅ 改进建议</h4>
+                    <div style="color: #065f46; margin-top: 10px;">您的财务健康状况良好，建议定期体检（每年一次）。</div>
+                `;
+            } else {
+                container.innerHTML = `
+                    <h4>💡 改进建议（按优先级排列）</h4>
+                    <ul>
+                        ${recommendations.map(r => `<li>${r}</li>`).join('')}
+                    </ul>
+                `;
+            }
+        }
+        
+        // 保存报告
+        function saveReport() {
+            const data = {
+                monthlyExpense: document.getElementById('monthlyExpense').value,
+                liquidAssets: document.getElementById('liquidAssets').value,
+                monthlyIncome: document.getElementById('monthlyIncome').value,
+                monthlyRepayment: document.getElementById('monthlyRepayment').value,
+                maxPosition: document.getElementById('maxPosition').value,
+                tradeFrequency: document.getElementById('tradeFrequency').value,
+                marriageAgreement: document.getElementById('marriageAgreement').value,
+                willArrangement: document.getElementById('willArrangement').value,
+                lifeInsurance: document.getElementById('lifeInsurance').value,
+                criticalIllness: document.getElementById('criticalIllness').value,
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('healthCheckup', JSON.stringify(data));
+            alert('✅ 体检报告已保存到本地！');
+        }
+        
+        // 页面加载时恢复数据
+        window.onload = function() {
+            const saved = localStorage.getItem('healthCheckup');
+            if (saved) {
+                const data = JSON.parse(saved);
+                document.getElementById('monthlyExpense').value = data.monthlyExpense || '';
+                document.getElementById('liquidAssets').value = data.liquidAssets || '';
+                document.getElementById('monthlyIncome').value = data.monthlyIncome || '';
+                document.getElementById('monthlyRepayment').value = data.monthlyRepayment || '';
+                document.getElementById('maxPosition').value = data.maxPosition || '';
+                document.getElementById('tradeFrequency').value = data.tradeFrequency || '';
+                document.getElementById('marriageAgreement').value = data.marriageAgreement || 'none';
+                document.getElementById('willArrangement').value = data.willArrangement || 'none';
+                document.getElementById('lifeInsurance').value = data.lifeInsurance || '';
+                document.getElementById('criticalIllness').value = data.criticalIllness || '';
+                calculate();
+            }
+        };
+    </script>
+</body>
+</html>

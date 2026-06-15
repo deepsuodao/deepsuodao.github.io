@@ -83,6 +83,28 @@ header nav a:hover {
   color: var(--primary-color);
 }
 
+/* === Header Dark (暗色背景，用于首屏为暗色的页面) === */
+header.header-dark {
+  background: rgba(11, 13, 16, 0.92);
+  border-bottom: 1px solid rgba(212, 168, 83, 0.08);
+}
+
+header.header-dark .logo {
+  color: #FFFFFF;
+}
+
+header.header-dark .logo span {
+  color: var(--accent-color);
+}
+
+header.header-dark nav a {
+  color: #8A94A6;
+}
+
+header.header-dark nav a:hover {
+  color: #FFFFFF;
+}
+
 /* === 排版与标题 === */
 .section-title {
   font-size: .85rem;
@@ -109,7 +131,8 @@ p {
 /* === 说话人样式（高级莫兰迪半透明背景版） === */
 .dialogue-block .speaker,
 .dialogue-block .speaker-b,
-.dialogue-block .speaker-c {
+.dialogue-block .speaker-c,
+.dialogue-block .speaker-d {
   font-weight: 600;
   padding: 3px 10px;
   border-radius: 4px;
@@ -135,6 +158,12 @@ p {
 .dialogue-block .speaker-c {
   color: #4f6334;
   background: #eff3ea;
+}
+
+/* 角色 D：小王（务实的大众投资者）- 采用低饱和度的莫兰迪暖陶红/肉桂粉衬底 */
+.dialogue-block .speaker-d {
+  color: #a35d52;
+  background: #fbf2f0;
 }
 
 

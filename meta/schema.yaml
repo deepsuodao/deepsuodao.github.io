@@ -1,0 +1,260 @@
+# 私家智囊 · 口径表 schema.yaml
+# 版本：0.1（讨论稿）
+# 生效日期：2026-06-12
+# 说明：本文件是所有核心概念的"唯一事实源"（single source of truth）。
+#       文章作者、工具开发者、AI（WorkBuddy/Hermes）必须引用本文件，
+#       不得自行创造说法。
+# 修改权限：只有黄总可以修改（需经讨论）。
+
+# ============================================================
+# 一、规划师三原则（标准措辞，来自 principles.html）
+# ============================================================
+principles:
+  - id: P1
+    name: "时间朋友"
+    standard_wording: "复利要创造奇迹，前提是——信心是其不中断的核动力"
+    extended_wording:
+      - text: "用信心喂养长期"
+        condition: "在讨论'复利前提''n的作用'等语义背景下可以使用"
+        approved: true
+        note: "不能替代标准措辞，只能作为补充理解"
+    related_tools: []
+    related_articles: ["dialogue-01", "dialogue-04", "dialogue-04B"]
+
+  - id: P2
+    name: "系统信任"
+    standard_wording: "信赖系统，而不是信赖自己的判断"
+    extended_wording:
+      - text: "用机制锁定人性"
+        condition: "在讨论'制度设计''资产隔离'等语义背景下可以使用"
+        approved: true
+        note: "不能替代标准措辞，只能作为补充理解"
+    related_tools: []
+    related_articles: ["dialogue-07", "dialogue-09", "dialogue-04B"]
+
+  - id: P3
+    name: "分散布局"
+    standard_wording: "不把鸡蛋放在一个篮子里，也不把所有的篮子放在同一辆卡车上"
+    extended_wording:
+      - text: "用教育替代投机"
+        condition: "在讨论'财商教育''儿童投资'等语义背景下可以使用"
+        approved: true
+        note: "不能替代标准措辞，只能作为补充理解"
+    related_tools: ["asset-allocation-checker"]
+    related_articles: ["dialogue-07", "dialogue-04B"]
+
+
+# ============================================================
+# 二、守夜人五底线（标准措辞 + 精确边界数值）
+# ============================================================
+bottom_lines:
+  - id: B1
+    name: "保障金底线"
+    standard_wording: "保障金是家庭财务的'安全气囊'，必须优先于投资"
+    precise_boundary:
+      min_months: 36
+      warning_months: 12
+      note: "保障金计算器必须强制设置'最低36个月'警示线；<12个月弹出红色警示"
+    related_tools: ["emergency-fund-calculator"]
+    related_articles: ["dialogue-08", "dialogue-04B"]
+
+  - id: B2
+    name: "负债边界底线"
+    standard_wording: "负债水平必须控制在家庭可承受范围内"
+    precise_boundary:
+      max_debt_to_income: 40
+      unit: "%"
+      note: "房贷/负债收入比>40%时，工具必须红色警示"
+    related_tools: ["mortgage-stress-test"]
+    related_articles: ["dialogue-08", "dialogue-17"]
+
+  - id: B3
+    name: "流动性防线底线"
+    standard_wording: "必须保留足够的流动性资产应对突发需求"
+    precise_boundary:
+      min_liquid_ratio: 10
+      unit: "%"
+      note: "流动性资产（现金+货币基金）占家庭总资产比例<10%时，工具必须警示"
+    related_tools: []
+    related_articles: ["dialogue-08"]
+
+  - id: B4
+    name: "家庭法律关系底线"
+    standard_wording: "家庭财务决策必须考虑法律关系的清晰性"
+    precise_boundary:
+      note: "工具不直接计算，但文章必须提醒'受益人''共同债务'等法律事项"
+    related_tools: []
+    related_articles: ["dialogue-08"]
+
+  - id: B5
+    name: "投资纪律底线"
+    standard_wording: "投资必须严守纪律，不使用高杠杆、不追逐短期暴利"
+    precise_boundary:
+      max_margin_ratio: 30
+      unit: "%"
+      note: "融资/保证金比例>30%时，工具必须红色警示；投资回报模拟器必须强制设置'收益率≤20%'上限"
+    related_tools: ["investment-return-simulator", "asset-allocation-checker"]
+    related_articles: ["dialogue-08"]
+
+
+# ============================================================
+# 三、财富五层框架（标准名称 + 定义）
+# ============================================================
+wealth_framework:
+  layers:
+    - id: L1
+      name: "挣钱"
+      definition: "通过劳动、技能、时间换取收入"
+      note: "这是财富的起点，但不是终极目标"
+      related_articles: []
+
+    - id: L2
+      name: "赚钱"
+      definition: "让资产产生被动收入（利息、股息、租金等）"
+      note: "这是从'主动收入'到'被动收入'的跨越"
+      related_articles: []
+
+    - id: L3
+      name: "积累财富"
+      definition: "通过复利、时间、分散布局，系统性地积累资产"
+      note: "这是规划师三原则的用武之地"
+      related_articles: ["dialogue-04", "dialogue-04B"]
+
+    - id: L4
+      name: "花钱"
+      definition: "合理分配财富用于消费、体验、社会责任"
+      note: "财富的意义在于使用，而不是囤积"
+      related_articles: []
+
+    - id: L5
+      name: "传承财富"
+      definition: "将财富、价值观、能力传递给下一代"
+      note: "这是财富管理的最高层次"
+      related_articles: ["dialogue-04B"]
+
+
+# ============================================================
+# 四、文章标签体系（标准标签名称，禁止自行创造）
+# ============================================================
+article_tags:
+  core_tags:
+    principles:
+      - "原则-时间朋友"
+      - "原则-系统信任"
+      - "原则-分散布局"
+    bottom_lines:
+      - "底线-保障金底线"
+      - "底线-负债边界底线"
+      - "底线-流动性防线底线"
+      - "底线-家庭法律关系底线"
+      - "底线-投资纪律底线"
+  topic_tags:
+    approved:
+      - "话题-儿童财商"
+      - "话题-退休规划"
+      - "话题-房贷规划"
+      - "话题-保险配置"
+      - "话题-资产分配"
+      - "话题-投资纪律"
+      - "话题-家庭法律关系"
+    note: "如需新增话题标签，需与黄总讨论后添加到本文件"
+  difficulty_tags:
+    approved:
+      - "难度-入门"
+      - "难度-进阶"
+    note: "暂不增加'难度-专家'，避免让读者望而却步"
+
+
+# ============================================================
+# 五、工具边界数值（供工具直接引用）
+# ============================================================
+tool_boundaries:
+  - tool_name: "emergency-fund-calculator"
+    tool_label: "保障金计算器"
+    boundaries:
+      - param: "min_months"
+        value: 36
+        unit: "个月"
+        warning_value: 12
+        note: "保障金<12个月，红色警示"
+    status: "规划中"
+
+  - tool_name: "investment-return-simulator"
+    tool_label: "投资回报模拟器"
+    boundaries:
+      - param: "min_years"
+        value: 10
+        unit: "年"
+        note: "强制设置投资期限≥10年的默认值"
+      - param: "max_return_rate"
+        value: 20
+        unit: "%/年"
+        note: "不允许用户设置'收益率>20%'"
+    status: "规划中"
+
+  - tool_name: "asset-allocation-checker"
+    tool_label: "资产分配检查器"
+    boundaries:
+      - param: "max_single_asset_ratio"
+        value: 30
+        unit: "%"
+        note: "单一资产占比>30%，黄色警示"
+      - param: "max_same_industry_ratio"
+        value: 50
+        unit: "%"
+        note: "同一行业逻辑占比>50%，黄色警示；需预设行业分类清单"
+      - param: "max_margin_ratio"
+        value: 30
+        unit: "%"
+        note: "融资比例>30%，红色警示"
+    status: "规划中"
+
+  - tool_name: "mortgage-stress-test"
+    tool_label: "房贷压力测试"
+    boundaries:
+      - param: "max_debt_to_income"
+        value: 40
+        unit: "%"
+        note: "负债收入比>40%，红色警示"
+    status: "规划中"
+
+
+# ============================================================
+# 六、案例标准摘要（防止各说各话）
+# ============================================================
+case_summaries:
+  approved:
+    - case_id: "C01"
+      name: "范氏义庄"
+      standard_summary: "范仲淹于1050年设立范氏义庄，通过'资产隔离+规则固化'机制，实现900年跨代传承。核心启示：用制度而非人情保障长期执行。"
+      source: "历史文献"
+      related_principles: ["P2-系统信任"]
+
+    - case_id: "C02"
+      name: "韩国工薪族集中崩盘"
+      standard_summary: "1997年亚洲金融危机期间，韩国大量工薪族因集中持有单一资产（房地产或股票）且高杠杆操作，导致 simultaneous loss。核心启示：分散布局必须同时考虑'资产种类'和'行业逻辑'。"
+      source: "公开市场数据"
+      related_principles: ["P3-分散布局"]
+
+    - case_id: "C03"
+      name: "2020年3月的电话"
+      standard_summary: "2020年3月全球疫情爆发，股市暴跌。一位投资者因未预留保障金，被迫在低点卖出股票应急。核心启示：保障金底线是不可省略的安全气囊。"
+      source: "市场背景"
+      related_bottom_lines: ["B1-保障金底线"]
+
+  note: "如需新增案例，需与黄总讨论后添加到本文件，并填写standard_summary（所有文章必须引用此摘要，不得自行发挥）"
+
+
+# ============================================================
+# 七、文件元数据
+# ============================================================
+meta:
+  version: "0.1"
+  status: "讨论稿"
+  created_date: "2026-06-12"
+  author: "WorkBuddy（参谋）"
+  approved_by: "待黄总审阅"
+  next_review_date: "2026-09-12"
+  changelog:
+    - date: "2026-06-12"
+      changes: "初版（0.1讨论稿），基于CHARTER.md起草"
