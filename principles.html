@@ -336,7 +336,7 @@
         <tr>
           <td>保障金</td>
           <td>每季度</td>
-          <td>可速兑资产≥36个月支出？</td>
+          <td>保障金≥36个月支出？</td>
           <td class="safe">≥36月</td>
           <td class="warn">24-36月</td>
           <td class="danger"><24月</td>
@@ -384,84 +384,7 @@
 
 <hr class="sep" style="max-width:1100px;margin:0 auto;">
 
-<!-- ===== Appointment Module (Dark, at the end) ===== -->
-<section style="padding:80px 0;background:#F9F8F6;">
-  <div style="max-width:1100px;margin:0 auto;padding:0 24px;">
-    <div class="appointment-module scroll-fade">
-      <div style="position:relative;z-index:1;">
-        <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.18em;color:#D4AF37;margin-bottom:16px;font-weight:500;">
-          闭门投资者茶叙
-        </div>
-        <h2 style="font-size:clamp(1.5rem,3vw,2.2rem);color:#FFFFFF;margin-bottom:16px;font-weight:600;">
-          申请加入我们的<br>闭门投资者茶叙
-        </h2>
-        <p style="font-size:0.95rem;color:#8A94A6;max-width:540px;margin:0 auto 32px;line-height:1.7;">
-          每季度一次，仅限合格投资者。深索道主理，围绕家庭财富规划的核心原则，进行深度闭门交流。名额有限，需审核通过。
-        </p>
-        
-        <!-- Form (using Formspree or similar for static site) -->
-        <form 
-          action="https://formspree.io/f/your-form-id" 
-          method="POST"
-          style="max-width:480px;margin:0 auto;text-align:left;"
-          onsubmit="handleSubmit(event); return false;"
-        >
-          <div style="margin-bottom:16px;">
-            <label style="display:block;font-size:0.82rem;color:#8A94A6;margin-bottom:6px;">阁下如何称呼？</label>
-            <input type="text" name="name" required class="form-input" placeholder="您的称呼">
-          </div>
-          
-          <div style="margin-bottom:16px;">
-            <label style="display:block;font-size:0.82rem;color:#8A94A6;margin-bottom:6px;">常用联系方式（微信/电话）</label>
-            <input type="text" name="contact" required class="form-input" placeholder="微信 ID 或手机号码">
-          </div>
-          
-          <div style="margin-bottom:16px;">
-            <label style="display:block;font-size:0.82rem;color:#8A94A6;margin-bottom:6px;">财富管理中，您目前最想解决的痛点？</label>
-            <div style="display:flex;flex-direction:column;gap:8px;">
-              <label style="display:flex;align-items:center;gap:8px;font-size:0.9rem;color:#CCCCCC;cursor:pointer;">
-                <input type="checkbox" name="pain_point" value="cross-cycle" style="accent-color:#D4AF37;"> 跨周期守护
-              </label>
-              <label style="display:flex;align-items:center;gap:8px;font-size:0.9rem;color:#CCCCCC;cursor:pointer;">
-                <input type="checkbox" name="pain_point" value="debt-hedge" style="accent-color:#D4AF37;"> 负债对冲
-              </label>
-              <label style="display:flex;align-items:center;gap:8px;font-size:0.9rem;color:#CCCCCC;cursor:pointer;">
-                <input type="checkbox" name="pain_point" value="dividend" style="accent-color:#D4AF37;"> 长期高股息配置
-              </label>
-            </div>
-          </div>
-          
-          <div style="margin-bottom:24px;">
-            <label style="display:block;font-size:0.82rem;color:#8A94A6;margin-bottom:6px;">可投资金融资产规模（单选）</label>
-            <div style="display:flex;flex-direction:column;gap:8px;">
-              <label style="display:flex;align-items:center;gap:8px;font-size:0.9rem;color:#CCCCCC;cursor:pointer;">
-                <input type="radio" name="asset_scale" value="lt500" required style="accent-color:#D4AF37;"> 500万以下
-              </label>
-              <label style="display:flex;align-items:center;gap:8px;font-size:0.9rem;color:#CCCCCC;cursor:pointer;">
-                <input type="radio" name="asset_scale" value="500-2000" style="accent-color:#D4AF37;"> 500万 - 2000万
-              </label>
-              <label style="display:flex;align-items:center;gap:8px;font-size:0.9rem;color:#CCCCCC;cursor:pointer;">
-                <input type="radio" name="asset_scale" value="gt2000" style="accent-color:#D4AF37;"> 2000万以上
-              </label>
-            </div>
-          </div>
-          
-          <button type="submit" class="btn-glass" style="width:100%;text-align:center;">
-            提交申请
-          </button>
-          
-          <p id="form-feedback" style="display:none;margin-top:16px;font-size:0.85rem;color:#D4AF37;text-align:center;">
-            原则已确认。守夜人团队将在48小时内审核您的申请，并与您取得联系。谢谢。
-          </p>
-        </form>
-        
-        <p style="font-size:0.75rem;color:#5a5855;margin-top:24px;position:relative;z-index:1;">
-          * 您的信息仅用于茶叙资格审核，不会被用于任何其他用途。
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 <!-- ===== Footer (Light) ===== -->
 <footer style="border-top:1px solid #E8E6E3;padding:48px 0 32px;background:#F9F8F6;">
