@@ -71,7 +71,7 @@ header .logo span {
 }
 
 header nav a {
-  font-size: .95rem;
+  font-size: .9rem;
   margin-left: 24px;
   color: var(--text-muted);
   text-decoration: none;
