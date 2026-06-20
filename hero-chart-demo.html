@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>首屏图表演示 — 守夜人 · 私家智囊</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Noto Sans SC", "Inter", -apple-system, "PingFang SC", sans-serif;
+      background: #0B0D10;
+      color: rgba(255, 255, 255, 0.85);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+    .demo-container { max-width: 640px; width: 100%; }
+    .demo-container > h1 {
+      font-size: 1.4rem; font-weight: 500; color: #D4AF37;
+      letter-spacing: 0.04em; margin-bottom: 6px;
+    }
+    .demo-container > .subtitle {
+      font-size: 0.9rem; color: rgba(255,255,255,0.5);
+      margin-bottom: 32px; font-weight: 300;
+    }
+    .chart-container {
+      position: relative; width: 380px; height: 280px;
+      background: #0B0D10; border: 1px solid rgba(212,175,55,0.12);
+      border-radius: 6px; overflow: hidden;
+    }
+    .chart-container canvas { display: block; width: 380px; height: 280px; }
+    .chart-fallback {
+      display: none; position: absolute; top: 0; left: 0;
+      width: 380px; height: 280px; background: #0B0D10;
+      justify-content: center; align-items: center; flex-direction: column; gap: 12px;
+    }
+    .chart-fallback.active { display: flex; }
+    .chart-fallback p { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+    .noscript-fallback {
+      display: none; position: absolute; top: 0; left: 0;
+      width: 380px; height: 280px; background: #0B0D10;
+      justify-content: center; align-items: center; flex-direction: column; gap: 12px;
+    }
+    .chart-legend {
+      display: flex; gap: 24px; margin-top: 10px;
+    }
+    .chart-legend .lg-item {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.72rem; color: rgba(255,255,255,0.4); font-weight: 300;
+    }
+    .chart-legend .lg-swatch { width: 20px; height: 2px; border-radius: 1px; flex-shrink: 0; }
+    .chart-legend .lg-swatch.gold-solid { background: #D4AF37; }
+    .chart-legend .lg-swatch.white-dash {
+      background: repeating-linear-gradient(to right, rgba(255,255,255,0.25) 0, rgba(255,255,255,0.25) 8px, transparent 8px, transparent 12px);
+    }
+    .chart-legend .lg-swatch.gold-dash {
+      background: repeating-linear-gradient(to right, rgba(212,175,55,0.3) 0, rgba(212,175,55,0.3) 5px, transparent 5px, transparent 10px);
+    }
+    .disclaimer-box {
+      margin-top: 12px; padding: 14px 16px;
+      border: 1px solid rgba(212,175,55,0.08); border-radius: 4px;
+      background: rgba(255,255,255,0.02);
+    }
+    .disclaimer-box p {
+      font-size: 0.7rem; color: rgba(255,255,255,0.25);
+      line-height: 1.6; font-weight: 300; margin-bottom: 2px;
+    }
+    .disclaimer-box p:last-child { margin-bottom: 0; }
+    .specs {
+      margin-top: 48px; padding: 24px;
+      border: 1px solid rgba(212,175,55,0.08); border-radius: 6px;
+      background: rgba(255,255,255,0.02);
+    }
+    .specs h2 {
+      font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em;
+      color: rgba(212,175,55,0.6); font-weight: 500; margin-bottom: 16px;
+    }
+    .specs ul { list-style: none; padding: 0; }
+    .specs ul li {
+      font-size: 0.8rem; color: rgba(255,255,255,0.5);
+      margin-bottom: 8px; padding-left: 16px; position: relative;
+    }
+    .specs ul li::before {
+      content: "—"; position: absolute; left: 0; color: rgba(212,175,55,0.4);
+    }
+    .specs ul li em { color: rgba(212,175,55,0.7); font-style: normal; }
+    @media (max-width: 768px) {
+      .chart-container, .chart-container canvas, .chart-legend, .disclaimer-box { display: none !important; }
+    }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #0B0D10; }
+    ::-webkit-scrollbar-thumb { background: rgba(212,175,55,0.2); border-radius: 2px; }
+  </style>
+</head>
+<body>
+<div class="demo-container">
+  <h1>首屏 Hero 区图表演示</h1>
+  <p class="subtitle">模拟"信心是复利不中断的核动力"的视觉锚点</p>
+
+  <div class="chart-container" id="chartContainer">
+    <canvas id="compoundChart" width="380" height="280"></canvas>
+    <div class="chart-fallback" id="chartFallback">
+      <svg width="200" height="120" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 110 Q40 100, 70 80 Q100 55, 130 40 Q160 25, 190 20" stroke="#D4AF37" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M10 105 Q65 95, 120 85 Q160 78, 190 72" stroke="rgba(255,255,255,0.25)" stroke-width="1" stroke-dasharray="8,4" fill="none" stroke-linecap="round"/>
+        <line x1="30" y1="70" x2="170" y2="70" stroke="rgba(212,175,55,0.25)" stroke-width="1" stroke-dasharray="5,5"/>
+        <text x="100" y="95" fill="rgba(255,255,255,0.3)" font-family="Noto Sans SC, sans-serif" font-size="9" text-anchor="middle">复利曲线 — 模拟数据</text>
+      </svg>
+      <p>图表加载中…</p>
+    </div>
+    <noscript>
+      <div class="noscript-fallback" style="display:flex;">
+        <svg width="160" height="100" viewBox="0 0 160 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 92 Q32 80, 56 64 Q80 44, 104 32 Q128 20, 152 16" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.4"/>
+          <path d="M8 88 Q44 80, 80 73 Q112 67, 152 62" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="8,4" fill="none" stroke-linecap="round"/>
+          <text x="80" y="50" fill="rgba(255,255,255,0.35)" font-family="Noto Sans SC, sans-serif" font-size="10" text-anchor="middle">请启用 JavaScript 以查看交互图表</text>
+        </svg>
+      </div>
+    </noscript>
+  </div>
+
+  <div class="chart-legend">
+    <span class="lg-item"><span class="lg-swatch gold-solid"></span>守夜人机制（8% 复利）</span>
+    <span class="lg-item"><span class="lg-swatch white-dash"></span>无风险基准（3% 单利）</span>
+    <span class="lg-item"><span class="lg-swatch gold-dash"></span>守夜人底线</span>
+  </div>
+
+  <div class="disclaimer-box">
+    <p>模拟数据说明：</p>
+    <p>• 曲线A（金色）：模拟年化8%复利增长，仅供参考</p>
+    <p>• 曲线B（白色）：参考中国10年期国债收益率约3%，线性计算</p>
+    <p>• 实际收益受市场波动影响，此图不代表任何收益承诺</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var W = 380, H = 280;
+  var M = { t: 28, r: 28, b: 36, l: 40 };
+  var pW = W - M.l - M.r, pH = H - M.t - M.b;
+
+  // Data
+  var years = 20, start = 100;
+  var dA = [], dB = [];
+  for(var y = 1; y <= years; y++) {
+    dA.push({year:y, v: Math.round(start * Math.pow(1.08, y) * 10)/10});
+    dB.push({year:y, v: Math.round((start * (1 + 0.03 * y)) * 10)/10});
+  }
+  var blVal = dA[9].v; // year 10 baseline
+  var yMax = 500;
+
+  function xP(y) { return M.l + (y-1)/(years-1) * pW; }
+  function yP(v) { return M.t + pH - (v-0)/(yMax-0) * pH; }
+
+  var canvas = document.getElementById('compoundChart');
+  var ctx = canvas.getContext('2d');
+
+  // Ensure canvas is clean
+  canvas.width = W;
+  canvas.height = H;
+
+  // Draw
+  function draw(progress, hoverIdx, hoverCurve) {
+    ctx.clearRect(0, 0, W, H);
+
+    // BG
+    ctx.fillStyle = '#0B0D10';
+    ctx.fillRect(0, 0, W, H);
+
+    // Grid
+    ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+    ctx.lineWidth = 1;
+    for(var v = 0; v <= yMax; v += 100) {
+      var gy = yP(v);
+      ctx.beginPath();
+      ctx.moveTo(M.l, gy);
+      ctx.lineTo(W-M.r, gy);
+      ctx.stroke();
+    }
+
+    // Y labels
+    ctx.fillStyle = 'rgba(255,255,255,0.4)';
+    ctx.font = '10px "Inter", "Noto Sans SC", sans-serif';
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'middle';
+    for(var v = 0; v <= yMax; v += 100)
+      ctx.fillText(v + '万', M.l - 8, yP(v));
+
+    // X labels
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    for(var y = 1; y <= years; y += 5)
+      ctx.fillText('第' + y + '年', xP(y), M.t + pH + 8);
+
+    // Baseline
+    ctx.save();
+    ctx.setLineDash([5,5]);
+    ctx.strokeStyle = 'rgba(212,175,55,0.3)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(xP(1), yP(blVal));
+    ctx.lineTo(xP(years), yP(blVal));
+    ctx.stroke();
+    ctx.restore();
+
+    // Baseline label
+    ctx.fillStyle = 'rgba(255,255,255,0.4)';
+    ctx.font = '10px "Inter", "Noto Sans SC", sans-serif';
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'bottom';
+    ctx.fillText('守夜人底线', xP(years) + 4, yP(blVal)-2);
+
+    // Helper: draw a curve
+    function drawOne(data, color, lw, dash) {
+      var count = Math.max(1, Math.floor(progress * (data.length - 1)));
+      var frac = progress * (data.length - 1) - count;
+
+      ctx.save();
+      if(dash) ctx.setLineDash(dash);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = lw;
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+
+      for(var i = 0; i <= count && i < data.length; i++) {
+        var x = xP(data[i].year), y = yP(data[i].v);
+        if(i === 0) ctx.moveTo(x, y);
+        else {
+          var px = xP(data[i-1].year), py = yP(data[i-1].v);
+          ctx.quadraticCurveTo((px+x)/2, py, x, y);
+        }
+      }
+      if(frac > 0 && count + 1 < data.length) {
+        var p1 = data[count], p2 = data[count+1];
+        var mx = xP(p1.year) + (xP(p2.year)-xP(p1.year)) * frac;
+        var my = yP(p1.v) + (yP(p2.v)-yP(p1.v)) * frac;
+        ctx.quadraticCurveTo((xP(p1.year)+xP(p2.year))/2, yP(p1.v), mx, my);
+      }
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    // Draw Curve B first (behind)
+    drawOne(dB, 'rgba(255,255,255,0.25)', 1.2, [8,4]);
+
+    // Draw Curve A on top
+    drawOne(dA, '#D4AF37', 2, null);
+
+    // Dots
+    var vis = Math.max(1, Math.floor(progress * (data.length - 1)));
+    for(var i = 0; i <= vis && i < dA.length; i++) {
+      var ax = xP(dA[i].year), ay = yP(dA[i].v);
+      ctx.fillStyle = '#D4AF37';
+      ctx.globalAlpha = 0.2;
+      ctx.beginPath(); ctx.arc(ax, ay, 2.5, 0, Math.PI*2); ctx.fill();
+      var bx = xP(dB[i].year), by = yP(dB[i].v);
+      ctx.fillStyle = 'rgba(255,255,255,0.12)';
+      ctx.globalAlpha = 0.4;
+      ctx.beginPath(); ctx.arc(bx, by, 2, 0, Math.PI*2); ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+
+    // Hover label
+    if(hoverIdx >= 0 && hoverCurve) {
+      var ds = hoverCurve === 'A' ? dA : dB;
+      var pt = ds[hoverIdx];
+      var px = xP(pt.year), py = yP(pt.v);
+      var lw = 136, lh = 44;
+      var lx = px - lw/2, ly = py - lh - 14;
+      if(lx < M.l) lx = M.l;
+      if(lx+lw > W-M.r) lx = W-M.r-lw;
+      if(ly < M.t) ly = py + 10;
+
+      ctx.fillStyle = 'rgba(22,26,34,0.9)';
+      // roundRect
+      ctx.beginPath();
+      ctx.moveTo(lx+4, ly);
+      ctx.lineTo(lx+lw-4, ly);
+      ctx.quadraticCurveTo(lx+lw, ly, lx+lw, ly+4);
+      ctx.lineTo(lx+lw, ly+lh-4);
+      ctx.quadraticCurveTo(lx+lw, ly+lh, lx+lw-4, ly+lh);
+      ctx.lineTo(lx+4, ly+lh);
+      ctx.quadraticCurveTo(lx, ly+lh, lx, ly+lh-4);
+      ctx.lineTo(lx, ly+4);
+      ctx.quadraticCurveTo(lx, ly, lx+4, ly);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      var midX = lx + lw/2;
+      if(hoverCurve === 'A') {
+        ctx.fillStyle = '#D4AF37';
+        ctx.font = '10px "Inter", "Noto Sans SC", sans-serif';
+        ctx.fillText('守夜人 · 第 ' + pt.year + ' 年', midX, ly + 14);
+        ctx.fillStyle = '#D4AF37';
+        ctx.font = '600 13px "Inter", "Noto Sans SC", sans-serif';
+        ctx.fillText(pt.v + ' 万', midX, ly + 33);
+      } else {
+        ctx.fillStyle = 'rgba(255,255,255,0.7)';
+        ctx.font = '10px "Inter", "Noto Sans SC", sans-serif';
+        ctx.fillText('基准 · 第 ' + pt.year + ' 年', midX, ly + 14);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = '600 13px "Inter", "Noto Sans SC", sans-serif';
+        ctx.fillText(pt.v + ' 万', midX, ly + 33);
+      }
+    }
+  }
+
+  // Draw full chart immediately
+  draw(1, -1, null);
+
+  // After 1.2s delay, replay the animation (redraw from 0 to 1)
+  setTimeout(function() {
+    var frame = 0;
+    var totalFrames = 72; // 1.2s at ~60fps
+
+    function animStep() {
+      frame++;
+      var p = Math.min(1, frame / totalFrames);
+      draw(p, -1, null);
+      if(p < 1) setTimeout(animStep, 16);
+    }
+
+    // Redraw from empty
+    draw(0, -1, null);
+    setTimeout(animStep, 16);
+  }, 1200);
+
+  console.log('[hero-chart] 图表已初始化。');
+})();
+</script>
+</body>
+</html>
