@@ -106,7 +106,9 @@
 
     <div class="container">
       <div class="hero-layout">
-        <div class="hero-text" style="position: relative; z-index: 1;">
+
+        <!-- Left: Hero Text -->
+        <div class="hero-text" style="position: relative; z-index: 1; flex: 1; min-width: 0;">
           <div class="subtitle"
             style="color: #D4AF37 !important; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.18em; font-weight: 500; margin-bottom: 16px;">
             私家智囊 · 您家庭财富的规划师与守夜人</div>
@@ -124,9 +126,56 @@
           <p style="font-size:.75rem;color:#8A94A6;margin-top:12px;">所有工具仅在浏览器本地计算，不上传服务器 · 免注册</p>
         </div>
 
-        <!-- ===== Mini Checkup ===== -->
-        <div class="mini-checkup" id="mini-checkup-anchor">
-          <div class="mc-title">⚡ 30秒 · 您家庭的信心体检</div>
+        <!-- Right: Canvas Chart -->
+        <div class="chart-wrapper">
+          <div class="chart-container" id="chartContainer">
+            <canvas id="compoundChart" width="380" height="280"></canvas>
+            <div class="chart-fallback" id="chartFallback">
+              <svg width="200" height="120" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 110 Q40 100, 70 80 Q100 55, 130 40 Q160 25, 190 20"
+                      stroke="#D4AF37" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path d="M10 105 Q65 95, 120 85 Q160 78, 190 72"
+                      stroke="rgba(255,255,255,0.25)" stroke-width="1" stroke-dasharray="8,4" fill="none" stroke-linecap="round"/>
+                <line x1="30" y1="70" x2="170" y2="70"
+                      stroke="rgba(212,175,55,0.25)" stroke-width="1" stroke-dasharray="5,5"/>
+                <text x="100" y="95" fill="rgba(255,255,255,0.3)"
+                      font-family="Noto Sans SC, sans-serif" font-size="9" text-anchor="middle">
+                  复利曲线 · 模拟数据
+                </text>
+              </svg>
+              <p style="font-size:0.75rem;color:rgba(255,255,255,0.3);">图表加载中…</p>
+            </div>
+          </div>
+
+          <!-- Legend -->
+          <div class="chart-legend">
+            <span class="lg-item">
+              <span class="lg-swatch gold-solid"></span>
+              守夜人机制（8% 复利）
+            </span>
+            <span class="lg-item">
+              <span class="lg-swatch white-dash"></span>
+              无风险基准（3% 单利）
+            </span>
+            <span class="lg-item">
+              <span class="lg-swatch gold-dash"></span>
+              守夜人底线
+            </span>
+          </div>
+
+          <!-- Disclaimer -->
+          <div class="chart-disclaimer">
+            <p>模拟数据说明：</p>
+            <p>• 曲线A（金色）：模拟年化8%复利增长，仅供参考</p>
+            <p>• 曲线B（白色）：参考中国10年期国债收益率约3%，线性计算</p>
+            <p>• 实际收益受市场波动影响，此图不代表任何收益承诺</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ===== Mini Checkup (below chart) ===== -->
+      <div class="mini-checkup" id="mini-checkup-anchor" style="margin-top:32px;max-width:540px;margin-left:auto;margin-right:auto;">
 
           <!-- Q1 -->
           <div class="mc-question" id="mc-q1">
@@ -286,6 +335,104 @@
 
       <img class="section-img wide" src="./images/funnel-steps.png" alt="三步落地 — 石阶逐级而上，机制层层递进"
         style="margin-top:48px;" />
+    </div>
+  </section>
+
+  <!-- ===== Dual Path: 规划师 vs 守夜人 ===== -->
+  <section class="section dual-path" id="dual-path">
+    <div class="container">
+
+      <div class="dp-header">
+        <div class="section-title" style="margin-bottom:8px;">从哪开始</div>
+        <h2>您现在的财富状态，更需要哪种支持？</h2>
+        <p>两条路径，通向同一个目标——让您的家庭财富有机制可依。选一条，开始走。</p>
+      </div>
+
+      <div class="dp-grid">
+
+        <!-- ===== Path A: 构建体系 ===== -->
+        <div class="dp-card dp-card-a" id="pathA">
+          <div class="dp-card-top">
+            <span class="dp-icon">🏗️</span>
+            <span class="dp-badge">路径一</span>
+            <h3>构建体系</h3>
+            <p class="dp-subtitle">规划师的工程学路径</p>
+            <p class="dp-desc">我想搭建家庭财富的结构框架，从框架到目标再到平衡</p>
+          </div>
+
+          <div class="dp-steps">
+            <div class="dp-step">
+              <span class="dp-step-num">01</span>
+              <div class="dp-step-body">
+                <strong>架构认知</strong>
+                <p class="dp-article">▸ 占位：待定</p>
+                <span class="dp-step-desc">「钱该怎么放？结构该长什么样？」</span>
+              </div>
+            </div>
+            <div class="dp-step">
+              <span class="dp-step-num">02</span>
+              <div class="dp-step-body">
+                <strong>哲学觉醒</strong>
+                <p class="dp-article">▸ 占位：待定</p>
+                <span class="dp-step-desc">「为什么靠机制不靠感觉？」</span>
+              </div>
+            </div>
+            <div class="dp-step">
+              <span class="dp-step-num">03</span>
+              <div class="dp-step-body">
+                <strong>守心实战</strong>
+                <p class="dp-article">▸ 占位：待定</p>
+                <span class="dp-step-desc">「如何对抗情绪与波动？」</span>
+              </div>
+            </div>
+          </div>
+
+          <a href="#content" class="dp-cta dp-cta-a">查看全部基石篇对话 →</a>
+        </div>
+
+        <!-- ===== Path B: 避险守护 ===== -->
+        <div class="dp-card dp-card-b" id="pathB">
+          <div class="dp-card-top">
+            <span class="dp-icon">🛡️</span>
+            <span class="dp-badge">路径二</span>
+            <h3>避险守护</h3>
+            <p class="dp-subtitle">守夜人的安心路径</p>
+            <p class="dp-desc">我很不安，我想先守住底线，别让风险击穿家庭</p>
+          </div>
+
+          <div class="dp-steps">
+            <div class="dp-step">
+              <span class="dp-step-num">01</span>
+              <div class="dp-step-body">
+                <strong>底线觉醒</strong>
+                <p class="dp-article">▸ 占位：待定</p>
+                <span class="dp-step-desc">「五条底线，一条都不能破」</span>
+              </div>
+            </div>
+            <div class="dp-step">
+              <span class="dp-step-num">02</span>
+              <div class="dp-step-body">
+                <strong>工具自检</strong>
+                <p class="dp-article">▸ 占位：待定</p>
+                <span class="dp-step-desc">「15分钟在线打钩，自动出分」</span>
+              </div>
+            </div>
+            <div class="dp-step">
+              <span class="dp-step-num">03</span>
+              <div class="dp-step-body">
+                <strong>机制落地</strong>
+                <p class="dp-article">▸ 占位：待定</p>
+                <span class="dp-step-desc">「36个月储备标准，三色预警」</span>
+              </div>
+            </div>
+          </div>
+
+          <a href="#tools" class="dp-cta dp-cta-b">使用自检工具箱 →</a>
+        </div>
+
+      </div>
+
+      <p class="dp-footnote">💡 两条路不冲突。走完一条后，欢迎再回来探索另一条。</p>
     </div>
   </section>
 
