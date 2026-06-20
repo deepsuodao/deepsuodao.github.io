@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="税务健康体检——18题自测你的税务合规风险等级。境内外收入申报、资产持有、跨境税务、税务规划四个板块全面评估。">
+<meta property="og:title" content="税务健康体检 — 私家智囊">
+<meta property="og:description" content="18题自测 · 4板块评分 · 风险等级评估。境内外收入申报、资产持有、跨境税务、税务规划全面扫描。">
+<meta property="og:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://deepsuodao.github.io/tool-tax-health-check.html">
+<meta property="og:site_name" content="私家智囊">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
+<title>税务健康体检 — 私家智囊</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC","Helvetica Neue",sans-serif;background:#0f1424;color:#e8e6e3;line-height:1.7;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:#d4a853;text-decoration:none;transition:color .3s}
+a:hover{color:#f0c868}
+.container{max-width:700px;margin:0 auto;padding:0 20px 40px}
+.header{text-align:center;padding:32px 0 20px}
+.header h1{font-size:clamp(1.4rem,3.5vw,2rem);font-weight:400;color:#d4a853;letter-spacing:-.02em;margin-bottom:4px}
+.header .subtitle{font-size:.82rem;color:#8a8885}
+.card{background:#1a1f30;border-radius:4px;padding:24px 20px;margin-bottom:16px;border:1px solid rgba(212,168,83,.12)}
+.card-title{font-size:.95rem;font-weight:500;color:#d4a853;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.section-title{font-size:.9rem;font-weight:500;color:#d4a853;margin:20px 0 12px;padding-bottom:8px;border-bottom:1px solid rgba(212,168,83,.12)}
+.question{margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.04)}
+.question:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.q-label{font-size:.85rem;color:#b0aeab;margin-bottom:8px}
+.q-text{font-size:.95rem;color:#e8e6e3;margin-bottom:10px;font-weight:500}
+.options{display:flex;flex-direction:column;gap:6px}
+.options label{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border:1px solid rgba(212,168,83,.1);border-radius:3px;cursor:pointer;transition:all .2s;font-size:.85rem;color:#b0aeab}
+.options label:hover{border-color:rgba(212,168,83,.25);background:rgba(212,168,83,.03)}
+.options input[type="radio"]{margin-top:3px;accent-color:#d4a853;flex-shrink:0}
+.save-btn{display:block;width:100%;padding:14px;margin-top:8px;background:#d4a853;border:none;border-radius:4px;color:#0a0e1a;font-size:.9rem;font-weight:500;cursor:pointer;transition:background .3s;font-family:inherit}
+.save-btn:hover{background:#f0c868}
+.result-box{display:none;background:rgba(212,168,83,.04);border:1px solid rgba(212,168,83,.12);border-radius:4px;padding:20px;margin-top:16px}
+.result-box .score{font-size:2.5rem;font-weight:300;color:#d4a853;margin-bottom:8px}
+.result-box .verdict{font-size:.9rem;margin-bottom:4px}
+.result-box .detail{font-size:.82rem;color:#8a8885;line-height:1.6}
+.risk-low{color:#7db87d}
+.risk-medium{color:#d4a853}
+.risk-high{color:#c97a7a}
+.site-footer{text-align:center;padding:28px 0 20px;border-top:1px solid rgba(255,255,255,.04);margin-top:16px}
+.site-footer .slogan{font-size:.82rem;color:#8a8885;margin-bottom:4px}
+.site-footer .slogan span{color:#d4a853}
+.site-footer .copyright{font-size:.7rem;color:#5a5855}
+@media(max-width:480px){.container{padding:0 14px 20px}.card{padding:18px 14px}.header{padding:24px 0 16px}}
+</style>
+<link rel="canonical" href="https://deepsuodao.github.io/tool-tax-health-check.html">
+<meta name="robots" content="index,follow">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "税务健康体检 — 私家智囊",
+  "description": "税务健康体检——18题自测你的税务合规风险等级。境内外收入申报、资产持有、跨境税务、税务规划四个板块全面评估。",
+  "url": "https://deepsuodao.github.io/tool-tax-health-check.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "All"
+}
+</script>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>🧾 税务健康体检</h1>
+    <div class="subtitle">18题自测 · 4板块评分 · 风险等级评估</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>🎯</span> 境内外收入申报板块（5题）</div>
+    <p style="font-size:.82rem;color:#6a6865;margin-bottom:16px;line-height:1.6;">评估你的境内外收入申报合规情况。</p>
+
+    <div class="question" id="q1">
+      <div class="q-label">问题 1/18</div>
+      <div class="q-text">你是否有境外收入（境外工资、股息、资本利得、房产租金等）？</div>
+      <div class="options">
+        <label><input type="radio" name="q1" value="0"> 没有境外收入</label>
+        <label><input type="radio" name="q1" value="0"> 有境外收入，已申报</label>
+        <label><input type="radio" name="q1" value="2"> 有境外收入，未申报</label>
+      </div>
+    </div>
+
+    <div class="question" id="q2">
+      <div class="q-label">问题 2/18</div>
+      <div class="q-text">你的配偶或子女是否持有外国护照或永久居留权（绿卡）？</div>
+      <div class="options">
+        <label><input type="radio" name="q2" value="0"> 否</label>
+        <label><input type="radio" name="q2" value="0"> 是，但已做税务申报</label>
+        <label><input type="radio" name="q2" value="2"> 是，且未做税务申报</label>
+      </div>
+    </div>
+
+    <div class="question" id="q3">
+      <div class="q-label">问题 3/18</div>
+      <div class="q-text">你是否通过境外账户（如香港、新加坡、瑞士银行账户）收款？</div>
+      <div class="options">
+        <label><input type="radio" name="q3" value="0"> 否</label>
+        <label><input type="radio" name="q3" value="0"> 是，但已申报</label>
+        <label><input type="radio" name="q3" value="2"> 是，且未申报</label>
+      </div>
+    </div>
+
+    <div class="question" id="q4">
+      <div class="q-label">问题 4/18</div>
+      <div class="q-text">你是否在境外公司担任董事或高管？</div>
+      <div class="options">
+        <label><input type="radio" name="q4" value="0"> 否</label>
+        <label><input type="radio" name="q4" value="0"> 是，但已申报</label>
+        <label><input type="radio" name="q4" value="2"> 是，且未申报</label>
+      </div>
+    </div>
+
+    <div class="question" id="q5">
+      <div class="q-label">问题 5/18</div>
+      <div class="q-text">你是否收到过税务机关的境外收入申报提醒或询问？</div>
+      <div class="options">
+        <label><input type="radio" name="q5" value="0"> 否</label>
+        <label><input type="radio" name="q5" value="0"> 是，已妥善处理</label>
+        <label><input type="radio" name="q5" value="2"> 是，但尚未处理</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>🏠</span> 资产持有板块（5题）</div>
+    <p style="font-size:.82rem;color:#6a6865;margin-bottom:16px;line-height:1.6;">评估你的资产持有税务合规情况。</p>
+
+    <div class="question" id="q6">
+      <div class="q-label">问题 6/18</div>
+      <div class="q-text">你是否持有境外房产？</div>
+      <div class="options">
+        <label><input type="radio" name="q6" value="0"> 否</label>
+        <label><input type="radio" name="q6" value="0"> 是，但已申报</label>
+        <label><input type="radio" name="q6" value="2"> 是，且未申报</label>
+      </div>
+    </div>
+
+    <div class="question" id="q7">
+      <div class="q-label">问题 7/18</div>
+      <div class="q-text">你是否持有境外公司股权（直接持股或穿透持股）？</div>
+      <div class="options">
+        <label><input type="radio" name="q7" value="0"> 否</label>
+        <label><input type="radio" name="q7" value="0"> 是，但已申报</label>
+        <label><input type="radio" name="q7" value="2"> 是，且未申报</label>
+      </div>
+    </div>
+
+    <div class="question" id="q8">
+      <div class="q-label">问题 8/18</div>
+      <div class="q-text">你是否通过信托持有境外资产？</div>
+      <div class="options">
+        <label><input type="radio" name="q8" value="0"> 否</label>
+        <label><input type="radio" name="q8" value="0"> 是，但已申报</label>
+        <label><input type="radio" name="q8" value="2"> 是，且未申报</label>
+      </div>
+    </div>
+
+    <div class="question" id="q9">
+      <div class="q-label">问题 9/18</div>
+      <div class="q-text">你是否持有加密货币（比特币、以太坊等）或数字资产？</div>
+      <div class="options">
+        <label><input type="radio" name="q9" value="0"> 否</label>
+        <label><input type="radio" name="q9" value="0"> 是，但已申报</label>
+        <label><input type="radio" name="q9" value="2"> 是，且未申报</label>
+      </div>
+    </div>
+
+    <div class="question" id="q10">
+      <div class="q-label">问题 10/18</div>
+      <div class="q-text">你的境内房产交易是否享受过"满五唯一"税收优惠？</div>
+      <div class="options">
+        <label><input type="radio" name="q10" value="0"> 否，或无房产交易</label>
+        <label><input type="radio" name="q10" value="0"> 是，符合条件</label>
+        <label><input type="radio" name="q10" value="2"> 是，但不符合条件（风险提示）</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>🌍</span> 跨境税务板块（4题）</div>
+    <p style="font-size:.82rem;color:#6a6865;margin-bottom:16px;line-height:1.6;">评估你的跨境税务合规情况。</p>
+
+    <div class="question" id="q11">
+      <div class="q-label">问题 11/18</div>
+      <div class="q-text">你是否被CRS（共同申报准则）覆盖（持有境外金融账户）？</div>
+      <div class="options">
+        <label><input type="radio" name="q11" value="0"> 否</label>
+        <label><input type="radio" name="q11" value="0"> 是，但已申报</label>
+        <label><input type="radio" name="q11" value="2"> 是，且未申报</label>
+      </div>
+    </div>
+
+    <div class="question" id="q12">
+      <div class="q-label">问题 12/18</div>
+      <div class="q-text">你是否持有外国税务居民身份（如美国绿卡、加拿大枫叶卡）？</div>
+      <div class="options">
+        <label><input type="radio" name="q12" value="0"> 否</label>
+        <label><input type="radio" name="q12" value="0"> 是，但已申报</label>
+        <label><input type="radio" name="q12" value="2"> 是，且未申报</label>
+      </div>
+    </div>
+
+    <div class="question" id="q13">
+      <div class="q-label">问题 13/18</div>
+      <div class="q-text">你是否通过境外公司进行贸易或投资？</div>
+      <div class="options">
+        <label><input type="radio" name="q13" value="0"> 否</label>
+        <label><input type="radio" name="q13" value="0"> 是，但已申报</label>
+        <label><input type="radio" name="q13" value="2"> 是，且未申报</label>
+      </div>
+    </div>
+
+    <div class="question" id="q14">
+      <div class="q-label">问题 14/18</div>
+      <div class="q-text">你是否收到过境外税务机构的税务通知或询问？</div>
+      <div class="options">
+        <label><input type="radio" name="q14" value="0"> 否</label>
+        <label><input type="radio" name="q14" value="1"> 是，已妥善处理</label>
+        <label><input type="radio" name="q14" value="2"> 是，但尚未处理</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>📋</span> 税务规划板块（4题）</div>
+    <p style="font-size:.82rem;color:#6a6865;margin-bottom:16px;line-height:1.6;">评估你的税务规划意识和准备情况。</p>
+
+    <div class="question" id="q15">
+      <div class="q-label">问题 15/18</div>
+      <div class="q-text">你是否做过税务健康体检（自查税务合规风险）？</div>
+      <div class="options">
+        <label><input type="radio" name="q15" value="0"> 是，定期做</label>
+        <label><input type="radio" name="q15" value="1"> 是，但很久以前做过</label>
+        <label><input type="radio" name="q15" value="2"> 否，从未做过</label>
+      </div>
+    </div>
+
+    <div class="question" id="q16">
+      <div class="q-label">问题 16/18</div>
+      <div class="q-text">你是否聘请专业税务顾问（注册会计师、税务师）？</div>
+      <div class="options">
+        <label><input type="radio" name="q16" value="0"> 是，长期合作</label>
+        <label><input type="radio" name="q16" value="1"> 是，但临时聘请</label>
+        <label><input type="radio" name="q16" value="2"> 否，从未聘请</label>
+      </div>
+    </div>
+
+    <div class="question" id="q17">
+      <div class="q-label">问题 17/18</div>
+      <div class="q-text">你是否了解金税四期对个人税务的影响？</div>
+      <div class="options">
+        <label><input type="radio" name="q17" value="0"> 是，很了解</label>
+        <label><input type="radio" name="q17" value="1"> 是，但了解不多</label>
+        <label><input type="radio" name="q17" value="2"> 否，完全不了解</label>
+      </div>
+    </div>
+
+    <div class="question" id="q18">
+      <div class="q-label">问题 18/18</div>
+      <div class="q-text">你是否制定过家族税务规划（跨境税务、传承税务）？</div>
+      <div class="options">
+        <label><input type="radio" name="q18" value="0"> 是，已制定</label>
+        <label><input type="radio" name="q18" value="1"> 是，但还在考虑</label>
+        <label><input type="radio" name="q18" value="2"> 否，从未考虑</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px;">
+    <button class="save-btn" onclick="calculate()">🧾 查看结果</button>
+
+    <div class="result-box" id="result">
+      <div class="score" id="scoreDisplay">0</div>
+      <div class="verdict" id="verdictDisplay"></div>
+      <div class="detail" id="detailDisplay"></div>
+    </div>
+  </div>
+
+  <div class="card" style="font-size:.82rem;color:#8a8885;line-height:1.6;margin-top:16px;">
+    <p style="margin-bottom:6px;"><strong style="color:#d4a853;">评分说明：</strong></p>
+    <p>• 0~8分 → 低风险 ✓</p>
+    <p>• 9~18分 → 中风险 ⚠️</p>
+    <p>• 19~36分 → 高风险 ❌</p>
+    <p style="margin-top:8px;"><strong style="color:#d4a853;">重要提示：</strong>本工具仅作税务健康自检，不构成税务建议。如有疑问，请咨询专业税务顾问。</p>
+    <p style="margin-top:8px;">💡 延伸阅读：<a href="./dialogue-30.html">日常篇</a> · <a href="./dialogue-31.html">稽查篇</a> · <a href="./dialogue-32.html">传承篇</a></p>
+  </div>
+
+  <div class="site-footer">
+    <p class="slogan">家庭财富的<span>规划师</span>与<span>守夜人</span></p>
+    <p class="copyright">私家智囊 · 数据本地计算，不上传服务器</p>
+  </div>
+</div>
+
+<script>
+function calculate() {
+  const questions = ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11','q12','q13','q14','q15','q16','q17','q18'];
+  let score = 0;
+  let answered = 0;
+
+  questions.forEach(id => {
+    const selected = document.querySelector(`input[name="${id}"]:checked`);
+    if (selected) {
+      answered++;
+      score += parseInt(selected.value);
+    }
+  });
+
+  if (answered < 18) {
+    document.getElementById('result').style.display = 'block';
+    document.getElementById('scoreDisplay').textContent = '?';
+    document.getElementById('verdictDisplay').textContent = '⚠️ 还有题目没选完';
+    document.getElementById('verdictDisplay').className = 'verdict';
+    document.getElementById('detailDisplay').textContent = '选完所有18题才能出结果。';
+    return;
+  }
+
+  document.getElementById('result').style.display = 'block';
+  document.getElementById('scoreDisplay').textContent = score + '分';
+
+  const verdict = document.getElementById('verdictDisplay');
+  const detail = document.getElementById('detailDisplay');
+
+  if (score <= 8) {
+    verdict.textContent = '✅ 低风险——你的税务合规情况良好';
+    verdict.className = 'verdict risk-low';
+    detail.textContent = '继续保持，定期做税务健康体检。建议：每年自查一次，关注税法变化，保留好相关凭证。';
+  } else if (score <= 18) {
+    verdict.textContent = '⚠️ 中风险——存在税务合规隐患';
+    verdict.className = 'verdict risk-medium';
+    detail.textContent = '建议：尽快咨询专业税务顾问，补齐未申报的税务事项，建立税务合规档案。';
+  } else {
+    verdict.textContent = '❌ 高风险——存在严重税务合规风险';
+    verdict.className = 'verdict risk-high';
+    detail.textContent = '建议：立即咨询专业税务顾问，评估风险等级，制定应对方案。切勿拖延，以免产生罚款或法律责任。';
+  }
+}
+</script>
+</body>
+</html>

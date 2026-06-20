@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="家族传承清单——13题评估你的传承准备度。四层功课（传钱、传资产、传机制、传价值观）与三个阀门（税务成本、控制结构、治理能力）全面扫描。">
+<meta property="og:title" content="家族传承清单 — 私家智囊">
+<meta property="og:description" content="13题评估 · 四层功课 · 三个阀门。传什么比传多少钱更重要——家族传承的全面体检。">
+<meta property="og:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://deepsuodao.github.io/tool-succession-checklist.html">
+<meta property="og:site_name" content="私家智囊">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
+<title>家族传承清单 — 私家智囊</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC","Helvetica Neue",sans-serif;background:#0f1424;color:#e8e6e3;line-height:1.7;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:#d4a853;text-decoration:none;transition:color .3s}
+a:hover{color:#f0c868}
+.container{max-width:700px;margin:0 auto;padding:0 20px 40px}
+.header{text-align:center;padding:32px 0 20px}
+.header h1{font-size:clamp(1.4rem,3.5vw,2rem);font-weight:400;color:#d4a853;letter-spacing:-.02em;margin-bottom:4px}
+.header .subtitle{font-size:.82rem;color:#8a8885}
+.card{background:#1a1f30;border-radius:4px;padding:16px 20px;margin-bottom:16px;border:1px solid rgba(212,168,83,.12)}
+.card-title{font-size:.95rem;font-weight:500;color:#d4a853;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.question{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.04)}
+.question:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.q-label{font-size:.85rem;color:#b0aeab;margin-bottom:6px}
+.q-text{font-size:.95rem;color:#e8e6e3;margin-bottom:8px;font-weight:500}
+.options{display:flex;flex-direction:column;gap:6px}
+.options label{display:flex;align-items:flex-start;gap:10px;padding:8px 12px;border:1px solid rgba(212,168,83,.1);border-radius:3px;cursor:pointer;transition:all .2s;font-size:.85rem;color:#b0aeab}
+.options label:hover{border-color:rgba(212,168,83,.25);background:rgba(212,168,83,.03)}
+.options input[type="radio"]{margin-top:3px;accent-color:#d4a853;flex-shrink:0}
+.save-btn{display:block;width:100%;padding:14px;margin-top:8px;background:#d4a853;border:none;border-radius:4px;color:#0a0e1a;font-size:.9rem;font-weight:500;cursor:pointer;transition:background .3s;font-family:inherit}
+.save-btn:hover{background:#f0c868}
+.result-box{display:none;background:rgba(212,168,83,.04);border:1px solid rgba(212,168,83,.12);border-radius:4px;padding:20px;margin-top:16px}
+.result-box .score{font-size:2.5rem;font-weight:300;color:#d4a853;margin-bottom:8px}
+.result-box .verdict{font-size:.9rem;margin-bottom:4px}
+.result-box .detail{font-size:.82rem;color:#8a8885;line-height:1.6}
+.risk-low{color:#7db87d}
+.risk-medium{color:#d4a853}
+.risk-high{color:#c97a7a}
+.layer-title{font-size:.9rem;font-weight:500;color:#d4a853;margin:16px 0 8px;padding-bottom:8px;border-bottom:1px solid rgba(212,168,83,.12)}
+.site-footer{text-align:center;padding:28px 0 20px;border-top:1px solid rgba(255,255,255,.04);margin-top:16px}
+.site-footer .slogan{font-size:.82rem;color:#8a8885;margin-bottom:4px}
+.site-footer .slogan span{color:#d4a853}
+.site-footer .copyright{font-size:.7rem;color:#5a5855}
+@media(max-width:480px){.container{padding:0 14px 20px}.card{padding:18px 14px}.header{padding:24px 0 16px}}
+</style>
+<link rel="canonical" href="https://deepsuodao.github.io/tool-succession-checklist.html">
+<meta name="robots" content="index,follow">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "家族传承清单 — 私家智囊",
+  "description": "家族传承清单——13题评估你的传承准备度。四层功课与三个阀门全面扫描。",
+  "url": "https://deepsuodao.github.io/tool-succession-checklist.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "All"
+}
+</script>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>📋 家族传承清单</h1>
+    <div class="subtitle">13题评估 · 四层功课 · 三个阀门</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>🎯</span> 传钱层（3题）</div>
+    <p style="font-size:.82rem;color:#6a6865;margin-bottom:16px;line-height:1.6;">第一层：传钱——现金流、保险、信托。</p>
+
+    <div class="question" id="q1">
+      <div class="q-label">问题 1/13</div>
+      <div class="q-text">你是否设立家族信托（境内或境外）？</div>
+      <div class="options">
+        <label><input type="radio" name="q1" value="0"> 是，已设立</label>
+        <label><input type="radio" name="q1" value="1"> 正在考虑</label>
+        <label><input type="radio" name="q1" value="2"> 否，从未考虑</label>
+      </div>
+    </div>
+
+    <div class="question" id="q2">
+      <div class="q-label">问题 2/13</div>
+      <div class="q-text">你是否购买大额人寿保险（保额≥500万）？</div>
+      <div class="options">
+        <label><input type="radio" name="q2" value="0"> 是，已购买</label>
+        <label><input type="radio" name="q2" value="1"> 正在考虑</label>
+        <label><input type="radio" name="q2" value="2"> 否，从未考虑</label>
+      </div>
+    </div>
+
+    <div class="question" id="q3">
+      <div class="q-label">问题 3/13</div>
+      <div class="q-text">你是否制定年度赠与计划（利用免税额度）？</div>
+      <div class="options">
+        <label><input type="radio" name="q3" value="0"> 是，每年执行</label>
+        <label><input type="radio" name="q3" value="1"> 是，但执行不规律</label>
+        <label><input type="radio" name="q3" value="2"> 否，从未制定</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>🏠</span> 传资产层（3题）</div>
+    <p style="font-size:.82rem;color:#6a6865;margin-bottom:16px;line-height:1.6;">第二层：传资产——房产、股权、艺术品。</p>
+
+    <div class="question" id="q4">
+      <div class="q-label">问题 4/13</div>
+      <div class="q-text">你是否持有家族企业股权（或控股公司）？</div>
+      <div class="options">
+        <label><input type="radio" name="q4" value="0"> 是，已制定传承方案</label>
+        <label><input type="radio" name="q4" value="1"> 是，但尚无传承方案</label>
+        <label><input type="radio" name="q4" value="2"> 否</label>
+      </div>
+    </div>
+
+    <div class="question" id="q5">
+      <div class="q-label">问题 5/13</div>
+      <div class="q-text">你是否持有多套房产（≥3套）？</div>
+      <div class="options">
+        <label><input type="radio" name="q5" value="0"> 是，已制定传承方案</label>
+        <label><input type="radio" name="q5" value="1"> 是，但尚无传承方案</label>
+        <label><input type="radio" name="q5" value="2"> 否</label>
+      </div>
+    </div>
+
+    <div class="question" id="q6">
+      <div class="q-label">问题 6/13</div>
+      <div class="q-text">你是否持有境外资产（境外房产、股权、账户）？</div>
+      <div class="options">
+        <label><input type="radio" name="q6" value="0"> 是，已制定传承方案</label>
+        <label><input type="radio" name="q6" value="1"> 是，但尚无传承方案</label>
+        <label><input type="radio" name="q6" value="2"> 否</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>⚙️</span> 传机制层（4题）</div>
+    <p style="font-size:.82rem;color:#6a6865;margin-bottom:16px;line-height:1.6;">第三层：传机制——家族宪法、决策委员会、教育基金。</p>
+
+    <div class="question" id="q7">
+      <div class="q-label">问题 7/13</div>
+      <div class="q-text">你是否制定家族宪法（家族使命、价值观、决策规则）？</div>
+      <div class="options">
+        <label><input type="radio" name="q7" value="0"> 是，已制定</label>
+        <label><input type="radio" name="q7" value="1"> 正在制定</label>
+        <label><input type="radio" name="q7" value="2"> 否，从未考虑</label>
+      </div>
+    </div>
+
+    <div class="question" id="q8">
+      <div class="q-label">问题 8/13</div>
+      <div class="q-text">你是否设立家族决策委员会（或类似治理机构）？</div>
+      <div class="options">
+        <label><input type="radio" name="q8" value="0"> 是，已设立</label>
+        <label><input type="radio" name="q8" value="1"> 正在考虑</label>
+        <label><input type="radio" name="q8" value="2"> 否，从未考虑</label>
+      </div>
+    </div>
+
+    <div class="question" id="q9">
+      <div class="q-label">问题 9/13</div>
+      <div class="q-text">你是否设立家族教育基金（用于后代教育、创业）？</div>
+      <div class="options">
+        <label><input type="radio" name="q9" value="0"> 是，已设立</label>
+        <label><input type="radio" name="q9" value="1"> 正在考虑</label>
+        <label><input type="radio" name="q9" value="2"> 否，从未考虑</label>
+      </div>
+    </div>
+
+    <div class="question" id="q10">
+      <div class="q-label">问题 10/13</div>
+      <div class="q-text">你是否定期召开家族会议（讨论传承、教育、慈善）？</div>
+      <div class="options">
+        <label><input type="radio" name="q10" value="0"> 是，每年至少一次</label>
+        <label><input type="radio" name="q10" value="1"> 是，但不规律</label>
+        <label><input type="radio" name="q10" value="2"> 否，从未召开</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>💎</span> 传价值观层（3题）</div>
+    <p style="font-size:.82rem;color:#6a6865;margin-bottom:16px;line-height:1.6;">第四层：传价值观——家风、慈善、社会责任。</p>
+
+    <div class="question" id="q11">
+      <div class="q-label">问题 11/13</div>
+      <div class="q-text">你是否向下一代传授家族价值观（勤奋、诚信、责任）？</div>
+      <div class="options">
+        <label><input type="radio" name="q11" value="0"> 是，系统传授</label>
+        <label><input type="radio" name="q11" value="1"> 是，但不系统</label>
+        <label><input type="radio" name="q11" value="2"> 否，从未传授</label>
+      </div>
+    </div>
+
+    <div class="question" id="q12">
+      <div class="q-label">问题 12/13</div>
+      <div class="q-text">你是否参与慈善活动（捐赠、设立慈善信托）？</div>
+      <div class="options">
+        <label><input type="radio" name="q12" value="0"> 是，系统参与</label>
+        <label><input type="radio" name="q12" value="1"> 是，但不系统</label>
+        <label><input type="radio" name="q12" value="2"> 否，从未参与</label>
+      </div>
+    </div>
+
+    <div class="question" id="q13">
+      <div class="q-label">问题 13/13</div>
+      <div class="q-text">你是否制定家族社会责任计划（环保、教育、扶贫）？</div>
+      <div class="options">
+        <label><input type="radio" name="q13" value="0"> 是，已制定</label>
+        <label><input type="radio" name="q13" value="1"> 正在制定</label>
+        <label><input type="radio" name="q13" value="2"> 否，从未考虑</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px;">
+    <button class="save-btn" onclick="calculate()">📋 查看结果</button>
+
+    <div class="result-box" id="result">
+      <div class="score" id="scoreDisplay">0</div>
+      <div class="verdict" id="verdictDisplay"></div>
+      <div class="detail" id="detailDisplay"></div>
+    </div>
+  </div>
+
+  <div class="card" style="font-size:.82rem;color:#8a8885;line-height:1.6;margin-top:16px;">
+    <p style="margin-bottom:6px;"><strong style="color:#d4a853;">评分说明：</strong></p>
+    <p>• 0~8分 → 传承准备充分 ✓</p>
+    <p>• 9~17分 → 传承准备不足 ⚠️</p>
+    <p>• 18~26分 → 传承准备严重缺失 ❌</p>
+    <p style="margin-top:8px;"><strong style="color:#d4a853;">重要提示：</strong>本工具仅作传承准备自检，不构成法律或税务建议。如有疑问，请咨询专业顾问。</p>
+    <p style="margin-top:8px;">💡 延伸阅读：<a href="./dialogue-32.html">传承篇</a> · <a href="./dialogue-30.html">税务日常篇</a> · <a href="./dialogue-31.html">税务稽查篇</a></p>
+  </div>
+
+  <div class="site-footer">
+    <p class="slogan">家庭财富的<span>规划师</span>与<span>守夜人</span></p>
+    <p class="copyright">私家智囊 · 数据本地计算，不上传服务器</p>
+  </div>
+</div>
+
+<script>
+function calculate() {
+  const questions = ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11','q12','q13'];
+  let score = 0;
+  let answered = 0;
+
+  questions.forEach(id => {
+    const selected = document.querySelector(`input[name="${id}"]:checked`);
+    if (selected) {
+      answered++;
+      score += parseInt(selected.value);
+    }
+  });
+
+  if (answered < 13) {
+    document.getElementById('result').style.display = 'block';
+    document.getElementById('scoreDisplay').textContent = '?';
+    document.getElementById('verdictDisplay').textContent = '⚠️ 还有题目没选完';
+    document.getElementById('verdictDisplay').className = 'verdict';
+    document.getElementById('detailDisplay').textContent = '选完所有13题才能出结果。';
+    return;
+  }
+
+  document.getElementById('result').style.display = 'block';
+  document.getElementById('scoreDisplay').textContent = score + '分';
+
+  const verdict = document.getElementById('verdictDisplay');
+  const detail = document.getElementById('detailDisplay');
+
+  if (score <= 8) {
+    verdict.textContent = '✅ 传承准备充分——你的家族传承体系较完善';
+    verdict.className = 'verdict risk-low';
+    detail.textContent = '继续保持，定期审查传承计划。建议：每3年回顾一次传承方案，根据家族成员变化调整。';
+  } else if (score <= 17) {
+    verdict.textContent = '⚠️ 传承准备不足——存在传承风险隐患';
+    verdict.className = 'verdict risk-medium';
+    detail.textContent = '建议：尽快咨询专业顾问，补齐传承短板，建立传承机制。重点：信托、保险、家族宪法。';
+  } else {
+    verdict.textContent = '❌ 传承准备严重缺失——传承风险极高';
+    verdict.className = 'verdict risk-high';
+    detail.textContent = '建议：立即咨询专业顾问，制定传承总体规划。切勿拖延，以免失去传承最佳时机。';
+  }
+}
+</script>
+</body>
+</html>
