@@ -1945,50 +1945,50 @@ footer .copyright {
 }
 
 /* ============================================================
-   Dual Path 模块 — 规划师 vs 守夜人 双栏对峙
+   Learning Path — 三阶段认知路径图
    ============================================================ */
-.dual-path {
+.learning-path {
   background: var(--bg-dark, #0B0D10);
   position: relative;
 }
 
-.dual-path .dp-header {
+.learning-path .lp-header {
   text-align: center;
   margin-bottom: 48px;
 }
 
-.dual-path .dp-header h2 {
+.learning-path .lp-header h2 {
   color: #FFFFFF;
   font-size: clamp(1.2rem, 2.8vw, 1.7rem);
   margin-bottom: 8px;
 }
 
-.dual-path .dp-header p {
+.learning-path .lp-header p {
   color: #8e959f;
   font-size: 0.9rem;
-  max-width: 500px;
+  max-width: 540px;
   margin: 0 auto;
 }
 
-/* Grid */
-.dp-grid {
+/* Grid: three columns on desktop, stack on mobile */
+.lp-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  max-width: 1000px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
-@media (max-width: 768px) {
-  .dp-grid { grid-template-columns: 1fr; gap: 20px; }
+@media (max-width: 900px) {
+  .lp-grid { grid-template-columns: 1fr; gap: 20px; }
 }
 
 /* Cards */
-.dp-card {
+.lp-card {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 8px;
-  padding: 32px 28px;
+  padding: 28px 24px;
   display: flex;
   flex-direction: column;
   transition: all 0.35s ease;
@@ -1996,7 +1996,7 @@ footer .copyright {
   overflow: hidden;
 }
 
-.dp-card::before {
+.lp-card::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
@@ -2005,167 +2005,130 @@ footer .copyright {
   transition: height 0.35s ease;
 }
 
-.dp-card-a::before { background: linear-gradient(90deg, #D4AF37, rgba(212, 175, 55, 0.3)); }
-.dp-card-b::before { background: linear-gradient(90deg, #1a5276, rgba(26, 82, 118, 0.3)); }
+.lp-card-1::before { background: linear-gradient(90deg, #D4AF37, rgba(212, 175, 55, 0.2)); }
+.lp-card-2::before { background: linear-gradient(90deg, #1a5276, rgba(26, 82, 118, 0.2)); }
+.lp-card-3::before { background: linear-gradient(90deg, #4f7a9e, rgba(79, 122, 158, 0.2)); }
 
-.dp-card:hover {
-  border-color: rgba(212, 175, 55, 0.2);
+.lp-card:hover {
+  border-color: rgba(212, 175, 55, 0.15);
   transform: translateY(-3px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 60px rgba(212, 175, 55, 0.04);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 60px rgba(212, 175, 55, 0.03);
 }
 
-.dp-card:hover::before { height: 4px; }
+.lp-card:hover::before { height: 4px; }
 
 /* Card header */
-.dp-card-top { margin-bottom: 24px; }
+.lp-card-header { margin-bottom: 20px; }
 
-.dp-icon {
-  font-size: 1.6rem;
-  display: block;
-  margin-bottom: 10px;
-}
-
-.dp-badge {
+.lp-stage-num {
   display: inline-block;
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  padding: 2px 10px;
-  border-radius: 2px;
-  margin-bottom: 10px;
-  font-weight: 500;
-}
-
-.dp-card-a .dp-badge {
+  font-size: 0.6rem;
+  font-weight: 600;
   color: #D4AF37;
-  border: 1px solid rgba(212, 175, 55, 0.25);
-  background: rgba(212, 175, 55, 0.06);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  padding: 2px 8px;
+  border-radius: 2px;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
 }
 
-.dp-card-b .dp-badge {
-  color: #5a9bc7;
-  border: 1px solid rgba(26, 82, 118, 0.35);
-  background: rgba(26, 82, 118, 0.08);
-}
-
-.dp-card h3 {
-  color: #FFFFFF;
-  font-size: 1.2rem;
+.lp-stage-label {
+  display: block;
+  font-size: 1.05rem;
   font-weight: 500;
-  margin-bottom: 2px;
+  color: #FFFFFF;
+  margin-bottom: 4px;
 }
 
-.dp-subtitle {
-  font-size: 0.8rem;
-  color: #8e959f;
-  margin-bottom: 8px;
-}
-
-.dp-desc {
+.lp-stage-desc {
   font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: #8e959f;
   line-height: 1.5;
-  margin: 0;
+  margin: 0 0 8px;
 }
 
-/* Steps */
-.dp-steps {
+.lp-time {
+  display: inline-block;
+  font-size: 0.7rem;
+  color: #6a6f78;
+  letter-spacing: 0.04em;
+}
+
+/* Article list */
+.lp-articles {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-bottom: 24px;
+  gap: 8px;
+  margin-bottom: 20px;
 }
 
-.dp-step {
+.lp-article {
   display: flex;
-  gap: 14px;
+  gap: 12px;
   align-items: flex-start;
-  padding: 12px 14px;
+  padding: 10px 12px;
   border-radius: 4px;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.04);
+  text-decoration: none;
   transition: background 0.3s;
 }
 
-.dp-step:hover {
-  background: rgba(255, 255, 255, 0.04);
+.lp-article:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(212, 175, 55, 0.12);
 }
 
-.dp-step-num {
-  font-size: 0.75rem;
-  font-weight: 600;
+.lp-num {
+  font-size: 0.8rem;
   color: #D4AF37;
-  font-variant-numeric: tabular-nums;
   flex-shrink: 0;
-  width: 24px;
+  width: 18px;
   text-align: center;
   margin-top: 1px;
 }
 
-.dp-step-body { flex: 1; min-width: 0; }
+.lp-article-body { flex: 1; min-width: 0; }
 
-.dp-step-body strong {
+.lp-article-body strong {
   display: block;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   font-weight: 500;
   color: #FFFFFF;
-  margin-bottom: 3px;
+  margin-bottom: 2px;
 }
 
-.dp-article {
-  font-size: 0.78rem;
-  color: rgba(212, 175, 55, 0.6);
-  margin: 0 0 3px;
-  line-height: 1.4;
-}
-
-.dp-step-desc {
-  display: block;
+.lp-article-body p {
   font-size: 0.75rem;
   color: #6a6f78;
+  margin: 0;
   line-height: 1.4;
 }
 
-/* CTA buttons */
-.dp-cta {
+/* CTA */
+.lp-cta {
   display: inline-block;
   width: 100%;
   text-align: center;
-  padding: 14px 20px;
+  padding: 12px 20px;
   border-radius: 4px;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 500;
   letter-spacing: 0.04em;
   text-decoration: none;
   transition: all 0.3s;
   font-family: inherit;
+  border: 1px solid;
+  background: transparent;
 }
 
-.dp-cta-a {
-  background: rgba(212, 175, 55, 0.1);
-  border: 1px solid rgba(212, 175, 55, 0.25);
-  color: #D4AF37;
-}
-
-.dp-cta-a:hover {
-  background: rgba(212, 175, 55, 0.18);
-  border-color: rgba(212, 175, 55, 0.4);
-}
-
-.dp-cta-b {
-  background: rgba(26, 82, 118, 0.15);
-  border: 1px solid rgba(26, 82, 118, 0.3);
-  color: #5a9bc7;
-}
-
-.dp-cta-b:hover {
-  background: rgba(26, 82, 118, 0.25);
-  border-color: rgba(26, 82, 118, 0.5);
+.lp-cta:hover {
+  background: rgba(255, 255, 255, 0.04);
 }
 
 /* Footnote */
-.dp-footnote {
+.lp-footnote {
   text-align: center;
   font-size: 0.8rem;
   color: #6a6f78;
