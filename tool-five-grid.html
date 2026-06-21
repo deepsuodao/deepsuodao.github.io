@@ -72,11 +72,30 @@ footer a{color:#d4a853;text-decoration:none}
 }
   
 function saveToDashboard(){
+  var gridBoxes=document.querySelectorAll('.grid-box');
   var filled=0;
-  ['s1','s2','s3','s4','s5'].forEach(function(id){
-    var el=document.getElementById(id);
-    if(el && el.value.trim())filled++;
-  });
+
+  // 格子1：堡垒账户 — textarea 有内容
+  var g1=gridBoxes[0].querySelector('textarea');
+  if(g1&&g1.value.trim())filled++;
+
+  // 格子2：锋利账户 — textarea 有内容
+  var g2=gridBoxes[1].querySelector('textarea');
+  if(g2&&g2.value.trim())filled++;
+
+  // 格子3：现金储备 — 两个 number 都填了
+  var exp3=document.getElementById('monthlyExp');
+  var bal3=document.getElementById('cashBal');
+  if(exp3&&bal3&&exp3.value&&bal3.value)filled++;
+
+  // 格子4：跨市场配置 — textarea 有内容
+  var g4=gridBoxes[3].querySelector('textarea');
+  if(g4&&g4.value.trim())filled++;
+
+  // 格子5：公用/固定资产 — textarea 有内容
+  var g5=gridBoxes[4].querySelector('textarea');
+  if(g5&&g5.value.trim())filled++;
+
   var score=Math.round(filled/5*100);
   var result={score:score,date:new Date().toISOString()};
   try{
