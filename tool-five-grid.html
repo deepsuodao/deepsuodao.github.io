@@ -70,6 +70,23 @@ footer a{color:#d4a853;text-decoration:none}
   "applicationCategory": "FinanceApplication",
   "operatingSystem": "All"
 }
+  
+function saveToDashboard(){
+  var filled=0;
+  ['s1','s2','s3','s4','s5'].forEach(function(id){
+    var el=document.getElementById(id);
+    if(el && el.value.trim())filled++;
+  });
+  var score=Math.round(filled/5*100);
+  var result={score:score,date:new Date().toISOString()};
+  try{
+    localStorage.setItem('fiveGridResult',JSON.stringify(result));
+    alert('✅ 已保存到仪表盘！\n\n打开"家庭财富仪表盘"即可查看。');
+  }catch(e){
+    console.error('保存失败：',e);
+    alert('保存失败，请检查浏览器设置。');
+  }
+}
   </script>
 </head>
 <body>
@@ -144,7 +161,8 @@ footer a{color:#d4a853;text-decoration:none}
 <div class="actions">
   <button class="btn primary" onclick="print()">🖨 打印结构图</button>
   <button class="btn" onclick="clearAll()">重新填写</button>
-</div>
+  <button class="btn" onclick="saveToDashboard()">📊 保存到仪表盘</button>
+  </div>
 
 </div>
 </section>

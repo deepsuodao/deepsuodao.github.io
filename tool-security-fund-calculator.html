@@ -446,6 +446,16 @@
             renderScenario(totalMonths);
             renderBenchmark(totalMonths, expense);
             renderRecommendations(totalMonths, expense, totalFund);
+
+            // 保存结果到仪表盘（securityFundResult）
+            const fundScore = totalMonths >= 36 ? 100 : totalMonths >= 24 ? 60 : totalMonths >= 12 ? 30 : 10;
+            const fundData = {
+                months: totalMonths,
+                score: fundScore,
+                totalFund: totalFund,
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('securityFundResult', JSON.stringify(fundData));
         }
         
         // 渲染核心结果

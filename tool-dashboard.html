@@ -4,19 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="家庭财富仪表盘——一站式查看你的财富健康状态。抗风险天数、资产净值、五条底线雷达图，数据本地保存，不上传服务器。">
-<meta property="og:title" content="家庭财富仪表盘 — 私家智囊">
-<meta property="og:description" content="一站式查看家庭财富健康状态。抗风险天数、资产净值、五条底线雷达图，数据本地保存。">
-<meta property="og:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://deepsuodao.github.io/tool-dashboard.html">
-<meta property="og:site_name" content="私家智囊">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
 <title>家庭财富仪表盘 — 私家智囊</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:-apple-system,"PingFang SC","Noto Sans SC","Helvetica Neue",sans-serif;background:#0f1424;color:#e8e6e3;line-height:1.7;-webkit-font-smoothing:antialiased;min-height:100vh}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:#0f1424;color:#e8e6e3;line-height:1.7;-webkit-font-smoothing:antialiased;min-height:100vh}
 a{color:#d4a853;text-decoration:none;transition:color .3s}
 a:hover{color:#f0c868}
 .container{max-width:900px;margin:0 auto;padding:0 20px 40px}
@@ -36,7 +27,6 @@ a:hover{color:#f0c868}
 .status-warning{background:rgba(212,168,83,.1);color:#d4a853}
 .status-danger{background:rgba(201,122,122,.1);color:#c97a7a}
 .radar-container{width:100%;max-width:400px;margin:0 auto;aspect-ratio:1}
-.radar-container canvas{width:100%!important;height:100%!important}
 .hint-box{background:rgba(212,168,83,.04);border:1px solid rgba(212,168,83,.12);border-radius:4px;padding:16px;margin-bottom:16px}
 .hint-box .hint-title{font-size:.9rem;font-weight:500;color:#d4a853;margin-bottom:8px}
 .hint-box .hint-item{font-size:.85rem;color:#b0aeab;margin-bottom:6px;padding-left:16px;position:relative}
@@ -53,20 +43,6 @@ a:hover{color:#f0c868}
 .site-footer .copyright{font-size:.7rem;color:#5a5855}
 @media(max-width:480px){.container{padding:0 14px 20px}.card{padding:18px 14px}.header{padding:24px 0 16px}.kpi-grid{grid-template-columns:1fr}}
 </style>
-<link rel="canonical" href="https://deepsuodao.github.io/tool-dashboard.html">
-<meta name="robots" content="index,follow">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "家庭财富仪表盘 — 私家智囊",
-  "description": "家庭财富仪表盘——一站式查看你的财富健康状态。抗风险天数、资产净值、五条底线雷达图，数据本地保存，不上传服务器。",
-  "url": "https://deepsuodao.github.io/tool-dashboard.html",
-  "applicationCategory": "FinanceApplication",
-  "operatingSystem": "All"
-}
-</script>
-<!-- Chart.js CDN -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
@@ -76,7 +52,6 @@ a:hover{color:#f0c868}
     <div class="subtitle">一站式查看你的财富健康状态 · 数据本地保存</div>
   </div>
 
-  <!-- KPI卡片区 -->
   <div class="kpi-grid">
     <div class="kpi-card">
       <div class="kpi-icon">🛡️</div>
@@ -84,14 +59,12 @@ a:hover{color:#f0c868}
       <div class="kpi-label">抗风险天数</div>
       <div class="kpi-status" id="kpi-days-status">未计算</div>
     </div>
-
     <div class="kpi-card">
       <div class="kpi-icon">💰</div>
       <div class="kpi-value" id="kpi-networth">--</div>
       <div class="kpi-label">资产净值</div>
       <div class="kpi-status" id="kpi-networth-status">未计算</div>
     </div>
-
     <div class="kpi-card">
       <div class="kpi-icon">📊</div>
       <div class="kpi-value" id="kpi-score">--</div>
@@ -100,7 +73,6 @@ a:hover{color:#f0c868}
     </div>
   </div>
 
-  <!-- 雷达图 -->
   <div class="card">
     <div class="card-title"><span>📊</span> 五条底线雷达图</div>
     <div class="radar-container">
@@ -108,32 +80,27 @@ a:hover{color:#f0c868}
     </div>
   </div>
 
-  <!-- 薄弱项提示 -->
   <div class="hint-box" id="hintBox">
     <div class="hint-title">📋 薄弱项提示</div>
-    <div class="hint-item" id="hint1">请先输入数据，查看您的财富健康状态。</div>
+    <div class="hint-item">请先输入数据，点击"计算"按钮查看您的财富健康状态。</div>
   </div>
 
-  <!-- 数据输入 -->
   <div class="card">
     <div class="card-title"><span>📝</span> 数据输入</div>
-    <p style="font-size:.82rem;color:#6a6855;margin-bottom:16px;line-height:1.6;">输入您的家庭财务数据，系统将自动计算抗风险天数、资产净值和五条底线评分。</p>
+    <p style="font-size:.82rem;color:#6a6865;margin-bottom:16px;line-height:1.6;">输入您的家庭财务数据，系统将自动计算抗风险天数、资产净值和五条底线评分。</p>
 
     <div class="input-group">
       <label>总资产（万元）</label>
       <input type="number" id="input-assets" placeholder="例如：800">
     </div>
-
     <div class="input-group">
       <label>总负债（万元）</label>
       <input type="number" id="input-debt" placeholder="例如：200">
     </div>
-
     <div class="input-group">
       <label>保障金余额（万元）</label>
       <input type="number" id="input-security" placeholder="例如：50">
     </div>
-
     <div class="input-group">
       <label>月支出（万元）</label>
       <input type="number" id="input-expense" step="0.1" placeholder="例如：2">
@@ -142,14 +109,12 @@ a:hover{color:#f0c868}
     <button class="save-btn" onclick="calculate()">🗠 计算我的财富健康状态</button>
   </div>
 
-  <!-- 工具联动 -->
   <div class="card" style="margin-top:16px;">
     <div class="card-title"><span>🔗</span> 工具联动</div>
-    <p style="font-size:.82rem;color:#6a6855;margin-bottom:16px;line-height:1.6;">完成以下工具，数据将自动同步到仪表盘：</p>
+    <p style="font-size:.82rem;color:#6a6865;margin-bottom:16px;line-height:1.6;">完成以下工具，数据将自动同步到仪表盘：</p>
     <p style="font-size:.85rem;color:#b0aeab;margin-bottom:8px;">• <a href="./tool-five-grid.html">五格家庭结构图</a></p>
     <p style="font-size:.85rem;color:#b0aeab;margin-bottom:8px;">• <a href="./tool-self-check-8q.html">八问自检表</a></p>
     <p style="font-size:.85rem;color:#b0aeab;margin-bottom:8px;">• <a href="./tool-security-fund-calculator.html">保障金测算器</a></p>
-    <p style="font-size:.85rem;color:#b0aeab;">• <a href="./tool-dashboard.html">查看完整报告 →</a></p>
   </div>
 
   <div class="site-footer">
@@ -159,246 +124,279 @@ a:hover{color:#f0c868}
 </div>
 
 <script>
-// 全局变量：Chart.js实例
 let radarChartInstance = null;
 
-// 从LocalStorage读取数据
 function loadData() {
-  const saved = localStorage.getItem('dashboardData');
-  if (saved) {
-    return JSON.parse(saved);
+  try {
+    const saved = localStorage.getItem('dashboardData');
+    return saved ? JSON.parse(saved) : null;
+  } catch(e) {
+    console.error('读取LocalStorage失败：', e);
+    return null;
   }
-  return null;
 }
 
-// 保存数据到LocalStorage
 function saveData(data) {
-  localStorage.setItem('dashboardData', JSON.stringify(data));
-}
-
-// 格式化金额
-function formatMoney(num) {
-  if (num >= 10000) {
-    return (num / 10000).toFixed(1) + '亿';
-  } else if (num >= 1) {
-    return num.toFixed(0) + '万';
-  } else {
-    return (num * 10000).toFixed(0) + '元';
+  try {
+    localStorage.setItem('dashboardData', JSON.stringify(data));
+    console.log('数据已保存到LocalStorage', data);
+  } catch(e) {
+    console.error('保存LocalStorage失败：', e);
   }
 }
 
-// 更新状态标签
+function formatMoney(num) {
+  if (num >= 10000) return (num / 10000).toFixed(1) + '亿';
+  if (num >= 1) return num.toFixed(0) + '万';
+  return (num * 10000).toFixed(0) + '元';
+}
+
 function updateStatus(elementId, status, text) {
   const el = document.getElementById(elementId);
-  el.className = 'kpi-status status-' + status;
-  el.textContent = text;
+  if (el) {
+    el.className = 'kpi-status status-' + status;
+    el.textContent = text;
+  }
 }
 
-// 更新薄弱项提示
 function updateHints(hints) {
   const box = document.getElementById('hintBox');
-  if (hints.length === 0) {
+  if (!box) return;
+  
+  if (!hints || hints.length === 0) {
     box.innerHTML = '<div class="hint-title">📋 薄弱项提示</div><div class="hint-item">✅ 您的财富健康状态良好，继续保持！</div>';
   } else {
     let html = '<div class="hint-title">📋 薄弱项提示</div>';
-    hints.forEach(h => {
+    hints.forEach(function(h) {
       html += '<div class="hint-item">' + h + '</div>';
     });
     box.innerHTML = html;
   }
+  console.log('薄弱项提示已更新', hints);
 }
 
-// 绘制雷达图
 function drawRadar(scores) {
   const ctx = document.getElementById('radarChart');
+  if (!ctx) return;
   
-  // 如果已存在图表，先销毁
+  if (typeof Chart === 'undefined') {
+    ctx.parentElement.innerHTML = '<div style="text-align:center;padding:40px 0;color:#8a8885;font-size:.9rem;">雷达图加载失败，请检查网络连接。</div>';
+    return;
+  }
+  
   if (radarChartInstance) {
     radarChartInstance.destroy();
   }
   
-  radarChartInstance = new Chart(ctx, {
-    type: 'radar',
-    data: {
-      labels: ['保障金', '负债率', '投资纪律', '家庭结构', '流动性'],
-      datasets: [{
-        label: '五条底线评分',
-        data: [scores.security, scores.debt, scores.investment, scores.family, scores.liquidity],
-        fill: true,
-        backgroundColor: 'rgba(212, 168, 83, 0.2)',
-        borderColor: 'rgb(212, 168, 83)',
-        pointBackgroundColor: 'rgb(212, 168, 83)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgb(212, 168, 83)'
-      }]
-    },
-    options: {
-      scales: {
-        r: {
-          angleLines: {
-            color: 'rgba(255, 255, 255, 0.1)'
-          },
-          grid: {
-            color: 'rgba(255, 255, 255, 0.1)'
-          },
-          pointLabels: {
-            color: '#b0aeab',
-            font: {
-              size: 14
-            }
-          },
-          ticks: {
-            display: false,
-            maxTicksLimit: 5
-          },
-          suggestedMin: 0,
-          suggestedMax: 100
-        }
+  try {
+    radarChartInstance = new Chart(ctx, {
+      type: 'radar',
+      data: {
+        labels: ['保障金', '负债率', '投资纪律', '家庭结构', '流动性'],
+        datasets: [{
+          label: '五条底线评分',
+          data: [scores.security, scores.debt, scores.investment, scores.family, scores.liquidity],
+          fill: true,
+          backgroundColor: 'rgba(212, 168, 83, 0.2)',
+          borderColor: 'rgb(212, 168, 83)',
+          pointBackgroundColor: 'rgb(212, 168, 83)',
+          pointBorderColor: '#fff'
+        }]
       },
-      plugins: {
-        legend: {
-          display: false
+      options: {
+        scales: {
+          r: {
+            angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
+            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+            pointLabels: { color: '#b0aeab', font: { size: 14 } },
+            ticks: { display: false },
+            suggestedMin: 0,
+            suggestedMax: 100
+          }
+        },
+        plugins: { legend: { display: false } }
+      }
+    });
+    console.log('雷达图绘制成功', scores);
+  } catch(e) {
+    console.error('绘制雷达图失败：', e);
+  }
+}
+
+function calculate() {
+  try {
+    const assets = parseFloat(document.getElementById('input-assets').value) || 0;
+    const debt = parseFloat(document.getElementById('input-debt').value) || 0;
+    const security = parseFloat(document.getElementById('input-security').value) || 0;
+    const expense = parseFloat(document.getElementById('input-expense').value) || 0;
+
+    if (assets === 0 && debt === 0 && security === 0 && expense === 0) {
+      alert('请至少输入一项数据。');
+      return;
+    }
+
+    const netWorth = assets - debt;
+    const days = expense > 0 ? Math.round(security / expense * 30) : 0;
+
+    let scores = { security: 0, debt: 0, investment: 0, family: 0, liquidity: 0 };
+    let hints = [];
+
+    // 1. 保障金评分（优先读取保障金测算器结果）
+    try {
+      const securityFundResult = localStorage.getItem('securityFundResult');
+      if (securityFundResult) {
+        const result = JSON.parse(securityFundResult);
+        scores.security = result.score || 0;
+        if (scores.security < 60) {
+          hints.push('保障金测算结果显示偏低，建议<a href="./tool-security-fund-calculator.html">查看详细分析</a>。');
         }
+      } else {
+        // 无保存结果时，基于用户输入计算
+        if (days >= 180) {
+          scores.security = 100;
+        } else if (days >= 90) {
+          scores.security = 60;
+          hints.push('保障金偏紧，建议增加到6个月支出（180天）。');
+        } else if (days >= 30) {
+          scores.security = 30;
+          hints.push('保障金不足，强烈建议增加到3个月支出（90天）。');
+        } else {
+          scores.security = 10;
+          hints.push('保障金严重不足！请优先建立保障金。');
+        }
+        hints.push('建议完成<a href="./tool-security-fund-calculator.html">保障金测算器</a>，获取精确评分。');
+      }
+    } catch(e) {
+      // 读取失败时，基于用户输入计算
+      if (days >= 180) {
+        scores.security = 100;
+      } else if (days >= 90) {
+        scores.security = 60;
+        hints.push('保障金偏紧，建议增加到6个月支出（180天）。');
+      } else if (days >= 30) {
+        scores.security = 30;
+        hints.push('保障金不足，强烈建议增加到3个月支出（90天）。');
+      } else {
+        scores.security = 10;
+        hints.push('保障金严重不足！请优先建立保障金。');
       }
     }
-  });
+
+    // 2. 负债率评分（修复变量名）
+    const debtRatioCalc = assets > 0 ? debt / assets : 1;
+    if (debtRatioCalc <= 0.3) {
+      scores.debt = 100;
+    } else if (debtRatioCalc <= 0.5) {
+      scores.debt = 60;
+      hints.push('负债率适中，注意控制新增负债。');
+    } else {
+      scores.debt = 30;
+      hints.push('负债率偏高，建议优先降低负债。');
+    }
+
+    // 3. 投资纪律评分
+    try {
+      const selfCheckResult = localStorage.getItem('selfCheckResult');
+      if (selfCheckResult) {
+        const result = JSON.parse(selfCheckResult);
+        scores.investment = result.score || 50;
+      } else {
+        scores.investment = 50;
+        hints.push('建议完成<a href="./tool-self-check-8q.html">八问自检表</a>，获取投资纪律评分。');
+      }
+    } catch(e) {
+      scores.investment = 50;
+    }
+
+    // 4. 家庭结构评分
+    try {
+      const fiveGridResult = localStorage.getItem('fiveGridResult');
+      if (fiveGridResult) {
+        const result = JSON.parse(fiveGridResult);
+        scores.family = result.score || 50;
+      } else {
+        scores.family = 50;
+        hints.push('建议完成<a href="./tool-five-grid.html">五格家庭结构图</a>，获取家庭结构评分。');
+      }
+    } catch(e) {
+      scores.family = 50;
+    }
+
+    // 5. 流动性评分
+    const liquidityRatio = assets > 0 ? expense * 12 / assets : 1;
+    if (liquidityRatio <= 0.2) {
+      scores.liquidity = 100;
+    } else if (liquidityRatio <= 0.4) {
+      scores.liquidity = 60;
+      hints.push('年支出占比较高，建议关注流动性管理。');
+    } else {
+      scores.liquidity = 30;
+      hints.push('年支出占比过高，建议优化支出结构。');
+    }
+
+    const totalScore = Math.round(
+      scores.security * 0.25 +
+      scores.debt * 0.20 +
+      scores.investment * 0.20 +
+      scores.family * 0.15 +
+      scores.liquidity * 0.20
+    );
+
+    // 更新KPI显示
+    document.getElementById('kpi-days').textContent = days + '天';
+    document.getElementById('kpi-networth').textContent = formatMoney(netWorth);
+    document.getElementById('kpi-score').textContent = totalScore + '分';
+
+    updateStatus('kpi-days-status', days >= 180 ? 'good' : days >= 90 ? 'warning' : 'danger', 
+                 days >= 180 ? '充足' : days >= 90 ? '偏紧' : '不足');
+    updateStatus('kpi-networth-status', netWorth > 0 ? 'good' : 'danger',
+                 netWorth > 0 ? '健康' : '负值');
+    updateStatus('kpi-score-status', totalScore >= 80 ? 'good' : totalScore >= 60 ? 'warning' : 'danger',
+                 totalScore >= 80 ? '优秀' : totalScore >= 60 ? '良好' : '需改进');
+
+    // 更新薄弱项提示（关键：这行必须执行）
+    updateHints(hints);
+
+    // 保存数据
+    saveData({
+      assets: assets,
+      debt: debt,
+      security: security,
+      expense: expense,
+      days: days,
+      netWorth: netWorth,
+      totalScore: totalScore,
+      scores: scores,
+      lastUpdate: new Date().toISOString()
+    });
+
+    // 绘制雷达图
+    drawRadar(scores);
+    
+    window.scrollTo({top: 0, behavior: 'smooth'});
+    console.log('计算完成', {days, netWorth, totalScore, scores, hints});
+    
+  } catch(e) {
+    console.error('计算出错：', e);
+    alert('计算出错，请检查输入数据。错误信息：' + e.message);
+  }
 }
 
-// 计算并展示结果
-function calculate() {
-  const assets = parseFloat(document.getElementById('input-assets').value) || 0;
-  const debt = parseFloat(document.getElementById('input-debt').value) || 0;
-  const security = parseFloat(document.getElementById('input-security').value) || 0;
-  const expense = parseFloat(document.getElementById('input-expense').value) || 0;
-
-  if (assets === 0 && debt === 0 && security === 0 && expense === 0) {
-    alert('请至少输入一项数据。');
-    return;
-  }
-
-  // 计算KPI
-  const netWorth = assets - debt; // 资产净值
-  const days = expense > 0 ? Math.round(security / expense * 30) : 0; // 抗风险天数
-
-  // 评分逻辑（五条底线各自评分）
-  let scores = {
-    security: 0,    // 保障金
-    debt: 0,         // 负债率
-    investment: 0,   // 投资纪律
-    family: 0,        // 家庭结构
-    liquidity: 0      // 流动性
-  };
-  
-  let hints = [];
-
-  // 1. 保障金评分（抗风险天数）
-  if (days >= 180) {
-    scores.security = 100;
-  } else if (days >= 90) {
-    scores.security = 60;
-    hints.push('保障金偏紧，建议增加到6个月支出（180天）。');
-  } else if (days >= 30) {
-    scores.security = 30;
-    hints.push('保障金不足，强烈建议增加到3个月支出（90天）。');
-  } else {
-    scores.security = 10;
-    hints.push('保障金严重不足！请优先建立保障金。');
-  }
-
-  // 2. 负债率评分
-  const debtRatio = assets > 0 ? debt / assets : 1;
-  if (debtRatio <= 0.3) {
-    scores.debt = 100;
-  } else if (debtRatio <= 0.5) {
-    scores.debt = 60;
-    hints.push('负债率适中，注意控制新增负债。');
-  } else {
-    scores.debt = 30;
-    hints.push('负债率偏高，建议优先降低负债。');
-  }
-
-  // 3. 投资纪律评分（默认，实际应从其他工具读取）
-  // 尝试从LocalStorage读取八问自检表结果
-  const selfCheckResult = localStorage.getItem('selfCheckResult');
-  if (selfCheckResult) {
-    const result = JSON.parse(selfCheckResult);
-    scores.investment = result.score || 50;
-  } else {
-    scores.investment = 50; // 默认中等
-    hints.push('建议完成<a href="./tool-self-check-8q.html">八问自检表</a>，获取投资纪律评分。');
-  }
-
-  // 4. 家庭结构评分（默认，实际应从其他工具读取）
-  // 尝试从LocalStorage读取五格图结果
-  const fiveGridResult = localStorage.getItem('fiveGridResult');
-  if (fiveGridResult) {
-    const result = JSON.parse(fiveGridResult);
-    scores.family = result.score || 50;
-  } else {
-    scores.family = 50; // 默认中等
-    hints.push('建议完成<a href="./tool-five-grid.html">五格家庭结构图</a>，获取家庭结构评分。');
-  }
-
-  // 5. 流动性评分（基于月支出和总资产的比例）
-  const liquidityRatio = assets > 0 ? expense * 12 / assets : 1;
-  if (liquidityRatio <= 0.2) {
-    scores.liquidity = 100;
-  } else if (liquidityRatio <= 0.4) {
-    scores.liquidity = 60;
-    hints.push('年支出占比较高，建议关注流动性管理。');
-  } else {
-    scores.liquidity = 30;
-    hints.push('年支出占比过高，建议优化支出结构。');
-  }
-
-  // 计算综合评分（加权平均）
-  const totalScore = Math.round(
-    scores.security * 0.25 +
-    scores.debt * 0.20 +
-    scores.investment * 0.20 +
-    scores.family * 0.15 +
-    scores.liquidity * 0.20
-  );
-
-  // 更新KPI显示
-  document.getElementById('kpi-days').textContent = days + '天';
-  document.getElementById('kpi-networth').textContent = formatMoney(netWorth);
-  document.getElementById('kpi-score').textContent = totalScore + '分';
-
-  // 更新状态
-  updateStatus('kpi-days-status', days >= 180 ? 'good' : days >= 90 ? 'warning' : 'danger', 
-               days >= 180 ? '充足' : days >= 90 ? '偏紧' : '不足');
-  updateStatus('kpi-networth-status', netWorth > 0 ? 'good' : 'danger',
-               netWorth > 0 ? '健康' : '负值');
-  updateStatus('kpi-score-status', totalScore >= 80 ? 'good' : totalScore >= 60 ? 'warning' : 'danger',
-               totalScore >= 80 ? '优秀' : totalScore >= 60 ? '良好' : '需改进');
-
-  // 更新薄弱项提示
-  updateHints(hints);
-
-  // 保存数据
-  saveData({
-    assets, debt, security, expense, 
-    days, netWorth, totalScore,
-    scores,
-    lastUpdate: new Date().toISOString()
-  });
-
-  // 绘制雷达图
-  drawRadar(scores);
-}
-
-// 页面加载时，尝试读取已有数据
 window.onload = function() {
-  const data = loadData();
-  if (data) {
-    document.getElementById('input-assets').value = data.assets || '';
-    document.getElementById('input-debt').value = data.debt || '';
-    document.getElementById('input-security').value = data.security || '';
-    document.getElementById('input-expense').value = data.expense || '';
-    // 自动计算
-    calculate();
+  try {
+    const data = loadData();
+    if (data) {
+      document.getElementById('input-assets').value = data.assets || '';
+      document.getElementById('input-debt').value = data.debt || '';
+      document.getElementById('input-security').value = data.security || '';
+      document.getElementById('input-expense').value = data.expense || '';
+      console.log('已加载历史数据', data);
+      calculate();
+    } else {
+      console.log('无历史数据');
+    }
+  } catch(e) {
+    console.error('页面加载出错：', e);
   }
 };
 </script>

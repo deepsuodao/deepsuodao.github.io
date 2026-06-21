@@ -105,10 +105,11 @@ footer a{color:#d4a853;text-decoration:none}
   <div class="advice" id="adviceText"></div>
 </div>
 
-<div class="actions" style="text-align:center;margin-top:32px">
-  <button class="btn primary" onclick="print()">🖨 打印自检表</button>
-  <button class="btn" onclick="resetAll()">重新填写</button>
-</div>
+	<div class="actions" style="text-align:center;margin-top:32px">
+	  <button class="btn primary" onclick="print()">🖨 打印自检表</button>
+	  <button class="btn" onclick="resetAll()">重新填写</button>
+	  <button class="btn" onclick="saveToDashboard()" id="saveDashboardBtn" style="display:none">📊 保存到仪表盘</button>
+	</div>
 
 </div>
 </section>
@@ -173,9 +174,11 @@ function updateScore(){
   });
   if(answered<8){
     document.getElementById('scorePanel').style.display='none';
+    document.getElementById('saveDashboardBtn').style.display='none';
     return;
   }
   document.getElementById('scorePanel').style.display='block';
+  document.getElementById('saveDashboardBtn').style.display='inline-block';
   document.getElementById('totalScore').textContent=total+'分';
   var tag=document.getElementById('levelTag'),adv=document.getElementById('adviceText');
   tag.className='level';
@@ -196,6 +199,23 @@ function updateScore(){
 }
 
 function resetAll(){scores={};render();window.scrollTo(0,0);}
+
+function saveToDashboard(){
+  var total=0;
+  questions.forEach(function(q){
+    if(scores[q.id]!==undefined)total+=scores[q.id];
+  });
+  var result={score:total,date:new Date().toISOString()};
+  try{
+    localStorage.setItem('selfCheckResult',JSON.stringify(result));
+    alert('✅ 已保存到仪表盘！\n\n打开"家庭财富仪表盘"即可查看。');
+    window.open('tool-dashboard.html','_blank');
+  }catch(e){
+    console.error('保存失败：',e);
+    alert('保存失败，请检查浏览器设置。');
+  }
+}
+
 
 render();
 </script>

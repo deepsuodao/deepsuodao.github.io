@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>重大决策决策树 — 私家智囊</title>
+  <link rel="stylesheet" href="./dialogue.css">
+  <style>
+    body { background: #0d0f13; color: #c8c4bf; font-family: 'Noto Serif SC', serif; margin: 0; }
+    .container { max-width: 640px; margin: 0 auto; padding: 24px 16px 60px; }
+    .header { text-align: center; margin-bottom: 32px; }
+    .header h1 { color: #d4a853; font-size: 1.4rem; margin: 0 0 6px; }
+    .header p { color: #8a8680; font-size: .85rem; margin: 0; }
+    .step-indicator { display: flex; gap: 8px; justify-content: center; margin-bottom: 28px; }
+    .step-dot { width: 28px; height: 6px; border-radius: 3px; background: #252320; }
+    .step-dot.active { background: #d4a853; }
+    .card { background: #181a1f; border: 1px solid #2a2825; border-radius: 10px; padding: 24px; margin-bottom: 20px; display: none; }
+    .card.active { display: block; }
+    .card-title { color: #d4a853; font-size: .95rem; font-weight: 600; margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
+    .scenario-select { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .scenario-btn { background: #1e2026; border: 1.5px solid #2a2825; border-radius: 10px; padding: 18px 14px; cursor: pointer; text-align: center; transition: .2s; }
+    .scenario-btn:hover, .scenario-btn.selected { border-color: #d4a853; background: #252320; }
+    .scenario-btn .icon { font-size: 1.6rem; display: block; margin-bottom: 8px; }
+    .scenario-btn .name { font-size: .88rem; color: #e0ddd8; font-weight: 600; }
+    .scenario-btn .desc { font-size: .75rem; color: #8a8680; margin-top: 4px; }
+    .input-group { margin-bottom: 16px; }
+    .input-label { font-size: .82rem; color: #8a8680; margin-bottom: 6px; display: block; }
+    input[type="number"], input[type="text"], select {
+      width: 100%; background: #0d0f13; border: 1px solid #2a2825; border-radius: 7px;
+      padding: 10px 12px; color: #e0ddd8; font-size: .9rem; box-sizing: border-box;
+    }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .risk-slider { display: flex; gap: 10px; margin-top: 8px; }
+    .risk-opt { flex: 1; text-align: center; padding: 8px 0; border-radius: 7px;
+      background: #0d0f13; border: 1px solid #2a2825; cursor: pointer; font-size: .82rem; }
+    .risk-opt.selected { border-color: #d4a853; color: #d4a853; background: #252320; }
+    .btn { display: block; width: 100%; padding: 13px; border: none; border-radius: 8px;
+      font-size: .95rem; font-weight: 600; cursor: pointer; margin-top: 16px; }
+    .btn-primary { background: #d4a853; color: #0d0f13; }
+    .btn-secondary { background: #252525; color: #c8c4bf; }
+    .result-card { background: #0d0f13; border-radius: 10px; padding: 20px; margin-top: 16px; }
+    .result-verdict { font-size: 1.1rem; font-weight: 700; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; }
+    .verdict-go { background: rgba(76,175,80,.12); color: #81c784; border: 1px solid rgba(76,175,80,.3); }
+    .verdict-stop { background: rgba(244,67,54,.12); color: #ef9a9a; border: 1px solid rgba(244,67,54,.3); }
+    .verdict-warn { background: rgba(255,193,7,.12); color: #ffd54f; border: 1px solid rgba(255,193,7,.3); }
+    .comparison-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: .82rem; }
+    .comparison-table th { background: #181a1f; color: #d4a853; padding: 8px 10px; text-align: left; }
+    .comparison-table td { padding: 8px 10px; border-bottom: 1px solid #252525; color: #c8c4bf; }
+    .bl-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: #181a1f;
+      border-radius: 7px; margin-bottom: 8px; font-size: .82rem; }
+    .bl-pass { color: #81c784; }
+    .bl-fail { color: #ef9a9a; }
+    .action-list { margin: 12px 0 0; padding-left: 18px; }
+    .action-list li { font-size: .82rem; color: #b0aeab; line-height: 1.7; }
+    .site-footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #252525; }
+    .slogan { color: #8a8680; font-size: .82rem; margin-bottom: 4px; }
+    .slogan span { color: #d4a853; }
+    .copyright { color: #5a5855; font-size: .75rem; }
+    @media(max-width:480px) { .row { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>重大决策决策树</h1>
+    <p>五条底线 · 压力测试 · 决策复盘</p>
+  </div>
+
+  <div class="step-indicator" id="stepIndicator">
+    <div class="step-dot active"></div>
+    <div class="step-dot"></div>
+    <div class="step-dot"></div>
+    <div class="step-dot"></div>
+  </div>
+
+  <!-- 第1步 -->
+  <div class="card active" id="step1">
+    <div class="card-title"><span>①</span> 选择决策类型</div>
+    <div class="scenario-select">
+      <div class="scenario-btn" onclick="selectScenario('repay')">
+        <div class="icon">🏦</div>
+        <div class="name">提前还贷 vs 投资</div>
+        <div class="desc">手头有闲钱，还贷还是投资？</div>
+      </div>
+      <div class="scenario-btn" onclick="selectScenario('expense')">
+        <div class="icon">💰</div>
+        <div class="name">大额支出决策</div>
+        <div class="desc">结婚·购车·教育·还债等</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第2步 -->
+  <div class="card" id="step2">
+    <div class="card-title"><span>②</span> 输入参数</div>
+    <div id="step2Form"></div>
+    <button class="btn btn-primary" onclick="goStep(3)">下一步</button>
+  </div>
+
+  <!-- 第3步 -->
+  <div class="card" id="step3">
+    <div class="card-title"><span>③</span> 生成决策结论</div>
+    <p style="font-size:.88rem;color:#c8c4bf;line-height:1.7;">点击下方按钮，系统将基于五条底线进行压力测试。</p>
+    <button class="btn btn-primary" onclick="doCalculate()">生成决策结论</button>
+  </div>
+
+  <!-- 第4步 -->
+  <div class="card" id="step4">
+    <div class="card-title"><span>④</span> 决策结论</div>
+    <div id="step4Content"></div>
+    <button class="btn btn-secondary" onclick="goStep(1); resetForm();" style="margin-top:12px;">重新决策</button>
+  </div>
+
+  <div class="site-footer">
+    <p class="slogan">家庭财富的<span>规划师</span>与<span>守夜人</span></p>
+    <p class="copyright">私家智囊 · 数据本地计算，不上传服务器</p>
+  </div>
+</div>
+
+<script>
+var currentScenario = '';
+
+function selectScenario(type) {
+  currentScenario = type;
+  document.querySelectorAll('.scenario-btn').forEach(function(b) { b.classList.remove('selected'); });
+  event.target.closest('.scenario-btn').classList.add('selected');
+  setTimeout(function() { goStep(2); }, 100);
+}
+
+function goStep(n) {
+  if (n === 2) buildForm();
+  if (n === 4) return; // 第4步由 doCalculate 触发
+  // 显示对应步骤
+  for (var i = 1; i <= 4; i++) {
+    document.getElementById('step' + i).classList.toggle('active', i === n);
+  }
+  var dots = document.querySelectorAll('.step-dot');
+  for (var j = 0; j < dots.length; j++) {
+    dots[j].classList.toggle('active', j < n);
+  }
+}
+
+function buildForm() {
+  var form = document.getElementById('step2Form');
+  if (currentScenario === 'repay') {
+    form.innerHTML = '\
+      <div style="margin-bottom:12px;"><label style="font-size:.82rem;color:#8a8680;">房贷年利率（%）</label><br><input type="number" id="inRate" step="0.01" placeholder="如：3.5" style="width:100%;margin-top:4px;"></div>\
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">\
+        <div><label style="font-size:.82rem;color:#8a8680;">剩余本金（万元）</label><br><input type="number" id="inDebt" placeholder="如：100" style="width:100%;margin-top:4px;"></div>\
+        <div><label style="font-size:.82rem;color:#8a8680;">还款金额（万元）</label><br><input type="number" id="inRepay" placeholder="如：50" style="width:100%;margin-top:4px;"></div>\
+      </div>\
+      <div style="margin-bottom:12px;"><label style="font-size:.82rem;color:#8a8680;">投资预期年化收益（%，保守估计）</label><br><input type="number" id="inReturn" step="0.1" placeholder="如：6.0" style="width:100%;margin-top:4px;"></div>\
+      <div style="margin-bottom:12px;"><label style="font-size:.82rem;color:#8a8680;">风险偏好</label><br>\
+        <div style="display:flex;gap:8px;margin-top:6px;">\
+          <div class="risk-opt" onclick="setRisk(this)" data-val="conservative">保守</div>\
+          <div class="risk-opt selected" onclick="setRisk(this)" data-val="neutral">中性</div>\
+          <div class="risk-opt" onclick="setRisk(this)" data-val="aggressive">激进</div>\
+        </div>\
+        <input type="hidden" id="inRisk" value="neutral">\
+      </div>\
+    ';
+  } else {
+    form.innerHTML = '\
+      <div style="margin-bottom:12px;"><label style="font-size:.82rem;color:#8a8680;">支出类型</label><br>\
+        <select id="inType" style="width:100%;margin-top:4px;">\
+          <option value="marriage">结婚</option>\
+          <option value="car">购车</option>\
+          <option value="education">教育</option>\
+          <option value="debt">还债</option>\
+          <option value="other">其他</option>\
+        </select>\
+      </div>\
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">\
+        <div><label style="font-size:.82rem;color:#8a8680;">支出金额（万元）</label><br><input type="number" id="inAmount" placeholder="如：30" oninput="calcGap()" style="width:100%;margin-top:4px;"></div>\
+        <div><label style="font-size:.82rem;color:#8a8680;">自有资金（万元）</label><br><input type="number" id="inOwnFund" placeholder="如：20" oninput="calcGap()" style="width:100%;margin-top:4px;"></div>\
+      </div>\
+      <div style="margin-bottom:12px;"><label style="font-size:.82rem;color:#8a8680;">资金缺口</label><br><input type="text" id="inGap" readonly style="width:100%;margin-top:4px;background:#181a1f;color:#d4a853;font-weight:600;"></div>\
+    ';
+  }
+}
+
+function setRisk(btn) {
+  document.querySelectorAll('.risk-opt').forEach(function(b) { b.classList.remove('selected'); });
+  btn.classList.add('selected');
+  document.getElementById('inRisk').value = btn.getAttribute('data-val');
+}
+
+function calcGap() {
+  var a = parseFloat(document.getElementById('inAmount').value) || 0;
+  var b = parseFloat(document.getElementById('inOwnFund').value) || 0;
+  document.getElementById('inGap').value = Math.max(0, a - b).toFixed(1) + ' 万元';
+}
+
+function resetForm() {
+  currentScenario = '';
+}
+
+function doCalculate() {
+  if (currentScenario === 'repay') {
+    calcRepay();
+  } else {
+    calcExpense();
+  }
+}
+
+function calcRepay() {
+  var rate = parseFloat(document.getElementById('inRate').value) || 0;
+  var repay = parseFloat(document.getElementById('inRepay').value) || 0;
+  var ret = parseFloat(document.getElementById('inReturn').value) || 0;
+  if (rate === 0 || repay === 0) { alert('请填写完整参数'); return; }
+  var saveInt = repay * rate / 100 * 5;
+  var investRet = repay * ret / 100 * 5 * 0.8;
+  var verdict = investRet > saveInt ? '✅ 建议：可以投资' : '🔴 建议：优先还贷';
+  showResult(verdict, '提前还贷5年节省利息 ' + saveInt.toFixed(1) + ' 万，投资税后收益 ' + investRet.toFixed(1) + ' 万。');
+}
+
+function calcExpense() {
+  var amount = parseFloat(document.getElementById('inAmount').value) || 0;
+  if (amount === 0) { alert('请填写支出金额'); return; }
+  showResult('✅ 建议执行', '支出 ' + amount + ' 万，请结合五条底线自行评估。');
+}
+
+function showResult(verdict, reason) {
+  var html = '<div style="padding:12px;background:#0d0f13;border-radius:8px;margin-top:12px;">';
+  html += '<div style="font-size:1.1rem;font-weight:700;color:#d4a853;margin-bottom:12px;">' + verdict + '</div>';
+  html += '<p style="font-size:.88rem;color:#c8c4bf;line-height:1.7;">' + reason + '</p>';
+  html += '<div style="margin-top:16px;padding:12px;background:#181a1f;border-radius:7px;font-size:.82rem;color:#8a8680;">📋 建议完成五条底线检查后再执行决策。</div>';
+  html += '</div>';
+  document.getElementById('step4Content').innerHTML = html;
+  goStep(4);
+}
+</script>
+</body>
+</html>
