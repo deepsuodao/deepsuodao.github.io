@@ -103,7 +103,8 @@ function saveToDashboard(){
   try{
     localStorage.setItem('fiveGridResult',JSON.stringify(result));
     if(confirm('✅ 已保存到仪表盘！\n\n是否立即查看？')){
-      window.location.href='./tool-dashboard.html';
+      console.log('[five-grid] 准备跳转到 tool-dashboard.html');
+      window.location.href = window.location.origin + '/tool-dashboard.html';
     }
   }catch(e){
     console.error('保存失败：',e);
