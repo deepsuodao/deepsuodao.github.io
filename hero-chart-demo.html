@@ -217,9 +217,6 @@
 
     // Helper: draw a curve
     function drawOne(data, color, lw, dash) {
-      var count = Math.max(1, Math.floor(progress * (data.length - 1)));
-      var frac = progress * (data.length - 1) - count;
-
       ctx.save();
       if(dash) ctx.setLineDash(dash);
       ctx.strokeStyle = color;
@@ -228,19 +225,11 @@
       ctx.lineCap = 'round';
       ctx.beginPath();
 
-      for(var i = 0; i <= count && i < data.length; i++) {
+      var n = Math.max(2, Math.floor(progress * data.length));
+      for(var i = 0; i < n && i < data.length; i++) {
         var x = xP(data[i].year), y = yP(data[i].v);
         if(i === 0) ctx.moveTo(x, y);
-        else {
-          var px = xP(data[i-1].year), py = yP(data[i-1].v);
-          ctx.quadraticCurveTo((px+x)/2, py, x, y);
-        }
-      }
-      if(frac > 0 && count + 1 < data.length) {
-        var p1 = data[count], p2 = data[count+1];
-        var mx = xP(p1.year) + (xP(p2.year)-xP(p1.year)) * frac;
-        var my = yP(p1.v) + (yP(p2.v)-yP(p1.v)) * frac;
-        ctx.quadraticCurveTo((xP(p1.year)+xP(p2.year))/2, yP(p1.v), mx, my);
+        else ctx.lineTo(x, y);
       }
       ctx.stroke();
       ctx.restore();
@@ -253,8 +242,7 @@
     drawOne(dA, '#D4AF37', 2, null);
 
     // Dots
-    var vis = Math.max(1, Math.floor(progress * (dA.length - 1)));
-    for(var i = 0; i <= vis && i < dA.length; i++) {
+    for(var i = 0; i < dA.length; i++) {
       var ax = xP(dA[i].year), ay = yP(dA[i].v);
       ctx.fillStyle = '#D4AF37';
       ctx.globalAlpha = 0.2;
