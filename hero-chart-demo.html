@@ -253,7 +253,7 @@
     drawOne(dA, '#D4AF37', 2, null);
 
     // Dots
-    var vis = Math.max(1, Math.floor(progress * (data.length - 1)));
+    var vis = Math.max(1, Math.floor(progress * (dA.length - 1)));
     for(var i = 0; i <= vis && i < dA.length; i++) {
       var ax = xP(dA[i].year), ay = yP(dA[i].v);
       ctx.fillStyle = '#D4AF37';
