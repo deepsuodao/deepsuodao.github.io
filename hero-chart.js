@@ -89,7 +89,6 @@
     ctx.scale(dpr, dpr);
   }
 
-  let animProgress = 0;
   let animationDone = false;
   let hoveredIndex = -1;
   let hoveredCurve = null;
@@ -263,36 +262,30 @@
   }
 
   /* ============================================================
-     Animation
+     Animation (setTimeout-based, compatible with all environments)
      ============================================================ */
-  let animStartTime = null;
+  let animFrame = 0;
   const ANIM_DELAY = 800;
   const ANIM_DURATION = 1200;
+  const ANIM_FPS = 60;
+  const TOTAL_FRAMES = Math.ceil(ANIM_DURATION / (1000 / ANIM_FPS));
 
   function startAnimation() {
     clearTimeout(fallbackTimer);
     fallbackEl.classList.remove('active');
     canvas.style.display = '';
-
-    animStartTime = performance.now() + ANIM_DELAY;
-    requestAnimationFrame(animate);
+    setTimeout(function() {
+      animFrame = 0;
+      animateByFrame();
+    }, ANIM_DELAY);
   }
 
-  function animate(timestamp) {
-    if (!animStartTime) {
-      animStartTime = timestamp + ANIM_DELAY;
-    }
-    const elapsed = timestamp - animStartTime;
-    if (elapsed < 0) {
-      drawChart(0, hoveredIndex, hoveredCurve);
-      requestAnimationFrame(animate);
-      return;
-    }
-    animProgress = Math.min(1, elapsed / ANIM_DURATION);
-    drawChart(animProgress, hoveredIndex, hoveredCurve);
-
-    if (animProgress < 1) {
-      requestAnimationFrame(animate);
+  function animateByFrame() {
+    animFrame++;
+    var p = Math.min(1, animFrame / TOTAL_FRAMES);
+    drawChart(p, hoveredIndex, hoveredCurve);
+    if (p < 1) {
+      setTimeout(animateByFrame, 1000 / ANIM_FPS);
     } else {
       animationDone = true;
       drawChart(1, hoveredIndex, hoveredCurve);
@@ -388,19 +381,26 @@
      ============================================================ */
   const fallbackEl = document.getElementById('chartFallback');
   const fallbackTimer = setTimeout(function () {
-    if (!animStartTime) {
+    if (!animationDone && animFrame === 0) {
       fallbackEl.classList.add('active');
       canvas.style.display = 'none';
     }
   }, 2000);
 
   /* ============================================================
-     Init
+     Init — draw full chart immediately, then animate
      ============================================================ */
-  drawChart(0, -1, null);
-  setTimeout(startAnimation, 50);
+  // Show the full chart first so user never sees blank
+  drawChart(1, -1, null);
+  cacheSnapshot();
+  animationDone = true;
 
-  console.log('[hero-chart] canvas =', canvas, '| ctx =', ctx);
+  // After a pause, replay the animation from empty
+  setTimeout(function() {
+    drawChart(0, -1, null);
+    animationDone = false;
+    startAnimation();
+  }, 1500);
 
   canvas.addEventListener('mousemove', onMouseMove);
   canvas.addEventListener('mouseleave', onMouseLeave);
