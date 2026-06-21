@@ -250,6 +250,10 @@ function calculate() {
         if (scores.security < 60) {
           hints.push('保障金测算结果显示偏低，建议<a href="./tool-security-fund-calculator.html">查看详细分析</a>。');
         }
+        if (result.timestamp) {
+          var d = new Date(result.timestamp);
+          hints.push('🛡️ 保障金测算完成于 ' + d.toLocaleDateString('zh-CN'));
+        }
       } else {
         // 无保存结果时，基于用户输入计算
         if (days >= 180) {
@@ -294,12 +298,16 @@ function calculate() {
       hints.push('负债率偏高，建议优先降低负债。');
     }
 
-    // 3. 投资纪律评分
+    // 3. 投资纪律评分（八问自检，满分80→换算为百分制）
     try {
       const selfCheckResult = localStorage.getItem('selfCheckResult');
       if (selfCheckResult) {
         const result = JSON.parse(selfCheckResult);
-        scores.investment = result.score || 50;
+        scores.investment = result.score != null ? Math.round(result.score / 80 * 100) : 50;
+        if (result.date) {
+          var d = new Date(result.date);
+          hints.push('📊 八问自检完成于 ' + d.toLocaleDateString('zh-CN') + '，得分 ' + result.score + '/80');
+        }
       } else {
         scores.investment = 50;
         hints.push('建议完成<a href="./tool-self-check-8q.html">八问自检表</a>，获取投资纪律评分。');
@@ -314,6 +322,10 @@ function calculate() {
       if (fiveGridResult) {
         const result = JSON.parse(fiveGridResult);
         scores.family = result.score || 50;
+        if (result.date) {
+          var d = new Date(result.date);
+          hints.push('🏠 五格结构图完成于 ' + d.toLocaleDateString('zh-CN'));
+        }
       } else {
         scores.family = 50;
         hints.push('建议完成<a href="./tool-five-grid.html">五格家庭结构图</a>，获取家庭结构评分。');
