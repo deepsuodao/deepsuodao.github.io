@@ -102,7 +102,9 @@ function saveToDashboard(){
   var result={score:score,date:new Date().toISOString()};
   try{
     localStorage.setItem('fiveGridResult',JSON.stringify(result));
-    alert('✅ 已保存到仪表盘！\n\n打开"家庭财富仪表盘"即可查看。');
+    if(confirm('✅ 已保存到仪表盘！\n\n是否立即查看？')){
+      window.location.href='./tool-dashboard.html';
+    }
   }catch(e){
     console.error('保存失败：',e);
     alert('保存失败，请检查浏览器设置。');
