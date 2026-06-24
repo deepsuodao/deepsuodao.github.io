@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="消费自检模板——每季度一次，检查你的钱花得值不值。拉清单、打标签、问三个问题、调整预算。">
+<meta property="og:title" content="消费自检模板 — 私家智囊">
+<meta property="og:description" content="花钱的三个层次、五个陷阱、四个原则、消费自检四步法——帮你把每一分钱都花在刀刃上。">
+<meta property="og:image" content="https://deepsuodao.com/images/dialogue-scene.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://deepsuodao.com/tool-spending-self-check.html">
+<meta property="og:site_name" content="私家智囊">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://deepsuodao.com/images/dialogue-scene.jpg">
+<title>消费自检模板 — 私家智囊</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:#0a0e1a;color:#e8e6e3;line-height:1.7;-webkit-font-smoothing:antialiased}
+.container{max-width:680px;margin:0 auto;padding:0 24px}
+
+header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,14,26,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,168,83,.08)}
+header .container{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-size:1rem;font-weight:500;color:#e8e6e3}
+.logo a{color:#e8e6e3;text-decoration:none}
+.logo span{color:#d4a853}
+nav a{font-size:.8rem;margin-left:20px;color:#8a8885;text-decoration:none}
+nav a:hover{color:#e8e6e3}
+
+.page{padding:100px 0 60px}
+.page h1{font-size:1.6rem;font-weight:500;margin-bottom:8px}
+.page .related{font-size:.8rem;color:#6a6865;margin-bottom:32px}
+.page .related a{color:#d4a853}
+.page .subtitle{font-size:.9rem;color:#8a8885;margin-bottom:28px}
+
+/* 步骤导航 */
+.steps{display:flex;gap:8px;margin-bottom:32px;flex-wrap:wrap}
+.step-btn{padding:8px 16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:4px;color:#8a8885;font-size:.82rem;cursor:pointer;transition:all .2s}
+.step-btn:hover{border-color:rgba(212,168,83,.4);color:#e8e6e3}
+.step-btn.active{background:rgba(212,168,83,.12);border-color:#d4a853;color:#d4a853}
+.step-btn.completed{background:rgba(100,180,100,.12);border-color:#7c7;color:#7c7}
+
+/* 步骤内容 */
+.step-content{display:none;background:rgba(255,255,255,.02);border:1px solid rgba(212,168,83,.1);padding:24px;border-radius:6px;margin-bottom:24px}
+.step-content.active{display:block}
+
+/* 输入区域 */
+.input-section{margin-bottom:20px}
+.input-section h3{font-size:.95rem;color:#d4a853;margin-bottom:12px;font-weight:500}
+.input-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.input-row label{font-size:.85rem;color:#8a8885;min-width:120px}
+.input-row input{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#e8e6e3;padding:8px 12px;border-radius:4px;font-size:.85rem;width:150px}
+.input-row input:focus{outline:none;border-color:#d4a853}
+.input-row .unit{font-size:.8rem;color:#6a6865}
+
+/* 标签选择 */
+.tag-section{margin-bottom:20px}
+.tag-section h3{font-size:.95rem;color:#d4a853;margin-bottom:12px;font-weight:500}
+.tag-options{display:flex;gap:8px;flex-wrap:wrap}
+.tag-opt{padding:8px 16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:4px;color:#8a8885;font-size:.82rem;cursor:pointer;transition:all .2s}
+.tag-opt:hover{border-color:rgba(212,168,83,.4);color:#e8e6e3}
+.tag-opt.selected{background:rgba(212,168,83,.12);border-color:#d4a853;color:#d4a853}
+
+/* 问题区域 */
+.question-section{margin-bottom:20px}
+.question-section h3{font-size:.95rem;color:#d4a853;margin-bottom:12px;font-weight:500}
+.question-text{font-size:.9rem;margin-bottom:16px;line-height:1.8}
+.question-options{display:flex;gap:8px;flex-wrap:wrap}
+.question-opt{padding:8px 16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:4px;color:#8a8885;font-size:.82rem;cursor:pointer;transition:all .2s}
+.question-opt:hover{border-color:rgba(212,168,83,.4);color:#e8e6e3}
+.question-opt.selected{background:rgba(212,168,83,.12);border-color:#d4a853;color:#d4a853}
+
+/* 结果区域 */
+.result-section{margin-bottom:20px}
+.result-section h3{font-size:.95rem;color:#d4a853;margin-bottom:12px;font-weight:500}
+.result-bar{margin:28px 0;text-align:center}
+.result-bar .big-score{font-size:3rem;font-weight:300;color:#d4a853}
+.result-bar .level{padding:4px 16px;border-radius:20px;font-size:.85rem;font-weight:500;display:inline-block;margin-top:8px}
+.level.good{background:rgba(100,180,100,.15);color:#7c7;border:1px solid rgba(100,180,100,.3)}
+.level.warning{background:rgba(200,180,60,.15);color:#dd8;border:1px solid rgba(200,180,60,.3)}
+.level.bad{background:rgba(200,80,60,.15);color:#d86;border:1px solid rgba(200,80,60,.3)}
+
+/* 建议区域 */
+.advice{margin-top:24px;padding:24px;border-left:2px solid #d4a853;background:rgba(212,168,83,.04);font-size:.9rem;line-height:1.8}
+.advice h3{font-size:.9rem;color:#d4a853;margin-bottom:8px}
+
+/* 按钮 */
+.actions{margin:28px 0;display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:10px 24px;background:rgba(212,168,83,.1);border:1px solid rgba(212,168,83,.3);color:#d4a853;font-size:.85rem;border-radius:4px;cursor:pointer;text-decoration:none;transition:all .2s}
+.btn:hover{background:rgba(212,168,83,.2)}
+.btn.primary{background:#d4a853;color:#0a0e1a;border-color:#d4a853}
+.btn.primary:hover{background:#f0c868}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+
+/* 进度条 */
+.progress-bar{width:100%;height:4px;background:rgba(255,255,255,.05);border-radius:2px;margin-bottom:32px;overflow:hidden}
+.progress-fill{height:100%;background:#d4a853;transition:width .3s}
+
+/* 图表 */
+.chart{margin:24px 0}
+.chart-bar{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.chart-bar .label{font-size:.85rem;color:#8a8885;min-width:100px}
+.chart-bar .bar{height:24px;background:rgba(212,168,83,.2);border-radius:4px;position:relative;flex:1}
+.chart-bar .bar-fill{height:100%;border-radius:4px;transition:width .5s}
+.chart-bar .bar-fill.survival{background:rgba(100,180,100,.6)}
+.chart-bar .bar-fill.maintenance{background:rgba(200,180,60,.6)}
+.chart-bar .bar-fill.investment{background:rgba(212,168,83,.6)}
+.chart-bar .value{font-size:.85rem;color:#e8e6e3;min-width:60px;text-align:right}
+
+footer{border-top:1px solid rgba(255,255,255,.04);padding:32px 0;text-align:center;font-size:.8rem;color:#5a5855}
+footer a{color:#d4a853;text-decoration:none}
+@media print{header{position:static}.page{padding:20px 0}.step-content,.result-section,.advice{break-inside:avoid}.actions{display:none}}
+</style>
+  <link rel="canonical" href="https://www.deepsuodao.com/tool-spending-self-check.html">
+  <meta name="robots" content="index,follow">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "消费自检模板 — 私家智囊",
+  "description": "消费自检模板——每季度一次，检查你的钱花得值不值。拉清单、打标签、问三个问题、调整预算。",
+  "url": "https://www.deepsuodao.com/tool-spending-self-check.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "All"
+}
+  </script>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="logo"><a href="index.html">私家<span>智囊</span></a></div>
+    <nav>
+      <a href="index.html#belief">理念</a>
+      <a href="index.html#content">对话</a>
+      <a href="index.html#tools">工具箱</a>
+      <a href="index.html#about">关于</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page">
+<div class="container">
+
+<h1>消费自检模板</h1>
+<p class="related">配套工具 · <a href="dialogue-36.html">对话36：花钱的艺术</a></p>
+<p class="subtitle">每季度一次，检查你的钱花得值不值。拉清单、打标签、问三个问题、调整预算。</p>
+
+<!-- 进度条 -->
+<div class="progress-bar">
+  <div class="progress-fill" id="progressFill" style="width: 25%"></div>
+</div>
+
+<!-- 步骤导航 -->
+<div class="steps">
+  <button class="step-btn active" data-step="1">第一步：拉清单</button>
+  <button class="step-btn" data-step="2">第二步：打标签</button>
+  <button class="step-btn" data-step="3">第三步：问三个问题</button>
+  <button class="step-btn" data-step="4">第四步：调整预算</button>
+</div>
+
+<!-- 第一步：拉清单 -->
+<div class="step-content active" id="step1">
+  <h3>第一步：拉清单</h3>
+  <p style="font-size:.9rem;color:#8a8885;margin-bottom:20px">导出过去三个月所有银行卡、支付宝、微信的流水，按类别归类。 below可以手动输入各类支出的金额。</p>
+  
+  <div class="input-section">
+    <h3>生存性支出（不花就活不下去）</h3>
+    <div class="input-row">
+      <label>餐饮</label>
+      <input type="number" id="food" placeholder="0" min="0">
+      <span class="unit">元/月</span>
+    </div>
+    <div class="input-row">
+      <label>房租/房贷</label>
+      <input type="number" id="rent" placeholder="0" min="0">
+      <span class="unit">元/月</span>
+    </div>
+    <div class="input-row">
+      <label>交通</label>
+      <input type="number" id="transport" placeholder="0" min="0">
+      <span class="unit">元/月</span>
+    </div>
+    <div class="input-row">
+      <label>医疗</label>
+      <input type="number" id="medical" placeholder="0" min="0">
+      <span class="unit">元/月</span>
+    </div>
+  </div>
+  
+  <div class="input-section">
+    <h3>维持性支出（花了让生活更好）</h3>
+    <div class="input-row">
+      <label>社交</label>
+      <input type="number" id="social" placeholder="0" min="0">
+      <span class="unit">元/月</span>
+    </div>
+    <div class="input-row">
+      <label>娱乐</label>
+      <input type="number" id="entertainment" placeholder="0" min="0">
+      <span class="unit">元/月</span>
+    </div>
+    <div class="input-row">
+      <label>服饰</label>
+      <input type="number" id="clothing" placeholder="0" min="0">
+      <span class="unit">元/月</span>
+    </div>
+    <div class="input-row">
+      <label>旅行</label>
+      <input type="number" id="travel" placeholder="0" min="0">
+      <span class="unit">元/月</span>
+    </div>
+  </div>
+  
+  <div class="input-section">
+    <h3>投资性支出（花在今天，收益在未来）</h3>
+    <div class="input-row">
+      <label>学习</label>
+      <input type="number" id="learning" placeholder="0" min="0">
+      <span class="unit">元/月</span>
+    </div>
+    <div class="input-row">
+      <label>健身</label>
+      <input type="number" id="fitness" placeholder="0" min="0">
+      <span class="unit">元/月</span>
+    </div>
+    <div class="input-row">
+      <label>保险</label>
+      <input type="number" id="insurance" placeholder="0" min="0">
+      <span class="unit">元/月</span>
+    </div>
+    <div class="input-row">
+      <label>资产配置</label>
+      <input type="number" id="investment" placeholder="0" min="0">
+      <span class="unit">元/月</span>
+    </div>
+  </div>
+  
+  <div class="actions">
+    <button class="btn primary" onclick="nextStep(1)">下一步</button>
+  </div>
+</div>
+
+<!-- 第二步：打标签 -->
+<div class="step-content" id="step2">
+  <h3>第二步：打标签</h3>
+  <p style="font-size:.9rem;color:#8a8885;margin-bottom:20px">系统已根据你的输入，自动计算三类支出的比例。你可以手动调整标签。</p>
+  
+  <div class="tag-section">
+    <h3>三类支出比例</h3>
+    <div class="chart" id="chart">
+      <!-- 图表将通过JS动态生成 -->
+    </div>
+    <div id="tagResults" style="margin-top:20px;font-size:.9rem;line-height:1.8">
+      <!-- 结果将通过JS动态生成 -->
+    </div>
+  </div>
+  
+  <div class="actions">
+    <button class="btn" onclick="prevStep(2)">上一步</button>
+    <button class="btn primary" onclick="nextStep(2)">下一步</button>
+  </div>
+</div>
+
+<!-- 第三步：问三个问题 -->
+<div class="step-content" id="step3">
+  <h3>第三步：问三个问题</h3>
+  <p style="font-size:.9rem;color:#8a8885;margin-bottom:20px">对每一笔大额支出（超过月收入10%），问自己这三个问题。</p>
+  
+  <div class="question-section">
+    <h3>问题一：这笔钱花得值不值？</h3>
+    <div class="question-text">回顾过去三个月的最大一笔支出，你觉得它带给你的满足感，值得这个价格吗？</div>
+    <div class="question-options">
+      <button class="question-opt" data-q="1" data-a="yes">值得，满足感持续了很久</button>
+      <button class="question-opt" data-q="1" data-a="maybe">一般，三天后就忘了</button>
+      <button class="question-opt" data-q="1" data-a="no">不值，买完就后悔了</button>
+    </div>
+  </div>
+  
+  <div class="question-section">
+    <h3>问题二：如果重来一次，我还会这么花吗？</h3>
+    <div class="question-text">如果时间倒流，你还会花这笔钱吗？还是会把钱花在别的地方？</div>
+    <div class="question-options">
+      <button class="question-opt" data-q="2" data-a="yes">会，这是我认为值得的</button>
+      <button class="question-opt" data-q="2" data-a="maybe">不确定，可能会犹豫</button>
+      <button class="question-opt" data-q="2" data-a="no">不会，我会花在更值得的地方</button>
+    </div>
+  </div>
+  
+  <div class="question-section">
+    <h3>问题三：这笔钱跟我的人生规划有关系吗？</h3>
+    <div class="question-text">这笔支出，是朝着你想要的人生方向前进了一步，还是偏离了方向？</div>
+    <div class="question-options">
+      <button class="question-opt" data-q="3" data-a="yes">有关系，是在为未来投资</button>
+      <button class="question-opt" data-q="3" data-a="maybe">有点关系，但不确定</button>
+      <button class="question-opt" data-q="3" data-a="no">没关系，只是一时冲动</button>
+    </div>
+  </div>
+  
+  <div class="actions">
+    <button class="btn" onclick="prevStep(3)">上一步</button>
+    <button class="btn primary" onclick="nextStep(3)">下一步</button>
+  </div>
+</div>
+
+<!-- 第四步：调整预算 -->
+<div class="step-content" id="step4">
+  <h3>第四步：调整下季度预算</h3>
+  <p style="font-size:.9rem;color:#8a8885;margin-bottom:20px">根据前面的检查结果，调整下季度的预算分配。</p>
+  
+  <div class="result-section">
+    <h3>你的消费自检报告</h3>
+    <div id="report">
+      <!-- 报告将通过JS动态生成 -->
+    </div>
+  </div>
+  
+  <div class="advice">
+    <h3>💡 优化建议</h3>
+    <div id="adviceText">
+      <!-- 建议将通过JS动态生成 -->
+    </div>
+  </div>
+  
+  <div class="actions">
+    <button class="btn" onclick="prevStep(4)">上一步</button>
+    <button class="btn primary" onclick="printReport()">打印报告</button>
+    <button class="btn" onclick="resetForm()">重新自检</button>
+  </div>
+</div>
+
+</div>
+</section>
+
+<footer>
+  <div class="container">
+    © 2026 私家智囊 · <a href="index.html">首页</a> · <a href="dialogue-36.html">花钱的艺术</a>
+  </div>
+</footer>
+
+<script>
+// 步骤切换
+function nextStep(current) {
+  // 验证当前步骤
+  if (current === 1) {
+    // 计算总金额
+    calculateTotals();
+  }
+  
+  // 隐藏当前步骤
+  document.getElementById('step' + current).classList.remove('active');
+  document.querySelector('.step-btn[data-step="' + current + '"]').classList.remove('active');
+  document.querySelector('.step-btn[data-step="' + current + '"]').classList.add('completed');
+  
+  // 显示下一步
+  const next = current + 1;
+  document.getElementById('step' + next).classList.add('active');
+  document.querySelector('.step-btn[data-step="' + next + '"]').classList.add('active');
+  
+  // 更新进度条
+  document.getElementById('progressFill').style.width = (next * 25) + '%';
+  
+  // 如果是最后一步，生成报告
+  if (next === 4) {
+    generateReport();
+  }
+}
+
+function prevStep(current) {
+  // 隐藏当前步骤
+  document.getElementById('step' + current).classList.remove('active');
+  document.querySelector('.step-btn[data-step="' + current + '"]').classList.remove('active');
+  
+  // 显示上一步
+  const prev = current - 1;
+  document.getElementById('step' + prev).classList.add('active');
+  document.querySelector('.step-btn[data-step="' + prev + '"]').classList.add('active');
+  
+  // 更新进度条
+  document.getElementById('progressFill').style.width = (prev * 25) + '%';
+}
+
+// 计算总金额
+function calculateTotals() {
+  // 获取所有输入值
+  const food = parseFloat(document.getElementById('food').value) || 0;
+  const rent = parseFloat(document.getElementById('rent').value) || 0;
+  const transport = parseFloat(document.getElementById('transport').value) || 0;
+  const medical = parseFloat(document.getElementById('medical').value) || 0;
+  
+  const social = parseFloat(document.getElementById('social').value) || 0;
+  const entertainment = parseFloat(document.getElementById('entertainment').value) || 0;
+  const clothing = parseFloat(document.getElementById('clothing').value) || 0;
+  const travel = parseFloat(document.getElementById('travel').value) || 0;
+  
+  const learning = parseFloat(document.getElementById('learning').value) || 0;
+  const fitness = parseFloat(document.getElementById('fitness').value) || 0;
+  const insurance = parseFloat(document.getElementById('insurance').value) || 0;
+  const investment = parseFloat(document.getElementById('investment').value) || 0;
+  
+  // 计算三类支出
+  const survival = food + rent + transport + medical;
+  const maintenance = social + entertainment + clothing + travel;
+  const invest = learning + fitness + insurance + investment;
+  
+  const total = survival + maintenance + invest;
+  
+  // 保存到全局变量
+  window.survival = survival;
+  window.maintenance = maintenance;
+  window.invest = invest;
+  window.total = total;
+  
+  // 生成图表
+  generateChart(survival, maintenance, invest, total);
+}
+
+// 生成图表
+function generateChart(survival, maintenance, invest, total) {
+  const chartDiv = document.getElementById('chart');
+  
+  if (total === 0) {
+    chartDiv.innerHTML = '<p style="color:#8a8885">请输入支出金额</p>';
+    return;
+  }
+  
+  const survivalPct = (survival / total * 100).toFixed(1);
+  const maintenancePct = (maintenance / total * 100).toFixed(1);
+  const investPct = (invest / total * 100).toFixed(1);
+  
+  chartDiv.innerHTML = `
+    <div class="chart-bar">
+      <div class="label">生存性支出</div>
+      <div class="bar">
+        <div class="bar-fill survival" style="width: ${survivalPct}%"></div>
+      </div>
+      <div class="value">${survivalPct}%</div>
+    </div>
+    <div class="chart-bar">
+      <div class="label">维持性支出</div>
+      <div class="bar">
+        <div class="bar-fill maintenance" style="width: ${maintenancePct}%"></div>
+      </div>
+      <div class="value">${maintenancePct}%</div>
+    </div>
+    <div class="chart-bar">
+      <div class="label">投资性支出</div>
+      <div class="bar">
+        <div class="bar-fill investment" style="width: ${investPct}%"></div>
+      </div>
+      <div class="value">${investPct}%</div>
+    </div>
+  `;
+  
+  // 生成结果文本
+  const resultsDiv = document.getElementById('tagResults');
+  let advice = '';
+  
+  if (survivalPct > 50) {
+    advice += '<p>⚠️ 你的生存性支出占比过高（' + survivalPct + '%），说明你的收入大部分用于维持基本生活。建议：寻找增加收入的机会，或者优化生存性支出的成本（比如换更便宜的房租）。</p>';
+  } else if (survivalPct < 30) {
+    advice += '<p>✅ 你的生存性支出占比合理（' + survivalPct + '%），说明你的基本生活成本可控。</p>';
+  }
+  
+  if (maintenancePct > 40) {
+    advice += '<p>⚠️ 你的维持性支出占比过高（' + maintenancePct + '%），可能存在面子消费或奶茶效应。建议：回顾每一笔维持性支出，问自己"这笔钱花得值不值？"。</p>';
+  } else if (maintenancePct < 20) {
+    advice += '<p>✅ 你的维持性支出占比合理（' + maintenancePct + '%），说明你没有过度消费。</p>';
+  }
+  
+  if (investPct < 10) {
+    advice += '<p>⚠️ 你的投资性支出占比过低（' + investPct + '%），大部分钱花在了今天，没有为未来投资。建议：每月固定拿出收入的10-20%用于学习、健身、保险、资产配置。</p>';
+  } else if (investPct > 30) {
+    advice += '<p>✅ 你的投资性支出占比很高（' + investPct + '%），说明你很重视未来。继续保持！</p>';
+  }
+  
+  resultsDiv.innerHTML = advice;
+}
+
+// 问题选择
+document.querySelectorAll('.question-opt').forEach(opt => {
+  opt.addEventListener('click', function() {
+    const q = this.getAttribute('data-q');
+    const a = this.getAttribute('data-a');
+    
+    // 清除同组的其他选择
+    document.querySelectorAll('.question-opt[data-q="' + q + '"]').forEach(o => {
+      o.classList.remove('selected');
+    });
+    
+    // 选中当前
+    this.classList.add('selected');
+    
+    // 保存答案
+    window['question' + q] = a;
+  });
+});
+
+// 生成报告
+function generateReport() {
+  const reportDiv = document.getElementById('report');
+  const adviceDiv = document.getElementById('adviceText');
+  
+  // 计算比例
+  const survivalPct = (window.survival / window.total * 100).toFixed(1);
+  const maintenancePct = (window.maintenance / window.total * 100).toFixed(1);
+  const investPct = (window.invest / window.total * 100).toFixed(1);
+  
+  // 生成报告
+  let report = '<p><strong>三类支出比例：</strong></p>';
+  report += '<p>生存性支出：' + survivalPct + '%（' + window.survival + '元/月）</p>';
+  report += '<p>维持性支出：' + maintenancePct + '%（' + window.maintenance + '元/月）</p>';
+  report += '<p>投资性支出：' + investPct + '%（' + window.invest + '元/月）</p>';
+  report += '<p><strong>总支出：</strong>' + window.total + '元/月</p>';
+  
+  // 问题答案
+  report += '<p><strong>三个问题的答案：</strong></p>';
+  report += '<p>问题一（值不值）：' + (window.question1 || '未回答') + '</p>';
+  report += '<p>问题二（重来会不会）：' + (window.question2 || '未回答') + '</p>';
+  report += '<p>问题三（与人生规划有没有关系）：' + (window.question3 || '未回答') + '</p>';
+  
+  reportDiv.innerHTML = report;
+  
+  // 生成建议
+  let advice = '';
+  
+  // 根据比例给出建议
+  if (survivalPct > 50) {
+    advice += '<p>1. <strong>优化生存性支出</strong>：你的生存性支出占比过高，建议审视房租、交通等固定支出，看看有没有优化空间。</p>';
+  }
+  
+  if (maintenancePct > 40) {
+    advice += '<p>2. <strong>控制维持性支出</strong>：你的维持性支出占比过高，可能存在不必要的消费。建议列出所有维持性支出，砍掉那些"不值"的。</p>';
+  }
+  
+  if (investPct < 10) {
+    advice += '<p>3. <strong>增加投资性支出</strong>：你的投资性支出占比过低，建议每月固定拿出收入的10-20%用于学习、健身、保险、资产配置。</p>';
+  }
+  
+  // 根据问题答案给出建议
+  if (window.question1 === 'no' || window.question2 === 'no' || window.question3 === 'no') {
+    advice += '<p>4. <strong>审视大额支出</strong>：你对至少一笔大额支出感到后悔，说明你的消费决策需要优化。建议在花钱之前，先问自己那三个问题。</p>';
+  }
+  
+  advice += '<p><strong>下季度预算建议：</strong></p>';
+  advice += '<p>- 生存性支出：控制在总支出的30-50%</p>';
+  advice += '<p>- 维持性支出：控制在总支出的20-40%</p>';
+  advice += '<p>- 投资性支出：提高到总支出的10-30%</p>';
+  
+  adviceDiv.innerHTML = advice;
+}
+
+// 打印报告
+function printReport() {
+  window.print();
+}
+
+// 重置表单
+function resetForm() {
+  if (confirm('确定要重新开始自检吗？所有输入将被清除。')) {
+    // 清除所有输入
+    document.querySelectorAll('input[type="number"]').forEach(input => {
+      input.value = '';
+    });
+    
+    // 清除所有选择
+    document.querySelectorAll('.question-opt.selected').forEach(opt => {
+      opt.classList.remove('selected');
+    });
+    
+    // 回到第一步
+    document.querySelectorAll('.step-content').forEach(step => {
+      step.classList.remove('active');
+    });
+    document.querySelectorAll('.step-btn').forEach(btn => {
+      btn.classList.remove('active', 'completed');
+    });
+    
+    document.getElementById('step1').classList.add('active');
+    document.querySelector('.step-btn[data-step="1"]').classList.add('active');
+    document.getElementById('progressFill').style.width = '25%';
+  }
+}
+
+// 步骤按钮点击
+document.querySelectorAll('.step-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const step = parseInt(this.getAttribute('data-step'));
+    
+    // 隐藏所有步骤
+    document.querySelectorAll('.step-content').forEach(s => {
+      s.classList.remove('active');
+    });
+    document.querySelectorAll('.step-btn').forEach(b => {
+      b.classList.remove('active');
+    });
+    
+    // 显示选中步骤
+    document.getElementById('step' + step).classList.add('active');
+    this.classList.add('active');
+    
+    // 更新进度条
+    document.getElementById('progressFill').style.width = (step * 25) + '%';
+    
+    // 如果是第四步，生成报告
+    if (step === 4) {
+      generateReport();
+    }
+  });
+});
+</script>
+
+</body>
+</html>
