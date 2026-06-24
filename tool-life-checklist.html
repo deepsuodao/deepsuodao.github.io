@@ -211,7 +211,7 @@ function update(){
     cardsHtml+='<div class="goal-row"><span>可用现金</span><span class="val">¥'+fmt(cashW)+'</span></div>';
     cardsHtml+='<div class="goal-row"><span>被动现金流</span><span class="val">¥'+fmt(res.passive)+'</span></div>';
     cardsHtml+='<div class="goal-row"><span>定投终值</span><span class="val">¥'+fmt(res.invest)+'</span></div>';
-    cardsHtml+='<div class="goal-row goal-break"><span>缺口</span><span class="val '+(gap>0?'neg':'pos')+'">¥'+fmt(Math.abs(gap))+'</span></div>';
+    cardsHtml+='<div class="goal-row goal-break"><span>缺口</span><span class="val '+(gap>0?'neg':'pos')+'">'+(gap>0?'¥'+fmt(Math.abs(gap)):'✅ 已覆盖')+'</span></div>';
 
     // 延后年限按钮
     if(gap>0){
