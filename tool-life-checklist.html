@@ -291,43 +291,63 @@ function update(){
   if(FV <= 0 || PMT <= 0){
     timelineDiv.style.display = 'none';
   } else {
+    // 计算净目标 = 总愿望 - (现金资产 + 长期被动现金流折现)
+    // 用10年代替终身折现，保持简洁
+    var passiveTotal = passiveW * 10;
+    var existingBuffer = cashW + passiveTotal;
+    var netFV = FV - existingBuffer; // 净目标——去掉已有资产后还差多少
+    if(netFV < 0) netFV = 0;
+    
     // calcMonthsNeeded 返回月数，除以12得到年数
-    var years0 = calcMonthsNeeded(FV, PMT, 0) / 12;
-    var years6 = annReturn > 0 ? calcMonthsNeeded(FV, PMT, rMonthly) / 12 : Infinity;
-    var years8 = calcMonthsNeeded(FV, PMT, 0.08/12) / 12;
+    var years0 = calcMonthsNeeded(netFV, PMT, 0) / 12;
+    var years6 = (annReturn > 0 && netFV > 0) ? calcMonthsNeeded(netFV, PMT, rMonthly) / 12 : (netFV <= 0 ? 0 : Infinity);
+    var years8 = (netFV > 0) ? calcMonthsNeeded(netFV, PMT, 0.08/12) / 12 : 0;
 
     function yrText(y){
       if(!isFinite(y) || y > 150) return '无法实现';
+      if(y <= 0) return '已覆盖 ✓';
       return Math.ceil(y) + '年（到' + (age + Math.ceil(y)) + '岁）';
     }
 
     var htmlTL = '';
-    var pct0 = Math.min(years0 / 60 * 100, 100);
-    htmlTL += '<div class="timeline-item"><span class="tag tag-gray">💵 纯存（0%）</span><div class="bar" style="background:#5a5855;width:'+pct0+'%"></div><span>'+yrText(years0)+'</span></div>';
-
-    if(isFinite(years6)){
-      var pct6 = Math.min(years6 / 60 * 100, 100);
-      var color6 = annReturn >= 0.08 ? '#8c8' : (annReturn >= 0.05 ? '#d4a853' : '#8bf');
-      htmlTL += '<div class="timeline-item"><span class="tag tag-gold">📈 '+ (annReturn*100).toFixed(0) +'%收益</span><div class="bar" style="background:'+color6+';width:'+pct6+'%"></div><span>'+yrText(years6)+'</span></div>';
+    if(existingBuffer > 0 && netFV < FV){
+      htmlTL += '<div class="timeline-item"><span class="tag tag-blue">🛡️ 已有资产覆盖</span><div class="bar" style="background:#5a8abf;width:20%"></div><span>¥' + fmt(existingBuffer) + '（已覆盖）</span></div>';
     }
 
-    if(isFinite(years8) && annReturn < 0.08){
-      var pct8 = Math.min(years8 / 60 * 100, 100);
-      htmlTL += '<div class="timeline-item"><span class="tag tag-green">🚀 8%参考</span><div class="bar" style="background:#8c8;width:'+pct8+'%"></div><span>'+yrText(years8)+'</span></div>';
+    if(netFV > 0){
+      var pct0 = Math.min(years0 / 60 * 100, 100);
+      htmlTL += '<div class="timeline-item"><span class="tag tag-gray">💵 纯存（0%）</span><div class="bar" style="background:#5a5855;width:'+pct0+'%"></div><span>'+yrText(years0)+'</span></div>';
+
+      if(isFinite(years6)){
+        var pct6 = Math.min(years6 / 60 * 100, 100);
+        var color6 = annReturn >= 0.08 ? '#8c8' : (annReturn >= 0.05 ? '#d4a853' : '#8bf');
+        htmlTL += '<div class="timeline-item"><span class="tag tag-gold">📈 '+ (annReturn*100).toFixed(0) +'%收益</span><div class="bar" style="background:'+color6+';width:'+pct6+'%"></div><span>'+yrText(years6)+'</span></div>';
+      }
+
+      if(isFinite(years8) && annReturn < 0.08){
+        var pct8 = Math.min(years8 / 60 * 100, 100);
+        htmlTL += '<div class="timeline-item"><span class="tag tag-green">🚀 8%参考</span><div class="bar" style="background:#8c8;width:'+pct8+'%"></div><span>'+yrText(years8)+'</span></div>';
+      }
+    } else {
+      htmlTL += '<div class="timeline-item"><span style="color:#8c8;">✅ 你的已有资产已覆盖全部愿望</span></div>';
     }
 
     timelineRows.innerHTML = htmlTL;
 
     // 洞察
     var insight = '';
-    var saveYears = isFinite(years6) ? Math.ceil(years6) : null;
+    var saveYears = (isFinite(years6) && netFV > 0) ? Math.ceil(years6) : 0;
     var endAge = saveYears ? age + saveYears : null;
 
-    if(saveYears === null || saveYears > 150){
-      insight = '以你当前的每月储蓄 ¥' + fmt(PMT) + '，即使算上复利，也无法在合理时间内实现总计 ¥' + fmt(FV) + ' 的愿望。<br>💡 建议：<strong>提高每月储蓄金额</strong>，或<strong>减少/延后部分愿望</strong>。';
+    if(netFV <= 0){
+      insight = '✅ 你的已有资产（现金¥' + fmt(cashW) + ' + 未来10年被动现金流¥' + fmt(passiveTotal) + '）已覆盖全部愿望¥' + fmt(FV) + '。<br>';
+      insight += '无需额外储蓄，建议用<a href="tool-five-grid.html" style="color:#d4a853;text-decoration:underline;">五格结构图</a>优化现有资产配置。';
+    } else if(saveYears === null || saveYears > 150){
+      insight = '以你当前的每月储蓄 ¥' + fmt(PMT) + '，即使算上复利，也无法在合理时间内弥补净缺口¥' + fmt(netFV) + '。<br>💡 建议：<strong>提高每月储蓄金额</strong>，或<strong>减少/延后部分愿望</strong>。';
     } else {
-      insight = '以每月储蓄 <strong>¥' + fmt(PMT) + '</strong>、年化 <strong>' + (annReturn*100).toFixed(0) + '%</strong>：<br>';
-      insight += '实现总计 <strong>¥' + fmt(FV) + '</strong> 的愿望需要 <strong>' + saveYears + '年</strong>（到你' + endAge + '岁）。';
+      insight = '你的总愿望¥' + fmt(FV) + '，已有资产覆盖了¥' + fmt(existingBuffer) + '，净缺口<strong>¥' + fmt(netFV) + '</strong>。<br>';
+      insight += '以每月储蓄 <strong>¥' + fmt(PMT) + '</strong>、年化 <strong>' + (annReturn*100).toFixed(0) + '%</strong>：<br>';
+      insight += '填补净缺口需要 <strong>' + saveYears + '年</strong>（到你' + endAge + '岁）。';
 
       if(isFinite(years0)){
         var diff = Math.ceil(years0 - years6);
