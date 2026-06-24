@@ -358,11 +358,13 @@ function update(){
 
       if(endAge > 65){
         insight += '<br><br>⚠️ 实现所有愿望时你已经' + endAge + '岁，部分愿望可能时间偏紧。';
-        insight += '<br>💡 建议：<strong>提高每月储蓄</strong>或<strong>延后部分目标</strong>。';
+        insight += '<br>💡 缩短缺口的四个杠杆：<strong>提高储蓄</strong>、<strong>增加定投</strong>、<strong>优化配置提高收益率</strong>、或<strong>降低/延后目标</strong>。';
+        insight += '<br>👉 用本站的<a href="tool-compound-calculator.html" style="color:#d4a853;text-decoration:underline;">复利计算器</a>试试不同方案的差距。';
       } else if(saveYears < 5){
         insight += '<br><br>✅ 目标在5年内即可实现，短期可实现性强。';
       } else {
-        insight += '<br><br>💡 如果希望提前完成，可以考虑每月多存 <strong>¥' + fmt(Math.round(PMT * 0.3)) + '</strong>（提高30%），或延后部分非核心愿望。';
+        insight += '<br><br>💡 缩短缺口：<strong>提高储蓄</strong>、<strong>增加定投</strong>、<strong>优化收益率</strong>、或<strong>降低目标</strong>。';
+        insight += '<br>👉 用本站的<a href="tool-compound-calculator.html" style="color:#d4a853;text-decoration:underline;">复利计算器</a>试试不同方案的差距。';
       }
     }
     insightDiv.innerHTML = insight;
