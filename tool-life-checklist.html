@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="人生愿望清单·目标规划表——从愿望清单到财务目标，你希望财富支撑起怎样的人生？含复利计算，先测后判。">
+<meta name="description" content="人生愿望清单·目标规划表——从愿望清单到财务目标，含复利计算和防御缺口测算。先测后判。">
 <meta property="og:title" content="人生愿望清单 · 目标规划表 — 私家智囊">
-<meta property="og:description" content="用今天的理性规划，换取明天选择生活的自由。输入愿望、储蓄和收益率，看看复利能帮你省多少年。">
+<meta property="og:description" content="输入愿望、储蓄和收益率，看看复利能帮你省多少年。填入当前资产，算清梦想与现实的差距。">
 <meta property="og:image" content="https://deepsuodao.com/images/dialogue-scene.jpg">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://deepsuodao.com/tool-life-checklist.html">
@@ -42,7 +42,6 @@ nav a:hover{color:#e8e6e3}
 .add-row{padding:12px;border:1px dashed rgba(255,255,255,.06);text-align:center;color:#6a6865;font-size:.85rem;cursor:pointer;border-radius:4px;margin-bottom:24px;transition:all .2s}
 .add-row:hover{border-color:rgba(212,168,83,.3);color:#b0aeab}
 
-/* 新增参数区 */
 .params{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px}
 .param-box{padding:16px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:6px}
 .param-box .label{font-size:.75rem;color:#6a6865;margin-bottom:6px}
@@ -51,13 +50,22 @@ nav a:hover{color:#e8e6e3}
 .param-box .unit{font-size:.72rem;color:#5a5855;margin-top:4px}
 @media(max-width:480px){.params{grid-template-columns:1fr;gap:8px}}
 
+.asset-box{margin-bottom:24px}
+.asset-box .title{font-size:.85rem;color:#d4a853;margin-bottom:12px;font-weight:500}
+.asset-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.asset-item{padding:14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:6px}
+.asset-item .label{font-size:.75rem;color:#6a6865;margin-bottom:4px}
+.asset-item input{width:100%;padding:8px 10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);color:#e8e6e3;font-size:.9rem;border-radius:4px;outline:none}
+.asset-item input:focus{border-color:#d4a853}
+.asset-item .unit{font-size:.72rem;color:#5a5855;margin-top:4px}
+@media(max-width:480px){.asset-grid{grid-template-columns:1fr}}
+
 .summary-box{padding:24px;background:rgba(212,168,83,.04);border:1px solid rgba(212,168,83,.1);border-radius:6px;margin-bottom:24px}
 .summary-box .label{font-size:.78rem;color:#6a6865}
 .summary-box .big{font-size:1.8rem;font-weight:300;color:#d4a853;margin:4px 0}
 .summary-box .row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.85rem}
 .summary-box .row:last-child{border:none}
 
-/* 时间线对比 */
 .timeline{margin-bottom:24px}
 .timeline .title{font-size:.85rem;color:#d4a853;margin-bottom:12px;font-weight:500}
 .timeline-item{display:flex;align-items:center;padding:10px 16px;margin-bottom:6px;border-radius:4px;font-size:.85rem}
@@ -67,9 +75,16 @@ nav a:hover{color:#e8e6e3}
 .tag-gold{background:rgba(212,168,83,.15);color:#d4a853}
 .tag-blue{background:rgba(100,160,220,.15);color:#8bf}
 .tag-gray{background:rgba(255,255,255,.04);color:#6a6865}
+.tag-red{background:rgba(220,80,60,.15);color:#e86}
 
 .insight{padding:16px 20px;background:rgba(212,168,83,.04);border-left:2px solid #d4a853;border-radius:0 6px 6px 0;margin-bottom:24px;font-size:.85rem;line-height:1.8}
 .insight strong{color:#d4a853}
+
+.gap-box{padding:20px;background:rgba(220,80,60,.04);border:1px solid rgba(220,80,60,.15);border-radius:6px;margin-bottom:24px}
+.gap-box .title{font-size:.85rem;color:#e86;margin-bottom:12px;font-weight:500}
+.gap-box .big{font-size:1.6rem;font-weight:300;color:#e86;margin:4px 0}
+.gap-box .row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(220,80,60,.08);font-size:.85rem}
+.gap-box .row:last-child{border:none}
 
 .actions{text-align:center;margin:28px 0}
 .btn{display:inline-block;padding:10px 24px;background:rgba(212,168,83,.1);border:1px solid rgba(212,168,83,.3);color:#d4a853;font-size:.85rem;border-radius:4px;cursor:pointer;text-decoration:none;margin:6px}
@@ -78,7 +93,7 @@ nav a:hover{color:#e8e6e3}
 .btn.primary:hover{background:#f0c868}
 footer{border-top:1px solid rgba(255,255,255,.04);padding:32px 0;text-align:center;font-size:.8rem;color:#5a5855}
 footer a{color:#d4a853;text-decoration:none}
-@media print{header{position:static}.page{padding:20px 0}.add-row,.del-btn,footer,.params{display:none}.row-input input{border:1px solid #ccc}}
+@media print{header{position:static}.page{padding:20px 0}.add-row,.del-btn,footer,.params,.asset-box{display:none}.row-input input{border:1px solid #ccc}}
 </style>
   <link rel="canonical" href="https://www.deepsuodao.com/tool-life-checklist.html">
   <meta name="robots" content="index,follow">
@@ -87,7 +102,7 @@ footer a{color:#d4a853;text-decoration:none}
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "人生愿望清单·目标规划表 — 私家智囊",
-  "description": "人生愿望清单·目标规划表——从愿望清单到财务目标，含复利计算。先测后判。",
+  "description": "人生愿望清单·目标规划表——从愿望清单到财务目标，含复利计算和防御缺口测算。先测后判。",
   "url": "https://www.deepsuodao.com/tool-life-checklist.html",
   "applicationCategory": "FinanceApplication",
   "operatingSystem": "All"
@@ -116,7 +131,7 @@ footer a{color:#d4a853;text-decoration:none}
 
 <div class="quote">
   "你希望财富，支撑起怎样的人生？"<br>
-  <span style="font-size:.85rem">写下愿望，标上金额和时间。输入你的每月储蓄和预期收益率——看看复利能帮你省多少年。</span>
+  <span style="font-size:.85rem">写下愿望，标上金额和时间。输入你的每月储蓄、预期收益率和当前资产——看看梦想与现实之间，差了多少个"投资年限"。</span>
 </div>
 
 <!-- 清单输入 -->
@@ -157,6 +172,23 @@ footer a{color:#d4a853;text-decoration:none}
   </div>
 </div>
 
+<!-- 当前资产（防御缺口测算用） -->
+<div class="asset-box">
+  <div class="title">🛡️ 你当前的防御资产</div>
+  <div class="asset-grid">
+    <div class="asset-item">
+      <div class="label">流动性现金资产</div>
+      <input type="number" id="cashAssets" placeholder="50" oninput="update()" value="50">
+      <div class="unit">万元（存款+货币基金+活期）</div>
+    </div>
+    <div class="asset-item">
+      <div class="label">长期被动现金流（年）</div>
+      <input type="number" id="passiveIncome" placeholder="5" oninput="update()" value="5">
+      <div class="unit">万元/年（租金+股息+其他被动收入）</div>
+    </div>
+  </div>
+</div>
+
 <!-- 总金额 -->
 <div class="summary-box">
   <div class="label">愿望总计</div>
@@ -169,6 +201,12 @@ footer a{color:#d4a853;text-decoration:none}
   <div class="title">📊 你的愿望实现时间线</div>
   <div id="timelineRows"></div>
   <div class="insight" id="insightText"></div>
+</div>
+
+<!-- 防御缺口 -->
+<div class="gap-box" id="gapSection" style="display:none;">
+  <div class="title">⚠️ 防御缺口测算——梦想与现实的差距</div>
+  <div id="gapContent"></div>
 </div>
 
 <div class="actions">
@@ -203,13 +241,15 @@ function addRow(){
 
 function delRow(btn){btn.parentElement.remove();update();}
 
-function calcYearsNeeded(FV, PMT, rMonthly){
-  // FV = 目标总额, PMT = 月供, rMonthly = 月化收益率
-  // 年金终值公式：FV = PMT * ((1+r)^n - 1) / r
-  // 求 n: n = log(FV * r / PMT + 1) / log(1 + r)
+/**
+ * 年金终值公式求期数
+ * FV = PMT * ((1+r)^n - 1) / r
+ * 返回：月数
+ */
+function calcMonthsNeeded(FV, PMT, rMonthly){
   if(PMT <= 0 || FV <= 0) return Infinity;
   if(rMonthly <= 0){
-    // 无收益时：FV = PMT * n
+    // 无收益：FV = PMT * n
     return FV / PMT;
   }
   var ratio = FV * rMonthly / PMT;
@@ -234,82 +274,137 @@ function update(){
   document.getElementById('totalAmt').textContent='¥'+fmt(total*10000);
   document.getElementById('detail').innerHTML=html||'<div class="row"><span style="color:#6a6865">添加你的第一个愿望</span></div>';
 
-  // 2. 计算时间线
-  var FV = total * 10000; // 转换为元
+  var FV = total * 10000; // 总目标（元）
   var PMT = parseFloat(document.getElementById('monthlySave').value) || 0;
   var annReturn = (parseFloat(document.getElementById('annualReturn').value) || 0) / 100;
   var age = parseInt(document.getElementById('currentAge').value) || 0;
   var rMonthly = annReturn / 12;
 
+  var cashW = (parseFloat(document.getElementById('cashAssets').value) || 0) * 10000;
+  var passiveW = (parseFloat(document.getElementById('passiveIncome').value) || 0) * 10000;
+
+  // ===== 时间线 =====
   var timelineDiv = document.getElementById('timelineSection');
   var timelineRows = document.getElementById('timelineRows');
   var insightDiv = document.getElementById('insightText');
 
   if(FV <= 0 || PMT <= 0){
     timelineDiv.style.display = 'none';
+  } else {
+    // calcMonthsNeeded 返回月数，除以12得到年数
+    var years0 = calcMonthsNeeded(FV, PMT, 0) / 12;
+    var years6 = annReturn > 0 ? calcMonthsNeeded(FV, PMT, rMonthly) / 12 : Infinity;
+    var years8 = calcMonthsNeeded(FV, PMT, 0.08/12) / 12;
+
+    function yrText(y){
+      if(!isFinite(y) || y > 150) return '无法实现';
+      return Math.ceil(y) + '年（到' + (age + Math.ceil(y)) + '岁）';
+    }
+
+    var htmlTL = '';
+    var pct0 = Math.min(years0 / 60 * 100, 100);
+    htmlTL += '<div class="timeline-item"><span class="tag tag-gray">💵 纯存（0%）</span><div class="bar" style="background:#5a5855;width:'+pct0+'%"></div><span>'+yrText(years0)+'</span></div>';
+
+    if(isFinite(years6)){
+      var pct6 = Math.min(years6 / 60 * 100, 100);
+      var color6 = annReturn >= 0.08 ? '#8c8' : (annReturn >= 0.05 ? '#d4a853' : '#8bf');
+      htmlTL += '<div class="timeline-item"><span class="tag tag-gold">📈 '+ (annReturn*100).toFixed(0) +'%收益</span><div class="bar" style="background:'+color6+';width:'+pct6+'%"></div><span>'+yrText(years6)+'</span></div>';
+    }
+
+    if(isFinite(years8) && annReturn < 0.08){
+      var pct8 = Math.min(years8 / 60 * 100, 100);
+      htmlTL += '<div class="timeline-item"><span class="tag tag-green">🚀 8%参考</span><div class="bar" style="background:#8c8;width:'+pct8+'%"></div><span>'+yrText(years8)+'</span></div>';
+    }
+
+    timelineRows.innerHTML = htmlTL;
+
+    // 洞察
+    var insight = '';
+    var saveYears = isFinite(years6) ? Math.ceil(years6) : null;
+    var endAge = saveYears ? age + saveYears : null;
+
+    if(saveYears === null || saveYears > 150){
+      insight = '以你当前的每月储蓄 ¥' + fmt(PMT) + '，即使算上复利，也无法在合理时间内实现总计 ¥' + fmt(FV) + ' 的愿望。<br>💡 建议：<strong>提高每月储蓄金额</strong>，或<strong>减少/延后部分愿望</strong>。';
+    } else {
+      insight = '以每月储蓄 <strong>¥' + fmt(PMT) + '</strong>、年化 <strong>' + (annReturn*100).toFixed(0) + '%</strong>：<br>';
+      insight += '实现总计 <strong>¥' + fmt(FV) + '</strong> 的愿望需要 <strong>' + saveYears + '年</strong>（到你' + endAge + '岁）。';
+
+      if(isFinite(years0)){
+        var diff = Math.ceil(years0 - years6);
+        if(diff > 0){
+          insight += '<br><br>🎯 与纯存钱相比，复利帮你省了 <strong>' + diff + '年</strong>！';
+        }
+      }
+
+      if(endAge > 65){
+        insight += '<br><br>⚠️ 实现所有愿望时你已经' + endAge + '岁，部分愿望可能时间偏紧。';
+        insight += '<br>💡 建议：<strong>提高每月储蓄</strong>或<strong>延后部分目标</strong>。';
+      } else if(saveYears < 5){
+        insight += '<br><br>✅ 目标在5年内即可实现，短期可实现性强。';
+      } else {
+        insight += '<br><br>💡 如果希望提前完成，可以考虑每月多存 <strong>¥' + fmt(Math.round(PMT * 0.3)) + '</strong>（提高30%），或延后部分非核心愿望。';
+      }
+    }
+    insightDiv.innerHTML = insight;
+    timelineDiv.style.display = 'block';
+  }
+
+  // ===== 防御缺口 =====
+  var gapDiv = document.getElementById('gapSection');
+  var gapContent = document.getElementById('gapContent');
+
+  if(FV <= 0){
+    gapDiv.style.display = 'none';
     return;
   }
 
-  // 计算三种情景
-  var years0 = calcYearsNeeded(FV, PMT, 0); // 0% 纯存
-  var years6 = annReturn > 0 ? calcYearsNeeded(FV, PMT, rMonthly) : Infinity;
-  var years8 = calcYearsNeeded(FV, PMT, 0.08/12); // 8% 参考
+  // 防御缺口 = 总愿望 - (当前现金资产 + 年被动现金流 × 10年简化值)
+  // 用10年代替终身折现，让计算简单且直观
+  var passiveTotal = passiveW * 10; // 10年被动现金流总和
+  var existingBuffer = cashW + passiveTotal;
+  var gap = FV - existingBuffer;
 
-  function yrText(y){
-    if(!isFinite(y) || y > 150) return '无法实现';
-    return Math.ceil(y) + '年（到' + (age + Math.ceil(y)) + '岁）';
-  }
+  if(gap < 0) gap = 0;
 
-  var htmlTL = '';
+  var htmlGap = '';
+  htmlGap += '<div class="row"><span>📋 你的人生愿望总金额</span><span style="color:#e86">¥' + fmt(FV) + '</span></div>';
+  htmlGap += '<div class="row"><span>－ 当前流动性现金资产</span><span>¥' + fmt(cashW) + '</span></div>';
+  htmlGap += '<div class="row"><span>－ 未来10年被动现金流</span><span>¥' + fmt(passiveTotal) + '</span></div>';
+  htmlGap += '<div class="row" style="border-bottom:2px solid rgba(220,80,60,.3);font-weight:600;"><span>＝ 你的总防御缺口</span><span style="color:#e86;font-size:1.1em;">¥' + fmt(gap) + '</span></div>';
 
-  // 纯存
-  var pct0 = Math.min(years0 / 60 * 100, 100);
-  htmlTL += '<div class="timeline-item"><span class="tag tag-gray">💵 纯存</span><div class="bar" style="background:#5a5855;width:'+pct0+'%"></div><span>'+yrText(years0)+'</span></div>';
+  if(gap > 0){
+    // 计算填补缺口需要的年限
+    var gapYears = (PMT > 0 && annReturn > 0) ? Math.ceil(calcMonthsNeeded(gap, PMT, rMonthly) / 12) : (PMT > 0 ? Math.ceil(gap / (PMT * 12)) : 999);
+    var gapEndAge = age + gapYears;
 
-  // 当前收益率
-  if(isFinite(years6)){
-    var pct6 = Math.min(years6 / 60 * 100, 100);
-    var color6 = annReturn >= 0.08 ? '#8c8' : (annReturn >= 0.05 ? '#d4a853' : '#8bf');
-    htmlTL += '<div class="timeline-item"><span class="tag tag-gold">📈 '+ (annReturn*100).toFixed(0) +'%收益</span><div class="bar" style="background:'+color6+';width:'+pct6+'%"></div><span>'+yrText(years6)+'</span></div>';
-  }
+    htmlGap += '<div style="margin-top:16px;padding:12px;background:rgba(220,80,60,.06);border-radius:4px;">';
+    htmlGap += '<p style="font-size:.85rem;line-height:1.8;">';
+    htmlGap += '🛡️ 你的梦想与现实之间，差了 <strong style="color:#e86;font-size:1.1em;">¥' + fmt(gap) + '</strong>。<br>';
 
-  // 参考8%
-  if(isFinite(years8) && annReturn < 0.08){
-    var pct8 = Math.min(years8 / 60 * 100, 100);
-    htmlTL += '<div class="timeline-item"><span class="tag tag-green">🚀 8%参考</span><div class="bar" style="background:#8c8;width:'+pct8+'%"></div><span>'+yrText(years8)+'</span></div>';
-  }
+    if(isFinite(gapYears) && gapYears < 150){
+      htmlGap += '按你每月储蓄 <strong>¥' + fmt(PMT) + '</strong>、年化 <strong>' + (annReturn*100).toFixed(0) + '%</strong>：<br>';
+      htmlGap += '填补这个缺口需要 <strong style="color:#e86;font-size:1.1em;">' + gapYears + '年</strong>（到你' + gapEndAge + '岁）。';
 
-  timelineRows.innerHTML = htmlTL;
-
-  // 洞察文字
-  var insight = '';
-  var saveYears = isFinite(years6) ? Math.ceil(years6) : null;
-  var endAge = saveYears ? age + saveYears : null;
-
-  if(saveYears === null || saveYears > 150){
-    insight = '以你当前的每月储蓄 ¥' + fmt(PMT) + '，即使算上复利，也无法在合理时间内实现总计 ¥' + fmt(FV) + ' 的愿望。<br>💡 建议：<strong>提高每月储蓄金额</strong>，或<strong>减少/延后部分愿望</strong>，让目标变得可执行。';
-  } else {
-    var yearsDiff = years0 > 0 && isFinite(years0) ? Math.ceil(years0 - years6) : 0;
-    insight = '以你每月储蓄 <strong>¥' + fmt(PMT) + '</strong>、年化 <strong>' + (annReturn*100).toFixed(0) + '%</strong>：<br>';
-    insight += '实现总计 <strong>¥' + fmt(FV) + '</strong> 的愿望需要 <strong>' + saveYears + '年</strong>（到你' + endAge + '岁）。';
-
-    if(yearsDiff > 0){
-      insight += '<br><br>🎯 与纯存钱相比，复利帮你省了 <strong>' + yearsDiff + '年</strong>！';
-    }
-
-    // 建议
-    if(endAge > 65){
-      insight += '<br><br>⚠️ 实现所有愿望时你已经' + endAge + '岁，部分愿望（如退休后的大额支出）可能时间偏紧。';
-      insight += '<br>💡 建议：<strong>提高每月储蓄</strong>或<strong>延后部分愿望的实现时间</strong>。';
-    } else if(saveYears < 5){
-      insight += '<br><br>✅ 目标在5年内即可实现，短期可实现性强。';
+      if(gapEndAge > 65){
+        htmlGap += '<br><br>⚠️ 填补缺口时你已经' + gapEndAge + '岁，超过了退休年龄。';
+        htmlGap += '<br>💡 建议：<strong>提高每月储蓄</strong>（如提到¥' + fmt(Math.round(PMT * 1.5)) + '），或<strong>重新评估部分愿望</strong>的优先级。';
+      } else {
+        htmlGap += '<br><br>💡 这就是你的"确定性震撼"——每一个愿望都有它的代价。';
+        htmlGap += '<br>不是不能实现，是你要清楚地知道：<strong>它需要你付出多少时间和金钱</strong>。';
+      }
     } else {
-      insight += '<br><br>💡 如果希望提前完成，可以考虑：<strong>每月多存 ¥' + fmt(Math.round(PMT * 0.3)) + '</strong>（提高30%），或<strong>延后部分非核心愿望</strong>。';
+      htmlGap += '以你当前的储蓄能力，无法在合理时间内填补这个缺口。建议<strong>提高储蓄</strong>或<strong>降低目标</strong>。';
     }
+    htmlGap += '</p></div>';
+  } else {
+    htmlGap += '<div style="margin-top:16px;padding:12px;background:rgba(100,200,100,.06);border-radius:4px;font-size:.85rem;">';
+    htmlGap += '✅ 你的当前资产已经可以覆盖全部愿望！你的梦想和现实之间没有缺口。<br>';
+    htmlGap += '下一步：用<a href="tool-five-grid.html" style="color:#d4a853;">五格结构图</a>优化资产配置。';
+    htmlGap += '</div>';
   }
 
-  insightDiv.innerHTML = insight;
-  timelineDiv.style.display = 'block';
+  gapContent.innerHTML = htmlGap;
+  gapDiv.style.display = 'block';
 }
 
 function resetAll(){
@@ -317,7 +412,10 @@ function resetAll(){
   document.getElementById('monthlySave').value = '5000';
   document.getElementById('annualReturn').value = '6';
   document.getElementById('currentAge').value = '35';
+  document.getElementById('cashAssets').value = '50';
+  document.getElementById('passiveIncome').value = '5';
   document.getElementById('timelineSection').style.display = 'none';
+  document.getElementById('gapSection').style.display = 'none';
   update();
 }
 
