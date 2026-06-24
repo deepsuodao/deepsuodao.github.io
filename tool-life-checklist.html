@@ -380,6 +380,7 @@ function update(){
     htmlGap += '<div style="margin-top:16px;padding:12px;background:rgba(220,80,60,.06);border-radius:4px;">';
     htmlGap += '<p style="font-size:.85rem;line-height:1.8;">';
     htmlGap += '🛡️ 你的梦想与现实之间，差了 <strong style="color:#e86;font-size:1.1em;">¥' + fmt(gap) + '</strong>。<br>';
+    htmlGap += '<span style="font-size:.78rem;color:#8a6865;">（总愿望 ¥' + fmt(FV) + ' − 当前资产 ¥' + fmt(existingBuffer) + ' = 缺口 ¥' + fmt(gap) + '）</span><br>';
 
     if(isFinite(gapYears) && gapYears < 150){
       htmlGap += '按你每月储蓄 <strong>¥' + fmt(PMT) + '</strong>、年化 <strong>' + (annReturn*100).toFixed(0) + '%</strong>：<br>';
@@ -389,8 +390,8 @@ function update(){
         htmlGap += '<br><br>⚠️ 填补缺口时你已经' + gapEndAge + '岁，超过了退休年龄。';
         htmlGap += '<br>💡 建议：<strong>提高每月储蓄</strong>（如提到¥' + fmt(Math.round(PMT * 1.5)) + '），或<strong>重新评估部分愿望</strong>的优先级。';
       } else {
-        htmlGap += '<br><br>💡 这就是你的"确定性震撼"——每一个愿望都有它的代价。';
-        htmlGap += '<br>不是不能实现，是你要清楚地知道：<strong>它需要你付出多少时间和金钱</strong>。';
+        htmlGap += '<br><br>💡 对比：如果从零开始需要<strong>' + saveYears + '年</strong>（到' + endAge + '岁）。但你已经有了¥' + fmt(existingBuffer) + '的资产基础，所以只需要补缺口¥' + fmt(gap) + '。<br>';
+        htmlGap += '这就是"当前资产"的力量——它帮你缩短了<strong>' + (saveYears - gapYears) + '年</strong>。';
       }
     } else {
       htmlGap += '以你当前的储蓄能力，无法在合理时间内填补这个缺口。建议<strong>提高储蓄</strong>或<strong>降低目标</strong>。';
