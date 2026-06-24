@@ -388,10 +388,13 @@ function update(){
 
       if(gapEndAge > 65){
         htmlGap += '<br><br>⚠️ 填补缺口时你已经' + gapEndAge + '岁，超过了退休年龄。';
-        htmlGap += '<br>💡 建议：<strong>提高每月储蓄</strong>（如提到¥' + fmt(Math.round(PMT * 1.5)) + '），或<strong>重新评估部分愿望</strong>的优先级。';
+        htmlGap += '<br>💡 缩短缺口的四个杠杆：<strong>提高储蓄</strong>、<strong>增加定投</strong>、<strong>优化配置提高收益率</strong>、或<strong>降低/延后目标</strong>。';
+        htmlGap += '<br>👉 用<a href="tool-compound-calculator.html" style="color:#d4a853;text-decoration:underline;">复利计算器</a>试试不同方案的差距。';
       } else {
         htmlGap += '<br><br>💡 对比：如果从零开始需要<strong>' + saveYears + '年</strong>（到' + endAge + '岁）。但你已经有了¥' + fmt(existingBuffer) + '的资产基础，所以只需要补缺口¥' + fmt(gap) + '。<br>';
-        htmlGap += '这就是"当前资产"的力量——它帮你缩短了<strong>' + (saveYears - gapYears) + '年</strong>。';
+        htmlGap += '这就是"当前资产"的力量——它帮你缩短了<strong>' + (saveYears - gapYears) + '年</strong>。<br>';
+        htmlGap += '💡 缩短缺口：<strong>提高储蓄</strong>、<strong>增加定投</strong>、<strong>优化收益率</strong>、或<strong>降低目标</strong>。';
+        htmlGap += '<br>👉 用<a href="tool-compound-calculator.html" style="color:#d4a853;text-decoration:underline;">复利计算器</a>试试不同方案的差距。';
       }
     } else {
       htmlGap += '以你当前的储蓄能力，无法在合理时间内填补这个缺口。建议<strong>提高储蓄</strong>或<strong>降低目标</strong>。';
