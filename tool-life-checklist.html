@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="人生愿望清单·目标规划表——填下愿望、金额、目标年份，自动测算缺口并引导到对应的工具。先测后判。">
+<meta name="description" content="人生愿望清单·目标规划表——填下愿望、金额、目标年份，自动测算缺口，可一键试算延长年限。先测后判。">
 <meta property="og:title" content="人生愿望清单 · 目标规划表 — 私家智囊">
-<meta property="og:description" content="填下你的愿望，系统自动算缺口，并引导你到复利计算器或房贷计算器找方案。">
+<meta property="og:description" content="填下你的愿望，系统自动算缺口，可试算延长年限，并引导到复利计算器或房贷计算器。">
 <meta property="og:image" content="https://deepsuodao.com/images/dialogue-scene.jpg">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://deepsuodao.com/tool-life-checklist.html">
@@ -30,7 +30,6 @@ nav a:hover{color:#e8e6e3}
 .page .related a{color:#d4a853}
 .page .sub{font-size:.9rem;color:#8a8885;margin-bottom:28px}
 
-/* 清单表格 */
 .row-input{display:grid;grid-template-columns:1.2fr 1fr 1fr 40px;gap:8px;align-items:end;margin-bottom:10px}
 .row-input.header span{font-size:.72rem;color:#6a6865;padding:0 4px}
 .row-input input{padding:10px 12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);color:#e8e6e3;font-size:.85rem;border-radius:4px;outline:none;transition:border-color .3s}
@@ -42,18 +41,16 @@ nav a:hover{color:#e8e6e3}
 .add-row{padding:10px;border:1px dashed rgba(255,255,255,.06);text-align:center;color:#6a6865;font-size:.82rem;cursor:pointer;border-radius:4px;margin-bottom:24px;transition:all .2s}
 .add-row:hover{border-color:rgba(212,168,83,.3);color:#b0aeab}
 
-/* 参数区 */
 .params{margin-bottom:24px}
 .params .title{font-size:.82rem;color:#d4a853;margin-bottom:10px;font-weight:500}
-.param-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.param-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px}
 .param-item{padding:14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:6px}
 .param-item .label{font-size:.72rem;color:#6a6865;margin-bottom:4px}
 .param-item input{width:100%;padding:8px 10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);color:#e8e6e3;font-size:.85rem;border-radius:4px;outline:none}
 .param-item input:focus{border-color:#d4a853}
 .param-item .unit{font-size:.7rem;color:#5a5855;margin-top:2px}
-@media(max-width:480px){.param-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.param-grid{grid-template-columns:1fr 1fr}}
 
-/* 分解表格 */
 .goal-section{margin-bottom:24px}
 .goal-section .title{font-size:.82rem;color:#d4a853;margin-bottom:10px;font-weight:500}
 .goal-card{padding:16px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:6px;margin-bottom:10px}
@@ -62,12 +59,15 @@ nav a:hover{color:#e8e6e3}
 .goal-row .val{color:#e8e6e3}
 .goal-row .val.neg{color:#e86;font-weight:600}
 .goal-row .val.pos{color:#8c8}
-.goal-row .hl{color:#d4a853}
 .goal-break{border-top:1px solid rgba(255,255,255,.06);margin:8px 0 0;padding-top:8px}
 .gap-tag{display:inline-block;padding:2px 10px;border-radius:3px;font-size:.75rem;font-weight:500}
 .gap-ok{background:rgba(100,200,100,.12);color:#8c8}
 .gap-warn{background:rgba(220,180,60,.12);color:#dd8}
 .gap-danger{background:rgba(220,80,60,.12);color:#e86}
+
+.ext-btn{display:inline-block;padding:6px 14px;margin:4px;background:rgba(212,168,83,.08);border:1px solid rgba(212,168,83,.2);color:#d4a853;font-size:.78rem;border-radius:3px;cursor:pointer}
+.ext-btn:hover{background:rgba(212,168,83,.15)}
+.ext-btn.active{background:rgba(212,168,83,.18);border-color:#d4a853}
 
 .tool-link{margin-top:10px;padding:10px 14px;background:rgba(212,168,83,.04);border-left:2px solid #d4a853;border-radius:0 4px 4px 0;font-size:.82rem;line-height:1.7}
 .tool-link a{color:#d4a853;text-decoration:underline}
@@ -90,7 +90,7 @@ footer a{color:#d4a853;text-decoration:none}
 "@context":"https://schema.org",
 "@type":"WebApplication",
 "name":"人生愿望清单·目标规划表 — 私家智囊",
-"description":"填下你的愿望，系统自动算缺口，并引导你到复利计算器或房贷计算器找方案。",
+"description":"填下你的愿望，自动算缺口，可一键试算延长年限。",
 "url":"https://www.deepsuodao.com/tool-life-checklist.html",
 "applicationCategory":"FinanceApplication",
 "operatingSystem":"All"
@@ -102,9 +102,8 @@ footer a{color:#d4a853;text-decoration:none}
 
 <h1>人生愿望清单</h1>
 <p class="related">配套工具 · <a href="dialogue-01.html">对话01：规划，始于一张人生清单</a></p>
-<p class="sub">写下你的愿望和目标年份，系统自动算缺口，并引导你到对应的工具找方案。</p>
+<p class="sub">写下愿望、金额、目标年份，系统自动算缺口。可一键试算延长年限的效果。</p>
 
-<!-- 表格头 -->
 <div class="row-input header"><span>愿望</span><span>金额（万）</span><span>目标年份</span><span></span></div>
 <div id="rows">
   <div class="row-input">
@@ -116,18 +115,16 @@ footer a{color:#d4a853;text-decoration:none}
 </div>
 <div class="add-row" onclick="addRow()">+ 添加一个愿望</div>
 
-<!-- 全局参数 -->
 <div class="params">
   <div class="title">你的每月能力</div>
   <div class="param-grid">
-    <div class="param-item"><div class="label">每月储蓄能力</div><input type="number" id="monthlySave" placeholder="5000" oninput="update()" value="10000"><div class="unit">元/月</div></div>
-    <div class="param-item"><div class="label">预期年化收益率</div><input type="number" id="annualReturn" placeholder="6" oninput="update()" value="6" step="0.5"><div class="unit">%</div></div>
-    <div class="param-item"><div class="label">当前现金资产</div><input type="number" id="cashAssets" placeholder="50" oninput="update()" value="300"><div class="unit">万元</div></div>
+    <div class="param-item"><div class="label">每月储蓄</div><input type="number" id="monthlySave" placeholder="5000" oninput="update()" value="10000"><div class="unit">元/月</div></div>
+    <div class="param-item"><div class="label">年化收益率</div><input type="number" id="annualReturn" placeholder="6" oninput="update()" value="6" step="0.5"><div class="unit">%</div></div>
+    <div class="param-item"><div class="label">现金资产</div><input type="number" id="cashAssets" placeholder="50" oninput="update()" value="300"><div class="unit">万元</div></div>
     <div class="param-item"><div class="label">年被动现金流</div><input type="number" id="passiveIncome" placeholder="5" oninput="update()" value="25"><div class="unit">万元/年</div></div>
   </div>
 </div>
 
-<!-- 分解结果 -->
 <div class="goal-section" id="goalResults" style="display:none;">
   <div class="title">📊 各愿望可行性分析</div>
   <div id="goalCards"></div>
@@ -139,10 +136,10 @@ footer a{color:#d4a853;text-decoration:none}
 </div>
 
 </div></section>
-
-<footer><div class="container"><p>用今天的理性规划，换取明天选择生活的自由。</p><p style="font-size:.72rem;color:#5a5855;line-height:1.8;margin-bottom:8px">1. 所有计算均在本地浏览器运行，数据不上传。<br>2. 模拟估算，不构成投资建议或决策依据；实际结果以金融机构正式计算为准。</p><a href="index.html">← 返回私家智囊首页</a></div></footer>
+<footer><div class="container"><p>用今天的理性规划，换取明天选择生活的自由。</p><p style="font-size:.72rem;color:#5a5855;line-height:1.8;margin-bottom:8px">1. 所有计算均在本地浏览器运行，数据不上传。<br>2. 模拟估算，不构成投资建议或决策依据。</p><a href="index.html">← 返回私家智囊首页</a></div></footer>
 
 <script>
+var extYears={}; // 记录每个愿望行的延后年限
 function fmt(n){return n.toLocaleString('zh-CN',{maximumFractionDigits:0})}
 function addRow(){
   var d=document.createElement('div');d.className='row-input';
@@ -151,66 +148,88 @@ function addRow(){
 }
 function delRow(b){b.parentElement.remove();update();}
 
+function calcGapRow(target, years, PMT, rMonthly, cashW, passiveW){
+  var availableCash=cashW;
+  var availablePassive=passiveW*years;
+  var months=years*12;
+  var investFV=0;
+  if(PMT>0&&rMonthly>0){
+    investFV=PMT*((Math.pow(1+rMonthly,months)-1)/rMonthly);
+  }else if(PMT>0){
+    investFV=PMT*months;
+  }
+  var gap=target-availableCash-availablePassive-investFV;
+  return {gap:gap, passive:availablePassive, invest:Math.round(investFV)};
+}
+
 function update(){
   var rows=document.querySelectorAll('#rows .row-input');
   var PMT=parseFloat(document.getElementById('monthlySave').value)||0;
   var annReturn=(parseFloat(document.getElementById('annualReturn').value)||0)/100;
   var cashW=(parseFloat(document.getElementById('cashAssets').value)||0)*10000;
   var passiveW=(parseFloat(document.getElementById('passiveIncome').value)||0)*10000;
+  var rMonthly=annReturn/12;
 
   var goals=[];
-  rows.forEach(function(r){
+  rows.forEach(function(r,i){
     var inp=r.querySelectorAll('input');
     var name=inp[0].value||'未命名愿望';
     var amt=parseFloat(inp[1].value)||0;
     var yr=parseInt(inp[2].value)||0;
-    if(amt>0&&yr>0) goals.push({name:name,amt:amt,yr:yr});
+    if(amt>0&&yr>0) goals.push({name:name,amt:amt,yr:yr,idx:i});
   });
 
   var goalDiv=document.getElementById('goalResults');
   var cardsDiv=document.getElementById('goalCards');
+  if(goals.length===0){goalDiv.style.display='none';return;}
 
-  if(goals.length===0){
-    goalDiv.style.display='none';return;
-  }
+  // 读取延后标记
+  var extYrs={};
+  var activeExt=document.querySelectorAll('.ext-btn.active');
+  activeExt.forEach(function(b){
+    var idx=parseInt(b.getAttribute('data-idx'));
+    var add=parseInt(b.getAttribute('data-add'));
+    extYrs[idx]=add;
+  });
 
-  var totalGap=0;
   var cardsHtml='';
-
   goals.forEach(function(g){
     var target=g.amt*10000;
-    var years=g.yr;
-    // 在该目标年限内，可用资源
-    var availableCash=cashW;// 一次性用
-    var availablePassive=passiveW*years;// 年限内被动现金流总和
-    var monthlyPmt=PMT;
-    var rMonthly=annReturn/12;
-    var months=years*12;
-    // 定投终值（该年限内）
-    var investFV=0;
-    if(monthlyPmt>0&&rMonthly>0){
-      investFV=monthlyPmt*((Math.pow(1+rMonthly,months)-1)/rMonthly);
-    }else if(monthlyPmt>0){
-      investFV=monthlyPmt*months;
-    }
-    // 缺口
-    var gap=target-availableCash-availablePassive-investFV;
-    var gapCls, gapLabel;
+    var baseYears=g.yr;
+    var ext=(extYrs[g.idx]||0);
+    var years=baseYears+ext;
+    var res=calcGapRow(target,years,PMT,rMonthly,cashW,passiveW);
+    var gap=res.gap;
+
+    var gapCls,gapLabel;
     if(gap<=0){gapCls='gap-ok';gapLabel='✅ 已覆盖';}else if(gap<=target*0.3){gapCls='gap-warn';gapLabel='⚠️ 有缺口';}else{gapCls='gap-danger';gapLabel='🔴 缺口较大';}
 
     cardsHtml+='<div class="goal-card">';
     cardsHtml+='<div class="name">'+g.name+' <span class="gap-tag '+gapCls+'">'+gapLabel+'</span></div>';
     cardsHtml+='<div class="goal-row"><span>目标金额</span><span class="val">¥'+fmt(target)+'</span></div>';
-    cardsHtml+='<div class="goal-row"><span>目标年限</span><span class="val">'+years+'年</span></div>';
-    cardsHtml+='<div class="goal-row"><span>可用现金</span><span class="val">¥'+fmt(availableCash)+'</span></div>';
-    cardsHtml+='<div class="goal-row"><span>被动现金流（'+years+'年）</span><span class="val">¥'+fmt(availablePassive)+'</span></div>';
-    cardsHtml+='<div class="goal-row"><span>定投终值（月¥'+fmt(monthlyPmt)+'×'+years+'年）</span><span class="val">¥'+fmt(Math.round(investFV))+'</span></div>';
+    cardsHtml+='<div class="goal-row"><span>年限</span><span class="val">'+(ext>0?baseYears+'+'+ext+'=':'')+years+'年</span></div>';
+    cardsHtml+='<div class="goal-row"><span>可用现金</span><span class="val">¥'+fmt(cashW)+'</span></div>';
+    cardsHtml+='<div class="goal-row"><span>被动现金流</span><span class="val">¥'+fmt(res.passive)+'</span></div>';
+    cardsHtml+='<div class="goal-row"><span>定投终值</span><span class="val">¥'+fmt(res.invest)+'</span></div>';
     cardsHtml+='<div class="goal-row goal-break"><span>缺口</span><span class="val '+(gap>0?'neg':'pos')+'">¥'+fmt(Math.abs(gap))+'</span></div>';
+
+    // 延后年限按钮
+    if(gap>0){
+      cardsHtml+='<div style="margin:10px 0 0;">';
+      cardsHtml+='<span style="font-size:.75rem;color:#6a6865;margin-right:8px;">延后试算：</span>';
+      [2,5,8].forEach(function(a){
+        var activeCls=(ext===a)?'active':'';
+        cardsHtml+='<button class="ext-btn '+activeCls+'" data-idx="'+g.idx+'" data-add="'+a+'" onclick="toggleExt(this)">+'+a+'年</button>';
+      });
+      if(ext>0){
+        cardsHtml+='<button class="ext-btn" data-idx="'+g.idx+'" data-add="0" onclick="toggleExt(this)" style="background:rgba(200,80,50,.1);border-color:rgba(200,80,50,.3);color:#e86;">取消延后</button>';
+      }
+      cardsHtml+='</div>';
+    }
 
     // 工具引导
     cardsHtml+='<div class="tool-link">';
     if(gap>0){
-      // 判断是否类似房贷类
       var isHousing= g.name.indexOf('房')>-1||g.name.indexOf('买')>-1||g.name.indexOf('置业')>-1;
       cardsHtml+='💡 缩短缺口：<strong>提高储蓄</strong>、<strong>增加定投</strong>、<strong>优化收益率</strong>、或<strong>降低目标</strong>。<br>';
       cardsHtml+='👉 用本站的<a href="tool-compound-calculator.html">复利计算器</a>试试不同方案的差距。<br>';
@@ -218,17 +237,26 @@ function update(){
         cardsHtml+='👉 向银行贷款，用本站的<a href="tool-mortgage-comparison.html">房贷按揭计算器</a>试试在'+years+'年内还清月供方案。';
       }
     }else{
-      cardsHtml+='✅ 你的可用资源已覆盖此目标。';
+      cardsHtml+='✅ 延长到'+years+'年后已覆盖。也可提前完成，用<a href="tool-compound-calculator.html">复利计算器</a>试试更高效率的方案。';
     }
-    cardsHtml+='</div>';
-
-    cardsHtml+='</div>';
-
-    if(gap>0) totalGap+=gap;
+    cardsHtml+='</div></div>';
   });
 
   cardsDiv.innerHTML=cardsHtml;
   goalDiv.style.display='block';
+}
+
+function toggleExt(btn){
+  var idx=parseInt(btn.getAttribute('data-idx'));
+  var add=parseInt(btn.getAttribute('data-add'));
+  // 清除同行的其他选中
+  document.querySelectorAll('.ext-btn[data-idx="'+idx+'"]').forEach(function(b){
+    b.classList.remove('active');
+  });
+  if(add>0){
+    btn.classList.add('active');
+  }
+  update();
 }
 
 function resetAll(){
@@ -239,8 +267,8 @@ function resetAll(){
   document.getElementById('passiveIncome').value='25';
   update();
 }
-
 update();
 </script>
 <div class="disclaimer"><strong>免责声明</strong><br>1. 所有计算均在本地浏览器运行，数据不上传。<br>2. 模拟估算，不构成投资建议或决策依据。<br>3. 若采用模拟估算结果做出决策，请使用者自行承担风险。</div>
 </body></html>
+ 
