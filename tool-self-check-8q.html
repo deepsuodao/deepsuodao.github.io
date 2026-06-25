@@ -208,7 +208,7 @@ function saveToDashboard(){
   var result={score:total,date:new Date().toISOString()};
   try{
     localStorage.setItem('selfCheckResult',JSON.stringify(result));
-    alert('✅ 已保存到仪表盘！\n\n打开"家庭财富仪表盘"即可查看。');
+    alert('✅ 已保存到仪表盘！\n\n打开"家庭财务仪表盘"即可查看。');
     window.open('tool-dashboard.html','_blank');
   }catch(e){
     console.error('保存失败：',e);
