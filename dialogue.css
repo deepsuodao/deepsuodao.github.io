@@ -719,6 +719,28 @@ footer .copyright {
 }
 
 /* === 移动端精致优化 === */
+/* === 文章风险提示条 === */
+.article-disclaimer {
+  background: #fbf9f3;
+  border-left: 4px solid var(--accent-color);
+  padding: 12px 18px;
+  margin: 0 auto 24px;
+  max-width: 800px;
+  border-radius: 0 4px 4px 0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.article-disclaimer strong {
+  color: var(--primary-color);
+}
+
+.article-disclaimer a {
+  color: var(--accent-color);
+  text-decoration: underline;
+  margin-left: 6px;
+}
+
 @media(max-width:480px) {
   body {
     padding-top: 84px;
