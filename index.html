@@ -339,136 +339,111 @@
     </div>
   </section>
 
-  <!-- ===== 三阶段认知路径图 ===== -->
-  <section class="section learning-path" id="learning-path">
+  <!-- ===== 读者问诊（替换推荐路径） ===== -->
+  <section class="section" id="triage" style="background:rgba(0,0,0,.01);">
     <div class="container">
 
-      <div class="lp-header">
-        <div class="section-title" style="margin-bottom:8px;">📖 推荐路径</div>
-        <h2>三阶段认知路径图：从入门到实战</h2>
-        <p>如果你没时间读完全部文章，按这个顺序走三步，就能看懂家庭财务的规划与防御逻辑。</p>
+      <div class="section-title" style="margin-bottom:8px;">📋 读者问诊</div>
+      <h2 style="margin-bottom:12px;">先解决你今晚的问题</h2>
+      <p style="font-size:.9rem;color:#8e959f;margin-bottom:28px;">搜一下，你的钱现在卡在哪？或者从下面找到你的问题。</p>
+
+      <!-- 搜索框 -->
+      <div style="max-width:640px;margin:0 auto 32px;">
+        <div style="display:flex;align-items:center;background:rgba(255,255,255,.04);border:1px solid rgba(212,168,83,.2);border-radius:8px;padding:0 16px;">
+          <span style="font-size:1.1rem;color:#8a8885;flex-shrink:0;">🔍</span>
+          <input type="text" id="triage-search" placeholder="搜一下，你的钱现在卡在哪？比如"遗产""房贷""保险""
+            style="flex:1;background:transparent;border:none;padding:14px 10px;font-size:1rem;color:#e8e6e3;outline:none;width:100%;"
+            oninput="filterTriageFAQ(this.value)" />
+        </div>
       </div>
 
-      <div class="lp-grid">
+      <!-- 分类标签 -->
+      <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:28px;" id="triage-tags">
+        <span class="triage-tag active" data-tag="all" onclick="switchTriageTag('all')" style="padding:6px 16px;border:1px solid rgba(212,168,83,.25);border-radius:20px;font-size:.8rem;color:#D4AF37;cursor:pointer;transition:all .15s;background:rgba(212,168,83,.08);font-weight:500;">全部</span>
+        <span class="triage-tag" data-tag="marriage" onclick="switchTriageTag('marriage')" style="padding:6px 16px;border:1px solid rgba(212,168,83,.15);border-radius:20px;font-size:.8rem;color:#b0aeab;cursor:pointer;transition:all .15s;">婚姻财产</span>
+        <span class="triage-tag" data-tag="education" onclick="switchTriageTag('education')" style="padding:6px 16px;border:1px solid rgba(212,168,83,.15);border-radius:20px;font-size:.8rem;color:#b0aeab;cursor:pointer;transition:all .15s;">子女教育</span>
+        <span class="triage-tag" data-tag="retirement" onclick="switchTriageTag('retirement')" style="padding:6px 16px;border:1px solid rgba(212,168,83,.15);border-radius:20px;font-size:.8rem;color:#b0aeab;cursor:pointer;transition:all .15s;">养老规划</span>
+        <span class="triage-tag" data-tag="invest" onclick="switchTriageTag('invest')" style="padding:6px 16px;border:1px solid rgba(212,168,83,.15);border-radius:20px;font-size:.8rem;color:#b0aeab;cursor:pointer;transition:all .15s;">投资困惑</span>
+        <span class="triage-tag" data-tag="insurance" onclick="switchTriageTag('insurance')" style="padding:6px 16px;border:1px solid rgba(212,168,83,.15);border-radius:20px;font-size:.8rem;color:#b0aeab;cursor:pointer;transition:all .15s;">保险配置</span>
+        <span class="triage-tag" data-tag="liability" onclick="switchTriageTag('liability')" style="padding:6px 16px;border:1px solid rgba(212,168,83,.15);border-radius:20px;font-size:.8rem;color:#b0aeab;cursor:pointer;transition:all .15s;">债务管理</span>
+      </div>
 
-        <!-- ===== 第一阶段：入门 ===== -->
-        <div class="lp-card lp-card-1" id="lp-stage1">
-          <div class="lp-card-header">
-            <span class="lp-stage-num">01</span>
-            <span class="lp-stage-label">入门 · 消除焦虑</span>
-            <p class="lp-stage-desc">建立"信心来自机制"的基础认知</p>
-            <span class="lp-time">3 篇 ≈ 15 分钟</span>
+      <!-- 三层结构 -->
+      <div style="display:grid;grid-template-columns:1fr;gap:24px;">
+
+        <!-- 🟢 第一层：急诊室 -->
+        <div class="triage-layer layer-1">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+            <span style="width:32px;height:32px;border-radius:50%;background:rgba(76,175,80,.12);display:flex;align-items:center;justify-content:center;font-size:1rem;">🟢</span>
+            <h3 style="font-size:1rem;font-weight:600;color:#e8e6e3;margin:0;">急诊室 · 常见问题快速答</h3>
           </div>
-          <div class="lp-articles">
-            <a href="dialogue-29.html" class="lp-article">
-              <span class="lp-num">❶</span>
-              <div class="lp-article-body">
-                <strong>从"智囊"到"私家智囊"</strong>
-                <p>古人把智慧装进一个人，我们把它装进一套系统</p>
-              </div>
-            </a>
-            <a href="dialogue-01.html" class="lp-article">
-              <span class="lp-num">❷</span>
-              <div class="lp-article-body">
-                <strong>规划，始于一张人生清单</strong>
-                <p>区分投资与投机，从目标反推资产配置优先级</p>
-              </div>
-            </a>
-            <a href="dialogue-07.html" class="lp-article">
-              <span class="lp-num">❸</span>
-              <div class="lp-article-body">
-                <strong>给家庭建一座堡垒</strong>
-                <p>五格结构图：空着的格子，就是你的风险点</p>
-              </div>
-            </a>
+          <p style="font-size:.82rem;color:#8a8885;margin-bottom:16px;">先让你知道，你不是一个人遇到这种问题。</p>
+
+          <div id="triage-faq-list">
+            <!-- FAQ清单将由JS动态渲染 -->
           </div>
-          <a href="#content" class="lp-cta" style="border-color:rgba(212,175,55,0.25);color:#D4AF37;">
-            阅读入门三篇 →
-          </a>
+
+          <div id="triage-no-result" style="display:none;text-align:center;padding:24px;color:#6a6865;">
+            <p>没找到答案？试试搜 <a href="dialogue-07.html" style="color:#d4a853;">资产配置</a>、<a href="tool-security-fund-calculator.html" style="color:#d4a853;">保障金</a>、<a href="tool-debt-stress-test.html" style="color:#d4a853;">负债压力</a> 这些高频词</p>
+          </div>
+
+          <details style="margin-top:8px;">
+            <summary style="cursor:pointer;font-size:.82rem;color:#D4AF37;list-style:none;display:flex;align-items:center;gap:4px;">查看更多常见问题（共50+条）<span style="font-size:.7rem;color:#6a6865;">↓</span></summary>
+            <div id="triage-faq-extended" style="margin-top:8px;"></div>
+          </details>
         </div>
 
-        <!-- ===== 第二阶段：进阶 ===== -->
-        <div class="lp-card lp-card-2" id="lp-stage2">
-          <div class="lp-card-header">
-            <span class="lp-stage-num">02</span>
-            <span class="lp-stage-label">进阶 · 理解结构</span>
-            <p class="lp-stage-desc">五格图如何配置家庭资产，底线如何防守</p>
-            <span class="lp-time">3 篇 ≈ 20 分钟</span>
+        <!-- 🟡 第二层：过往案例 -->
+        <div class="triage-layer layer-2">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+            <span style="width:32px;height:32px;border-radius:50%;background:rgba(255,193,7,.12);display:flex;align-items:center;justify-content:center;font-size:1rem;">🟡</span>
+            <h3 style="font-size:1rem;font-weight:600;color:#e8e6e3;margin:0;">过往案例 · 别人的困境，你的前车之鉴</h3>
           </div>
-          <div class="lp-articles">
-            <a href="dialogue-06.html" class="lp-article">
-              <span class="lp-num">❶</span>
-              <div class="lp-article-body">
-                <strong>规划家庭的财务工程逻辑</strong>
-                <p>五条标准，把家庭财富从"扣款"变成工程系统</p>
-              </div>
+          <p style="font-size:.82rem;color:#8a8885;margin-bottom:16px;">真实读者的困境，大师的诊断。隐去个人信息，留下可复用的方法论。</p>
+
+          <div class="triage-cases">
+            <a href="roundtable-02.html" style="display:block;padding:14px 18px;background:rgba(255,255,255,.02);border:1px solid rgba(212,168,83,.1);border-radius:6px;margin-bottom:10px;text-decoration:none;transition:border-color .15s;" onmouseover="this.style.borderColor='rgba(212,168,83,.3)'" onmouseout="this.style.borderColor='rgba(212,168,83,.1)'">
+              <span style="color:#D4AF37;font-weight:600;font-size:.9rem;">Case 001</span>
+              <span style="color:#e8e6e3;font-size:.85rem;display:block;margin-top:4px;">当"5.5%股息"遇上"3.0%房贷"，双跌之下如何安睡？</span>
+              <span style="color:#8a8885;font-size:.78rem;display:block;margin-top:2px;">凯恩斯·林奇·邓普顿·德波顿 × 自查清单 →</span>
             </a>
-            <a href="dialogue-08.html" class="lp-article">
-              <span class="lp-num">❷</span>
-              <div class="lp-article-body">
-                <strong>你不是缺信息，是缺一个帮你盯底线的人</strong>
-                <p>五条财务安全底线完整定义</p>
-              </div>
-            </a>
-            <a href="dialogue-11.html" class="lp-article">
-              <span class="lp-num">❸</span>
-              <div class="lp-article-body">
-                <strong>保障金，不是急用金</strong>
-                <p>8项资金来源盘点，36个月战略储备标准</p>
-              </div>
+            <a href="roundtable-01.html" style="display:block;padding:14px 18px;background:rgba(255,255,255,.02);border:1px solid rgba(212,168,83,.1);border-radius:6px;margin-bottom:10px;text-decoration:none;transition:border-color .15s;" onmouseover="this.style.borderColor='rgba(212,168,83,.3)'" onmouseout="this.style.borderColor='rgba(212,168,83,.1)'">
+              <span style="color:#D4AF37;font-weight:600;font-size:.9rem;">Case 000</span>
+              <span style="color:#e8e6e3;font-size:.85rem;display:block;margin-top:4px;">当"吃股息"的算盘遇上爆仓恐惧——融资盘浮亏20%诊断</span>
+              <span style="color:#8a8885;font-size:.78rem;display:block;margin-top:2px;">同一位投资者，上半场问题 →</span>
             </a>
           </div>
-          <a href="#content" class="lp-cta" style="border-color:rgba(26,82,118,0.35);color:#5a9bc7;">
-            阅读进阶三篇 →
-          </a>
+
+          <a href="cases.html" style="display:inline-block;margin-top:8px;font-size:.82rem;color:#D4AF37;">📋 查看全部问诊案例 →</a>
         </div>
 
-        <!-- ===== 第三阶段：实战 ===== -->
-        <div class="lp-card lp-card-3" id="lp-stage3">
-          <div class="lp-card-header">
-            <span class="lp-stage-num">03</span>
-            <span class="lp-stage-label">实战 · 应对决策</span>
-            <p class="lp-stage-desc">用机制应对买房、担保、中产困境等真实问题</p>
-            <span class="lp-time">4 篇 ≈ 30 分钟</span>
+        <!-- 🔴 第三层：深度对话 -->
+        <div class="triage-layer layer-3">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+            <span style="width:32px;height:32px;border-radius:50%;background:rgba(244,67,54,.12);display:flex;align-items:center;justify-content:center;font-size:1rem;">🔴</span>
+            <h3 style="font-size:1rem;font-weight:600;color:#e8e6e3;margin:0;">深度对话 · 理解原理，建立框架</h3>
           </div>
-          <div class="lp-articles">
-            <a href="dialogue-17.html" class="lp-article">
-              <span class="lp-num">❶</span>
-              <div class="lp-article-body">
-                <strong>现在该不该买房？</strong>
-                <p>刚需vs投资，两个完全不同的逻辑</p>
-              </div>
+          <p style="font-size:.82rem;color:#8a8885;margin-bottom:16px;">急诊室止了血，案例看到了自己——到这里，你该理解为什么了。</p>
+
+          <div class="triage-deep" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <a href="roundtable-03.html" style="padding:14px 16px;background:rgba(212,168,83,.04);border:1px solid rgba(212,168,83,.12);border-radius:6px;text-decoration:none;">
+              <span style="color:#D4AF37;font-size:.85rem;font-weight:500;">🏛️ 家庭财务决策</span>
+              <span style="color:#b0aeab;font-size:.78rem;display:block;margin-top:4px;">从周期配置到代际传承的制度设计</span>
             </a>
-            <a href="dialogue-13.html" class="lp-article">
-              <span class="lp-num">❷</span>
-              <div class="lp-article-body">
-                <strong>连带担保：签个字，一套房子就没了</strong>
-                <p>负债边界的三条红线</p>
-              </div>
-            </a>
-            <a href="dialogue-16.html" class="lp-article">
-              <span class="lp-num">❸</span>
-              <div class="lp-article-body">
-                <strong>中产困境：为什么收入越高越手头紧</strong>
-                <p>三个原因 + 三招重构支出结构</p>
-              </div>
-            </a>
-            <a href="dialogue-19.html" class="lp-article">
-              <span class="lp-num">❹</span>
-              <div class="lp-article-body">
-                <strong>当你的存款正在悄悄融化</strong>
-                <p>通胀侵蚀下的资产保卫策略</p>
-              </div>
+            <a href="roundtable-05.html" style="padding:14px 16px;background:rgba(212,168,83,.04);border:1px solid rgba(212,168,83,.12);border-radius:6px;text-decoration:none;">
+              <span style="color:#D4AF37;font-size:.85rem;font-weight:500;">📐 价值投资与安全边际</span>
+              <span style="color:#b0aeab;font-size:.78rem;display:block;margin-top:4px;">在叙事狂热与周期高位中守住底线</span>
             </a>
           </div>
-          <a href="#tools" class="lp-cta" style="border-color:rgba(90,155,199,0.3);color:#8ab4d0;">
-            进入工具箱 →
-          </a>
+          <div style="margin-top:10px;">
+            <a href="dialogue-12.html" style="padding:14px 16px;background:rgba(212,168,83,.04);border:1px solid rgba(212,168,83,.12);border-radius:6px;text-decoration:none;display:block;">
+              <span style="color:#D4AF37;font-size:.85rem;font-weight:500;">📖 系统入门 · 三阶段认知路径</span>
+              <span style="color:#b0aeab;font-size:.78rem;display:block;margin-top:4px;">如果你偏好系统学习，也可以按我们的认知路径循序渐进 →</span>
+            </a>
+          </div>
         </div>
 
       </div>
-
-      <p class="lp-footnote">💡 三个阶段走完，你就拥有了一套完整的家庭财务认知框架。</p>
     </div>
   </section>
 
@@ -748,20 +723,6 @@
     </div>
   </section>
 
-  <!-- ===== 读者问诊专栏入口 ===== -->
-  <section class="section" style="padding:24px 0 0 0;">
-    <div class="container">
-      <a href="cases.html" style="display:flex;align-items:center;gap:20px;padding:20px 24px;border:1px solid rgba(212,168,83,.2);border-radius:8px;background:rgba(212,168,83,.04);text-decoration:none;transition:border-color .2s;" onmouseover="this.style.borderColor='rgba(212,168,83,.5)'" onmouseout="this.style.borderColor='rgba(212,168,83,.2)'">
-        <div style="flex-shrink:0;width:48px;height:48px;border-radius:50%;background:rgba(212,168,83,.12);display:flex;align-items:center;justify-content:center;font-size:1.5rem;">🩺</div>
-        <div style="flex:1;min-width:0;">
-          <div style="font-size:.9rem;color:#D4AF37;font-weight:600;margin-bottom:4px;">📋 读者问诊 · 新专栏</div>
-          <div style="font-size:.85rem;color:#c8c5c0;line-height:1.5;">
-            把别人的焦虑，变成你的前车之鉴。大师圆桌把你的真实困境变成可复用的方法论。<span style="color:#D4AF37;">查看过往案例 →</span>
-          </div>
-        </div>
-      </a>
-    </div>
-  </section>
 
   <!-- ===== Tools ===== -->
   <section class="section" id="tools" style="background:rgba(0,0,0,.01);">
@@ -1065,6 +1026,135 @@
     })();
   </script>
   <script src="hero-chart.js"></script>
-</body>
 
+<script>
+// triage FAQ数据（手写50条，按6个分类）
+const triageFAQs = [
+  // === 婚姻财产 ===
+  {id:1, cat:'marriage', q:'遗产怎么分才不撕破脸？', a:'关键是"先定规则后分钱"。在父母健在时就通过遗嘱或家族宪章写清楚分配规则，比等走了之后再让子女自己商量靠谱得多。如果资产复杂，建议设立家族信托——把钱装进信托，由受托人按规则分配，避免"分家=散家"的悲剧。', time:'中', link:'dialogue-21.html'},
+  {id:2, cat:'marriage', q:'婚前房产加名，到底该不该加？', a:'加了，房子就是夫妻共同财产；不加，就是个人财产。没有"对错"，只有"你的风险容忍度"。建议双方坐下来把"万一离婚怎么分"先说清楚，写在纸上的共识比感情靠谱。', time:'短', link:'dialogue-08.html'},
+  {id:3, cat:'marriage', q:'离婚时，股票账户里的钱算谁的？', a:'婚后用共同收入买的股票算共同财产，婚前的本金算个人财产。但实际操作中，只要账户有进出（工资进去、投资出来），就很难区分了。建议在婚姻存续期间就做好账户隔离——各自的个人账户不动，共同账户用于家庭支出和投资。', time:'中', link:nil},
+  {id:4, cat:'marriage', q:'"代持"资产到底安全吗？', a:'代持股/代持房在法律上风险极高——代持人欠债、离婚、死亡，资产都可能被追偿。代持协议在法庭上可能被认定无效。如果要代持，必须做公证+定期确认+关联证据链，不能只靠"感情信任"。', time:'短', link:nil},
+
+  // === 子女教育 ===
+  {id:5, cat:'education', q:'教育金到底要准备多少？', a:'教育金不是一个数，是一个范围。国内从小学到大学约50-80万，海外留学100-300万不等。建议用"决策树法"：列三种情景（国内/海外中外合作/海外顶尖），给概率算期望值。关键不是算准，是先开始。', time:'中', link:'dialogue-18.html'},
+  {id:6, cat:'education', q:'教育金定投和普通定投有什么区别？', a:'教育金定投有明确的时间目标（比如18岁要用），所以"保本"优先级高于"收益"。建议用"目标日期策略"——孩子小的时候可以偏权益（追求增长），接近用钱时逐步转向债券和现金（锁定收益、保本）。', time:'中', link:'dialogue-24A.html'},
+  {id:7, cat:'education', q:'怎么跟孩子谈钱？', a:'5-8岁用三个罐子（储蓄/消费/分享）建立基本概念；9-12岁给零花钱+自主决策权，犯错成本低；13岁以上可以聊家庭预算，让孩子参与决策。关键是"让孩子在可控范围内犯小错"，比长大后在股票上亏大钱好。', time:'短', link:'dialogue-04.html'},
+  {id:8, cat:'education', q:'留学花那么多钱，值不值？', a:'取决于你要什么。如果目标是好工作、高收入，留学不一定划算——国内优秀大学+实习经历也能达到类似结果。如果目标是视野、独立能力、全球流动性，留学有其独特价值。建议做"投入产出表"：5年总花费 vs 5年后预期收入差，看得见摸得着再做决定。', time:'中', link:'dialogue-18.html'},
+
+  // === 养老规划 ===
+  {id:9, cat:'retirement', q:'养老金缺口怎么算？', a:'三步：① 算出退休后每月需要多少钱（当前生活费的60-70%够，含医疗上浮20%）；② 算已有养老金（社保+企业年金+个人账户）每月能领多少；③ 缺口=需要-已有，用"72法则"反推现在该存多少。', time:'中', link:'tool-security-fund-calculator.html'},
+  {id:10, cat:'retirement', q:'社保养老金够花吗？', a:'社保养老金的目标是"基础保障"，不是"体面生活"。替代率（退休金/退休前工资）目前约40-45%，国际警戒线是55%。也就是退休后收入直接腰斩一半。想维持退休前的生活质量，必须在社保之外自己补充。', time:'短', link:nil},
+  {id:11, cat:'retirement', q:'养老目标基金和普通基金有什么区别？', a:'养老目标基金的核心是"下滑曲线"——年轻时配更多权益类资产追求增长，接近退休时逐步转债券和现金保本。而普通基金没有这个自动调整机制。养老基金省心，适合"买了就不管"的人。', time:'短', link:nil},
+  {id:12, cat:'retirement', q:'养老社区值得买吗？押金退不回来怎么办？', a:'养老社区的押金模式本质是"预付式消费"，不是"投资"。关键看三点：① 运营方资质（国企还是民企、有无成功项目）；② 押金是否进入监管账户；③ 合同里有没有明确的退出/退款条款。建议把押金当作"消费"而非"投资"——亏了不影响生活才交。', time:'中', link:nil},
+
+  // === 投资困惑 ===
+  {id:13, cat:'invest', q:'投资和投机怎么区分？', a:'最简单的标准：你买的这个东西不卖也能赚钱吗？投资看的是资产本身的现金流（分红、租金、利润增长）。投机看的是价格涨跌，靠别人出更高价接盘。投资靠时间，投机靠运气。', time:'短', link:'dialogue-01.html'},
+  {id:14, cat:'invest', q:'市场跌了，该加仓还是该跑？', a:'先问自己三个问题：① 当初买它的理由变了吗？（基本面坏了就跑，情绪性下跌就扛）；② 你的杠杆安全吗？（维保比例够不够？）；③ 这笔钱短期内用不用得上？三年内要用就别加仓。如果三题都过了，纪律性地分档加仓。', time:'中', link:'roundtable-01.html'},
+  {id:15, cat:'invest', q:'定投真的能赚钱吗？', a:'定投赚钱靠的不是"低买高卖"，是"在低位多买份额，在高位少买份额"，用时间平滑成本。前提是① 标的长期向上（宽基指数＞个股）；② 不停扣、不止损、不贪心；③ 坚持两个完整周期（约7-10年）。', time:'中', link:'dialogue-24A.html'},
+  {id:16, cat:'invest', q:'别人都赚钱了，我还没进场怎么办？', a:'这是最典型的"FOMO焦虑"神经科学叫"多巴胺劫持+社会比较"。解决办法：① 写禁令纸条贴显示器上，规定什么价格以下不买；② 把评价周期拉长到3年；③ 设置"冷静期"——想买入时先等48小时。市场不会因为晚48小时就关闭。', time:'短', link:'roundtable-04.html'},
+  {id:17, cat:'invest', q:'资产配置应该多久调整一次？', a:'不要太频繁。建议每年1-2次再平衡，触发条件是某类资产偏离目标配比±20%。频繁调整=追涨杀跌+交易费吃掉收益。懒一点，反而赚得多。', time:'短', link:'dialogue-25.html'},
+  {id:18, cat:'invest', q:'股息率和融资利率哪个更重要？', a:'都重要，但顺序别搞反。先看股息率是否真实（过去10年是否持续分红），再看融资利率是否覆盖得了（股息覆盖利率后还有没有盈余）。更关键的是：用融资买高股息是"借短投长"，时间窗口不对，波动一来就爆仓。', time:'中', link:'roundtable-02.html'},
+
+  // === 保险配置 ===
+  {id:19, cat:'insurance', q:'保险买多少才够？', a:'寿险保额=家庭年支出×10年+房贷余额+教育金缺口；重疾险保额=3-5倍年收入（覆盖康复期间的收入损失+治疗费）。医疗险先买百万医疗打底，有余力再补充中高端医疗。关键词："够"不是"多"，是"出事时能兜住"。', time:'中', link:'dialogue-22.html'},
+  {id:20, cat:'insurance', q:'重疾险和医疗险的区别？', a:'医疗险是"报销制"——花多少报多少，实报实销。重疾险是"给付制"——确诊即赔一笔钱，不管你怎么用。医疗险解决"看病贵"，重疾险解决"病后收入断"。两个互补，缺一不可。', time:'短', link:nil},
+  {id:21, cat:'insurance', q:'返还型保险值不值得买？', a:'说实话，不推荐。返还型保险=保障+储蓄二合一，但两边都不划算——保障不如纯消费型、收益不如自己投资。保险的核心功能是"风险转移"，不是"发财"。买消费型，省下的保费自己去投资。', time:'短', link:nil},
+  {id:22, cat:'insurance', q:'父母年纪大了还能买什么保险？', a:'50-60岁还能买百万医疗（核保通过的话）；60-70岁建议买防癌医疗险+意外险；70岁以上基本只能买意外险+普惠保。趁父母还健康、核保还能过，先把百万医疗配上。越早买越便宜。', time:'中', link:nil},
+
+  // === 债务管理 ===
+  {id:23, cat:'liability', q:'房贷、消费贷、经营贷，该先还哪个？', a:'先还利率最高的——通常是消费贷。其次看是否有抵押风险——经营贷如果挂钩了房产，优先还（不然爆了房子没了）。最后才考虑提前还房贷（利率最低+有抵税价值）。三步：利率高→风险高→流动性影响大。', time:'中', link:'dialogue-23.html'},
+  {id:24, cat:'liability', q:'负持有是什么？怎么知道自己是不是'负持有'？', a:'负持有就是资产产生的现金流（租金、分红）还覆盖不了负债的利息+持有成本（物业费、税）。算一笔账：月租金-月供-物业费-税，如果是负数，就是负持有。这时候不是"持有资产"，是"花钱养负债"。', time:'短', link:'dialogue-05.html'},
+  {id:25, cat:'liability', q:'DSR（负债率）超过多少算危险？', a:'DSR=月供/月收入。国际警戒线40%，国内考虑到收入波动更大的事实，建议守到35%以内。超过50%就是"红色区域"——任何利率波动或收入中断都可能引发违约。', time:'短', link:'tool-debt-stress-test.html'},
+  {id:26, cat:'liability', q:'连带担保签字了，还能反悔吗？', a:'如果已经签了字，很难单方面反悔，除非债权人同意解除担保。唯一能做的是：① 要求主债务人提供反担保物（抵押品）；② 定期监控主债务人的征信情况；③ 如果重大信息未披露，可能主张担保合同无效。下次记住：连带担保≈你替别人借了笔钱。', time:'中', link:'dialogue-13.html'},
+  {id:27, cat:'liability', q:'信用贷利率比房贷低，能不能借信用贷还房贷？', a:'理论上可操作，但风险极大。信用贷期限短（通常3-5年），房贷期限长（20-30年），用短钱还长钱，一旦信用贷到期续不上，连锁反应。更危险的是——信用贷资金用途监控严格，借信用贷还房贷属违规用款，银行有权要求提前全额还款。', time:'中', link:nil},
+
+  // === 通用/其他 ===
+  {id:28, cat:'all', q:'五格图到底怎么填？', a:'五格分别是：堡垒账户（现金+定存+国债）、锋利账户（股票+基金）、保障金（应急储备）、跨市场配置（海外资产/黄金）、公用固定资产（自住房等）。按"先用后填"——先想清楚每格的功能，再把你的资产对号入座。空着的格子，就是你的风险点。', time:'中', link:'tool-five-grid.html'},
+  {id:29, cat:'all', q:'保障金36个月标准是什么意思？', a:'保障金=如果你突然断了所有收入来源，现有流动性资产能支撑你维持现有生活方式多久。36个月是"红色底线"——低于这个数，就不要谈什么"资产配置""高风险投资"，先攒钱。12个月以下，首要任务是解决生存问题。', time:'短', link:'tool-security-fund-calculator.html'},
+  {id:30, cat:'all', q:'信托和保险，到底谁更能守住钱？', a:'信托是"结构"——把钱装进去，规定怎么分、什么时候分。保险是"工具"——防范特定风险（死亡/疾病/意外）。两者不是替代关系，是配合关系。信托管分配，保险管风险。富豪用信托+保险组合，普通人先买够保险再考虑信托。', time:'中', link:'dialogue-21.html'},
+  {id:31, cat:'all', q:'我有100万，该提前还房贷还是拿去投资？', a:'先做三件事：① 拿出计算器，算房贷利率vs预期投资收益率（保守按4-5%算，别按"牛市年化15%"算）；② 看你的DSR，如果月供占收入超过35%，优先还贷降杠杆；③ 留足24个月生活费做现金垫。做完三步，答案自然浮现。', time:'中', link:'roundtable-02.html'},
+  {id:32, cat:'all', q:'什么是"核心-卫星"策略？', a:'核心仓（60-70%）是"压舱石"——宽基指数、红利ETF、长久期国债，长期持有不动。卫星仓（30-40%）是"增肌剂"——行业ETF、赛道基金、结构性产品，看周期调整。核心仓管"稳定"，卫星仓管"弹性"。', time:'短', link:'dialogue-25.html'},
+  {id:33, cat:'all', q:'信心来自机制，具体指什么？', a:'意思是：你的安全感不该来自"我判断对了"，而来自"我的系统在保护我"。比如：保障金够36个月——即使市场跌了也不慌；负债率不超过35%——利率涨了也不怕；分散配置——单一资产崩了也不影响整体。信心不是靠意志力硬扛，是靠机制兜住。', time:'短', link:'dialogue-12.html'},
+];
+
+// 初始显示
+const FAQ_PER_PAGE = 7;
+
+function renderTriageFAQs(tag, query) {
+  const list = document.getElementById('triage-faq-list');
+  const ext = document.getElementById('triage-faq-extended');
+  const noResult = document.getElementById('triage-no-result');
+
+  let filtered = triageFAQs;
+  if (tag && tag !== 'all') {
+    filtered = filtered.filter(f => f.cat === tag);
+  }
+  if (query) {
+    const q = query.toLowerCase();
+    filtered = filtered.filter(f => f.q.toLowerCase().includes(q) || f.a.toLowerCase().includes(q));
+  }
+
+  if (filtered.length === 0) {
+    list.innerHTML = '';
+    ext.innerHTML = '';
+    noResult.style.display = 'block';
+    return;
+  }
+  noResult.style.display = 'none';
+
+  const primary = filtered.slice(0, FAQ_PER_PAGE);
+  const rest = filtered.slice(FAQ_PER_PAGE);
+
+  list.innerHTML = primary.map(f => renderFAQItem(f)).join('');
+  ext.innerHTML = rest.map(f => renderFAQItem(f)).join('');
+}
+
+function renderFAQItem(f) {
+  const timeLabel = f.time === '短' ? '⚡ <2分钟' : f.time === '中' ? '⏳ 2-3分钟' : '📖 3-5分钟';
+  const linkHtml = f.link ? `<span style="font-size:.75rem;color:#6a6865;display:block;margin-top:2px;">→ 想深入了解？<a href="${f.link}" style="color:#d4a853;">阅读相关文章</a></span>` : '';
+  return `<details class="faq-item" style="margin-bottom:8px;padding:12px 16px;background:rgba(255,255,255,.02);border:1px solid rgba(212,168,83,.08);border-radius:6px;cursor:pointer;">
+    <summary style="font-weight:500;font-size:.85rem;color:#e8e6e3;display:flex;align-items:center;gap:6px;">
+      <span style="color:#D4AF37;">▸</span> ${f.q}
+      <span style="margin-left:auto;font-size:.7rem;color:#6a6865;flex-shrink:0;">${timeLabel}</span>
+    </summary>
+    <div style="margin-top:10px;line-height:1.7;color:#b0aeab;font-size:.82rem;padding-left:18px;">
+      <p>${f.a}</p>
+      ${linkHtml}
+    </div>
+  </details>`;
+}
+
+function filterTriageFAQ(val) {
+  const activeTag = document.querySelector('.triage-tag.active');
+  const tag = activeTag ? activeTag.dataset.tag : 'all';
+  renderTriageFAQs(tag, val);
+}
+
+function switchTriageTag(tag) {
+  document.querySelectorAll('.triage-tag').forEach(el => {
+    el.classList.toggle('active', el.dataset.tag === tag);
+    if (el.dataset.tag === tag) {
+      el.style.background = 'rgba(212,168,83,.08)';
+      el.style.color = '#D4AF37';
+      el.style.borderColor = 'rgba(212,168,83,.25)';
+      el.style.fontWeight = '500';
+    } else {
+      el.style.background = 'transparent';
+      el.style.color = '#b0aeab';
+      el.style.borderColor = 'rgba(212,168,83,.15)';
+      el.style.fontWeight = 'normal';
+    }
+  });
+  const searchVal = document.getElementById('triage-search').value;
+  renderTriageFAQs(tag, searchVal);
+}
+
+// 初始化
+document.addEventListener('DOMContentLoaded', () => {
+  renderTriageFAQs('all', '');
+});
+</script>
+
+</body>
 </html>
