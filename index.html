@@ -363,7 +363,7 @@
           <span style="font-size:1.1rem;color:#D4AF37;flex-shrink:0;">🔍</span>
           <input type="text" id="triage-search" placeholder="有什么财务疑问？搜一下，5分钟答完"
             style="flex:1;background:transparent;border:none;padding:14px 10px;font-size:1rem;font-weight:600;color:#ffffff;outline:none;width:100%;caret-color:#D4AF37;accent-color:#D4AF37;"
-            oninput="filterTriageFAQ(this.value)" />
+            oninput="filterTriageFAQ(this.value)" onkeydown="if(event.key==='Enter'){let d=document.querySelector('#triage-faq-list details,#triage-faq-extended details');if(d){d.setAttribute('open','');d.scrollIntoView({behavior:'smooth',block:'center'})}}" />
         </div>
       </div>
 
@@ -1235,7 +1235,7 @@ function renderFAQItem(f) {
       <span style="color:#D4AF37;">▸</span> ${f.q}
       <span style="margin-left:auto;font-size:.75rem;color:#8a8885;flex-shrink:0;">${timeLabel}</span>
     </summary>
-    <div style="margin-top:10px;line-height:1.8;color:#e8e6e3;font-size:.85rem;padding-left:18px;">
+    <div style="margin-top:10px;line-height:1.8;color:#8e959f;font-size:.9rem;padding-left:18px;">
       <p>${f.a}</p>
       ${linkHtml}
     </div>
