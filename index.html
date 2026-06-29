@@ -355,14 +355,14 @@
 
       <div class="section-title" style="margin-bottom:8px;">🛎️ 值班室·快答</div>
       <h2 style="margin-bottom:12px;">有什么财务疑问？搜一下，5分钟答完</h2>
-      <p style="font-size:1rem;color:#c8c5c0;margin-bottom:28px;">财务问题，5分钟内先让你知道答案。搜一下，或者从分类找到你的问题。</p>
+      <p style="font-size:1rem;color:#3a3a3a;margin-bottom:28px;">财务问题，5分钟内先让你知道答案。搜一下，或者从分类找到你的问题。</p>
 
       <!-- 搜索框 -->
       <div style="max-width:640px;margin:0 auto 32px;">
         <div style="display:flex;align-items:center;background:rgba(255,255,255,.08);border:1px solid rgba(212,168,83,.35);border-radius:8px;padding:0 16px;">
           <span style="font-size:1.1rem;color:#D4AF37;flex-shrink:0;">🔍</span>
           <input type="text" id="triage-search" placeholder="有什么财务疑问？搜一下，5分钟答完"
-            style="flex:1;background:transparent;border:none;padding:14px 10px;font-size:1.05rem;font-weight:400;color:#c8c5c0;outline:none;width:100%;caret-color:#d4a853;"
+            style="flex:1;background:transparent;border:none;padding:14px 10px;font-size:1.05rem;font-weight:400;color:#3a3a3a;outline:none;width:100%;caret-color:#d4a853;"
             oninput="filterTriageFAQ(this.value)" onkeydown="if(event.key==='Enter'){let d=document.querySelector('#triage-faq-list details,#triage-faq-extended details');if(d){d.setAttribute('open','');d.scrollIntoView({behavior:'smooth',block:'center'})}}" />
         </div>
       </div>
@@ -387,7 +387,7 @@
             <span style="width:32px;height:32px;border-radius:50%;background:rgba(76,175,80,.12);display:flex;align-items:center;justify-content:center;font-size:1rem;">🟢</span>
             <h3 style="font-size:1.05rem;font-weight:600;color:#D4AF37;margin:0;">值班室 · 常见问题快速答</h3>
           </div>
-          <p style="font-size:1rem;color:#c8c5c0;margin-bottom:16px;">先让你知道，你不是一个人遇到这种问题。</p>
+          <p style="font-size:1rem;color:#3a3a3a;margin-bottom:16px;">先让你知道，你不是一个人遇到这种问题。</p>
 
           <div id="triage-faq-list">
             <!-- FAQ清单将由JS动态渲染 -->
@@ -1182,7 +1182,7 @@ function renderFAQItem(f) {
   const timeLabel = f.time === '短' ? '⚡ <2分钟' : f.time === '中' ? '⏳ 2-3分钟' : '📖 3-5分钟';
   const linkHtml = f.link ? `<span style="font-size:.78rem;color:#8a8885;display:block;margin-top:4px;">→ 想深入了解？<a href="${f.link}" style="color:#d4a853;">阅读相关文章</a></span>` : '';
   return `<details class="faq-item" style="margin-bottom:8px;padding:14px 18px;background:rgba(255,255,255,.06);border:1px solid rgba(212,168,83,.15);border-radius:6px;cursor:pointer;">
-    <summary style="font-weight:500;font-size:1rem;color:#c8c5c0;display:flex;align-items:center;gap:6px;">
+    <summary style="font-weight:500;font-size:1rem;color:#3a3a3a;display:flex;align-items:center;gap:6px;">
       <span style="color:#D4AF37;">▸</span> ${f.q}
       <span style="margin-left:auto;font-size:.75rem;color:#8a8885;flex-shrink:0;">${timeLabel}</span>
     </summary>
