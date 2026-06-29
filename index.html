@@ -370,12 +370,12 @@
       <!-- 分类标签 -->
       <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:28px;" id="triage-tags">
         <span class="triage-tag active" data-tag="all" onclick="switchTriageTag('all')" style="padding:6px 16px;border:1px solid rgba(212,168,83,.35);border-radius:20px;font-size:.85rem;color:#D4AF37;cursor:pointer;transition:all .15s;background:rgba(212,168,83,.12);font-weight:600;">全部</span>
-        <span class="triage-tag" data-tag="marriage" onclick="switchTriageTag('marriage')" style="padding:6px 16px;border:1px solid rgba(212,168,83,.2);border-radius:20px;font-size:.85rem;color:#d8d5d0;cursor:pointer;transition:all .15s;">婚姻财产</span>
-        <span class="triage-tag" data-tag="education" onclick="switchTriageTag('education')" style="padding:6px 16px;border:1px solid rgba(212,168,83,.2);border-radius:20px;font-size:.85rem;color:#d8d5d0;cursor:pointer;transition:all .15s;">子女教育</span>
-        <span class="triage-tag" data-tag="retirement" onclick="switchTriageTag('retirement')" style="padding:6px 16px;border:1px solid rgba(212,168,83,.2);border-radius:20px;font-size:.85rem;color:#d8d5d0;cursor:pointer;transition:all .15s;">养老规划</span>
-        <span class="triage-tag" data-tag="invest" onclick="switchTriageTag('invest')" style="padding:6px 16px;border:1px solid rgba(212,168,83,.2);border-radius:20px;font-size:.85rem;color:#d8d5d0;cursor:pointer;transition:all .15s;">投资困惑</span>
-        <span class="triage-tag" data-tag="insurance" onclick="switchTriageTag('insurance')" style="padding:6px 16px;border:1px solid rgba(212,168,83,.2);border-radius:20px;font-size:.85rem;color:#d8d5d0;cursor:pointer;transition:all .15s;">保险配置</span>
-        <span class="triage-tag" data-tag="liability" onclick="switchTriageTag('liability')" style="padding:6px 16px;border:1px solid rgba(212,168,83,.2);border-radius:20px;font-size:.85rem;color:#d8d5d0;cursor:pointer;transition:all .15s;">债务管理</span>
+        <span class="triage-tag" data-tag="marriage" onclick="switchTriageTag('marriage')" style="padding:6px 16px;border:1px solid rgba(212,168,83,.25);border-radius:20px;font-size:.85rem;color:#D4AF37;cursor:pointer;transition:all .15s;font-weight:500;">婚姻财产</span>
+        <span class="triage-tag" data-tag="education" onclick="switchTriageTag('education')" style="padding:6px 16px;border:1px solid rgba(212,168,83,.25);border-radius:20px;font-size:.85rem;color:#D4AF37;cursor:pointer;transition:all .15s;font-weight:500;">子女教育</span>
+        <span class="triage-tag" data-tag="retirement" onclick="switchTriageTag('retirement')" style="padding:6px 16px;border:1px solid rgba(212,168,83,.25);border-radius:20px;font-size:.85rem;color:#D4AF37;cursor:pointer;transition:all .15s;font-weight:500;">养老规划</span>
+        <span class="triage-tag" data-tag="invest" onclick="switchTriageTag('invest')" style="padding:6px 16px;border:1px solid rgba(212,168,83,.25);border-radius:20px;font-size:.85rem;color:#D4AF37;cursor:pointer;transition:all .15s;font-weight:500;">投资困惑</span>
+        <span class="triage-tag" data-tag="insurance" onclick="switchTriageTag('insurance')" style="padding:6px 16px;border:1px solid rgba(212,168,83,.25);border-radius:20px;font-size:.85rem;color:#D4AF37;cursor:pointer;transition:all .15s;font-weight:500;">保险配置</span>
+        <span class="triage-tag" data-tag="liability" onclick="switchTriageTag('liability')" style="padding:6px 16px;border:1px solid rgba(212,168,83,.25);border-radius:20px;font-size:.85rem;color:#D4AF37;cursor:pointer;transition:all .15s;font-weight:500;">债务管理</span>
       </div>
 
       <!-- 三层结构 -->
@@ -1145,15 +1145,15 @@ function switchTriageTag(tag) {
   document.querySelectorAll('.triage-tag').forEach(el => {
     el.classList.toggle('active', el.dataset.tag === tag);
     if (el.dataset.tag === tag) {
-      el.style.background = 'rgba(212,168,83,.08)';
+      el.style.background = 'rgba(212,168,83,.12)';
+      el.style.color = '#D4AF37';
+      el.style.borderColor = 'rgba(212,168,83,.35)';
+      el.style.fontWeight = '600';
+    } else {
+      el.style.background = 'transparent';
       el.style.color = '#D4AF37';
       el.style.borderColor = 'rgba(212,168,83,.25)';
       el.style.fontWeight = '500';
-    } else {
-      el.style.background = 'transparent';
-      el.style.color = '#b0aeab';
-      el.style.borderColor = 'rgba(212,168,83,.15)';
-      el.style.fontWeight = 'normal';
     }
   });
   const searchVal = document.getElementById('triage-search').value;
