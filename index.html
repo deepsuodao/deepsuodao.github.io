@@ -362,7 +362,7 @@
         <div style="display:flex;align-items:center;background:rgba(255,255,255,.08);border:1px solid rgba(212,168,83,.35);border-radius:8px;padding:0 16px;">
           <span style="font-size:1.1rem;color:#D4AF37;flex-shrink:0;">🔍</span>
           <input type="text" id="triage-search" placeholder="有什么财务疑问？搜一下，5分钟答完"
-            style="flex:1;background:transparent;border:none;padding:14px 10px;font-size:1rem;font-weight:600;color:#ffffff;outline:none;width:100%;caret-color:#D4AF37;accent-color:#D4AF37;"
+            style="flex:1;background:transparent;border:none;padding:14px 10px;font-size:.95rem;font-weight:400;color:#8e959f;outline:none;width:100%;caret-color:#8e959f;"
             oninput="filterTriageFAQ(this.value)" onkeydown="if(event.key==='Enter'){let d=document.querySelector('#triage-faq-list details,#triage-faq-extended details');if(d){d.setAttribute('open','');d.scrollIntoView({behavior:'smooth',block:'center'})}}" />
         </div>
       </div>
@@ -1182,7 +1182,7 @@ function renderFAQItem(f) {
   const timeLabel = f.time === '短' ? '⚡ <2分钟' : f.time === '中' ? '⏳ 2-3分钟' : '📖 3-5分钟';
   const linkHtml = f.link ? `<span style="font-size:.78rem;color:#8a8885;display:block;margin-top:4px;">→ 想深入了解？<a href="${f.link}" style="color:#d4a853;">阅读相关文章</a></span>` : '';
   return `<details class="faq-item" style="margin-bottom:8px;padding:14px 18px;background:rgba(255,255,255,.06);border:1px solid rgba(212,168,83,.15);border-radius:6px;cursor:pointer;">
-    <summary style="font-weight:600;font-size:.88rem;color:#ffffff;display:flex;align-items:center;gap:6px;">
+    <summary style="font-weight:500;font-size:.9rem;color:#8e959f;display:flex;align-items:center;gap:6px;">
       <span style="color:#D4AF37;">▸</span> ${f.q}
       <span style="margin-left:auto;font-size:.75rem;color:#8a8885;flex-shrink:0;">${timeLabel}</span>
     </summary>
