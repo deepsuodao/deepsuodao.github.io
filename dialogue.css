@@ -166,6 +166,19 @@ p {
   background: #fbf2f0;
 }
 
+/* 角色 A+：圆桌主持人（嘉宾对话）- 采用金色强调色衬底 */
+.dialogue-block .speaker-a {
+  color: #8a6d2b;
+  background: #f6f0df;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  margin-right: 8px;
+  display: inline-block;
+  letter-spacing: 0.02em;
+}
+
 
 /* 场景交待与阅读时间 */
 .dialogue-block .scene {
