@@ -59,7 +59,7 @@
       <nav>
         <a href="belief.html">信念</a>
         <a href="principles.html" style="color:#D4AF37;">原则</a>
-        <a href="#triage">值班室</a>
+        <a href="triage.html">值班室</a>
         <a href="#content">瞭望台</a>
         <a href="#tools">工具箱</a>
         <a href="#about">关于</a>
@@ -228,7 +228,7 @@
   <div style="text-align:center;padding:24px 20px;background:rgba(212,168,83,.03);border-bottom:1px solid rgba(212,168,83,.06);">
     <p style="font-size:.85rem;color:#b0aeab;margin:0;">
       🆕 第一次来？
-      <a href="#triage" style="color:#d4a853;text-decoration:none;">先去值班室解决今晚的问题</a>
+      <a href="triage.html" style="color:#d4a853;text-decoration:none;">去值班室解决今晚的问题</a>
       <span style="color:#6a6865;margin:0 8px;">·</span>
       <a href="#content" style="color:#d4a853;text-decoration:none;">或者去瞭望台建立框架</a>
     </p>
@@ -349,113 +349,49 @@
     </div>
   </section>
 
-  <!-- ===== 值班室·快答（替换读者问诊） ===== -->
+  <!-- ===== 值班室·快答（精简版·独立页） ===== -->
   <section class="section" id="triage" style="background:rgba(0,0,0,.01);">
     <div class="container">
 
       <div class="section-title" style="margin-bottom:8px;">🛎️ 值班室·快答</div>
       <h2 style="margin-bottom:12px;">有什么财务疑问？搜一下，5分钟答完</h2>
-      <p style="font-size:1rem;color:#3a3a3a;margin-bottom:28px;">财务问题，5分钟内先让你知道答案。搜一下，或者从分类找到你的问题。</p>
+      <p style="font-size:.9rem;color:#8a8885;margin-bottom:24px;">104个常见问题覆盖投资、保险、债务、税务、传承等。</p>
 
-      <!-- 搜索框 -->
-      <div style="max-width:640px;margin:0 auto 32px;">
-        <div style="display:flex;align-items:center;background:rgba(255,255,255,.08);border:1px solid rgba(212,168,83,.35);border-radius:8px;padding:0 16px;">
-          <span style="font-size:1.1rem;color:#D4AF37;flex-shrink:0;">🔍</span>
-          <input type="text" id="triage-search" placeholder="有什么财务疑问？搜一下，5分钟答完"
-            style="flex:1;background:transparent;border:none;padding:14px 10px;font-size:1.05rem;font-weight:400;color:#3a3a3a;outline:none;width:100%;caret-color:#d4a853;"
-            oninput="filterTriageFAQ(this.value)" onkeydown="if(event.key==='Enter'){let d=document.querySelector('#triage-faq-list details,#triage-faq-extended details');if(d){d.setAttribute('open','');d.scrollIntoView({behavior:'smooth',block:'center'})}}" />
-        </div>
+      <div style="max-width:600px;margin:0 auto 24px;display:flex;border:1px solid rgba(212,168,83,.2);border-radius:4px;overflow:hidden;">
+        <input type="text" id="triage-search-index" placeholder="搜一下，5分钟答完…" style="flex:1;background:transparent;border:none;padding:14px 16px;font-size:.95rem;color:#e8e6e3;outline:none;font-family:inherit;" onkeydown="if(event.key===String.fromCharCode(13)){window.location.href='triage.html?q='+encodeURIComponent(this.value)}">
       </div>
 
-      <!-- 分类标签 -->
-      <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:28px;" id="triage-tags">
-        <span class="triage-tag active" data-tag="all" onclick="switchTriageTag('all')" style="padding:6px 16px;border:1px solid rgba(212,168,83,.35);border-radius:20px;font-size:.85rem;color:#D4AF37;cursor:pointer;transition:all .15s;background:rgba(212,168,83,.12);font-weight:600;">全部</span>
-        <span class="triage-tag" data-tag="marriage" onclick="switchTriageTag('marriage')" style="padding:6px 16px;border:1px solid rgba(212,168,83,.25);border-radius:20px;font-size:.85rem;color:#D4AF37;cursor:pointer;transition:all .15s;font-weight:500;">婚姻财产</span>
-        <span class="triage-tag" data-tag="education" onclick="switchTriageTag('education')" style="padding:6px 16px;border:1px solid rgba(212,168,83,.25);border-radius:20px;font-size:.85rem;color:#D4AF37;cursor:pointer;transition:all .15s;font-weight:500;">子女教育</span>
-        <span class="triage-tag" data-tag="retirement" onclick="switchTriageTag('retirement')" style="padding:6px 16px;border:1px solid rgba(212,168,83,.25);border-radius:20px;font-size:.85rem;color:#D4AF37;cursor:pointer;transition:all .15s;font-weight:500;">养老规划</span>
-        <span class="triage-tag" data-tag="invest" onclick="switchTriageTag('invest')" style="padding:6px 16px;border:1px solid rgba(212,168,83,.25);border-radius:20px;font-size:.85rem;color:#D4AF37;cursor:pointer;transition:all .15s;font-weight:500;">投资困惑</span>
-        <span class="triage-tag" data-tag="insurance" onclick="switchTriageTag('insurance')" style="padding:6px 16px;border:1px solid rgba(212,168,83,.25);border-radius:20px;font-size:.85rem;color:#D4AF37;cursor:pointer;transition:all .15s;font-weight:500;">保险配置</span>
-        <span class="triage-tag" data-tag="liability" onclick="switchTriageTag('liability')" style="padding:6px 16px;border:1px solid rgba(212,168,83,.25);border-radius:20px;font-size:.85rem;color:#D4AF37;cursor:pointer;transition:all .15s;font-weight:500;">债务管理</span>
+      <div id="hot-faqs" style="max-width:700px;margin:0 auto;"></div>
+
+      <div style="text-align:center;margin-top:24px;">
+        <a href="triage.html" style="display:inline-block;padding:12px 28px;border:1px solid rgba(212,168,83,.25);color:#d4a853;font-size:.85rem;text-decoration:none;border-radius:3px;">📋 查看全部104条问答 →</a>
       </div>
 
-      <!-- 三层结构 -->
-      <div style="display:grid;grid-template-columns:1fr;gap:24px;">
-
-        <!-- 🟢 第一层：急诊室 -->
-        <div class="triage-layer layer-1">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-            <span style="width:32px;height:32px;border-radius:50%;background:rgba(76,175,80,.12);display:flex;align-items:center;justify-content:center;font-size:1rem;">🟢</span>
-            <h3 style="font-size:1.05rem;font-weight:600;color:#D4AF37;margin:0;">值班室 · 常见问题快速答</h3>
-          </div>
-          <p style="font-size:1rem;color:#3a3a3a;margin-bottom:16px;">先让你知道，你不是一个人遇到这种问题。</p>
-
-          <div id="triage-faq-list">
-            <!-- FAQ清单将由JS动态渲染 -->
-          </div>
-
-          <div id="triage-no-result" style="display:none;text-align:center;padding:24px;color:#8a8885;">
-            <p style="color:#c8c5c0;">没找到答案？试试搜 <a href="dialogue-07.html" style="color:#d4a853;">资产配置</a>、<a href="tool-security-fund-calculator.html" style="color:#d4a853;">保障金</a>、<a href="tool-debt-stress-test.html" style="color:#d4a853;">负债压力</a> 这些高频词</p>
-          </div>
-
-          <details style="margin-top:8px;">
-            <summary style="cursor:pointer;font-size:.82rem;color:#D4AF37;list-style:none;display:flex;align-items:center;gap:4px;">查看更多常见问题（共105条）<span style="font-size:.7rem;color:#6a6865;">↓</span></summary>
-            <div id="triage-faq-extended" style="margin-top:8px;"></div>
-          </details>
-        </div>
-
-        <!-- 🟡 第二层：过往案例 -->
-        <div class="triage-layer layer-2">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-            <span style="width:32px;height:32px;border-radius:50%;background:rgba(255,193,7,.12);display:flex;align-items:center;justify-content:center;font-size:1rem;">🟡</span>
-            <h3 style="font-size:1.05rem;font-weight:600;color:#D4AF37;margin:0;">过往案例 · 别人的困境，你的前车之鉴</h3>
-          </div>
-          <p style="font-size:.9rem;color:#8e959f;margin-bottom:16px;">真实读者的困境，大师的诊断。隐去个人信息，留下可复用的方法论。</p>
-
-          <div class="triage-cases">
-            <a href="roundtable-02.html" style="display:block;padding:14px 18px;background:rgba(255,255,255,.04);border:1px solid rgba(212,168,83,.15);border-radius:6px;margin-bottom:10px;text-decoration:none;transition:border-color .15s;" onmouseover="this.style.borderColor='rgba(212,168,83,.3)'" onmouseout="this.style.borderColor='rgba(212,168,83,.15)'">
-              <span style="color:#D4AF37;font-weight:600;font-size:.9rem;">Case 001</span>
-              <span style="color:#8e959f;font-size:.9rem;display:block;margin-top:4px;">当"5.5%股息"遇上"3.0%房贷"，双跌之下如何安睡？</span>
-              <span style="color:#8e959f;font-size:.85rem;display:block;margin-top:2px;">凯恩斯·林奇·邓普顿·德波顿 × 自查清单 →</span>
-            </a>
-            <a href="roundtable-01.html" style="display:block;padding:14px 18px;background:rgba(255,255,255,.04);border:1px solid rgba(212,168,83,.15);border-radius:6px;margin-bottom:10px;text-decoration:none;transition:border-color .15s;" onmouseover="this.style.borderColor='rgba(212,168,83,.3)'" onmouseout="this.style.borderColor='rgba(212,168,83,.15)'">
-              <span style="color:#D4AF37;font-weight:600;font-size:.9rem;">Case 000</span>
-              <span style="color:#8e959f;font-size:.9rem;display:block;margin-top:4px;">当"吃股息"的算盘遇上爆仓恐惧——融资盘浮亏20%诊断</span>
-              <span style="color:#8e959f;font-size:.85rem;display:block;margin-top:2px;">同一位投资者，上半场问题 →</span>
-            </a>
-          </div>
-
-          <a href="cases.html" style="display:inline-block;margin-top:8px;font-size:.82rem;color:#D4AF37;">📋 查看全部问诊案例 →</a>
-        </div>
-
-        <!-- 🔴 第三层：深度对话 -->
-        <div class="triage-layer layer-3">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-            <span style="width:32px;height:32px;border-radius:50%;background:rgba(244,67,54,.12);display:flex;align-items:center;justify-content:center;font-size:1rem;">🔴</span>
-            <h3 style="font-size:1.05rem;font-weight:600;color:#D4AF37;margin:0;">深度对话 · 理解原理，建立框架</h3>
-          </div>
-          <p style="font-size:.9rem;color:#8e959f;margin-bottom:16px;">值班室止了血，案例看到了自己——到这里，你该理解为什么了。</p>
-
-          <div class="triage-deep" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-            <a href="roundtable-03.html" style="padding:16px 18px;background:rgba(212,168,83,.06);border:1px solid rgba(212,168,83,.18);border-radius:6px;text-decoration:none;">
-              <span style="color:#D4AF37;font-size:.9rem;font-weight:500;">🏛️ 家庭财务决策</span>
-              <span style="color:#8e959f;font-size:.9rem;display:block;margin-top:4px;">从周期配置到代际传承的制度设计</span>
-            </a>
-            <a href="roundtable-05.html" style="padding:16px 18px;background:rgba(212,168,83,.06);border:1px solid rgba(212,168,83,.18);border-radius:6px;text-decoration:none;">
-              <span style="color:#D4AF37;font-size:.9rem;font-weight:500;">📐 价值投资与安全边际</span>
-              <span style="color:#8e959f;font-size:.9rem;display:block;margin-top:4px;">在叙事狂热与周期高位中守住底线</span>
-            </a>
-          </div>
-          <div style="margin-top:10px;">
-            <a href="dialogue-12.html" style="padding:16px 18px;background:rgba(212,168,83,.06);border:1px solid rgba(212,168,83,.18);border-radius:6px;text-decoration:none;display:block;">
-              <span style="color:#D4AF37;font-size:.9rem;font-weight:500;">📖 系统入门 · 三阶段认知路径</span>
-              <span style="color:#8e959f;font-size:.9rem;display:block;margin-top:4px;">如果你偏好系统学习，也可以按我们的认知路径循序渐进 →</span>
-            </a>
-          </div>
-        </div>
-
-      </div>
     </div>
   </section>
+
+  <script src="faq-data.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      var list = document.getElementById('hot-faqs');
+      if(!list || typeof triageFAQs === 'undefined') return;
+      var hot = triageFAQs.slice(0, 8);
+      hot.forEach(function(item){
+        var d = document.createElement('div');
+        d.style.cssText = 'border-bottom:1px solid rgba(255,255,255,.04);padding:12px 0;';
+        var qDiv = document.createElement('div');
+        qDiv.style.cssText = 'display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:.9rem;color:#e8e6e3;';
+        qDiv.innerHTML = '<span>' + item.q + '</span><span style="color:#6a6865;font-size:.7rem;">&#9654; 展开</span>';
+        var aDiv = document.createElement('div');
+        aDiv.style.cssText = 'display:none;margin-top:6px;font-size:.82rem;color:#b0aeab;line-height:1.6;';
+        aDiv.innerHTML = item.a + (item.link ? ' <a href="'+item.link+'" style="color:#d4a853;font-size:.78rem;">相关对话→</a>' : '');
+        qDiv.onclick = function(){aDiv.style.display='block';qDiv.querySelector('span:last-child').textContent='';};
+        d.appendChild(qDiv);
+        d.appendChild(aDiv);
+        list.appendChild(d);
+      });
+    });
+  </script>
 
   <!-- ===== Dialogue List ===== -->
   <section class="section" id="content">

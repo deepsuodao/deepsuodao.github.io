@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="值班室·快答——104个家庭财务常见问题，搜一下5分钟答完。覆盖投资、保险、债务、税务、传承、买房等。">
+<meta property="og:title" content="值班室·快答 — 104个家庭财务问题快速解答 — 私家智囊">
+<meta property="og:description" content="搜一下，5分钟答完。投资困惑、保险配置、债务管理、税务筹划、传承规划等104个常见问题。">
+<meta property="og:image" content="https://abcsuodao.github.io/images/og-image.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://abcsuodao.com/triage.html">
+<meta property="og:site_name" content="私家智囊">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://abcsuodao.github.io/images/og-image.jpg">
+<title>值班室·快答 — 104个家庭财务问题快速解答 — 私家智囊</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC","Helvetica Neue",sans-serif;background:#0f1424;color:#e8e6e3;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:#d4a853;text-decoration:none;transition:color .3s}
+a:hover{color:#f0c868}
+.container{max-width:900px;margin:0 auto;padding:0 24px}
+header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(15,20,36,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,168,83,.08)}
+header .container{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-size:1rem;font-weight:500;color:#e8e6e3;letter-spacing:.05em}
+.logo span{color:#d4a853}
+nav a{font-size:.8rem;margin-left:20px;color:#8a8885;transition:color .3s}
+nav a:hover,nav a.active{color:#d4a853}
+.hero{padding:120px 0 48px;text-align:center}
+.hero h1{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:400;color:#d4a853;letter-spacing:-.02em;margin-bottom:8px}
+.hero p{font-size:.9rem;color:#8a8885}
+.search-box{display:flex;max-width:600px;margin:24px auto 32px;border:1px solid rgba(212,168,83,.2);border-radius:4px;background:rgba(255,255,255,.02);overflow:hidden}
+.search-box input{flex:1;background:transparent;border:none;padding:14px 16px;font-size:1rem;color:#e8e6e3;outline:none;font-family:inherit}
+.search-box input::placeholder{color:#5a5855}
+.tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:32px}
+.tag-btn{padding:6px 16px;border:1px solid rgba(212,168,83,.25);border-radius:20px;font-size:.82rem;color:#d4a853;cursor:pointer;transition:all .15s;background:transparent;font-family:inherit}
+.tag-btn.active,.tag-btn:hover{background:rgba(212,168,83,.12);border-color:rgba(212,168,83,.35);font-weight:600}
+.faq-list{max-width:800px;margin:0 auto}
+.faq-item{border-bottom:1px solid rgba(255,255,255,.04);padding:16px 0}
+.faq-item.hidden{display:none}
+.faq-q{display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:.95rem;color:#e8e6e3;font-weight:500;line-height:1.4}
+.faq-q .arrow{font-size:.75rem;color:#6a6865;transition:transform .2s;flex-shrink:0;margin-left:12px}
+.faq-item.open .faq-q .arrow{transform:rotate(180deg)}
+.faq-a{display:none;margin-top:10px;font-size:.88rem;color:#b0aeab;line-height:1.7;padding-right:24px}
+.faq-item.open .faq-a{display:block}
+.faq-meta{margin-top:8px;font-size:.75rem;color:#5a5855}
+.faq-meta a{color:#d4a853}
+.counter{text-align:center;font-size:.82rem;color:#6a6865;margin-bottom:24px}
+.no-result{display:none;text-align:center;padding:40px 20px;color:#6a6865;font-size:.9rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;max-width:600px;margin:0 auto 40px;text-align:center}
+.stat-card{background:rgba(255,255,255,.015);border:1px solid rgba(212,168,83,.08);border-radius:4px;padding:16px}
+.stat-num{font-size:1.4rem;font-weight:300;color:#d4a853}
+.stat-label{font-size:.78rem;color:#8a8885;margin-top:4px}
+.back-to-top{position:fixed;bottom:32px;right:32px;width:44px;height:44px;border-radius:50%;background:rgba(212,168,83,.1);border:1px solid rgba(212,168,83,.2);color:#d4a853;font-size:1.2rem;cursor:pointer;transition:all .3s;z-index:999;display:flex;align-items:center;justify-content:center;text-decoration:none;backdrop-filter:blur(4px)}
+.back-to-top:hover{background:rgba(212,168,83,.2);border-color:rgba(212,168,83,.4)}
+footer{border-top:1px solid rgba(255,255,255,.04);padding:48px 0 32px;text-align:center}
+footer .slogan{font-size:.9rem;color:#8a8885;margin-bottom:8px}
+footer .slogan span{color:#d4a853}
+footer .copyright{font-size:.75rem;color:#5a5855}
+@media(max-width:480px){.hero{padding:100px 0 32px}.container{padding:0 16px}.faq-q{font-size:.88rem}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="logo">私家<span>智囊</span></div>
+    <nav>
+      <a href="index.html">首页</a>
+      <a href="principles.html">原则</a>
+      <a href="triage.html" class="active">值班室</a>
+      <a href="index.html#content">瞭望台</a>
+      <a href="index.html#tools">工具箱</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <h1>🛎️ 值班室·快答</h1>
+    <p>104个家庭财务常见问题，搜一下，5分钟答完</p>
+
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="搜一下，5分钟答完…" oninput="filterFAQs()">
+    </div>
+
+    <div class="tags" id="tagContainer"></div>
+
+    <div class="counter" id="counter"></div>
+
+    <div class="stats" id="statsContainer"></div>
+
+    <div class="faq-list" id="faqList"></div>
+
+    <div class="no-result" id="noResult">
+      <p>没有找到匹配的问题</p>
+      <p style="margin-top:8px;font-size:.82rem;">试试换个关键词，或者从分类中浏览</p>
+    </div>
+  </div>
+</section>
+
+<a href="#" class="back-to-top" aria-label="回到顶部">↑</a>
+
+<footer>
+  <div class="container">
+    <p class="slogan">家庭财富的<span>规划师</span>与<span>守夜人</span></p>
+    <p class="copyright">私家智囊 · 2026</p>
+  </div>
+</footer>
+
+<script src="faq-data.js"></script>
+<script>
+let currentTag = 'all';
+const CATEGORY_NAMES = {
+  'all':'全部', 'marriage':'婚姻财产', 'education':'子女教育', 'retirement':'养老规划',
+  'invest':'投资困惑', 'insurance':'保险配置', 'liability':'债务管理', 'tax':'税务筹划',
+  'estate':'传承规划', 'housing':'买房租房', 'budget':'预算消费', 'other':'其他'
+};
+const CATEGORY_ORDER = ['all','marriage','education','retirement','invest','insurance','liability','tax','estate','housing','budget','other'];
+const CATEGORY_ICONS = {all:'📋',marriage:'💍',education:'🎓',retirement:'🌅',invest:'📈',insurance:'🛡️',liability:'⚖️',tax:'🧾',estate:'📜',housing:'🏠',budget:'📊',other:'💡'};
+
+function initTags(){
+  const c = document.getElementById('tagContainer');
+  CATEGORY_ORDER.forEach(k=>{
+    const span = document.createElement('span');
+    span.className = 'tag-btn' + (k==='all'?' active':'');
+    span.textContent = (CATEGORY_ICONS[k]||'') + ' ' + (CATEGORY_NAMES[k]||k);
+    span.setAttribute('data-tag',k);
+    span.onclick = ()=>{switchTag(k)};
+    c.appendChild(span);
+  });
+}
+
+function switchTag(tag){
+  currentTag = tag;
+  document.querySelectorAll('.tag-btn').forEach(b=>b.classList.toggle('active',b.getAttribute('data-tag')===tag));
+  filterFAQs();
+}
+
+function getCategoryCounts(){
+  const counts = {};
+  triageFAQs.forEach(item=>{
+    const cats = item.cat.split(',');
+    cats.forEach(c=>{counts[c]=(counts[c]||0)+1});
+  });
+  return counts;
+}
+
+function renderStats(){
+  const counts = getCategoryCounts();
+  const c = document.getElementById('statsContainer');
+  c.innerHTML = '';
+  CATEGORY_ORDER.forEach(k=>{
+    if(k==='all' || !counts[k]) return;
+    const d = document.createElement('div'); d.className = 'stat-card';
+    d.innerHTML = `<div class="stat-num">${counts[k]}</div><div class="stat-label">${CATEGORY_ICONS[k]||''} ${CATEGORY_NAMES[k]||k}</div>`;
+    c.appendChild(d);
+  });
+}
+
+function filterFAQs(){
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const list = document.getElementById('faqList');
+  let count = 0;
+  list.innerHTML = '';
+  triageFAQs.forEach(item=>{
+    const cats = item.cat.split(',');
+    const matchTag = currentTag==='all' || cats.includes(currentTag);
+    const matchSearch = !q || item.q.toLowerCase().includes(q) || item.a.toLowerCase().includes(q);
+    if(!matchTag || !matchSearch) return;
+    count++;
+    const div = document.createElement('div'); div.className = 'faq-item';
+    div.innerHTML = `
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <span>${item.q}</span>
+        <span class="arrow">▾</span>
+      </div>
+      <div class="faq-a">${item.a}</div>
+      <div class="faq-meta">⏱ ${item.time || '短'} · ${item.link ? '<a href="'+item.link+'">相关对话 →</a>' : ''}</div>
+    `;
+    list.appendChild(div);
+  });
+  document.getElementById('counter').textContent = count + ' 个问题';
+  document.getElementById('noResult').style.display = count===0 ? 'block' : 'none';
+}
+
+initTags();
+renderStats();
+filterFAQs();
+</script>
+
+</body>
+</html>
