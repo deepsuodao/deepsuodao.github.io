@@ -13,6 +13,19 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://abcsuodao.github.io/images/og-image.jpg">
 <title>值班室·快答 — 104个家庭财务问题快速解答 — 私家智囊</title>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "规划为什么从一张人生清单开始？", "acceptedAnswer": {"@type": "Answer", "text": "因为大多数人不知道自己想要什么，更不知道需要多少钱。人生清单把模糊的愿望变成具体的金额和时间线。"}},
+    {"@type": "Question", "name": "投资和投机怎么区分？", "acceptedAnswer": {"@type": "Answer", "text": "投资看的是资产本身创造价值的能力（分红、租金、利润增长），投机看的是价格波动，靠别人出更高价接盘。"}},
+    {"@type": "Question", "name": "提前还房贷划算吗？", "acceptedAnswer": {"@type": "Answer", "text": "没有统一答案，核心看三个条件：息差是否为正、资产分红能否覆盖年还款额、剩余还款年限是否足够长。"}},
+    {"@type": "Question", "name": "五格结构图是哪五格？", "acceptedAnswer": {"@type": "Answer", "text": "安全感格子、防御格子、进攻格子、收益格子、现金格子。比例随年龄动态调整。"}},
+    {"@type": "Question", "name": "守夜人五条底线是哪五条？", "acceptedAnswer": {"@type": "Answer", "text": "保障金底线、负债边界、流动性防线、家庭关系底线、投资纪律红线。"}}
+  ]
+}
+</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -183,6 +196,16 @@ function filterFAQs(){
   document.getElementById('counter').textContent = count + ' 个问题';
   document.getElementById('noResult').style.display = count===0 ? 'block' : 'none';
 }
+
+// 读取URL参数 ?q= 并自动搜索
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  const q = params.get('q');
+  if(q){
+    document.getElementById('searchInput').value = q;
+    filterFAQs();
+  }
+})();
 
 initTags();
 renderStats();
