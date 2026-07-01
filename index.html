@@ -332,14 +332,14 @@
     html += '<h3 style="font-size:.9rem;color:#D4AF37;margin-bottom:12px;">📖 核心对话</h3>';
     data.dialogues.forEach(function(d){
       html += '<a href="'+d.url+'" style="display:block;padding:10px 14px;margin-bottom:6px;border:1px solid rgba(255,255,255,.04);border-radius:3px;text-decoration:none;transition:all .15s;" onmouseover="this.style.background=\'rgba(255,255,255,.02)\'" onmouseout="this.style.background=\'transparent\'">';
-      html += '<span style="font-size:.85rem;color:#e8e6e3;">'+d.title+'</span>';
-      html += '<span style="font-size:.78rem;color:#b0aeab;display:block;margin-top:2px;">'+d.desc+'</span></a>';
+      html += '<span style="font-size:.85rem;color:#3a3f47;">'+d.title+'</span>';
+      html += '<span style="font-size:.78rem;color:#6a6865;display:block;margin-top:2px;">'+d.desc+'</span></a>';
     });
     html += '<h3 style="font-size:.9rem;color:#D4AF37;margin:16px 0 12px;">🔧 推荐工具</h3>';
     data.tools.forEach(function(t){
       html += '<a href="'+t.url+'" style="display:block;padding:10px 14px;margin-bottom:6px;border:1px solid rgba(255,255,255,.04);border-radius:3px;text-decoration:none;">';
-      html += '<span style="font-size:.85rem;color:#e8e6e3;">'+t.name+'</span>';
-      html += '<span style="font-size:.78rem;color:#b0aeab;display:block;margin-top:2px;">'+t.desc+'</span></a>';
+      html += '<span style="font-size:.85rem;color:#3a3f47;">'+t.name+'</span>';
+      html += '<span style="font-size:.78rem;color:#6a6865;display:block;margin-top:2px;">'+t.desc+'</span></a>';
     });
     html += '</div>';
     document.getElementById('problem-content').innerHTML = html;
@@ -353,16 +353,16 @@
 
       <div class="section-title" style="margin-bottom:8px;">🛎️ 值班室·快答</div>
       <h2 style="margin-bottom:12px;">有什么财务疑问？搜一下，5分钟答完</h2>
-      <p style="font-size:.9rem;color:#b0aeab;margin-bottom:24px;">104个常见问题覆盖投资、保险、债务、税务、传承等。</p>
+      <p style="font-size:.9rem;color:#6a6865;margin-bottom:24px;">104个常见问题覆盖投资、保险、债务、税务、传承等。</p>
 
       <div style="max-width:600px;margin:0 auto 24px;display:flex;border:1px solid rgba(212,168,83,.2);border-radius:4px;overflow:hidden;">
-        <input type="text" id="triage-search-index" placeholder="搜一下，5分钟答完…" style="flex:1;background:transparent;border:none;padding:14px 16px;font-size:.95rem;color:#e8e6e3;outline:none;font-family:inherit;" onkeydown="if(event.key===String.fromCharCode(13)){window.location.href='triage.html?q='+encodeURIComponent(this.value)}">
+        <input type="text" id="triage-search-index" placeholder="搜一下，5分钟答完…" style="flex:1;background:transparent;border:none;padding:14px 16px;font-size:.95rem;color:#3a3f47;outline:none;font-family:inherit;" onkeydown="if(event.key===String.fromCharCode(13)){window.location.href='triage.html?q='+encodeURIComponent(this.value)}">
       </div>
 
       <div id="hot-faqs" style="max-width:700px;margin:0 auto;"></div>
 
       <div style="text-align:center;margin-top:24px;">
-        <a href="triage.html" style="display:inline-block;padding:12px 28px;border:1px solid rgba(212,168,83,.25);color:#d4a853;font-size:.85rem;text-decoration:none;border-radius:3px;">📋 查看全部104条问答 →</a>
+        <a href="triage.html" style="display:inline-block;padding:12px 28px;border:1px solid rgba(212,168,83,.25);color:#D4AF37;font-size:.85rem;text-decoration:none;border-radius:3px;">📋 查看全部104条问答 →</a>
       </div>
 
     </div>
@@ -378,11 +378,11 @@
         var d = document.createElement('div');
         d.style.cssText = 'border-bottom:1px solid rgba(255,255,255,.04);padding:12px 0;';
         var qDiv = document.createElement('div');
-        qDiv.style.cssText = 'display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:.9rem;color:#e8e6e3;';
-        qDiv.innerHTML = '<span>' + item.q + '</span><span style="color:#b0aeab;font-size:.7rem;">&#9654; 展开</span>';
+        qDiv.style.cssText = 'display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:.9rem;color:#3a3f47;';
+        qDiv.innerHTML = '<span>' + item.q + '</span><span style="color:#6a6865;font-size:.7rem;">&#9654; 展开</span>';
         var aDiv = document.createElement('div');
-        aDiv.style.cssText = 'display:none;margin-top:6px;font-size:.82rem;color:#b0aeab;line-height:1.6;';
-        aDiv.innerHTML = item.a + (item.link ? ' <a href="'+item.link+'" style="color:#d4a853;font-size:.78rem;">相关对话→</a>' : '');
+        aDiv.style.cssText = 'display:none;margin-top:6px;font-size:.82rem;color:#6a6865;line-height:1.6;';
+        aDiv.innerHTML = item.a + (item.link ? ' <a href="'+item.link+'" style="color:#D4AF37;font-size:.78rem;">相关对话→</a>' : '');
         qDiv.onclick = function(){aDiv.style.display='block';qDiv.querySelector('span:last-child').textContent='';};
         d.appendChild(qDiv);
         d.appendChild(aDiv);
