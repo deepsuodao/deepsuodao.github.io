@@ -26,55 +26,9 @@
   ]
 }
 </script>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:-apple-system,"PingFang SC","Noto Sans SC","Helvetica Neue",sans-serif;background:#0f1424;color:#e8e6e3;line-height:1.7;-webkit-font-smoothing:antialiased}
-a{color:#D4AF37;text-decoration:none;transition:color .3s}
-a:hover{color:#f0c868}
-.container{max-width:900px;margin:0 auto;padding:0 24px}
-header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(15,20,36,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,168,83,.08)}
-header .container{display:flex;align-items:center;justify-content:space-between;height:60px}
-.logo{font-size:1rem;font-weight:500;color:#e8e6e3;letter-spacing:.05em}
-.logo span{color:#D4AF37}
-nav a{font-size:.8rem;margin-left:20px;color:#8a8885;transition:color .3s}
-nav a:hover,nav a.active{color:#D4AF37}
-.hero{padding:120px 0 48px;text-align:center}
-.hero h1{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:400;color:#D4AF37;letter-spacing:-.02em;margin-bottom:8px}
-.hero p{font-size:.9rem;color:#8a8885}
-.search-box{display:flex;max-width:600px;margin:24px auto 32px;border:1px solid rgba(212,168,83,.2);border-radius:4px;background:rgba(255,255,255,.02);overflow:hidden}
-.search-box input{flex:1;background:transparent;border:none;padding:14px 16px;font-size:1rem;color:#e8e6e3;outline:none;font-family:inherit}
-.search-box input::placeholder{color:#5a5855}
-.tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:32px}
-.tag-btn{padding:6px 16px;border:1px solid rgba(212,168,83,.25);border-radius:20px;font-size:.82rem;color:#D4AF37;cursor:pointer;transition:all .15s;background:transparent;font-family:inherit}
-.tag-btn.active,.tag-btn:hover{background:rgba(212,168,83,.12);border-color:rgba(212,168,83,.35);font-weight:600}
-.faq-list{max-width:800px;margin:0 auto}
-.faq-item{border-bottom:1px solid rgba(255,255,255,.04);padding:16px 0}
-.faq-item.hidden{display:none}
-.faq-q{display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:.95rem;color:#e8e6e3;font-weight:500;line-height:1.4}
-.faq-q .arrow{font-size:.75rem;color:#6a6865;transition:transform .2s;flex-shrink:0;margin-left:12px}
-.faq-item.open .faq-q .arrow{transform:rotate(180deg)}
-.faq-a{display:none;margin-top:10px;font-size:.88rem;color:#b0aeab;line-height:1.7;padding-right:24px}
-.faq-item.open .faq-a{display:block}
-.faq-meta{margin-top:8px;font-size:.75rem;color:#5a5855}
-.faq-meta a{color:#D4AF37}
-.counter{text-align:center;font-size:.82rem;color:#6a6865;margin-bottom:24px}
-.no-result{display:none;text-align:center;padding:40px 20px;color:#6a6865;font-size:.9rem}
-.no-result-hint{margin-top:8px;font-size:.82rem;color:#8a8885}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;max-width:600px;margin:0 auto 40px;text-align:center}
-.stat-card{background:rgba(255,255,255,.015);border:1px solid rgba(212,168,83,.08);border-radius:4px;padding:16px}
-.stat-num{font-size:1.4rem;font-weight:300;color:#D4AF37}
-.stat-label{font-size:.78rem;color:#8a8885;margin-top:4px}
-.back-to-top{position:fixed;bottom:32px;right:32px;width:44px;height:44px;border-radius:50%;background:rgba(212,168,83,.1);border:1px solid rgba(212,168,83,.2);color:#D4AF37;font-size:1.2rem;cursor:pointer;transition:all .3s;z-index:999;display:flex;align-items:center;justify-content:center;text-decoration:none;backdrop-filter:blur(4px)}
-.back-to-top:hover{background:rgba(212,168,83,.2);border-color:rgba(212,168,83,.4)}
-footer{border-top:1px solid rgba(255,255,255,.04);padding:48px 0 32px;text-align:center}
-footer .slogan{font-size:.9rem;color:#8a8885;margin-bottom:8px}
-footer .slogan span{color:#D4AF37}
-footer .copyright{font-size:.75rem;color:#5a5855}
-@media(max-width:480px){.hero{padding:100px 0 32px}.container{padding:0 16px}.faq-q{font-size:.88rem}}
-</style>
+<link rel="stylesheet" href="./dialogue.css">
 </head>
-<body>
+<body class="triage-page">
 
 <header>
   <div class="container">
@@ -89,26 +43,26 @@ footer .copyright{font-size:.75rem;color:#5a5855}
   </div>
 </header>
 
-<section class="hero">
+<section class="triage-hero">
   <div class="container">
     <h1>🛎️ 值班室·快答</h1>
     <p>104个家庭财务常见问题，搜一下，5分钟答完</p>
 
-    <div class="search-box">
+    <div class="triage-search">
       <input type="text" id="searchInput" placeholder="搜一下，5分钟答完…" oninput="filterFAQs()">
     </div>
 
-    <div class="tags" id="tagContainer"></div>
+    <div class="triage-tags" id="tagContainer"></div>
 
-    <div class="counter" id="counter"></div>
+    <div class="triage-counter" id="counter"></div>
 
-    <div class="stats" id="statsContainer"></div>
+    <div class="triage-stats" id="statsContainer"></div>
 
-    <div class="faq-list" id="faqList"></div>
+    <div class="triage-faq" id="faqList"></div>
 
-    <div class="no-result" id="noResult">
+    <div class="triage-noresult" id="noResult">
       <p>没有找到匹配的问题</p>
-      <p class="no-result-hint">试试换个关键词，或者从分类中浏览</p>
+      <p class="triage-noresult-hint">试试换个关键词，或者从分类中浏览</p>
     </div>
   </div>
 </section>

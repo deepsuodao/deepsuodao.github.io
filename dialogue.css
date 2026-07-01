@@ -959,3 +959,45 @@ footer .copyright {
   color:var(--primary-color);
   font-weight:600
 }
+
+/* === Triage Page（值班室·快答）—— 深色主题 === */
+body.triage-page{background:#0f1424;color:#e8e6e3}
+.triage-page a{color:#D4AF37;text-decoration:none;transition:color .3s}
+.triage-page a:hover{color:#f0c868}
+.triage-page .container{max-width:900px;margin:0 auto;padding:0 24px}
+.triage-page header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(15,20,36,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,168,83,.08)}
+.triage-page header .container{display:flex;align-items:center;justify-content:space-between;height:60px}
+.triage-page .logo{font-size:1rem;font-weight:500;color:#e8e6e3;letter-spacing:.05em}
+.triage-page .logo span{color:#D4AF37}
+.triage-page nav a{font-size:.8rem;margin-left:20px;color:#8a8885;transition:color .3s}
+.triage-page nav a:hover,.triage-page nav a.active{color:#D4AF37}
+.triage-hero{padding:120px 0 48px;text-align:center}
+.triage-hero h1{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:400;color:#D4AF37;letter-spacing:-.02em;margin-bottom:8px}
+.triage-hero p{font-size:.9rem;color:#8a8885}
+.triage-search{display:flex;max-width:600px;margin:24px auto 32px;border:1px solid rgba(212,168,83,.2);border-radius:4px;background:rgba(255,255,255,.02);overflow:hidden}
+.triage-search input{flex:1;background:transparent;border:none;padding:14px 16px;font-size:1rem;color:#e8e6e3;outline:none;font-family:inherit}
+.triage-search input::placeholder{color:#5a5855}
+.triage-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:32px}
+.triage-btn{padding:6px 16px;border:1px solid rgba(212,168,83,.25);border-radius:20px;font-size:.82rem;color:#D4AF37;cursor:pointer;transition:all .15s;background:transparent;font-family:inherit}
+.triage-btn.active,.triage-btn:hover{background:rgba(212,168,83,.12);border-color:rgba(212,168,83,.35);font-weight:600}
+.triage-faq{max-width:800px;margin:0 auto}
+.triage-faq .faq-item{border-bottom:1px solid rgba(255,255,255,.04);padding:16px 0}
+.triage-faq .faq-q{display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:.95rem;color:#e8e6e3;font-weight:500;line-height:1.4}
+.triage-faq .faq-q .arrow{font-size:.75rem;color:#6a6865;transition:transform .2s;flex-shrink:0;margin-left:12px}
+.triage-faq .faq-item.open .faq-q .arrow{transform:rotate(180deg)}
+.triage-faq .faq-a{display:none;margin-top:10px;font-size:.88rem;color:#b0aeab;line-height:1.7;padding-right:24px}
+.triage-faq .faq-item.open .faq-a{display:block}
+.triage-faq .faq-meta{margin-top:8px;font-size:.75rem;color:#5a5855}
+.triage-faq .faq-meta a{color:#D4AF37}
+.triage-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;max-width:600px;margin:0 auto 40px;text-align:center}
+.triage-stats .stat-card{background:rgba(255,255,255,.015);border:1px solid rgba(212,168,83,.08);border-radius:4px;padding:16px}
+.triage-stats .stat-num{font-size:1.4rem;font-weight:300;color:#D4AF37}
+.triage-stats .stat-label{font-size:.78rem;color:#8a8885;margin-top:4px}
+.triage-counter{text-align:center;font-size:.82rem;color:#6a6865;margin-bottom:24px}
+.triage-noresult{display:none;text-align:center;padding:40px 20px;color:#6a6865;font-size:.9rem}
+.triage-noresult-hint{margin-top:8px;font-size:.82rem;color:#8a8885}
+.triage-page footer{border-top:1px solid rgba(255,255,255,.04);padding:48px 0 32px;text-align:center}
+.triage-page footer .slogan{font-size:.9rem;color:#8a8885;margin-bottom:8px}
+.triage-page footer .slogan span{color:#D4AF37}
+.triage-page footer .copyright{font-size:.75rem;color:#5a5855}
+@media(max-width:480px){.triage-hero{padding:100px 0 32px}.triage-page .container{padding:0 16px}.triage-faq .faq-q{font-size:.88rem}}
