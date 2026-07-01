@@ -965,7 +965,7 @@ body.triage-page{background:#fcfbfa;color:#3a3f47}
 .triage-page a{color:#D4AF37;text-decoration:none;transition:color .3s}
 .triage-page a:hover{color:#f0c868}
 .triage-page .container{max-width:900px;margin:0 auto;padding:0 24px}
-.triage-page header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(252,251,250,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,168,83,.12)}
+.triage-page header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(252,251,250,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border-color)}
 .triage-page header .container{display:flex;align-items:center;justify-content:space-between;height:60px}
 .triage-page .logo{font-size:1rem;font-weight:500;color:#2e4057;letter-spacing:.05em}
 .triage-page .logo span{color:#D4AF37}
