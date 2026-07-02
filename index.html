@@ -297,7 +297,7 @@
       <h2>我的问题是什么？</h2>
       <p>选一个分类，直接找到对应的对话和工具。</p>
 
-      <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:24px;margin-bottom:28px;" id="problem-tags">
+      <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:24px;margin-bottom:20px;" id="problem-tags">
         <span class="problem-tag active" data-cat="safety" onclick="switchProblem('safety')" style="padding:8px 18px;border:1px solid #D4AF37;border-radius:20px;font-size:.85rem;color:#D4AF37;cursor:pointer;background:rgba(212,168,83,.12);font-weight:600;">🛡️ 保障问题</span>
         <span class="problem-tag" data-cat="housing" onclick="switchProblem('housing')" style="padding:8px 18px;border:1px solid rgba(212,168,83,.25);border-radius:20px;font-size:.85rem;color:#D4AF37;cursor:pointer;">🏠 房产问题</span>
         <span class="problem-tag" data-cat="invest" onclick="switchProblem('invest')" style="padding:8px 18px;border:1px solid rgba(212,168,83,.25);border-radius:20px;font-size:.85rem;color:#D4AF37;cursor:pointer;">📈 投资问题</span>
@@ -305,6 +305,8 @@
         <span class="problem-tag" data-cat="tax" onclick="switchProblem('tax')" style="padding:8px 18px;border:1px solid rgba(212,168,83,.25);border-radius:20px;font-size:.85rem;color:#D4AF37;cursor:pointer;">🧾 税务问题</span>
         <span class="problem-tag" data-cat="insurance" onclick="switchProblem('insurance')" style="padding:8px 18px;border:1px solid rgba(212,168,83,.25);border-radius:20px;font-size:.85rem;color:#D4AF37;cursor:pointer;">🛡️ 保险问题</span>
       </div>
+
+      <img src="./images/problem-key.png" alt="找到你的问题入口" style="display:block;max-width:120px;height:auto;margin:0 auto 20px;opacity:.6;border-radius:4px;" loading="lazy" />
 
       <div id="problem-content" style="max-width:700px;margin:0 auto;">
         <!-- 由JS动态渲染 -->
