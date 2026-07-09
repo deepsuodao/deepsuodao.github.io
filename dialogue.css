@@ -1001,3 +1001,169 @@ body.triage-page{background:#fcfbfa;color:#3a3f47}
 .triage-page footer .slogan span{color:#D4AF37}
 .triage-page footer .copyright{font-size:.75rem;color:#8a8885}
 @media(max-width:480px){.triage-hero{padding:100px 0 32px}.triage-page .container{padding:0 16px}.triage-faq .faq-q{font-size:.88rem}}
+
+/* === 深色模式（dark-mode）=== */
+body.dark-mode {
+  background: #0b0d10;
+  color: #d4d0c8;
+}
+body.dark-mode :root {
+  --primary-color: #c8c4b8;
+  --accent-color: #D4AF37;
+  --text-main: #d4d0c8;
+  --text-muted: #8A94A6;
+  --bg-block: #16181d;
+  --bg-light: #1e2028;
+  --border-color: #2a2c35;
+}
+body.dark-mode p {
+  color: #d4d0c8;
+}
+body.dark-mode .dialogue-block .scene {
+  background: #1a1c24;
+  color: #d4d0c8;
+  border-left-color: #D4AF37;
+}
+body.dark-mode .dialogue-block .speaker {
+  color: #a0b4c8;
+  background: #1e2835;
+}
+body.dark-mode .dialogue-block .speaker-b {
+  color: #d4b87a;
+  background: #2a241a;
+}
+body.dark-mode .dialogue-block .speaker-c {
+  color: #8aaa6a;
+  background: #1e2418;
+}
+body.dark-mode .dialogue-block .speaker-d {
+  color: #c47a6a;
+  background: #2a1a18;
+}
+body.dark-mode .dialogue-block .speaker-a {
+  color: #d4b87a;
+  background: #2a241a;
+}
+body.dark-mode .section h2,
+body.dark-mode #content h2 {
+  color: #d4d0c8;
+}
+body.dark-mode .section h3,
+body.dark-mode #content h3 {
+  color: #d4d0c8;
+}
+body.dark-mode .section h4,
+body.dark-mode #content h4 {
+  color: #d4d0c8;
+}
+body.dark-mode .dialogue-block .summary-table {
+  background: #16181d;
+  border-color: #2a2c35;
+}
+body.dark-mode .dialogue-block .summary-table th {
+  background-color: #1e2028;
+  color: #d4d0c8;
+  border-bottom-color: #2a2c35;
+}
+body.dark-mode .dialogue-block .summary-table td {
+  border-bottom-color: #2a2c35;
+  color: #d4d0c8;
+}
+body.dark-mode .dialogue-block .summary-table tr:hover td {
+  background-color: #1a1c24;
+}
+body.dark-mode .dialogue-block .quote-line {
+  background: #1a1c24;
+  border-left-color: #D4AF37;
+  color: #d4d0c8;
+}
+body.dark-mode .dialogue-block .epilogue {
+  background: #1a1c24;
+  border-left-color: #D4AF37;
+  color: #d4d0c8;
+}
+body.dark-mode .dialogue-block .concept-list li {
+  color: #d4d0c8;
+}
+body.dark-mode .dialogue-block .ordered-list li {
+  color: #d4d0c8;
+}
+body.dark-mode .dialogue-block .term-note {
+  background: rgba(212, 168, 83, 0.08);
+}
+body.dark-mode .dialogue-block .term-note p {
+  color: #8A94A6;
+}
+body.dark-mode .dialogue-block .case-box {
+  background: #1a1c24;
+  border-color: #2a2c35;
+}
+body.dark-mode .dialogue-block .case-box p {
+  color: #b0aca0;
+}
+body.dark-mode .post-tags .tag {
+  background: #1e2028;
+  color: #8A94A6;
+  border-color: #2a2c35;
+}
+body.dark-mode .post-tags .tag:hover {
+  border-color: #D4AF37;
+  color: #D4AF37;
+}
+body.dark-mode .tool-guide {
+  background: #16181d;
+  border-color: rgba(212, 168, 83, 0.3);
+}
+body.dark-mode .tool-guide p {
+  color: #8A94A6;
+}
+body.dark-mode .article-disclaimer {
+  background: #1a1c24;
+  border-left-color: #D4AF37;
+  color: #8A94A6;
+}
+body.dark-mode .article-disclaimer strong {
+  color: #d4d0c8;
+}
+body.dark-mode .meta {
+  background: #16181d;
+  border-top-color: #2a2c35;
+  color: #8A94A6;
+}
+body.dark-mode .editor-note {
+  background: rgba(212, 168, 83, 0.08);
+}
+body.dark-mode .local-note {
+  background: rgba(46, 64, 87, 0.15);
+}
+body.dark-mode .legal-note {
+  background: #1a1c24;
+  border-left-color: #D4AF37;
+}
+body.dark-mode footer {
+  border-top-color: #2a2c35;
+}
+body.dark-mode footer .slogan {
+  color: #8A94A6;
+}
+body.dark-mode footer .slogan span {
+  color: #d4d0c8;
+}
+body.dark-mode footer .copyright {
+  color: #6a6870;
+}
+body.dark-mode .back-to-top {
+  background: rgba(212, 168, 83, 0.08);
+  border-color: rgba(212, 168, 83, 0.2);
+  color: #D4AF37;
+}
+body.dark-mode .back-to-top:hover {
+  background: rgba(212, 168, 83, 0.15);
+}
+body.dark-mode .read-time {
+  color: #8A94A6;
+}
+body.dark-mode .section hr,
+body.dark-mode #content hr {
+  background: linear-gradient(to right, rgba(212, 168, 83, 0), rgba(212, 168, 83, 0.15) 20%, rgba(212, 168, 83, 0.15) 80%, rgba(212, 168, 83, 0));
+}
