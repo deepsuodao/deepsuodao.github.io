@@ -25,6 +25,52 @@
         a{color:#d4a853;text-decoration:none;transition:color .3s}
         a:hover{color:#f0c868}
 
+        /* === 四层导航条卡片 === */
+        .nav-bar{
+            display:flex;gap:10px;justify-content:center;padding:20px 20px 10px;
+            max-width:800px;margin:0 auto
+        }
+        .nav-item{
+            flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;
+            padding:14px 10px;background:#1a1f30;border:1px solid rgba(212,168,83,.12);
+            border-radius:4px;text-decoration:none;transition:all .3s;min-width:0
+        }
+        .nav-item:hover{
+            border-color:#d4a853;background:rgba(212,168,83,.06);transform:translateY(-2px)
+        }
+        .nav-icon{font-size:1.3rem;line-height:1}
+        .nav-label{font-size:.72rem;color:#b0aeab;white-space:nowrap}
+        .nav-item:hover .nav-label{color:#d4a853}
+        @media(max-width:480px){
+            .nav-bar{padding:14px 14px 8px;gap:6px}
+            .nav-item{padding:10px 4px}
+            .nav-icon{font-size:1.1rem}
+            .nav-label{font-size:.65rem}
+        }
+
+        /* === 应急金参考条 === */
+        .emergency-bar{
+            display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;
+            max-width:800px;margin:0 auto 10px;padding:10px 20px;
+            background:rgba(212,168,83,.06);border:1px solid rgba(212,168,83,.15);
+            border-radius:4px;font-size:.8rem;color:#b0aeab
+        }
+        .emg-icon{font-size:1rem}
+        .emg-text{color:#8a8885;flex-shrink:0}
+        .emg-item{color:#d4a853}
+        .emg-item strong{color:#e8e6e3;font-weight:500}
+        .emg-sep{color:#3a3f55;font-size:.7rem}
+        .emg-link{
+            margin-left:auto;padding:4px 12px;border:1px solid rgba(212,168,83,.25);
+            border-radius:3px;color:#d4a853;font-size:.75rem;text-decoration:none;
+            transition:all .2s;flex-shrink:0
+        }
+        .emg-link:hover{background:rgba(212,168,83,.08);border-color:#d4a853}
+        @media(max-width:480px){
+            .emergency-bar{gap:6px;padding:8px 14px;font-size:.72rem}
+            .emg-link{margin-left:0;width:100%;text-align:center}
+        }
+
         /* === Layout === */
         .container{max-width:800px;margin:0 auto;padding:0 20px 40px}
 
@@ -162,6 +208,18 @@
         }
         .benchmark-title{font-size:.9rem;color:#d4a853;margin-bottom:10px;font-weight:500}
         .benchmark-item{font-size:.82rem;color:#b0aeab;line-height:1.6}
+        .benchmark-link-section{
+            display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+            margin-top:14px;padding-top:12px;border-top:1px solid rgba(212,168,83,.08)
+        }
+        .benchmark-link-icon{font-size:.85rem}
+        .benchmark-link-label{font-size:.78rem;color:#8a8885;flex-shrink:0}
+        .benchmark-link{
+            padding:4px 10px;background:rgba(212,168,83,.06);border:1px solid rgba(212,168,83,.12);
+            border-radius:3px;font-size:.75rem;color:#d4a853;text-decoration:none;transition:all .2s
+        }
+        .benchmark-link:hover{background:rgba(212,168,83,.12);border-color:#d4a853}
+        .benchmark-link-all{background:rgba(212,168,83,.1);border-color:rgba(212,168,83,.25);font-weight:500}
 
         /* === Recommendations === */
         .recommendations{
@@ -218,6 +276,47 @@
 <meta name="baidu-site-verification" content="codeva-zOTi2X5wIM" />
 </head>
 <body>
+    <!-- === 四层导航条卡片 === -->
+    <div class="layer-nav" style="background:#f8f7f4;border:1px solid #e0dcd3;border-radius:8px;padding:20px;margin-bottom:24px;">
+      <h3 style="font-size:15px;color:#2e4057;margin:0 0 8px;">💡 账户四层架构</h3>
+      <p style="font-size:13px;color:#666;margin:0 0 12px;">本工具计算第三层（保障金）。完整的家庭账户应分四层：</p>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
+        <div style="background:#fff;border:1px solid #e0dcd3;border-radius:6px;padding:12px;text-align:center;">
+          <strong style="font-size:13px;color:#2e4057;display:block;">第一层</strong>
+          <p style="font-size:11px;color:#666;margin:4px 0 8px;">应急现金<br>1,000-2,000元</p>
+          <a href="./dialogue-10.html#q5a" style="font-size:11px;color:#d4a853;">→ 在自检表测</a>
+        </div>
+        <div style="background:#fff;border:1px solid #e0dcd3;border-radius:6px;padding:12px;text-align:center;">
+          <strong style="font-size:13px;color:#2e4057;display:block;">第二层</strong>
+          <p style="font-size:11px;color:#666;margin:4px 0 8px;">应急金<br>3-6个月支出</p>
+          <a href="./dialogue-10.html#q5" style="font-size:11px;color:#d4a853;">→ 在自检表测</a>
+        </div>
+        <div style="background:#fbf9f3;border:2px solid #d4a853;border-radius:6px;padding:12px;text-align:center;">
+          <strong style="font-size:13px;color:#d4a853;display:block;">第三层</strong>
+          <p style="font-size:11px;color:#666;margin:4px 0 8px;">保障金<br>6-36个月</p>
+          <span style="font-size:11px;color:#999;">← 你在这里</span>
+        </div>
+        <div style="background:#fff;border:1px solid #e0dcd3;border-radius:6px;padding:12px;text-align:center;">
+          <strong style="font-size:13px;color:#2e4057;display:block;">第四层</strong>
+          <p style="font-size:11px;color:#666;margin:4px 0 8px;">人生规划<br>养老/教育/传承</p>
+          <a href="./dialogue-25.html" style="font-size:11px;color:#d4a853;">→ 读文章</a>
+        </div>
+      </div>
+      <p style="font-size:12px;color:#999;margin:12px 0 0;">完整四层架构详见<a href="./dialogue-10.html" style="color:#d4a853;">《给家庭财务做一次年度审计》</a></p>
+    </div>
+
+    <!-- === 应急金参考条 === -->
+    <div class="emergency-bar">
+        <span class="emg-icon">⚠️</span>
+        <span class="emg-text">参考标准：</span>
+        <span class="emg-item"><strong>急用金</strong> 3–6个月</span>
+        <span class="emg-sep">|</span>
+        <span class="emg-item"><strong>保障金</strong> ≥36个月</span>
+        <span class="emg-sep">|</span>
+        <span class="emg-item"><strong>A股周期</strong> 3–5年</span>
+        <a href="tools.html" class="emg-link">对标其他工具 →</a>
+    </div>
+
     <div class="container">
         <div class="header">
             <h1>🛡️ 保障金测算器</h1>
@@ -595,6 +694,15 @@
                 <div class="benchmark-item">
                     <div>${comparison}</div>
                     <div style="margin-top: 8px;">注：根据2024年国家统计局数据，67%的中国家庭应急资金不足2个月。</div>
+                </div>
+                <div class="benchmark-link-section">
+                    <span class="benchmark-link-icon">🔗</span>
+                    <span class="benchmark-link-label">相关工具：</span>
+                    <a href="tool-spending-self-check.html" class="benchmark-link">消费自检</a>
+                    <a href="tool-tax-health-check.html" class="benchmark-link">税务体检</a>
+                    <a href="tool-self-check-8q.html" class="benchmark-link">8问自检</a>
+                    <a href="tool-succession-checklist.html" class="benchmark-link">传承清单</a>
+                    <a href="tools.html" class="benchmark-link benchmark-link-all">全部工具 →</a>
                 </div>
             `;
         }
