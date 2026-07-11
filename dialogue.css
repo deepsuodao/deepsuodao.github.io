@@ -1163,6 +1163,77 @@ body.dark-mode .back-to-top:hover {
 body.dark-mode .read-time {
   color: #8A94A6;
 }
+
+/* === 综合篇文章大标题 === */
+.dialogue-block .article-title {
+  font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+  font-weight: 600;
+  color: var(--primary-color);
+  margin: 0 0 16px;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+/* === 内联行动指引（先测后判） === */
+.dialogue-block .callout-action {
+  margin: 24px 0;
+  padding: 14px 20px;
+  background: rgba(212, 168, 83, 0.06);
+  border-left: 3px solid var(--accent-color);
+  border-radius: 0 6px 6px 0;
+}
+.dialogue-block .callout-action p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--primary-color);
+  line-height: 1.7;
+}
+.dialogue-block .callout-action p strong {
+  color: var(--accent-color);
+  font-weight: 600;
+}
+.dialogue-block .callout-action a {
+  color: var(--accent-color);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* === 文章内标签行 === */
+.dialogue-block .article-tags {
+  margin: 20px 0;
+  line-height: 2;
+}
+.dialogue-block .article-tags .tag {
+  display: inline-block;
+  font-size: 0.83rem;
+  padding: 4px 14px;
+  border-radius: 4px;
+  background: var(--bg-light);
+  color: var(--text-muted);
+  margin: 3px 4px 3px 0;
+  border: 1px solid var(--border-color);
+}
+
+/* === Dark mode for new classes === */
+body.dark-mode .dialogue-block .article-title {
+  color: #d4d0c8;
+}
+body.dark-mode .dialogue-block .callout-action {
+  background: rgba(212, 168, 83, 0.08);
+  border-left-color: #D4AF37;
+}
+body.dark-mode .dialogue-block .callout-action p {
+  color: #d4d0c8;
+}
+body.dark-mode .dialogue-block .callout-action a {
+  color: #D4AF37;
+}
+body.dark-mode .dialogue-block .article-tags .tag {
+  background: #1e2028;
+  color: #8A94A6;
+  border-color: #2a2c35;
+}
 body.dark-mode .section hr,
 body.dark-mode #content hr {
   background: linear-gradient(to right, rgba(212, 168, 83, 0), rgba(212, 168, 83, 0.15) 20%, rgba(212, 168, 83, 0.15) 80%, rgba(212, 168, 83, 0));
