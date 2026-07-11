@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="财务自由时间线——输入现有资产、年储蓄、预期收益率，算出你离财务自由还有多远。先算后判。">
+    <meta name="description" content="财务自由时间线 — 计算按现在的积累速度，多少岁能实现财务自由。看到时间+复利的威力。">
     <meta property="og:title" content="财务自由时间线 - 私家智囊">
     <meta property="og:description" content="计算您的财务自由时间线：按现在的积累速度，多少岁能实现财务自由？看到时间+复利的威力。">
-    <meta property="og:image" content="https://abcsuodao.com/images/dialogue-scene.jpg">
+    <meta property="og:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://abcsuodao.com/financial-freedom-timeline.html">
+    <meta property="og:url" content="https://deepsuodao.github.io/tool-financial-freedom-timeline.html">
     <meta property="og:site_name" content="私家智囊">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://abcsuodao.com/images/dialogue-scene.jpg">
-    <title>财务自由时间线 — 私家智囊</title>
+    <meta name="twitter:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
+    <title>财务自由时间线 - 私家智囊</title>
     <style>
         /* === Reset === */
         *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -233,21 +233,6 @@
             .result-value{font-size:2rem}
         }
     </style>
-  <link rel="canonical" href="https://abcsuodao.com/tool-financial-freedom-timeline.html">
-  <meta name="robots" content="index,follow">
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "财务自由时间线 — 私家智囊",
-  "description": "财务自由时间线——输入现有资产、年储蓄、预期收益率，算出你离财务自由还有多远。先算后判。",
-  "url": "https://abcsuodao.com/tool-financial-freedom-timeline.html",
-  "applicationCategory": "FinanceApplication",
-  "operatingSystem": "All"
-}
-  </script>
-<meta name="msvalidate.01" content="F48C7A4625437CD09069E4F94D70C1D7" />
-<meta name="baidu-site-verification" content="codeva-zOTi2X5wIM" />
 </head>
 <body>
     <div class="container">
@@ -294,7 +279,7 @@
             </div>
             
             <div class="input-group">
-                <label class="input-label">当前可投资资产（元）<span class="hint">（必填，不含自住房、不含急用金）</span></label>
+                <label class="input-label">当前可投资资产（元）<span class="hint">（必填，不含自住房、不含应急金（应急金账户））</span></label>
                 <input type="number" id="investableAssets" placeholder="如：500000（50万元）" oninput="calculate()">
             </div>
             
@@ -370,7 +355,7 @@
         <button class="save-btn" onclick="saveResult()">💾 保存时间线</button>
         
         <div class="site-footer">
-            <p class="slogan">家庭财务的<span>规划师</span>与<span>守夜人</span></p>
+            <p class="slogan">家庭财富的<span>规划师</span>与<span>守夜人</span></p>
             <p class="copyright">私家智囊 · 数据本地计算，不上传服务器</p>
         </div>
     </div>
@@ -722,15 +707,5 @@
             }
         };
     </script>
-
-  <!-- === 隐私安全声明 === -->
-  <div class="privacy-badge" style="display:flex;align-items:center;gap:10px;justify-content:center;padding:14px 20px;margin:32px auto 0;max-width:800px;background:#edf7ed;border:1px solid #b7d7b7;border-radius:6px;">
-    <span style="font-size:20px;flex-shrink:0;">&#x1F6E1;&#xFE0F;</span>
-    <div>
-      <strong style="color:#2a6b2a;font-size:14px;display:block;margin-bottom:2px;">您的数据安全</strong>
-      <span style="color:#3a7a3a;font-size:12px;line-height:1.5;">所有计算均在您的浏览器本地完成，输入的数据不上传任何服务器，不留存、不分享、不追踪。</span>
-    </div>
-  </div>
-
 </body>
 </html>

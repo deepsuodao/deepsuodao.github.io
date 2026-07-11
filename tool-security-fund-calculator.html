@@ -3,320 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="保障金测算器——按月均生活支出×目标月数×压力系数，算清楚家庭安全垫到底需要多少钱。先算后判。">
+<meta name="description" content="家庭保障金测算器 — 计算你的家庭安全垫需要多少钱。按支出算缺口、按月数设目标、按系数调压力。先算后判，让数字说话。">
 <meta property="og:title" content="保障金测算器 - 私家智囊">
-<meta property="og:description" content="计算你的家庭安全垫：按月均生活支出 × 目标月数 × 压力系数，算清楚保障金到底需要多少钱。先算后判。">
-<meta property="og:image" content="https://abcsuodao.com/images/dialogue-scene.jpg">
+<meta property="og:description" content="计算你的家庭安全垫：按月均必要支出 × 目标月数 × 压力系数，算清楚保障金到底需要多少钱。先算后判。">
+<meta property="og:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://abcsuodao.com/security-fund-calculator.html">
+<meta property="og:url" content="https://deepsuodao.github.io/tool-security-fund-calculator.html">
 <meta property="og:site_name" content="私家智囊">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://abcsuodao.com/images/dialogue-scene.jpg">
-    <title>保障金测算器 — 私家智囊</title>
-    <style>
-        /* === Reset === */
-        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-        html{scroll-behavior:smooth}
-        body{
-            font-family:-apple-system,"PingFang SC","Noto Sans SC","Helvetica Neue",sans-serif;
-            background:#0f1424;color:#e8e6e3;line-height:1.7;
-            -webkit-font-smoothing:antialiased;min-height:100vh
-        }
-        a{color:#d4a853;text-decoration:none;transition:color .3s}
-        a:hover{color:#f0c868}
-
-        /* === 四层导航条卡片 === */
-        .nav-bar{
-            display:flex;gap:10px;justify-content:center;padding:20px 20px 10px;
-            max-width:800px;margin:0 auto
-        }
-        .nav-item{
-            flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;
-            padding:14px 10px;background:#1a1f30;border:1px solid rgba(212,168,83,.12);
-            border-radius:4px;text-decoration:none;transition:all .3s;min-width:0
-        }
-        .nav-item:hover{
-            border-color:#d4a853;background:rgba(212,168,83,.06);transform:translateY(-2px)
-        }
-        .nav-icon{font-size:1.3rem;line-height:1}
-        .nav-label{font-size:.72rem;color:#b0aeab;white-space:nowrap}
-        .nav-item:hover .nav-label{color:#d4a853}
-        @media(max-width:480px){
-            .nav-bar{padding:14px 14px 8px;gap:6px}
-            .nav-item{padding:10px 4px}
-            .nav-icon{font-size:1.1rem}
-            .nav-label{font-size:.65rem}
-        }
-
-        /* === 应急金参考条 === */
-        .emergency-bar{
-            display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;
-            max-width:800px;margin:0 auto 10px;padding:10px 20px;
-            background:rgba(212,168,83,.06);border:1px solid rgba(212,168,83,.15);
-            border-radius:4px;font-size:.8rem;color:#b0aeab
-        }
-        .emg-icon{font-size:1rem}
-        .emg-text{color:#8a8885;flex-shrink:0}
-        .emg-item{color:#d4a853}
-        .emg-item strong{color:#e8e6e3;font-weight:500}
-        .emg-sep{color:#3a3f55;font-size:.7rem}
-        .emg-link{
-            margin-left:auto;padding:4px 12px;border:1px solid rgba(212,168,83,.25);
-            border-radius:3px;color:#d4a853;font-size:.75rem;text-decoration:none;
-            transition:all .2s;flex-shrink:0
-        }
-        .emg-link:hover{background:rgba(212,168,83,.08);border-color:#d4a853}
-        @media(max-width:480px){
-            .emergency-bar{gap:6px;padding:8px 14px;font-size:.72rem}
-            .emg-link{margin-left:0;width:100%;text-align:center}
-        }
-
-        /* === Layout === */
-        .container{max-width:800px;margin:0 auto;padding:0 20px 40px}
-
-        /* === Header === */
-        .header{text-align:center;padding:40px 0 28px}
-        .header h1{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:400;color:#d4a853;letter-spacing:-.02em}
-        .header p{font-size:.85rem;color:#8a8885;margin-top:8px}
-
-        /* === Card === */
-        .card{
-            background:#1a1f30;border-radius:4px;padding:28px 24px;margin-bottom:20px;
-            border:1px solid rgba(212,168,83,.12);
-            transition:border-color .3s
-        }
-        .card:hover{border-color:rgba(212,168,83,.25)}
-        .card-title{
-            font-size:1rem;font-weight:500;color:#d4a853;margin-bottom:20px;
-            display:flex;align-items:center;gap:10px;letter-spacing:.02em
-        }
-        .card-title span{font-size:1.2rem}
-
-        /* === Input === */
-        .input-group{margin-bottom:18px}
-        .input-label{
-            display:block;font-size:.82rem;color:#b0aeab;margin-bottom:6px;font-weight:400
-        }
-        .input-label .hint{color:#6a6865;font-size:.75rem;margin-left:6px}
-        input[type="number"],input[type="text"],select{
-            width:100%;padding:12px 14px;font-size:.95rem;
-            background:#232840;border:1px solid #3a3f55;border-radius:4px;
-            color:#e8e6e3;outline:none;transition:border-color .3s,background .3s;
-            font-family:inherit
-        }
-        input:focus,select:focus{
-            border-color:#d4a853;background:#2a2f48
-        }
-        input::placeholder{color:#5a5855}
-        select{appearance:auto;cursor:pointer}
-
-        /* === Grid Row === */
-        .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-        @media(max-width:640px){.row{grid-template-columns:1fr}}
-
-        /* === Toggle / Optional === */
-        .toggle-section{margin-top:16px;padding-top:16px;border-top:1px solid rgba(212,168,83,.08)}
-        .toggle-label{
-            display:flex;align-items:center;gap:10px;cursor:pointer;
-            font-size:.85rem;color:#d4a853
-        }
-        .toggle-label input[type="checkbox"]{width:16px;height:16px;accent-color:#d4a853}
-        .hidden{display:none}
-        .optional-badge{
-            display:inline-block;font-size:.7rem;padding:2px 8px;border-radius:2px;
-            background:rgba(212,168,83,.12);color:#d4a853;margin-left:6px
-        }
-
-        /* === Hint Box === */
-        .hint-box{
-            background:rgba(212,168,83,.04);border-radius:4px;padding:12px 16px;
-            margin-bottom:18px;font-size:.82rem;color:#8a8885;line-height:1.6;
-            border-left:2px solid rgba(212,168,83,.2)
-        }
-
-        /* === Concept Box === */
-        .concept-box{
-            background:rgba(255,255,255,.015);border-radius:4px;padding:16px 20px;
-            margin-bottom:18px;border-left:2px solid #d4a853
-        }
-        .concept-title{font-size:.9rem;color:#d4a853;margin-bottom:6px;font-weight:500}
-        .concept-text{font-size:.82rem;color:#b0aeab;line-height:1.6}
-        .concept-text strong{color:#e8e6e3}
-
-        /* === Result Section === */
-        .result-section{margin-top:0}
-        .result-card{
-            background:linear-gradient(180deg,#1a1f30 0%,#1f2440 100%);
-            border:1px solid rgba(212,168,83,.15);border-radius:4px;
-            padding:36px 24px;text-align:center;margin-bottom:20px
-        }
-        .result-label{font-size:.85rem;color:#8a8885;margin-bottom:12px}
-        .result-value{
-            font-size:clamp(2.5rem,5vw,4rem);font-weight:300;color:#d4a853;margin-bottom:8px
-        }
-        .result-unit{font-size:1.2rem;font-weight:400;color:#b0aeab;margin-left:4px}
-        .result-status{font-size:1.1rem;font-weight:500;margin-bottom:16px}
-        .result-status.green{color:#7db87d}
-        .result-status.yellow{color:#d4a853}
-        .result-status.red{color:#c97a7a}
-
-        /* === Progress Bar === */
-        .progress-bar{
-            width:100%;height:8px;background:rgba(255,255,255,.06);
-            border-radius:4px;overflow:hidden;margin:16px 0 8px
-        }
-        .progress-fill{height:100%;border-radius:4px;transition:width 1s ease-in-out}
-        .progress-fill.green{background:#7db87d}
-        .progress-fill.yellow{background:#d4a853}
-        .progress-fill.red{background:#c97a7a}
-        .progress-label{font-size:.78rem;color:#6a6865}
-
-        /* === Source Breakdown === */
-        .source-breakdown{
-            background:rgba(255,255,255,.015);border-radius:4px;padding:20px;margin-bottom:20px;
-            border:1px solid rgba(212,168,83,.08)
-        }
-        .source-title{font-size:.9rem;color:#d4a853;margin-bottom:14px;font-weight:500}
-        .source-item{
-            display:flex;justify-content:space-between;align-items:center;
-            padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.85rem
-        }
-        .source-item:last-child{border-bottom:none;font-weight:500;color:#e8e6e3}
-        .source-name{color:#8a8885}
-        .source-value{color:#c8c6c2}
-
-        /* === Scenario === */
-        .scenario-section{margin-bottom:20px}
-        .scenario-title{font-size:.9rem;color:#d4a853;margin-bottom:14px;font-weight:500}
-        .scenario-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-        @media(max-width:480px){.scenario-grid{grid-template-columns:1fr}}
-        .scenario-card{
-            background:rgba(255,255,255,.015);border:1px solid rgba(212,168,83,.1);
-            border-radius:4px;padding:16px;text-align:center
-        }
-        .scenario-label{font-size:.78rem;color:#8a8885;margin-bottom:6px}
-        .scenario-value{font-size:1.3rem;font-weight:500;color:#e8e6e3}
-        .scenario-value.green{color:#7db87d}
-        .scenario-value.yellow{color:#d4a853}
-        .scenario-value.red{color:#c97a7a}
-        .scenario-note{font-size:.72rem;color:#6a6865;margin-top:4px}
-
-        /* === Benchmark === */
-        .benchmark-section{
-            background:rgba(212,168,83,.04);border-radius:4px;padding:20px;margin-bottom:20px;
-            border:1px solid rgba(212,168,83,.1)
-        }
-        .benchmark-title{font-size:.9rem;color:#d4a853;margin-bottom:10px;font-weight:500}
-        .benchmark-item{font-size:.82rem;color:#b0aeab;line-height:1.6}
-        .benchmark-link-section{
-            display:flex;align-items:center;gap:8px;flex-wrap:wrap;
-            margin-top:14px;padding-top:12px;border-top:1px solid rgba(212,168,83,.08)
-        }
-        .benchmark-link-icon{font-size:.85rem}
-        .benchmark-link-label{font-size:.78rem;color:#8a8885;flex-shrink:0}
-        .benchmark-link{
-            padding:4px 10px;background:rgba(212,168,83,.06);border:1px solid rgba(212,168,83,.12);
-            border-radius:3px;font-size:.75rem;color:#d4a853;text-decoration:none;transition:all .2s
-        }
-        .benchmark-link:hover{background:rgba(212,168,83,.12);border-color:#d4a853}
-        .benchmark-link-all{background:rgba(212,168,83,.1);border-color:rgba(212,168,83,.25);font-weight:500}
-
-        /* === Recommendations === */
-        .recommendations{
-            background:rgba(125,184,125,.04);border-radius:4px;padding:20px;margin-bottom:0;
-            border:1px solid rgba(125,184,125,.12)
-        }
-        .recommendations h4{font-size:.9rem;color:#7db87d;margin-bottom:12px;font-weight:500}
-        .recommendations ul{list-style:none;padding:0}
-        .recommendations li{
-            padding:6px 0 6px 20px;position:relative;font-size:.85rem;color:#b0aeab;line-height:1.6
-        }
-        .recommendations li:before{content:"→";position:absolute;left:0;color:#d4a853}
-
-        /* === Save Button === */
-        .save-btn{
-            display:block;width:100%;padding:14px;margin-top:4px;
-            background:#d4a853;border:none;border-radius:4px;
-            color:#0a0e1a;font-size:.9rem;font-weight:500;cursor:pointer;
-            transition:background .3s;font-family:inherit
-        }
-        .save-btn:hover{background:#f0c868}
-
-        /* === Footer === */
-        .site-footer{
-            text-align:center;padding:32px 0 24px;border-top:1px solid rgba(255,255,255,.04);
-            margin-top:20px
-        }
-        .site-footer .slogan{font-size:.85rem;color:#8a8885;margin-bottom:4px}
-        .site-footer .slogan span{color:#d4a853}
-        .site-footer .copyright{font-size:.72rem;color:#5a5855}
-
-        /* === Mobile === */
-        @media(max-width:480px){
-            body{padding:0}
-            .container{padding:0 16px 20px}
-            .card{padding:20px 16px}
-            .header{padding:28px 0 20px}
-        }
-    </style>
-  <link rel="canonical" href="https://abcsuodao.com/tool-security-fund-calculator.html">
-  <meta name="robots" content="index,follow">
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "保障金测算器 — 私家智囊",
-  "description": "保障金测算器——按月均生活支出×目标月数×压力系数，算清楚家庭安全垫到底需要多少钱。先算后判。",
-  "url": "https://abcsuodao.com/tool-security-fund-calculator.html",
-  "applicationCategory": "FinanceApplication",
-  "operatingSystem": "All"
-}
-  </script>
-<meta name="msvalidate.01" content="F48C7A4625437CD09069E4F94D70C1D7" />
-<meta name="baidu-site-verification" content="codeva-zOTi2X5wIM" />
+<meta name="twitter:image" content="https://deepsuodao.github.io/images/dialogue-scene.jpg">
+    <title>保障金测算器 - 私家智囊</title>
+    <link rel="stylesheet" href="tools.css">
 </head>
-<body>
-    <!-- === 四层导航条卡片 === -->
-    <div class="layer-nav" style="background:#f8f7f4;border:1px solid #e0dcd3;border-radius:8px;padding:20px;margin-bottom:24px;">
-      <h3 style="font-size:15px;color:#2e4057;margin:0 0 8px;">💡 账户四层架构</h3>
-      <p style="font-size:13px;color:#666;margin:0 0 12px;">本工具计算第三层（保障金）。完整的家庭账户应分四层：</p>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
-        <div style="background:#fff;border:1px solid #e0dcd3;border-radius:6px;padding:12px;text-align:center;">
-          <strong style="font-size:13px;color:#2e4057;display:block;">第一层</strong>
-          <p style="font-size:11px;color:#666;margin:4px 0 8px;">应急现金<br>1,000-2,000元</p>
-          <a href="./dialogue-10.html#q5a" style="font-size:11px;color:#d4a853;">→ 在自检表测</a>
-        </div>
-        <div style="background:#fff;border:1px solid #e0dcd3;border-radius:6px;padding:12px;text-align:center;">
-          <strong style="font-size:13px;color:#2e4057;display:block;">第二层</strong>
-          <p style="font-size:11px;color:#666;margin:4px 0 8px;">应急金<br>3-6个月支出</p>
-          <a href="./dialogue-10.html#q5" style="font-size:11px;color:#d4a853;">→ 在自检表测</a>
-        </div>
-        <div style="background:#fbf9f3;border:2px solid #d4a853;border-radius:6px;padding:12px;text-align:center;">
-          <strong style="font-size:13px;color:#d4a853;display:block;">第三层</strong>
-          <p style="font-size:11px;color:#666;margin:4px 0 8px;">保障金<br>6-36个月</p>
-          <span style="font-size:11px;color:#999;">← 你在这里</span>
-        </div>
-        <div style="background:#fff;border:1px solid #e0dcd3;border-radius:6px;padding:12px;text-align:center;">
-          <strong style="font-size:13px;color:#2e4057;display:block;">第四层</strong>
-          <p style="font-size:11px;color:#666;margin:4px 0 8px;">人生规划<br>养老/教育/传承</p>
-          <a href="./dialogue-25.html" style="font-size:11px;color:#d4a853;">→ 读文章</a>
-        </div>
-      </div>
-      <p style="font-size:12px;color:#999;margin:12px 0 0;">完整四层架构详见<a href="./dialogue-10.html" style="color:#d4a853;">《给家庭财务做一次年度审计》</a></p>
-    </div>
-
-    <!-- === 应急金参考条 === -->
-    <div class="emergency-bar">
-        <span class="emg-icon">⚠️</span>
-        <span class="emg-text">参考标准：</span>
-        <span class="emg-item"><strong>急用金</strong> 3–6个月</span>
-        <span class="emg-sep">|</span>
-        <span class="emg-item"><strong>保障金</strong> ≥36个月</span>
-        <span class="emg-sep">|</span>
-        <span class="emg-item"><strong>A股周期</strong> 3–5年</span>
-        <a href="tools.html" class="emg-link">对标其他工具 →</a>
-    </div>
-
+<body class="tool-security" >
     <div class="container">
         <div class="header">
             <h1>🛡️ 保障金测算器</h1>
@@ -330,11 +29,11 @@
             </div>
             
             <div class="concept-box">
-                <div class="concept-title">💡 保障金 ≠ 急用金</div>
+                <div class="concept-title">💡 保障金 ≠ 应急金（应急金账户）</div>
                 <div class="concept-text">
-                    急用金：应对突发支出（3-6个月）| 保障金：确保复利不中断（36个月）<br>
-                    保障金是战略性储备，急用金是战术性储备。<br>
-                    <strong>A股一轮完整牛熊周期约3-5年，36个月储备让你能穿越周期不中断。</strong>
+                    应急金（L2·应急金账户）：应对突发支出的短期保障机制（3-6个月，基准6个月）| 保障金（L3）：确保复利不中断的战略保障机制（6-36个月，完整标准36个月）<br>
+                    保障金是战略性储备，应急金是战术性储备。<br>
+                    <strong>A股一轮完整牛熊周期约3-5年，保障金完整标准36个月让你能穿越周期不中断。</strong>
                 </div>
             </div>
             
@@ -467,7 +166,7 @@
         <button class="save-btn" onclick="saveResult()">💾 保存测算结果</button>
         
         <div class="site-footer">
-            <p class="slogan">家庭财务的<span>规划师</span>与<span>守夜人</span></p>
+            <p class="slogan">家庭财富的<span>规划师</span>与<span>守夜人</span></p>
             <p class="copyright">私家智囊 · 数据本地计算，不上传服务器</p>
         </div>
     </div>
@@ -547,16 +246,6 @@
             renderScenario(totalMonths);
             renderBenchmark(totalMonths, expense);
             renderRecommendations(totalMonths, expense, totalFund);
-
-            // 保存结果到仪表盘（securityFundResult）
-            const fundScore = totalMonths >= 36 ? 100 : totalMonths >= 24 ? 60 : totalMonths >= 12 ? 30 : 10;
-            const fundData = {
-                months: totalMonths,
-                score: fundScore,
-                totalFund: totalFund,
-                timestamp: new Date().toISOString()
-            };
-            localStorage.setItem('securityFundResult', JSON.stringify(fundData));
         }
         
         // 渲染核心结果
@@ -695,15 +384,6 @@
                     <div>${comparison}</div>
                     <div style="margin-top: 8px;">注：根据2024年国家统计局数据，67%的中国家庭应急资金不足2个月。</div>
                 </div>
-                <div class="benchmark-link-section">
-                    <span class="benchmark-link-icon">🔗</span>
-                    <span class="benchmark-link-label">相关工具：</span>
-                    <a href="tool-spending-self-check.html" class="benchmark-link">消费自检</a>
-                    <a href="tool-tax-health-check.html" class="benchmark-link">税务体检</a>
-                    <a href="tool-self-check-8q.html" class="benchmark-link">8问自检</a>
-                    <a href="tool-succession-checklist.html" class="benchmark-link">传承清单</a>
-                    <a href="tools.html" class="benchmark-link benchmark-link-all">全部工具 →</a>
-                </div>
             `;
         }
         
@@ -760,15 +440,5 @@
             }
         };
     </script>
-
-  <!-- === 隐私安全声明 === -->
-  <div class="privacy-badge" style="display:flex;align-items:center;gap:10px;justify-content:center;padding:14px 20px;margin:32px auto 0;max-width:800px;background:#edf7ed;border:1px solid #b7d7b7;border-radius:6px;">
-    <span style="font-size:20px;flex-shrink:0;">&#x1F6E1;&#xFE0F;</span>
-    <div>
-      <strong style="color:#2a6b2a;font-size:14px;display:block;margin-bottom:2px;">您的数据安全</strong>
-      <span style="color:#3a7a3a;font-size:12px;line-height:1.5;">所有计算均在您的浏览器本地完成，输入的数据不上传任何服务器，不留存、不分享、不追踪。</span>
-    </div>
-  </div>
-
 </body>
 </html>
