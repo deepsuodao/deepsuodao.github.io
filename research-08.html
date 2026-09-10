@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A 股股指期货没有免费午餐———三次转向、一个不存在的开源包，和一段 48% 缺失的数据。私家智囊·研究 第 8 篇，基于公开数据的原创实证研究。">
+  <meta property="og:title" content="A 股股指期货没有免费午餐———三次转向、一个不存在的开源包，和一段 48% 缺失的数据 — 私家智囊">
+  <meta property="og:description" content="A 股股指期货没有免费午餐———三次转向、一个不存在的开源包，和一段 48% 缺失的数据。私家智囊·研究 第 8 篇，基于公开数据的原创实证研究。">
+  <meta property="og:image" content="https://abcsuodao.com/images/dialogue-scene.jpg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://abcsuodao.com/research-08.html">
+  <meta property="og:site_name" content="私家智囊">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://abcsuodao.com/images/dialogue-scene.jpg">
+  <title>A 股股指期货没有免费午餐———三次转向、一个不存在的开源包，和一段 48% 缺失的数据 — 私家智囊</title>
+  <link rel="stylesheet" href="dialogue.css">
+  <link rel="stylesheet" href="research.css">
+  <link rel="canonical" href="https://abcsuodao.com/research-08.html">
+  <meta name="robots" content="index,follow">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "headline": "A 股股指期货没有免费午餐———三次转向、一个不存在的开源包，和一段 48% 缺失的数据",
+  "description": "A 股股指期货没有免费午餐———三次转向、一个不存在的开源包，和一段 48% 缺失的数据。私家智囊·研究 第 8 篇，基于公开数据的原创实证研究。",
+  "url": "https://abcsuodao.com/research-08.html",
+  "inLanguage": "zh-CN",
+  "author": { "@type": "Organization", "name": "私家智囊" },
+  "publisher": { "@type": "Organization", "name": "私家智囊" },
+  "datePublished": "2026-09-10",
+  "dateModified": "2026-09-10",
+  "keywords": "信源审计, 数据完整性, 交叉复现, 否定性结论"
+}
+  </script>
+<meta name="msvalidate.01" content="F48C7A4625437CD09069E4F94D70C1D7" />
+<meta name="baidu-site-verification" content="codeva-zOTi2X5wIM" />
+</head>
+
+<body>
+
+  <!-- ===== Header (fixed, dark) ===== -->
+  <header class="header-dark">
+    <div class="container">
+      <div class="logo"><a href="./index.html">私家<span>智囊</span></a></div>
+      <nav>
+        <a href="index.html">首页</a>
+        <a href="belief.html">信念</a>
+        <a href="principles.html">原则</a>
+        <a href="triage.html">值班室</a>
+        <a href="content.html">瞭望台</a>
+        <a href="tools.html">工具箱</a>
+        <a href="index.html#about">关于</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="section" id="content">
+    <div class="container">
+
+      <div class="report-head">
+        <div class="report-badge">📊 研究报告 · 原创实证 · 第 8 篇</div>
+        <h1 class="report-title">A 股股指期货没有免费午餐</h1>
+        <p class="report-subtitle">———三次转向、一个不存在的开源包，和一段 48% 缺失的数据</p>
+        <div class="report-meta">
+          <strong>阅读时间</strong>：约 16 分钟　｜　<strong>标签</strong>：#信源审计 #数据完整性 #交叉复现 #否定性结论
+        </div>
+      </div>
+
+      <div class="report-body">
+
+<div class="report-toc">
+<h2>目 录</h2>
+<ol>
+<li><a href="#阅读须知请先读完这一段">⚠️ 阅读须知（请先读完这一段）</a></li>
+<li><a href="#引子一份看起来很专业的方案">引子：一份看起来很专业的方案</a></li>
+<li><a href="#一先说结论">一、先说结论</a></li>
+<li><a href="#二第一道检验先审方案别急着测">二、第一道检验：先审方案，别急着测</a></li>
+<li><a href="#三第二道检验它引用的现成资源三项不存在">三、第二道检验：它引用的"现成资源"，三项不存在</a></li>
+<li class="toc-sub"><a href="#幻觉的三条识别特征">幻觉的三条识别特征</a></li>
+<li class="toc-sub"><a href="#顺便说一个好结果">顺便说一个好结果</a></li>
+<li><a href="#四第三道检验怀疑自己的中间结果">四、第三道检验：怀疑自己的中间结果</a></li>
+<li><a href="#五逐笔审计48的数据是缺的">五、逐笔审计：48% 的数据是缺的</a></li>
+<li><a href="#六修好之后真相是23">六、修好之后，真相是 2–3%</a></li>
+<li class="toc-sub"><a href="#那么趋势型那条路呢">那么，趋势型那条路呢？</a></li>
+<li><a href="#七为什么做空必死这件事值得单独说">七、为什么"做空必死"这件事值得单独说</a></li>
+<li><a href="#八结论没有免费午餐">八、结论：没有免费午餐</a></li>
+<li><a href="#九这条研究的边界诚实清单">九、这条研究的边界（诚实清单）</a></li>
+<li><a href="#金句墙">金句墙</a></li>
+<li><a href="#行动清单审计任何外部方案的5个动作">行动清单：审计任何外部方案的 5 个动作</a></li>
+<li><a href="#数据来源与样本说明">数据来源与样本说明</a></li>
+<li><a href="#免责声明">免责声明</a></li>
+</ol></div>
+
+
+<blockquote>
+<p>类型：原创审计研究 ｜ 素材：一份外部方案的三轮审计 + 十年数据实证
+系列：私家智囊·研究 第 8 篇 ｜ 成稿：2026 年 9 月</p>
+</blockquote>
+<hr />
+<h2 id="阅读须知请先读完这一段">⚠️ 阅读须知（请先读完这一段）</h2>
+<ol>
+<li><strong>本文不是投资建议，也不构成对任何证券、产品或衍生品的评价。</strong> 本文记录的是<strong>审计过程</strong>，不含任何可照搬的操作规则。</li>
+<li><strong>本文涉及杠杆类衍生品，风险等级显著高于普通投资。</strong> 本文的结论是<strong>否定性</strong>的——它得出的答案是"不构成可靠的收益来源"。<strong>本文不推荐任何人参与相关交易。</strong></li>
+<li><strong>本文所有数字都是历史回测结果，不是收益预测</strong>，也不表示未来会发生同样的结果。</li>
+<li><strong>本文对涉及的机构、人员、产品与标的名称一律匿名化处理</strong>，不列出名称——审计对象是<strong>论证方法</strong>，不是任何一家机构。</li>
+<li>本文的方法与数据来源见文末。</li>
+</ol>
+<hr />
+<h2 id="引子一份看起来很专业的方案">引子：一份看起来很专业的方案</h2>
+<p>研究的起点，是一份从外部递进来的方案。</p>
+<p>它写得很像样：策略有名字（通道突破 + 波动率风控），有分工（参数顾问、回测、报告），有数据来源，有预期指标，还列了几份"可以复用的券商与高校开源成果"。</p>
+<p><strong>它的问题不在于错，而在于——里面有几处是编造的。</strong></p>
+<p>这篇文章记录的是一次完整的审计过程。它的结论是"这条路走不通"，但真正有价值的不是这个结论，而是<strong>三次转向</strong>里每一次的判断依据。</p>
+<hr />
+<h2 id="一先说结论">一、先说结论</h2>
+<ol>
+<li><strong>拿到一份方案，先审"方案本身"，别急着测策略。</strong> 我们在跑第一行代码之前，就已在方案里找出 <strong>3 处致命缺陷</strong>——每一处都足以让结论失效，且都是<strong>不修正就无法落地</strong>的那一类。</li>
+<li><strong>方案里引用的"现成资源"，四项里有三项不存在。</strong> 链接、文件名、精确数字，全部检索不到。</li>
+<li><strong>幻觉有可识别的特征。</strong> 我总结出三条，其中一条几乎是"指纹级"的。</li>
+<li><strong>轮到怀疑自己的结果。</strong> 我们中途算出一个很漂亮的数字（报出 31.4% 的年化），<strong>独立复现的结果是 −0.7%——差了 32 个百分点。</strong></li>
+<li><strong>再翻下去发现，48% 的数据是缺的</strong>——不是模型错了，是<strong>底座漏了</strong>。而两条路最终都不构成可靠的收益来源：<strong>A 股股指期货上没有免费午餐。</strong></li>
+</ol>
+<blockquote>
+<p>以上五条里，第 2 条和第 5 条是本文认为最可复用的：<strong>一条讲怎么识别不可信的输入，一条讲怎么识别不可信的结果。</strong></p>
+</blockquote>
+<hr />
+<h2 id="二第一道检验先审方案别急着测">二、第一道检验：先审方案，别急着测</h2>
+<p>大多数人的做法是：拿到方案 → 直接跑回测 → 看结果好不好。</p>
+<p><strong>我们的做法是：先逐条质问方案本身。</strong> 结果是 <strong>3 处致命 + 5 处重要</strong>缺陷。</p>
+<p>三处致命的，都不是"精度不够"，而是"<strong>在这个市场里根本无法执行</strong>"：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>缺陷</th>
+<th>要害</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>① 漏掉了持仓限额规则</strong></td>
+<td>该品种在样本期内长时间存在<strong>开仓限额</strong>。方案假设双向自由开仓，但在限额期内<strong>程序化双向交易实际做不了</strong>。回测跑得再漂亮，也是跑一个不存在的市场。</td>
+</tr>
+<tr>
+<td><strong>② 成本模型漏掉了平今仓手续费</strong></td>
+<td>该品种<strong>当日平仓</strong>的手续费约为隔夜平仓的 <strong>15 倍</strong>。而方案的信号频率加止损设置，极易触发日内开平——<strong>成本被低估了一个数量级。</strong></td>
+</tr>
+<tr>
+<td><strong>③ 数据前提不成立</strong></td>
+<td>方案依赖的"十年分钟级数据"，其免费接口<strong>只保留最近约 1 个月</strong>。也就是说，<strong>方案设计所依赖的那批数据，免费根本拿不到。</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>五处重要缺陷里，还有一条特别典型：方案用了一个<strong>在国内并不存在的波动率指标</strong>（该指数的历史序列早已停止发布），来作为仓位调节因子。<strong>它引用的是一个在本土市场无法计算的量。</strong></p>
+<blockquote>
+<p><strong>教训</strong>：一份方案的"专业感"和它的"可执行性"是两件事。<strong>成本模型、交易规则、数据可得性</strong>——这三样只要有一条不成立，后面所有数字都没有意义。</p>
+</blockquote>
+<hr />
+<h2 id="三第二道检验它引用的现成资源三项不存在">三、第二道检验：它引用的"现成资源"，三项不存在</h2>
+<p>方案的后半部分建议"复用成熟的券商与高校开源成果，避免自己重复踩坑"。</p>
+<p>方向没问题。但它引用了<strong>四项</strong>具体的资源。我们逐项做了检索核验：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>引用项</th>
+<th>声称的内容</th>
+<th>核验结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>某券商"滚贴水策略开源版"</td>
+<td>一个数据压缩包、一个回测脚本、实盘验证、样本外收益区间</td>
+<td><strong>机构确实存在，但该"开源成果"不存在</strong>：发布渠道是付费平台，声称的文件名<strong>全网无痕</strong></td>
+</tr>
+<tr>
+<td>某券商"库存动能模型"GitHub 仓库</td>
+<td>特定月份更新、夏普从某值提升到某值、一个具体的 Python 文件名</td>
+<td><strong>研报存在，但"复现仓库"与文件名均无痕</strong></td>
+</tr>
+<tr>
+<td>某高校"股票回报可预测性"复现项目</td>
+<td>一个能自动识别"92% 数据缺陷"的脚本</td>
+<td><strong>未检索到该项目</strong>，"92%"无出处</td>
+</tr>
+<tr>
+<td>某机构"技术指标回测规范"</td>
+<td>三条阈值指标 + 一个 25 品种数据集</td>
+<td><strong>原则可取，但阈值来源不明、数据集无痕</strong>（半幻觉）</td>
+</tr>
+</tbody>
+</table></div>
+<p>此外，支撑全文的三个对比数字（"效率 4.2 倍""可靠性提升 63%""92% 的数据缺陷"）——<strong>全部无出处</strong>。</p>
+<p><strong>结论：四项引用，三项确认为虚构，一项为半虚构。</strong></p>
+<h3 id="幻觉的三条识别特征">幻觉的三条识别特征</h3>
+<p>这次核验里，我总结出三条可复用的判据，其中最后一条几乎是指纹级的：</p>
+<blockquote>
+<p><strong>① 精确到小数点的对比数字。</strong>
+"效率 4.2 倍""可靠性提升 63%"——<strong>这类数字的共同点是：精确、好看、无出处。</strong> 真实的统计结论通常附带口径与区间；编造的数字只给结论。</p>
+<p><strong>② 全网无痕的文件名。</strong>
+一个具体的压缩包名、一个具体的脚本名，看起来很可信。<strong>但如果全网检索不到任何痕迹，它就不是"冷门"，而是不存在。</strong></p>
+<p><strong>③ 术语的误用。</strong>
+这是最锋利的一条。方案在描述<strong>期货合约切换</strong>时，用了一个属于<strong>股票退市</strong>的英文术语。<strong>两个场景毫无关系。</strong>
+<strong>技术术语用错地方，是生成痕迹最直接的暴露点</strong>——因为术语是"知道才会用对"的东西，编造者只能从相似语境里搬。</p>
+</blockquote>
+<h3 id="顺便说一个好结果">顺便说一个好结果</h3>
+<p>检索过程中确实找到了<strong>真实存在</strong>的开源资产——几个成熟的量化回测框架和研究复现项目。</p>
+<p>但把它们摊开看会发现一件事：<strong>它们全都是"框架类""选股类"的资产，没有一个是方案所声称的那种"清洗好的期货数据包 + 一键复现的策略"。</strong></p>
+<p>也就是说：<strong>方案声称的那类核心资产，在开源世界里并不存在。数据清洗与策略验证这两件事，无法外包，只能自己做。</strong></p>
+<p>（顺着这个方向找，也确实找到了一份<strong>真实</strong>的卖方研报——它给出的方向性证据反而支持了我们的下一步：那条路的风险特征比趋势型策略好一个数量级。于是有了第一次转向。）</p>
+<hr />
+<h2 id="四第三道检验怀疑自己的中间结果">四、第三道检验：怀疑自己的中间结果</h2>
+<p>转向之后，我们用自建的数据和引擎，跑了另一条路的回测。</p>
+<p><strong>第一次跑出来的结果非常漂亮</strong>：报出的年化是 31.4%，风险调整指标 2.31，最大回撤只有 −11%。</p>
+<p><strong>这份结果被当场质疑了。</strong> 质疑来自独立的一方，理由只有一句：</p>
+<blockquote>
+<p><strong>"这个指标在真实市场里极为罕见。一个简单的机械价差策略达到这个水平，要么市场结构极其特殊，要么另有一个我们没看见的原因。请把逐笔清单公开。"</strong></p>
+</blockquote>
+<p>于是我们做了一件现在回想很关键的事：<strong>没有庆祝，也没有急着解释，而是要求披露每一笔。</strong></p>
+<p><strong>独立复现的结果是 −0.7%。</strong></p>
+<p><strong>相差 32 个百分点。</strong> 一个漂亮的数字，和一个几乎是零的结果。</p>
+<p><strong>分歧没有消除之前，不出实盘指令。</strong> 这条原则当时就被明确下来——<strong>它不是流程装饰，它拦住了一次真金白银的投入。</strong></p>
+<hr />
+<h2 id="五逐笔审计48的数据是缺的">五、逐笔审计：48% 的数据是缺的</h2>
+<p>接下来是逐笔核对。查下去发现了两个事实：</p>
+<p><strong>第一个</strong>：上百次持仓移仓的结算金额<strong>全部为 0</strong>。这不正常——移仓必然涉及价值结转。</p>
+<p><strong>第二个，也是根因</strong>：<strong>某品种的价差序列，只有一半的交易日有值——缺失率约 52%。</strong></p>
+<p>根因是一个<strong>定义错误</strong>。当时把"近月合约"定义成了"<strong>到期月份等于当前自然月</strong>"的那个合约。这个定义在每月交割日之后就失效了——于是<strong>每个月有约 10 个交易日，这个值算不出来</strong>，数据被静默丢弃。</p>
+<p>被丢掉的是<strong>交割日之后那一段的价差变动</strong>。而恰恰是这一段，决定了策略账面上的盈亏。</p>
+<p><strong>把定义改成"按到期日最近排序、交割后自动切换"，完整率从约 52% 升到 94%。</strong></p>
+<blockquote>
+<p><strong>这就是"漂亮数字"的来源：不是模型聪明，是底座漏了。</strong>
+<strong>数据完整性不是质量指标，它是可信度的第一道关。</strong></p>
+</blockquote>
+<hr />
+<h2 id="六修好之后真相是23">六、修好之后，真相是 2–3%</h2>
+<p>修正定义、重跑之后，结果变成了这样（按四类宽基股指期货品种分别看）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>品种</th>
+<th>全周期表现</th>
+<th><strong>剔除极端年份后</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>沪深300 期货</td>
+<td>年化约 13.6%，回撤 −25.4%</td>
+<td><strong>常态化年化仅约 2.8%</strong>，回撤 −10.9%</td>
+</tr>
+<tr>
+<td>中证500 期货</td>
+<td>年化约 13.6%，回撤 −49.0%</td>
+<td><strong>常态化年化仅约 1.6%</strong>，回撤 −24.5%</td>
+</tr>
+<tr>
+<td>上证50 期货</td>
+<td>年化约 8.6%，回撤 −24.4%</td>
+<td><strong>常态化年化约 2.0%</strong></td>
+</tr>
+<tr>
+<td>中证1000 期货</td>
+<td>负</td>
+<td>负</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>看清这张表的关键在最后一列：</strong></p>
+<blockquote>
+<p><strong>全周期的亮眼表现，几乎全部来自一个极端年份</strong>——那一年贴水极深，单年贡献了极高的收益。
+<strong>剔除那一年之后，四个品种的常态化水平落在 1.6%–2.8% 之间。</strong></p>
+</blockquote>
+<p>而且还有一段不能忽略：在贴水收窄的几年里，这些策略<strong>普遍连续亏损</strong>。</p>
+<p><strong>基差周期本身，就是这个策略最大的风险源。</strong></p>
+<h3 id="那么趋势型那条路呢">那么，趋势型那条路呢？</h3>
+<p>回头看第一道检验之后跑出的结果，两条路对比起来更清楚：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>路线</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>趋势型（双向）</td>
+<td>十年为负，两个独立实现分别得到约 −46% 与约 −26%，风险调整指标接近 0，最大回撤约 −70%，十年只有十几笔交易</td>
+</tr>
+<tr>
+<td>趋势型（仅做多方向）</td>
+<td>转正，但风险调整指标仅约 0.24，回撤 −30%，<strong>仍不达可执行标准</strong></td>
+</tr>
+<tr>
+<td>趋势型（仅做空方向）</td>
+<td>为负，<strong>是主要的亏损来源</strong></td>
+</tr>
+<tr>
+<td>结构型（跨期，修正后常态化）</td>
+<td>年化约 2–3%，回撤约 −11%</td>
+</tr>
+</tbody>
+</table></div>
+<p>关于<strong>参数</strong>还有一个必须说的结果：我们对趋势型策略做了 <strong>320 组参数的完整网格扫描</strong>——</p>
+<blockquote>
+<p><strong>达标组合：0 / 320。</strong></p>
+</blockquote>
+<p>也就是说，这不是"参数没调好"，而是<strong>结构性的</strong>：那套规则在这个市场上不成立，怎么调都不成立。</p>
+<hr />
+<h2 id="七为什么做空必死这件事值得单独说">七、为什么"做空必死"这件事值得单独说</h2>
+<p>上表里有一行特别值得停下来看：<strong>同一套规则，只做多头是正的，只做空头是深度为负的。</strong></p>
+<p>这不是偶然。原因有两条，都与这个市场的性格有关：</p>
+<ol>
+<li><strong>极端反弹剧烈。</strong> 样本期内出现过数次急促的向上修复行情，<strong>这类行情对空头是灾难</strong>。</li>
+<li><strong>结构性偏移不利于做空。</strong> 该市场长期存在的贴水结构，本身就对空头持仓不利。</li>
+</ol>
+<p>合起来的效果就是那句话：<strong>做多勉强活，做空必死。</strong></p>
+<p><strong>这提醒一件事：一个策略在不同方向上的表现可以完全不对称。</strong> 如果只报"双向合并"的总成绩，这个不对称就被平均掉了——而它恰恰是理解这个策略为什么会死的钥匙。</p>
+<hr />
+<h2 id="八结论没有免费午餐">八、结论：没有免费午餐</h2>
+<p>把两条路放在一起看：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>路线</th>
+<th>赚的是什么钱</th>
+<th>判定</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>趋势型</strong></td>
+<td>赚<strong>预测</strong>的钱</td>
+<td>不稳定；且方向高度不对称，做空方向是亏损黑洞</td>
+</tr>
+<tr>
+<td><strong>结构型（跨期）</strong></td>
+<td>赚<strong>结构</strong>的钱</td>
+<td>常态化只有 2–3%；极端年份不可外推；贴水收窄期普遍连亏</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>两条路都不构成可靠的超额收益来源。</strong></p>
+<p>但这次审计留下的东西，比这个结论重要：<strong>三次转向，每一次都是"不信任某个输入"的结果</strong>——不信任外部方案的可执行性、不信任它引用的资源、不信任自己算出的漂亮数字。</p>
+<p><strong>最后一次不信任，救回了 32 个百分点。</strong></p>
+<hr />
+<h2 id="九这条研究的边界诚实清单">九、这条研究的边界（诚实清单）</h2>
+<ol>
+<li><strong>结论是否定性的</strong>：它说明某些做法不成立，<strong>不能反过来推断"什么一定能成"</strong>。</li>
+<li><strong>结构型路线的常态化水平约 2–3%</strong>，且<strong>主要超额来自一个极端年份</strong>，不可外推。</li>
+<li><strong>涉及杠杆</strong>：其中一份参照材料使用的是数倍杠杆假设。<strong>杠杆会等比例放大亏损</strong>，且会引入强平风险——本文不复述、也不推荐任何具体杠杆水平。</li>
+<li><strong>参照材料与外部引用的可信度有限</strong>：收益数据来自卖方研报、<strong>未计滑点</strong>，不能直接采信；另有部分外部引用无法核验真伪——<strong>"检索不到"不等于"确定不存在"</strong>，本文的表述是"未发现痕迹"，不是"已被证伪"。</li>
+<li><strong>两处关键修正（合约定义、数据完整性）是本次审计的核心产出</strong>，其余口径可能与更严谨的实现仍有细微差异；且样本为十年左右，对基差周期这类慢变量而言，统计功效有限。</li>
+</ol>
+<hr />
+<h2 id="金句墙">金句墙</h2>
+<blockquote>
+<p><strong>一份方案的"专业感"和它的"可执行性"是两件事。</strong></p>
+<p><strong>精确、好看、无出处——三个特征同时出现时，先怀疑数字。</strong></p>
+<p><strong>术语用错地方，是生成痕迹最直接的暴露点。</strong></p>
+<p><strong>数据完整性不是质量指标，它是可信度的第一道关。</strong></p>
+<p><strong>不是模型聪明，是底座漏了。</strong></p>
+<p><strong>分歧没有消除之前，不出实盘指令——这条原则拦住了一次真金白银的投入。</strong></p>
+<p><strong>一个策略在不同方向上的表现可以完全不对称，而总成绩会把它平均掉。</strong></p>
+</blockquote>
+<hr />
+<h2 id="行动清单审计任何外部方案的5个动作">行动清单：审计任何外部方案的 5 个动作</h2>
+<ol>
+<li><strong>先审可执行性，再跑回测。</strong> 查三样：交易规则（有没有限额/限制）、成本模型（有没有漏项）、数据可得性（宣称的数据真的拿得到吗）。</li>
+<li><strong>逐项核验引用。</strong> 每一个"现成资源""权威数据""行业指标"，都要能检索到出处；检索不到就记"无痕"，不记"可疑"。</li>
+<li><strong>警惕无出处的精确数字。</strong> 越精确越要问口径。</li>
+<li><strong>给自己的漂亮结果设一道否决权。</strong> 谁都可以质疑，<strong>质疑未消除前不进入下一步</strong>。</li>
+<li><strong>先查数据完整性，再看收益。</strong> 缺失率是比收益率更靠前的指标。</li>
+</ol>
+<p><strong>本文不提供任何投资行动建议。本文涉及杠杆类衍生品，风险等级显著高于普通投资，作者不推荐任何人参与相关交易。</strong></p>
+<hr />
+<h2 id="数据来源与样本说明">数据来源与样本说明</h2>
+<p>★ <strong>本文所有案例与测算均为作者基于公开数据的独立整理（原创），未引用第三方研究成果作为结论依据。</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据来源</td>
+<td>交易所官方历史数据（月度公开数据包）+ 公开行情接口</td>
+</tr>
+<tr>
+<td>数据区间</td>
+<td>约十年（覆盖多轮基差周期）</td>
+</tr>
+<tr>
+<td>数据构成</td>
+<td>多类宽基股指期货品种的<strong>全部历史合约</strong>日线；自行构建价差序列</td>
+</tr>
+<tr>
+<td>效率说明</td>
+<td>因公开接口逐日抓取效率极低（约 30 小时），改为<strong>官方月度数据包直取 + 并发</strong>，约 15 分钟完成十年</td>
+</tr>
+<tr>
+<td>成本假设</td>
+<td>佣金双边 + 卖出税费 + 每边滑点；<strong>含当日平仓费率</strong>（该项最初被遗漏，见正文）</td>
+</tr>
+<tr>
+<td>校验方式</td>
+<td>两套独立实现交叉复现；逐笔明细审计；参数全网格扫描</td>
+</tr>
+<tr>
+<td>关键修正</td>
+<td>① 近月合约定义错误（按到期日排序，交割后自动切换）→ 数据完整率约 52% 提升至 94%；② 移仓结算口径</td>
+</tr>
+<tr>
+<td>已知局限</td>
+<td>结论为否定性；结构型路线的超额主要来自单一极端年份；未计部分实盘摩擦；外部引用部分无法核验</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>关于可复核性</strong>：本文对机构、人员、产品与品种名称作匿名化处理（理由见开头「阅读须知」）。但上面已给出<strong>数据来源、区间、成本口径、校验方式与关键修正内容</strong>——读者可据此自行构造同类数据，用同样的口径复跑。<strong>能复核的是方法与过程，不是几个名字。</strong></p>
+<p>本文研究对象为<strong>审计方法</strong>，不对任何机构、产品或标的作出评价、推荐或投资建议。</p>
+<hr />
+<h2 id="免责声明">免责声明</h2>
+<p>本文为原创研究分享，所载内容与数据均来自公开渠道，仅供学习与方法探讨之用。</p>
+<p>本文不构成任何投资建议、要约或承诺，不指向任何具体投资标的。本文对涉及的机构、人员、产品与标的名称采用匿名化处理，亦不构成对任何机构或个股的诊断、评价或影射。</p>
+<p>本文所列百分比与统计量均为特定样本与特定区间内的历史回测结果，<strong>其中结构型路线的超额主要来自单一极端年份，常态化水平远低于全周期数字</strong>，不代表未来收益，也不构成任何形式的收益预测或承诺。</p>
+<p><strong>本文涉及杠杆类衍生品，其风险等级显著高于普通投资，可能导致本金全部损失。本文的结论是否定性的，作者不推荐任何人参与相关交易。</strong></p>
+<p>投资有风险，决策需谨慎。请根据自身实际情况独立判断，并自行承担相应后果。</p>
+<hr />
+<p><em>本文属「私家智囊·研究」系列。同系列已发布：开栏篇《从企业价值到资本配置》，第 2 篇《"跌了这么多，总该抄底了吧"》，第 3 篇《"涨得多的，以后还会涨"》，第 4 篇《怎么杀死一个看起来很赚的策略》，第 5 篇《先写死标准，再跑数据》，第 6 篇《我把自己的铜策略定级为 C 级，然后停止优化》，第 7 篇《海龟突破：walk-forward 之后还剩多少》。</em></p>
+
+      </div>
+
+      <div class="related-block">
+        <h3>同系列研究</h3>
+        <a href="research-value-capital-allocation.html">开栏第一篇《从企业价值到资本配置》 <span>· 价值投资的收益来源、市场估值与状态依赖型有限杠杆研究</span></a>
+        <a href="research-02.html">第 2 篇《“跌了这么多，总该抄底了吧”》 <span>· 我用 744 次买入，验证了这个念头有多危险</span></a>
+        <a href="research-03.html">第 3 篇《“涨得多的，以后还会涨”》 <span>· 我用五轮验证，把这个念头证伪了</span></a>
+        <a href="research-04.html">第 4 篇《怎么杀死一个看起来很赚的策略》 <span>· 一份“杀模型”的十诫，和九块墓碑</span></a>
+        <a href="research-05.html">第 5 篇《先写死标准，再跑数据》 <span>· 预注册到底在防什么</span></a>
+        <a href="research-06.html">第 6 篇《我把自己的铜策略定级为 C 级，然后停止优化》 <span>· 一份研究是怎么在“看起来有效”的时候被自己拆掉的</span></a>
+        <a href="research-07.html">第 7 篇《海龟突破：walk-forward 之后还剩多少》 <span>· 一个“跑赢”的策略，被劈成两半之后</span></a>
+      </div>
+
+      <div style="text-align:center;margin-top:40px;">
+        <a href="./research.html" class="btn-back">← 返回研究栏目</a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p class="slogan">家庭财务的<span>规划师</span>与<span>守夜人</span></p>
+      <p class="copyright">
+        <a href="./disclaimer.html" style="color:var(--text-muted);text-decoration:underline;">免责声明</a> ·
+        <a href="./privacy-policy.html" style="color:var(--text-muted);text-decoration:underline;">隐私政策</a> ·
+        <a href="./terms.html" style="color:var(--text-muted);text-decoration:underline;">使用条款</a>
+      </p>
+      <p class="copyright" style="margin-top:4px;">私家智囊 · 2026</p>
+    </div>
+  </footer>
+
+</body>
+</html>
