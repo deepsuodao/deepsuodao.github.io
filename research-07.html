@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="海龟突破：walk-forward 之后还剩多少———一个"跑赢"的策略，被劈成两半之后。私家智囊·研究 第 7 篇，基于公开数据的原创实证研究。">
+  <meta property="og:title" content="海龟突破：walk-forward 之后还剩多少———一个"跑赢"的策略，被劈成两半之后 — 私家智囊">
+  <meta property="og:description" content="海龟突破：walk-forward 之后还剩多少———一个"跑赢"的策略，被劈成两半之后。私家智囊·研究 第 7 篇，基于公开数据的原创实证研究。">
+  <meta property="og:image" content="https://abcsuodao.com/images/dialogue-scene.jpg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://abcsuodao.com/research-07.html">
+  <meta property="og:site_name" content="私家智囊">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://abcsuodao.com/images/dialogue-scene.jpg">
+  <title>海龟突破：walk-forward 之后还剩多少———一个"跑赢"的策略，被劈成两半之后 — 私家智囊</title>
+  <link rel="stylesheet" href="dialogue.css">
+  <link rel="stylesheet" href="research.css">
+  <link rel="canonical" href="https://abcsuodao.com/research-07.html">
+  <meta name="robots" content="index,follow">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "headline": "海龟突破：walk-forward 之后还剩多少———一个"跑赢"的策略，被劈成两半之后",
+  "description": "海龟突破：walk-forward 之后还剩多少———一个"跑赢"的策略，被劈成两半之后。私家智囊·研究 第 7 篇，基于公开数据的原创实证研究。",
+  "url": "https://abcsuodao.com/research-07.html",
+  "inLanguage": "zh-CN",
+  "author": { "@type": "Organization", "name": "私家智囊" },
+  "publisher": { "@type": "Organization", "name": "私家智囊" },
+  "datePublished": "2026-09-10",
+  "dateModified": "2026-09-10",
+  "keywords": "样本外验证, 过拟合, 参数稳定, 适用范围"
+}
+  </script>
+<meta name="msvalidate.01" content="F48C7A4625437CD09069E4F94D70C1D7" />
+<meta name="baidu-site-verification" content="codeva-zOTi2X5wIM" />
+</head>
+
+<body>
+
+  <!-- ===== Header (fixed, dark) ===== -->
+  <header class="header-dark">
+    <div class="container">
+      <div class="logo"><a href="./index.html">私家<span>智囊</span></a></div>
+      <nav>
+        <a href="index.html">首页</a>
+        <a href="belief.html">信念</a>
+        <a href="principles.html">原则</a>
+        <a href="triage.html">值班室</a>
+        <a href="content.html">瞭望台</a>
+        <a href="tools.html">工具箱</a>
+        <a href="index.html#about">关于</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="section" id="content">
+    <div class="container">
+
+      <div class="report-head">
+        <div class="report-badge">📊 研究报告 · 原创实证 · 第 7 篇</div>
+        <h1 class="report-title">海龟突破：walk-forward 之后还剩多少</h1>
+        <p class="report-subtitle">———一个"跑赢"的策略，被劈成两半之后</p>
+        <div class="report-meta">
+          <strong>阅读时间</strong>：约 12 分钟　｜　<strong>标签</strong>：#样本外验证 #过拟合 #参数稳定 #适用范围
+        </div>
+      </div>
+
+      <div class="report-body">
+
+<div class="report-toc">
+<h2>目 录</h2>
+<ol>
+<li><a href="#阅读须知请先读完这一段">⚠️ 阅读须知（请先读完这一段）</a></li>
+<li><a href="#引子一份成功的报告">引子：一份"成功"的报告</a></li>
+<li><a href="#一先说结论">一、先说结论</a></li>
+<li><a href="#二先说清楚劈成两半是怎么回事">二、先说清楚"劈成两半"是怎么回事</a></li>
+<li><a href="#三全样本看起来是成功的">三、全样本看起来是成功的</a></li>
+<li><a href="#四劈开之后优势全部在前一半">四、劈开之后：优势全部在前一半</a></li>
+<li class="toc-sub"><a href="#这句话要说三遍">这句话要说三遍</a></li>
+<li><a href="#五参数稳定策略稳健">五、参数稳定 ≠ 策略稳健</a></li>
+<li><a href="#六同一个过滤器在两个标的上方向相反">六、同一个过滤器，在两个标的上方向相反</a></li>
+<li><a href="#七在个股上越牛越惨">七、在个股上：越牛越惨</a></li>
+<li><a href="#八这条研究最后怎么给自己定界">八、这条研究最后怎么给自己定界</a></li>
+<li><a href="#九这条研究的边界诚实清单">九、这条研究的边界（诚实清单）</a></li>
+<li><a href="#金句墙">金句墙</a></li>
+<li><a href="#行动清单检验任何跑赢结论的5个动作">行动清单：检验任何"跑赢"结论的 5 个动作</a></li>
+<li><a href="#数据来源与样本说明">数据来源与样本说明</a></li>
+<li><a href="#免责声明">免责声明</a></li>
+</ol></div>
+
+
+<blockquote>
+<p>类型：原创实证研究 ｜ 数据区间：2014 年 4 月 – 2026 年 8 月
+系列：私家智囊·研究 第 7 篇 ｜ 成稿：2026 年 9 月</p>
+</blockquote>
+<hr />
+<h2 id="阅读须知请先读完这一段">⚠️ 阅读须知（请先读完这一段）</h2>
+<ol>
+<li><strong>本文不是投资建议，也不构成对任何证券或产品的评价。</strong> 本文讲的是一个策略检验过程，不涉及任何可照搬的操作规则。</li>
+<li><strong>本文所有数字都是历史回测结果，不是收益预测</strong>，也不表示未来会发生同样的结果。</li>
+<li><strong>本文的结论带有明确的适用边界</strong>：该策略只在特定一类宽基指数上做过验证，其他标的全部不适用。</li>
+<li><strong>本文对个股样本采用匿名化处理</strong>，不列出标的名称；指数与宽基工具按其指数名称表述。</li>
+<li>本文的方法与数据来源见文末，欢迎复核。</li>
+</ol>
+<hr />
+<h2 id="引子一份成功的报告">引子：一份"成功"的报告</h2>
+<p>有一份回测报告的结论是这样写的：</p>
+<blockquote>
+<p>该策略在目标标的上跑赢买入持有 <strong>+13.6</strong> 个百分点，年化收益更高、最大回撤不到基准的一半。
+参数稳定性好，前四名由同一组参数包揽。</p>
+</blockquote>
+<p>看起来是一份成功的报告。它也确实在内部通过了全部校验：归因恒等式 <strong>125/125 全部通过</strong>，成交价用次日开盘（无前视），成本模型完整。</p>
+<p><strong>然后我做了一件事：把它按时间劈成两半。</strong></p>
+<p>前一半（2014–2020）和后一半（2021–2026），分别重算。</p>
+<p>结果，那份"成功"就不成立了。</p>
+<hr />
+<h2 id="一先说结论">一、先说结论</h2>
+<ol>
+<li><strong>"跑赢"这个词，不把时间切开看是没有意义的。</strong> 全样本跑赢 +13.6 个百分点，但劈开之后，<strong>全部优势集中在前七年</strong>。</li>
+<li><strong>样本外年化从 12.88% 降到 1.07%（历史回测口径，非收益预测）。</strong> 后六年几乎走平。<strong>优势不在策略里，在前那七年里。</strong></li>
+<li><strong>参数稳定 ≠ 策略稳健。</strong> 同一组最优参数在两支同类指数上包揽前四名，却在另一类指数上 <strong>0/25 全败</strong>。</li>
+<li><strong>同一个过滤器，在两个标的上方向相反。</strong> 在这里"越严越差"，在那里"越严越好"——<strong>过滤器的方向由标的决定，不是由它自己决定。</strong></li>
+<li><strong>这套方法在个股上更糟，而且是可解释地糟。</strong> 一句话：<strong>越牛越惨。</strong></li>
+</ol>
+<hr />
+<h2 id="二先说清楚劈成两半是怎么回事">二、先说清楚"劈成两半"是怎么回事</h2>
+<p>这个方法有一个正式名字：<strong>walk-forward 验证</strong>（滚动推进验证）。</p>
+<p>做法很朴素：<strong>把数据按时间切成前后两段，前一段用来"找参数"，后一段用来"考试"。</strong> 考试那一段，策略是没见过的。</p>
+<p>它和普通回测的区别，用一句话说清：</p>
+<blockquote>
+<p>普通回测问的是"<strong>这套规则在过去表现得怎么样</strong>"。
+walk-forward 问的是"<strong>在一段它没见过的未来里，它还成不成立</strong>"。</p>
+</blockquote>
+<p>这两件事的差别，比大多数人以为的大得多。因为在普通回测里，只要你愿意试足够多的参数组合，<strong>总能找到一组在过去很好看的东西</strong>——这不证明任何事。</p>
+<p>本文这项研究里，一共试了 <strong>125 组</strong>有效参数组合。<strong>125 组里挑出最好的一组，然后拿它的全样本成绩当结论——这本身就是问题。</strong></p>
+<p>walk-forward 就是专门用来拆这个问题的。</p>
+<p>（关于"为什么不能先看结果再定标准"，本系列第 5 篇《先写死标准，再跑数据》有完整的规程。）</p>
+<hr />
+<h2 id="三全样本看起来是成功的">三、全样本看起来是成功的</h2>
+<p>先看它没被劈开时的样子：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>指标</th>
+<th style="text-align: right;">该策略</th>
+<th style="text-align: right;">买入持有</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>年化收益</td>
+<td style="text-align: right;"><strong>7.38%</strong></td>
+<td style="text-align: right;">6.87%</td>
+</tr>
+<tr>
+<td>累计收益</td>
+<td style="text-align: right;"><strong>+140.0%</strong></td>
+<td style="text-align: right;">+126.4%</td>
+</tr>
+<tr>
+<td>最大回撤</td>
+<td style="text-align: right;"><strong>29.5%</strong></td>
+<td style="text-align: right;">约 63%</td>
+</tr>
+<tr>
+<td>与基准之差</td>
+<td style="text-align: right;"><strong>+13.6 个百分点</strong> ✅</td>
+<td style="text-align: right;">—</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>注意两个数字的对比</strong>：收益只多了一点点，但<strong>最大回撤从约 63% 压到 29.5%</strong>。</p>
+<p>这个形状和本系列第 6 篇（铜策略）里看到的一模一样：<strong>这类工具真正改善的是"最坏情况"，不是"平均水平"。</strong></p>
+<p>而且它的参数稳定性看起来很好——最优的四个组合全部来自同一组长周期参数，不是散乱的、互相矛盾的碎点。</p>
+<p><strong>到这里，一切都很像成功。</strong></p>
+<hr />
+<h2 id="四劈开之后优势全部在前一半">四、劈开之后：优势全部在前一半</h2>
+<p>现在把它按时间切开：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>区间</th>
+<th style="text-align: right;">年化收益</th>
+<th style="text-align: right;">最大回撤</th>
+<th style="text-align: right;">风险调整后性价比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>前一段（2014–2020）</strong></td>
+<td style="text-align: right;"><strong>12.88%</strong></td>
+<td style="text-align: right;">29.5%</td>
+<td style="text-align: right;">0.87</td>
+</tr>
+<tr>
+<td><strong>后一段（2021–2026）</strong></td>
+<td style="text-align: right;"><strong>1.07%</strong></td>
+<td style="text-align: right;">23.0%</td>
+<td style="text-align: right;">0.15</td>
+</tr>
+<tr>
+<td>全样本</td>
+<td style="text-align: right;">7.38%</td>
+<td style="text-align: right;">29.5%</td>
+<td style="text-align: right;">0.59</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>后一段的年化是 1.07%。</strong> 这个数字意味着什么？</p>
+<p>意味着<strong>跑了六年的策略，累计收益几乎和"什么都不做、只是把钱放在那里"接近</strong>——而它还要承担交易成本、承担踏空风险、承担每天盯信号的精力。而同期后一段的最大回撤仍然有 23%。</p>
+<p>衰减幅度：<strong>11.81 个百分点</strong>。</p>
+<h3 id="这句话要说三遍">这句话要说三遍</h3>
+<blockquote>
+<p><strong>优势不在策略里，在前那七年里。</strong></p>
+</blockquote>
+<p>前七年是趋势清晰、波段分明的市况——趋势跟踪类方法在这种环境里天然占优。后六年转入震荡走弱，同一条规则就开始原地磨损。</p>
+<p><strong>这不是"策略变差了"，而是"那段时间结束了"。</strong> 而一份只报全样本数字的报告，会把这两件事混成一件。</p>
+<hr />
+<h2 id="五参数稳定策略稳健">五、参数稳定 ≠ 策略稳健</h2>
+<p>接下来这一步，是最能说明问题的一步。</p>
+<p>我把同一套方法、同一套参数网格，搬到<strong>另一类宽基指数</strong>上重跑。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>标的类别</th>
+<th>最优参数是否落在同一族</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第一类宽基指数</td>
+<td>✅ 前四名全部由同一组长周期参数包揽</td>
+<td>跑赢基准</td>
+</tr>
+<tr>
+<td><strong>第二类宽基指数</strong></td>
+<td>❌ <strong>0/25 全败</strong></td>
+<td>跑输基准</td>
+</tr>
+</tbody>
+</table></div>
+<p>同一组参数，<strong>在一个市场里包揽前四名，在另一个市场里 25 次尝试全部失败。</strong></p>
+<p><strong>参数稳定，只说明"在这段数据里它不自相矛盾"；它不说明"换个地方还成立"。</strong></p>
+<p>为什么会这样？因为两类指数的<strong>波动特征不一样</strong>：
+- 一类振幅大、趋势波段分明 → 长周期通道能吃到完整波段；
+- 另一类趋势更平缓、回调更深 → 长周期通道反复被假回调洗出。</p>
+<p><strong>参数的有效性，是被标的的性格决定的，不是被参数自己决定的。</strong></p>
+<hr />
+<h2 id="六同一个过滤器在两个标的上方向相反">六、同一个过滤器，在两个标的上方向相反</h2>
+<p>研究中还测了一个"辅助过滤器"（用来判断行情是否有明确方向），结果更有意思：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>标的类别</th>
+<th style="text-align: right;">关掉过滤器</th>
+<th style="text-align: right;">打开严格过滤器</th>
+<th>方向</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第一类宽基指数</td>
+<td style="text-align: right;">6.14%</td>
+<td style="text-align: right;">5.68%</td>
+<td><strong>越严越差</strong></td>
+</tr>
+<tr>
+<td>第二类宽基指数</td>
+<td style="text-align: right;">3.62%</td>
+<td style="text-align: right;">4.73%</td>
+<td><strong>越严越好</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>同一个过滤器，方向完全相反。</strong></p>
+<p>原因还是那个：第一类需要<strong>容忍震荡</strong>（过滤掉就等于切掉了它的机会），第二类需要<strong>过滤震荡</strong>（过滤掉就是它的价值所在）。</p>
+<blockquote>
+<p><strong>一个指标的"好"或"坏"，不是它的固有属性——它是"指标 × 标的"的组合属性。</strong></p>
+</blockquote>
+<p>所以报告里最终把它设为<strong>默认关闭</strong>，并注明"在该类标的上净效果为负"。</p>
+<hr />
+<h2 id="七在个股上越牛越惨">七、在个股上：越牛越惨</h2>
+<p>同一套方法也在一组个股样本上跑过。这一部分本文只做<strong>降权处理</strong>，因为它的数据条件本身是降级的（详见边界清单）。</p>
+<p>核心结果：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>结果</th>
+<th>比例</th>
+<th>特征</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>跑赢基准</td>
+<td><strong>2 / 16</strong></td>
+<td>两只都是"<strong>空仓躲跌</strong>"型——躲过了一段下跌</td>
+</tr>
+<tr>
+<td>跑输基准</td>
+<td><strong>14 / 16</strong></td>
+<td><strong>越牛越惨</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>"越牛越惨"这四个字需要解释一下，因为它反直觉：</p>
+<blockquote>
+<p><strong>越是长期上涨的标的，这套方法跑输得越多。</strong></p>
+</blockquote>
+<p>原因在于它的工作机制：<strong>它靠"突破新高"进场、靠"跌破近期低点"离场。</strong> 在一只持续上涨的标的上，价格的每一次正常回调都会触发它的离场条件——<strong>它被反复"洗"出去，然后再追回来。</strong> 上涨越持续，被洗的次数越多，累计损耗越大。</p>
+<p>而在横盘或下跌的标的上，它反而能靠"空仓"躲掉一段——这正是那两只跑赢者的共同特征。</p>
+<p><strong>所以它在个股上不是"收益工具"，也不是"风控工具"，更像一个"下跌躲避器"。</strong> 这和同类方法在另一项研究里的结论方向一致。</p>
+<p><strong>结论：个股不启用。</strong></p>
+<hr />
+<h2 id="八这条研究最后怎么给自己定界">八、这条研究最后怎么给自己定界</h2>
+<p>它没有宣布成功，也没有宣布失败，而是<strong>把适用范围收得很窄</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>项</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>适用标的</td>
+<td><strong>仅一类宽基指数</strong>，其他指数、其他宽基工具<strong>不启用</strong></td>
+</tr>
+<tr>
+<td>适用角色</td>
+<td><strong>不独立使用</strong>，只作为已有体系的一个"第二意见"确认环节</td>
+</tr>
+<tr>
+<td>个股</td>
+<td><strong>不启用</strong>（2/16 跑赢，且是躲避器而非收益工具）</td>
+</tr>
+<tr>
+<td>参数</td>
+<td>冻结，不再调</td>
+</tr>
+<tr>
+<td>下一步</td>
+<td>进入<strong>模拟盘跟踪</strong>，用真实跟踪结果决定是否小仓位实盘、继续跟踪、或停止</td>
+</tr>
+</tbody>
+</table></div>
+<p>注意最后一行：<strong>它没有直接进入实盘，而是先进"观察期"。</strong> 观察期有明确的判定条件（要不要扩展、要不要停），以及明确的终止日期。</p>
+<p><strong>这是我认为这份研究最值得学的地方</strong>——它在结论里写清了"什么情况下我会承认它不行"。而不是留一句"效果良好，建议关注"。</p>
+<hr />
+<h2 id="九这条研究的边界诚实清单">九、这条研究的边界（诚实清单）</h2>
+<ol>
+<li><strong>后一段样本几乎走平</strong>——历史回测中，后六年的年化只有 1.07%（非收益预测）。这是本研究的核心风险，必须标在结论最前面。</li>
+<li><strong>该方法有明确的市场环境依赖</strong>——在趋势清晰的环境里占优，在震荡环境里磨损。</li>
+<li><strong>参数与标的强相关</strong>，不能跨标的套用；已被两类指数的对照结果直接证明。</li>
+<li><strong>个股部分使用的是降级数据</strong>（缺少日内高低价），完整数据下的结论可能微调——但方向大概率不变，因为"越牛越惨"的机制来自规则本身，不来自数据缺失。</li>
+<li><strong>另有若干未被覆盖的因素</strong>：对照标的的复权口径与主标的构造方式不同（其绝对收益数字不具备直接可比性）；融资成本、红利税、跟踪误差对实盘的影响未测试；全部结论基于 12 年样本，统计功效有限——<strong>这不是"验证通过"，是"在限定条件下未被证伪"。</strong></li>
+</ol>
+<hr />
+<h2 id="金句墙">金句墙</h2>
+<blockquote>
+<p><strong>优势不在策略里，在前那七年里。</strong></p>
+<p><strong>"跑赢"这个词，不把时间切开看，是没有意义的。</strong></p>
+<p><strong>参数稳定只说明"在这段数据里它不自相矛盾"，不说明"换个地方还成立"。</strong></p>
+<p><strong>一个指标的好或坏，不是它的固有属性——它是"指标 × 标的"的组合属性。</strong></p>
+<p><strong>越牛越惨：它靠突破进场、靠回落离场，于是被持续上涨反复洗出去。</strong></p>
+<p><strong>walk-forward 不是加分项，它是专门用来砍掉你成果的那一刀。</strong></p>
+<p><strong>一份研究应该写清"什么情况下我会承认它不行"。</strong></p>
+</blockquote>
+<hr />
+<h2 id="行动清单检验任何跑赢结论的5个动作">行动清单：检验任何"跑赢"结论的 5 个动作</h2>
+<ol>
+<li><strong>按时间劈开。</strong> 前一半找参数、后一半考试；只看后一半的成绩，别只看总成绩。</li>
+<li><strong>数一数试了多少组合。</strong> 试了 125 组再挑最好的，和只试 1 组，结论的可信度完全不同。</li>
+<li><strong>换个标的重跑。</strong> 参数在同一类标的里稳不稳不重要，重要的是换一类还成不成立。</li>
+<li><strong>看它靠什么赚。</strong> 分清"改善了最坏情况"和"提高了平均水平"——这两件事经常被混为一谈。</li>
+<li><strong>要求写清终止条件。</strong> 一份没有"什么情况下算失败"的研究，等于没有边界。</li>
+</ol>
+<p><strong>本文不提供任何投资行动建议。以上清单用于读者检验本文与其他研究报告的结论。</strong></p>
+<hr />
+<h2 id="数据来源与样本说明">数据来源与样本说明</h2>
+<p>★ <strong>本文所有案例与测算均为作者基于公开数据的独立整理（原创），非引用第三方研究成果。</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据来源</td>
+<td>公开行情数据（通过公开数据接口获取）；宽基指数采用其跟踪指数的日线数据</td>
+</tr>
+<tr>
+<td>数据区间</td>
+<td>2014 年 4 月 – 2026 年 8 月（约 12 年）</td>
+</tr>
+<tr>
+<td>拆分方式</td>
+<td>前段用于参数选择，后段用于样本外检验</td>
+</tr>
+<tr>
+<td>参数网格</td>
+<td>突破周期 7 档 × 离场周期 5 档 × 止损倍数 5 档，有效组合 125 组（含周期大小约束）</td>
+</tr>
+<tr>
+<td>样本构成</td>
+<td>两类宽基指数（互为对照） + 一组个股样本（16 只，数据条件降级，仅作方向性参考）</td>
+</tr>
+<tr>
+<td>成交与成本</td>
+<td>信号日收盘确认 → 次日开盘成交；佣金双边 + 卖出税费 + 每边滑点</td>
+</tr>
+<tr>
+<td>归因校验</td>
+<td>期末净值 ≡ 已实现盈亏 + 浮盈 − 总成本，残差在容差内；<strong>125/125 全部通过</strong></td>
+</tr>
+<tr>
+<td>已知局限</td>
+<td>样本外走平；参数与标的强相关；个股部分为降级数据；未计融资成本与跟踪误差</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>关于可复核性</strong>：本文不列出个股样本名称（理由见开头「阅读须知」）。但上面已给出<strong>样本类别、指数类型、参数网格、数据区间与口径处理方式</strong>——读者可据此自行构造同类样本，用同样的口径复跑。<strong>能复核的是方法与过程，不是几个名字。</strong></p>
+<p>本文研究对象为<strong>策略检验方法</strong>，不对任何证券或产品作出评价、推荐或投资建议。</p>
+<hr />
+<h2 id="免责声明">免责声明</h2>
+<p>本文为原创研究分享，所载内容与数据均来自公开渠道，仅供学习与方法探讨之用。</p>
+<p>本文不构成任何投资建议、要约或承诺，不指向任何具体投资标的。本文对个股样本采用匿名化处理，不列出标的名称，亦不构成个股诊断或评价。</p>
+<p>本文所列百分比与统计量均为特定样本与特定区间内的历史回测结果，<strong>其中样本外区间的表现已接近走平</strong>，不代表未来收益，也不构成任何形式的收益预测或承诺。</p>
+<p>投资有风险，决策需谨慎。请根据自身实际情况独立判断，并自行承担相应后果。</p>
+<hr />
+<p><em>本文属「私家智囊·研究」系列。同系列已发布：开栏篇《从企业价值到资本配置》，第 2 篇《"跌了这么多，总该抄底了吧"》，第 3 篇《"涨得多的，以后还会涨"》，第 4 篇《怎么杀死一个看起来很赚的策略》，第 5 篇《先写死标准，再跑数据》，第 6 篇《我把自己的铜策略定级为 C 级，然后停止优化》。</em></p>
+
+      </div>
+
+      <div class="related-block">
+        <h3>同系列研究</h3>
+        <a href="research-value-capital-allocation.html">开栏第一篇《从企业价值到资本配置》 <span>· 价值投资的收益来源、市场估值与状态依赖型有限杠杆研究</span></a>
+        <a href="research-02.html">第 2 篇《“跌了这么多，总该抄底了吧”》 <span>· 我用 744 次买入，验证了这个念头有多危险</span></a>
+        <a href="research-03.html">第 3 篇《“涨得多的，以后还会涨”》 <span>· 我用五轮验证，把这个念头证伪了</span></a>
+        <a href="research-04.html">第 4 篇《怎么杀死一个看起来很赚的策略》 <span>· 一份“杀模型”的十诫，和九块墓碑</span></a>
+        <a href="research-05.html">第 5 篇《先写死标准，再跑数据》 <span>· 预注册到底在防什么</span></a>
+        <a href="research-06.html">第 6 篇《我把自己的铜策略定级为 C 级，然后停止优化》 <span>· 一份研究是怎么在“看起来有效”的时候被自己拆掉的</span></a>
+      </div>
+
+      <div style="text-align:center;margin-top:40px;">
+        <a href="./research.html" class="btn-back">← 返回研究栏目</a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p class="slogan">家庭财务的<span>规划师</span>与<span>守夜人</span></p>
+      <p class="copyright">
+        <a href="./disclaimer.html" style="color:var(--text-muted);text-decoration:underline;">免责声明</a> ·
+        <a href="./privacy-policy.html" style="color:var(--text-muted);text-decoration:underline;">隐私政策</a> ·
+        <a href="./terms.html" style="color:var(--text-muted);text-decoration:underline;">使用条款</a>
+      </p>
+      <p class="copyright" style="margin-top:4px;">私家智囊 · 2026</p>
+    </div>
+  </footer>
+
+</body>
+</html>
