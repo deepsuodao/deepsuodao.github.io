@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="判死边界：我在什么范围里杀了它———一个 t = 5.02 的发现，和它没死的那部分。私家智囊·研究 第 9 篇，基于公开数据的原创实证研究。">
+  <meta property="og:title" content="判死边界：我在什么范围里杀了它———一个 t = 5.02 的发现，和它没死的那部分 — 私家智囊">
+  <meta property="og:description" content="判死边界：我在什么范围里杀了它———一个 t = 5.02 的发现，和它没死的那部分。私家智囊·研究 第 9 篇，基于公开数据的原创实证研究。">
+  <meta property="og:image" content="https://abcsuodao.com/images/dialogue-scene.jpg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://abcsuodao.com/research-09.html">
+  <meta property="og:site_name" content="私家智囊">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://abcsuodao.com/images/dialogue-scene.jpg">
+  <title>判死边界：我在什么范围里杀了它———一个 t = 5.02 的发现，和它没死的那部分 — 私家智囊</title>
+  <link rel="stylesheet" href="dialogue.css">
+  <link rel="stylesheet" href="research.css">
+  <link rel="canonical" href="https://abcsuodao.com/research-09.html">
+  <meta name="robots" content="index,follow">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "headline": "判死边界：我在什么范围里杀了它———一个 t = 5.02 的发现，和它没死的那部分",
+  "description": "判死边界：我在什么范围里杀了它———一个 t = 5.02 的发现，和它没死的那部分。私家智囊·研究 第 9 篇，基于公开数据的原创实证研究。",
+  "url": "https://abcsuodao.com/research-09.html",
+  "inLanguage": "zh-CN",
+  "author": { "@type": "Organization", "name": "私家智囊" },
+  "publisher": { "@type": "Organization", "name": "私家智囊" },
+  "datePublished": "2026-09-10",
+  "dateModified": "2026-09-10",
+  "keywords": "判死边界, 适用范围, 样本子范围, 复活条件"
+}
+  </script>
+<meta name="msvalidate.01" content="F48C7A4625437CD09069E4F94D70C1D7" />
+<meta name="baidu-site-verification" content="codeva-zOTi2X5wIM" />
+</head>
+
+<body>
+
+  <!-- ===== Header (fixed, dark) ===== -->
+  <header class="header-dark">
+    <div class="container">
+      <div class="logo"><a href="./index.html">私家<span>智囊</span></a></div>
+      <nav>
+        <a href="index.html">首页</a>
+        <a href="belief.html">信念</a>
+        <a href="principles.html">原则</a>
+        <a href="triage.html">值班室</a>
+        <a href="content.html">瞭望台</a>
+        <a href="tools.html">工具箱</a>
+        <a href="index.html#about">关于</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="section" id="content">
+    <div class="container">
+
+      <div class="report-head">
+        <div class="report-badge">📊 研究报告 · 原创实证 · 第 9 篇</div>
+        <h1 class="report-title">判死边界：我在什么范围里杀了它</h1>
+        <p class="report-subtitle">———一个 t = 5.02 的发现，和它没死的那部分</p>
+        <div class="report-meta">
+          <strong>阅读时间</strong>：约 16 分钟　｜　<strong>标签</strong>：#判死边界 #适用范围 #样本子范围 #复活条件
+        </div>
+      </div>
+
+      <div class="report-body">
+
+<div class="report-toc">
+<h2>目 录</h2>
+<ol>
+<li><a href="#阅读须知请先读完这一段">⚠️ 阅读须知（请先读完这一段）</a></li>
+<li><a href="#引子一个差点被我写进结论里的发现">引子：一个差点被我写进结论里的发现</a></li>
+<li><a href="#一先说结论">一、先说结论</a></li>
+<li><a href="#二这个发现是什么为什么值得心动">二、这个发现是什么，为什么值得心动</a></li>
+<li><a href="#三第一次心动控制住涨幅之后它依然显著">三、第一次心动：控制住涨幅之后，它依然显著</a></li>
+<li><a href="#四第一个裂缝换个问法它就不显著了">四、第一个裂缝：换个问法，它就不显著了</a></li>
+<li><a href="#五决定性的一步把它拆成慢慢涨上去的和暴涨上去的">五、决定性的一步：把它拆成"慢慢涨上去的"和"暴涨上去的"</a></li>
+<li class="toc-sub"><a href="#它到底是什么">它到底是什么</a></li>
+<li><a href="#六关键问题它在什么范围内死了">六、关键问题：它在什么范围内死了</a></li>
+<li><a href="#七这一节请慢慢读不判死不等于证明有效">七、⚠️ 这一节请慢慢读："不判死"不等于"证明有效"</a></li>
+<li><a href="#八复活条件四条里倒了哪一条就是它的死亡坐标">八、复活条件：四条里倒了哪一条，就是它的死亡坐标</a></li>
+<li><a href="#九事后复核三处被挑出来的问题">九、事后复核：三处被挑出来的问题</a></li>
+<li><a href="#十这条研究的边界诚实清单">十、这条研究的边界（诚实清单）</a></li>
+<li><a href="#金句墙">金句墙</a></li>
+<li><a href="#行动清单给任何一个被证伪的结论划边界">行动清单：给任何一个"被证伪"的结论划边界</a></li>
+<li><a href="#数据来源与样本说明">数据来源与样本说明</a></li>
+<li><a href="#免责声明">免责声明</a></li>
+</ol></div>
+
+
+<blockquote>
+<p>类型：原创实证研究 ｜ 数据区间：2005 年 1 月 – 2026 年 8 月
+系列：私家智囊·研究 第 9 篇 ｜ 成稿：2026 年 9 月</p>
+</blockquote>
+<hr />
+<h2 id="阅读须知请先读完这一段">⚠️ 阅读须知（请先读完这一段）</h2>
+<ol>
+<li><strong>本文不是投资建议，也不构成对任何证券的评价。</strong> 本文的研究对象是<strong>一个结论的适用范围</strong>，不是任何可选股的方法。样本为全市场口径，不涉及个别标的名称。</li>
+<li><strong>本文所有数字都是历史统计结果，不是收益预测</strong>，也不表示未来会发生同样的结果。</li>
+<li><strong>本文的起点是本系列第 3 篇里出现过的一个结果。</strong> 那篇讲的是它如何被判死；<strong>本文讲的是另一件事——判死的范围。</strong> 如果你已经读过第 3 篇，本文不会重复那个过程。</li>
+<li><strong>本文最重要的读者提醒</strong>：文中出现"不判死"三个字的地方，<strong>都不等于"证明有效"</strong>。这两个说法的差别，是本文要守住的纪律，也是本文真正的主题。</li>
+<li>本文的方法与数据来源见文末，欢迎复核。</li>
+</ol>
+<hr />
+<h2 id="引子一个差点被我写进结论里的发现">引子：一个差点被我写进结论里的发现</h2>
+<p>先说一个数字。</p>
+<p>有一项指标，在控制住其他因素之后，对未来收益的预测强度是 <strong>+1.275%</strong>，统计显著度 <strong>t = +5.02</strong>。</p>
+<p>如果你不熟悉统计，可以这样理解这个 t 值：<strong>如果这个指标其实完全没用，那么我们在数据里看到这么大差异的概率，低到几乎可以忽略。</strong></p>
+<p>换句话说，它不像运气。</p>
+<p>而且它经得起换口径：把它从"是/否"的开关换成连续变量来看，结论同向（<strong>+4.488%，t = +2.95</strong>）；把持有期从 60 个交易日拉长到 120 个交易日，强度不降反升（<strong>+2.373%，t = +6.21</strong>）。</p>
+<p>按我们自己定下的立项标准——<strong>它够格。</strong></p>
+<p>按很多人的做法，到这里就可以写结论了：<em>"我们发现了一个有效的位置信号。"</em></p>
+<p><strong>但我没有这样写。</strong></p>
+<p>因为它后来死了。更准确地说：<strong>它在一个特定的范围里死了，而在另一个范围里，我没有资格宣布它死。</strong></p>
+<p>这篇文章讲的不是它有多可惜，而是——</p>
+<blockquote>
+<p><strong>一个结论被判死之后，死亡通知书上应该写清楚：它死在哪个范围里。</strong></p>
+</blockquote>
+<hr />
+<h2 id="一先说结论">一、先说结论</h2>
+<ol>
+<li><strong>统计显著，不等于结论成立。</strong> 这项指标 t = 5.02，看上去几乎不可能是运气；但拆开之后发现，它的全部效应集中在"前期暴涨"那一组，而在"慢慢涨上来"那一组里约等于零。</li>
+<li><strong>它不是一个新发现，是另一个已知现象的镜像。</strong> 所谓"站上高位还会涨"，实际上是"暴涨之后会分化"——而后者已经被"涨幅"这个变量解释过了。</li>
+<li><strong>判死必须有范围。</strong> 本次判死的是："它能不能作为<strong>全市场独立选股信号</strong>"。<strong>这个范围之外，我没有判它死。</strong></li>
+<li><strong>"不判死"不等于"证明有效"。</strong> 它真正的含义只有一句：<strong>当前证据不足以杀死它。</strong> 多一个字都不能加。</li>
+<li><strong>复活条件可以精确定位死因。</strong> 它要复活需要满足四条，其中三条已经满足，<strong>只有一条倒下</strong>——而倒下的那一条，恰好问的是"它到底是不是独立的位置信息"。<strong>这四条就是它死亡范围的坐标。</strong></li>
+</ol>
+<hr />
+<h2 id="二这个发现是什么为什么值得心动">二、这个发现是什么，为什么值得心动</h2>
+<p>先把指标说清楚。</p>
+<blockquote>
+<p><strong>高位度 = 当前价格 ÷ 过去 252 个交易日的最高价</strong></p>
+<p>当这个比值 ≥ 0.75，记为"高位组"——意思是：<strong>它现在的价格，距离过去一年的最高点不到 25%。</strong></p>
+</blockquote>
+<p>它背后的想法很朴素，也很像常识：</p>
+<blockquote>
+<p>一只股票能慢慢爬到接近一年最高点的位置，并且<strong>守住</strong>这个位置——说明它走得稳，说明市场持续认可它，说明它不是那种冲一下就掉回来的投机品。</p>
+</blockquote>
+<p>这个叙事叫"<strong>慢牛</strong>"。而慢牛是绝大多数投资者最想买到的东西：涨得不急，回撤不大，拿得住。</p>
+<p><strong>问题在于：这个指标同时也能被另一种完全不同的情况触发。</strong></p>
+<p>一只股票可以在三天里暴涨 40%，然后停在那里。它的高位度同样很高——<strong>但它不是慢牛，它是暴涨后的高位。</strong></p>
+<p>这两种情况，在这项指标里<strong>长得一模一样</strong>。</p>
+<p>这就是后面所有麻烦的起点。</p>
+<hr />
+<h2 id="三第一次心动控制住涨幅之后它依然显著">三、第一次心动：控制住涨幅之后，它依然显著</h2>
+<p>检验的思路是：把"过去涨了多少"这个因素的影响扣掉，再看高位组还有没有多出来的收益。</p>
+<p>为什么要扣掉？因为本系列第 3 篇已经证明过一件事：<strong>在这批数据里，过去涨得多的，未来反而跑输。</strong> 如果高位组里全是涨得多的股票，那它的任何表现都可能只是"涨幅"的影子，而不是它自己的本事。</p>
+<p>所以第一步，是把涨幅按住。</p>
+<p><strong>检验 A-1（控制 60 日、120 日、250 日涨幅之后）：</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align: right;">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>高位组的额外收益（60 日窗口）</td>
+<td style="text-align: right;"><strong>+1.275%</strong></td>
+</tr>
+<tr>
+<td>统计显著度</td>
+<td style="text-align: right;"><strong>t = +5.02</strong></td>
+</tr>
+<tr>
+<td>拉长到 120 日窗口</td>
+<td style="text-align: right;"><strong>+2.373%，t = +6.21</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>涨幅被控制住了，它依然显著。<strong>这是一个真正让人心动的结果。</strong></p>
+<p>而且还有第二个佐证：不把它当"是/否"的开关，而是当连续变量来看（越接近一年高点越强），结论同向——<strong>+4.488%，t = +2.95</strong>。</p>
+<p>两个口径，同一个方向。看起来它站得很稳。</p>
+<hr />
+<h2 id="四第一个裂缝换个问法它就不显著了">四、第一个裂缝：换个问法，它就不显著了</h2>
+<p>同一批数据，另一道检验给出了不一样的答案。</p>
+<p><strong>检验 A-2（只控制 60 日涨幅，用分组匹配）：</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>高位组的额外收益</td>
+<td><strong>+0.391%</strong></td>
+</tr>
+<tr>
+<td>置信区间</td>
+<td><strong>[−1.05%, +1.28%]</strong></td>
+</tr>
+<tr>
+<td>判定</td>
+<td><strong>不显著</strong>（区间包含 0）</td>
+</tr>
+</tbody>
+</table></div>
+<p>同一个指标、同一批样本，一个说"显著为正"，一个说"看不出来"。</p>
+<p><strong>这不是数据打架，这是问法不同。</strong></p>
+<ul>
+<li>A-1 把 60 日、120 日、250 日涨幅<strong>全部</strong>控制住，等于把"长期涨幅"的干扰彻底剥离；</li>
+<li>A-2 只控制了 60 日涨幅，120 日和 250 日的涨幅还混在里面，干扰没有被清干净。</li>
+</ul>
+<p><strong>换句话说：结论依赖你问问题的方式。</strong> 这一点很重要，但还不是致命的——因为 A-1 的控制更彻底，按理说它的答案更可信。</p>
+<p><strong>真正致命的在下一步。</strong></p>
+<hr />
+<h2 id="五决定性的一步把它拆成慢慢涨上去的和暴涨上去的">五、决定性的一步：把它拆成"慢慢涨上去的"和"暴涨上去的"</h2>
+<p>前面说过，这项指标有两种完全不同的触发路径。于是最关键的一道检验就是：</p>
+<blockquote>
+<p><strong>把样本按"前期涨幅"分成几组，看它在每一组里是否都成立。</strong></p>
+</blockquote>
+<p>如果它是真的"位置信号"，那么<strong>在慢慢涨上来那一组里，它应该同样有效</strong>——因为那才是它想描述的东西。</p>
+<p>如果它只在暴涨组里有效，那它描述的就不是"位置"，而是别的什么。</p>
+<p><strong>结果：</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>前期涨幅分组</th>
+<th style="text-align: right;">该指标的效应</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>涨幅低（慢牛）</strong></td>
+<td style="text-align: right;"><strong>−0.07%</strong>（约等于没有）</td>
+</tr>
+<tr>
+<td><strong>涨幅高（暴涨）</strong></td>
+<td style="text-align: right;"><strong>+1.21%</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>全部效应，都来自"前期暴涨"那一组。</strong></p>
+<p>在它真正想描述的那个场景里——慢慢爬升、守住高位——它的效应是 <strong>−0.07%</strong>，约等于零。而且这一组的置信区间是 <strong>[−2.78%, +1.92%]</strong>，稳稳地跨着 0。</p>
+<p><strong>判定：不成立。</strong></p>
+<h3 id="它到底是什么">它到底是什么</h3>
+<p>现在回头看，真相很清楚：</p>
+<blockquote>
+<p>它测到的不是"<strong>站在高位所以还会涨</strong>"，而是"<strong>暴涨之后会分化</strong>"——有的继续冲，有的掉回来，平均下来略有正偏。</p>
+</blockquote>
+<p>而"暴涨之后会怎样"这件事，早就已经被"涨幅"这个变量解释过了（本系列第 3 篇：在这批数据里，追强的方向是负的，这个正偏只是那个现象的另一面）。</p>
+<blockquote>
+<p><strong>所以它不是一个新发现，它是旧现象的一面镜子。</strong></p>
+</blockquote>
+<p>这也顺带解释了第四节那个裂缝：A-1 之所以显著，是因为它把长期涨幅控制住之后，剩下的那点东西恰好是这个"暴涨分化"的残留；而 A-2 没控干净，反而把它和涨幅的影响混在一起，看不清楚。</p>
+<p><strong>一个 t = 5.02 的漂亮结果，倒在了这一刀下面。</strong></p>
+<hr />
+<h2 id="六关键问题它在什么范围内死了">六、关键问题：它在什么范围内死了</h2>
+<p>到这里，很多人会写一句："该指标无效。"</p>
+<p><strong>这句话是不准确的，它超出了证据覆盖的范围。</strong></p>
+<p>因为整个检验问的是一个<strong>非常具体</strong>的问题：</p>
+<blockquote>
+<p><strong>在全市场范围内，按这项指标单独选股，能不能拿到涨幅之外的额外收益？</strong></p>
+</blockquote>
+<p>答案是不能。<strong>这才是被判死的东西。</strong></p>
+<p>但"能不能单独选股"只是它能被使用的一种方式。还有另一种完全不同的用法：</p>
+<blockquote>
+<p><strong>在已经筛出来的一批标的里，用它作为进一步区分的条件之一。</strong></p>
+</blockquote>
+<p>这两种用法，是<strong>两个不同的研究问题</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: center;">#</th>
+<th>问题</th>
+<th>本次证据是否覆盖</th>
+<th style="text-align: center;">结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>A</strong></td>
+<td>它能不能作为<strong>全市场独立选股信号</strong></td>
+<td>✅ 覆盖</td>
+<td style="text-align: center;">❌ <strong>判死</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>B</strong></td>
+<td>它能不能作为<strong>域门槛 / 条件变量</strong></td>
+<td>❌ <strong>未覆盖</strong></td>
+<td style="text-align: center;">⬜ <strong>不判死，保留</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>B 这一栏，本次研究根本没测过。</strong></p>
+<p>没测过，就不能宣布死亡。就像你不能因为一个人没参加过马拉松，就说他跑不了马拉松。</p>
+<hr />
+<h2 id="七这一节请慢慢读不判死不等于证明有效">七、⚠️ 这一节请慢慢读："不判死"不等于"证明有效"</h2>
+<p>这是本文最想守住的一条纪律，也是最容易被人读歪的地方。</p>
+<p>表格里 B 那一栏写的是"不判死，保留"。这句话<strong>非常容易被理解成</strong>：</p>
+<blockquote>
+<p>~~"它在 B 范围里是有效的，只是这次没测。"~~</p>
+</blockquote>
+<p><strong>这个理解是错的，而且是有害的。</strong></p>
+<p>"不判死"真正的含义只有一句：</p>
+<blockquote>
+<p><strong>当前证据不足以杀死它。</strong></p>
+</blockquote>
+<p>仅此而已。它不包含任何正面的判断。它<strong>不</strong>说明它在 B 范围里有效，<strong>不</strong>说明它值得被使用，<strong>不</strong>说明我们应该对它抱有期待。</p>
+<p>两者的差别，可以用一句话分开：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>说法</th>
+<th>性质</th>
+<th style="text-align: center;">是否允许</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"本次证据没有覆盖这个用法"</td>
+<td>对<strong>证据状态</strong>的描述</td>
+<td style="text-align: center;">✅</td>
+</tr>
+<tr>
+<td>"它在这个用法下有效"</td>
+<td>对<strong>结论</strong>的主张</td>
+<td style="text-align: center;">⛔ 无证据，禁止</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>"没被证明是错的"和"被证明是对的"，中间隔着整个证据体系的距离。</strong></p>
+</blockquote>
+<p>这条纪律为什么重要？因为一旦把"不判死"读成"有效"，接下来就会发生一件事：<strong>有人会拿它去用。</strong> 而支持他去用的，其实什么都没有——只是一个"我们还没来得及测它"的事实。</p>
+<p><strong>所以本文在这里明确写下</strong>：B 范围的结论是<strong>"未检验"</strong>，不是"待启用"。</p>
+<hr />
+<h2 id="八复活条件四条里倒了哪一条就是它的死亡坐标">八、复活条件：四条里倒了哪一条，就是它的死亡坐标</h2>
+<p>按本栏目的规矩（本系列第 4 篇讲过为什么要写这一栏），每个被判死的结论都要附上一句：<strong>如果将来要为它翻案，必须先拿出什么。</strong></p>
+<p>这项指标的复活条件有四条，必须同时成立：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: center;">#</th>
+<th>复活条件</th>
+<th style="text-align: center;">当前状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1</td>
+<td>控制住各期涨幅后，增量显著为正</td>
+<td style="text-align: center;">✅ 满足</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td>近十年子样本方向一致</td>
+<td style="text-align: center;">✅ 满足</td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td>在可交易子集内不反向</td>
+<td style="text-align: center;">✅ 满足</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>4</strong></td>
+<td><strong>增量必须来自"低涨幅慢牛"那一组，而不是"高涨幅暴涨"那一组</strong></td>
+<td style="text-align: center;">❌ <strong>不满足</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>三条满足，一条倒下。</strong></p>
+<p>而这个结构本身，就是它死亡范围最精确的坐标：</p>
+<blockquote>
+<p>它不是"整体上不行"，它是<strong>在第 4 问上倒下的</strong>。
+而第 4 问恰恰问的是：<strong>"你到底是不是你想描述的那个东西？"</strong></p>
+</blockquote>
+<p><strong>它的死因不是"效果不好"，而是"名不副实"。</strong></p>
+<p>这一点对读者可能比结论本身更有用：<strong>很多看起来有统计显著性的发现，倒下的位置都在这里——不是数字不够漂亮，而是数字背后的东西，和你以为的不是同一个。</strong></p>
+<hr />
+<h2 id="九事后复核三处被挑出来的问题">九、事后复核：三处被挑出来的问题</h2>
+<p>判死之后，这份结论又被人从头挑了一遍。挑出三个焦点，这里一并公开：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>焦点</th>
+<th>挑的是什么</th>
+<th style="text-align: center;">结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>① A-1 显著与 A-2 不显著的矛盾</td>
+<td>是不是选择性采用了对自己有利的那个口径？</td>
+<td style="text-align: center;">站得住。A-1 控制更彻底；且判死的依据<strong>不是</strong> A-1 的显著性，而是拆解结果</td>
+</tr>
+<tr>
+<td>② 拆解方式与预先登记的方案不一致</td>
+<td>预登记是双维 3×3，实际做成了单维 5 组</td>
+<td style="text-align: center;">可接受。双维因两组高度相关导致空组；改为单维 + 回归双重控制，<strong>口径更严格</strong>，且核心结论不受影响</td>
+</tr>
+<tr>
+<td>③ 重叠样本的 t 值可能被高估</td>
+<td>是不是把显著度算高了？</td>
+<td style="text-align: center;">不影响判死。判死靠的是<strong>块自举置信区间</strong>（已处理序列相关），不是 t 值</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>复核结论：判死成立。</strong></p>
+<p>把这三处公开出来的理由很简单：<strong>一份结论的可信度，不取决于它有多漂亮，而取决于它经得起多少种问法。</strong></p>
+<hr />
+<h2 id="十这条研究的边界诚实清单">十、这条研究的边界（诚实清单）</h2>
+<ol>
+<li><strong>判死范围有限</strong>：本次只判死"作为全市场独立选股信号"，<strong>未判死</strong>其他用法——但"未判死"不等于"有效"（见第七节）。</li>
+<li><strong>样本为全市场口径，但仅限特定区间</strong>：5514 只标的 × 5245 个交易日（2005 年 1 月至 2026 年 8 月），含 292 只已退市标的（约 5.3%），已修正幸存者偏差。<strong>换一个市场、换一段区间，结论可能不同。</strong></li>
+<li><strong>"零效应"不等于"精确等于零"</strong>：低涨幅组的效应是 −0.07%，置信区间 [−2.78%, +1.92%]。准确的表述是"<strong>数据中看不出它有作用</strong>"，不是"它的作用恰好是零"。</li>
+<li><strong>A-1 与 A-2 的差异未完全消除</strong>：两个口径给出不同答案，本文采用的是控制更彻底的那个（A-1），并说明了理由。<strong>存在另一种解释路径的可能。</strong></li>
+<li><strong>复活条件第 4 条是主观性最强的一条</strong>："来自慢牛组"这个要求依赖对分组方式的选择。这一点没有完美解法，只能公开。</li>
+</ol>
+<hr />
+<h2 id="金句墙">金句墙</h2>
+<blockquote>
+<p><strong>统计显著，不等于结论成立——它只说明"不像运气"，不说明"是你以为的那个原因"。</strong></p>
+<p><strong>它测到的不是"站在高位所以还会涨"，而是"暴涨之后会分化"。</strong></p>
+<p><strong>一个 t = 5.02 的漂亮结果，倒在了"把它拆开"这一刀下面。</strong></p>
+<p><strong>判死必须有范围：本次死的是"能不能单独选股"，不是"能不能做别的"。</strong></p>
+<p><strong>"不判死"真正的含义只有一句：当前证据不足以杀死它。多一个字都不能加。</strong></p>
+<p><strong>"没被证明是错的"和"被证明是对的"，中间隔着整个证据体系的距离。</strong></p>
+<p><strong>很多发现的倒下位置都在这里：不是数字不够漂亮，而是数字背后的东西，和你以为的不是同一个。</strong></p>
+<p><strong>一份结论的可信度，不取决于它有多漂亮，而取决于它经得起多少种问法。</strong></p>
+</blockquote>
+<hr />
+<h2 id="行动清单给任何一个被证伪的结论划边界">行动清单：给任何一个"被证伪"的结论划边界</h2>
+<blockquote>
+<p><strong>本文不提供任何投资行动建议。以下清单用于读者检验本文及其他研究的结论。</strong></p>
+</blockquote>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: center;">#</th>
+<th>动作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1</td>
+<td><strong>追问范围。</strong> 看到"某方法无效"时，问一句：它是在<strong>哪个问题</strong>上无效的？全市场选股、还是特定条件筛？</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td><strong>分辨"不判死"与"有效"。</strong> 遇到"没有被证伪"的说法，检查它是否被偷偷写成了"因此有效"。<strong>这是最常见的一次偷换。</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td><strong>看复活条件倒在哪一条。</strong> 倒下的那一条，就是这个结论真正的死因；满足的那几条，说明它不是全错。</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td><strong>找拆解法。</strong> 任何一个聚合的漂亮数字，都可以问："把它按某个维度拆开，效应还在每一组里吗？"</td>
+</tr>
+<tr>
+<td style="text-align: center;">5</td>
+<td><strong>要求公开被挑出来的问题。</strong> 一份没有被质疑过的结论，和一个没被检验过的结论，是同一件事。</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2 id="数据来源与样本说明">数据来源与样本说明</h2>
+<p>★ <strong>本文所有案例与测算均为作者基于公开数据的独立整理（原创），非引用第三方研究成果。</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据来源</td>
+<td>A 股公开行情数据（通过公开数据接口获取）</td>
+</tr>
+<tr>
+<td>数据区间</td>
+<td>2005 年 1 月 – 2026 年 8 月（5245 个交易日）</td>
+</tr>
+<tr>
+<td>样本构成</td>
+<td>全市场口径 <strong>5514 只</strong>标的，含已退市 <strong>292 只</strong>（约 5.3%），已修正幸存者偏差</td>
+</tr>
+<tr>
+<td>指标定义</td>
+<td>高位度 = 当前价 ÷ 过去 252 个交易日最高价；≥ 0.75 记为高位组</td>
+</tr>
+<tr>
+<td>控制变量</td>
+<td>60 / 120 / 250 日涨幅分位</td>
+</tr>
+<tr>
+<td>主检验</td>
+<td>分组匹配 + 因子回归双口径；持有窗口 60 日为主、120 日复核</td>
+</tr>
+<tr>
+<td>效应拆解</td>
+<td>按 60 日涨幅分位分组，考察组内增量</td>
+</tr>
+<tr>
+<td>置信区间</td>
+<td>块自举法（块长 20），已处理序列相关</td>
+</tr>
+<tr>
+<td>已知局限</td>
+<td>见第十节边界清单；A-1 与 A-2 口径差异未完全消除</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>关于可复核性</strong>：本文不列出个别标的名称——研究样本为全市场口径，研究对象是<strong>结论的适用范围</strong>，与具体标的无关。上面已公开<strong>样本构成、指标定义、控制变量、检验方式与置信区间算法</strong>，读者可据此自行构造同类样本，用同样的口径复跑。<strong>能复核的是方法与过程，不是几个名字。</strong></p>
+<p>本文研究对象为<strong>研究方法</strong>，不对任何证券作出评价、推荐或投资建议。</p>
+<hr />
+<h2 id="免责声明">免责声明</h2>
+<p>本文为原创研究分享，所载内容与数据均来自公开渠道，仅供学习与方法探讨之用。</p>
+<p>本文不构成任何投资建议、要约或承诺，不指向任何具体投资标的。本文采用全市场口径样本，不列出个别标的名称，亦不构成个股诊断或评价。</p>
+<p>本文所列百分比与统计量均为特定样本与特定区间内的历史统计结果，<strong>不代表未来收益，也不构成任何形式的收益预测或承诺</strong>。文中"判死""不判死"等表述，均为对<strong>特定研究问题下证据状态</strong>的描述，不构成对任何方法或指标的有效性主张。</p>
+<p>投资有风险，决策需谨慎。请根据自身实际情况独立判断，并自行承担相应后果。</p>
+<hr />
+<p><em>本文属「私家智囊·研究」系列。同系列已发布：开栏篇《从企业价值到资本配置》，第 2 篇《"跌了这么多，总该抄底了吧"》，第 3 篇《"涨得多的，以后还会涨"》，第 4 篇《怎么杀死一个看起来很赚的策略》，第 5 篇《先写死标准，再跑数据》，第 6 篇《我把自己的铜策略定级为 C 级，然后停止优化》，第 7 篇《海龟突破：walk-forward 之后还剩多少》，第 8 篇《A 股股指期货没有免费午餐》。</em></p>
+
+      </div>
+
+      <div class="related-block">
+        <h3>同系列研究</h3>
+        <a href="research-value-capital-allocation.html">开栏第一篇《从企业价值到资本配置》 <span>· 价值投资的收益来源、市场估值与状态依赖型有限杠杆研究</span></a>
+        <a href="research-02.html">第 2 篇《“跌了这么多，总该抄底了吧”》 <span>· 我用 744 次买入，验证了这个念头有多危险</span></a>
+        <a href="research-03.html">第 3 篇《“涨得多的，以后还会涨”》 <span>· 我用五轮验证，把这个念头证伪了</span></a>
+        <a href="research-04.html">第 4 篇《怎么杀死一个看起来很赚的策略》 <span>· 一份“杀模型”的十诫，和九块墓碑</span></a>
+        <a href="research-05.html">第 5 篇《先写死标准，再跑数据》 <span>· 预注册到底在防什么</span></a>
+        <a href="research-06.html">第 6 篇《我把自己的铜策略定级为 C 级，然后停止优化》 <span>· 一份研究是怎么在“看起来有效”的时候被自己拆掉的</span></a>
+        <a href="research-07.html">第 7 篇《海龟突破：walk-forward 之后还剩多少》 <span>· 一个“跑赢”的策略，被劈成两半之后</span></a>
+        <a href="research-08.html">第 8 篇《A 股股指期货没有免费午餐》 <span>· 三次转向、一个不存在的开源包，和一段 48% 缺失的数据</span></a>
+      </div>
+
+      <div style="text-align:center;margin-top:40px;">
+        <a href="./research.html" class="btn-back">← 返回研究栏目</a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p class="slogan">家庭财务的<span>规划师</span>与<span>守夜人</span></p>
+      <p class="copyright">
+        <a href="./disclaimer.html" style="color:var(--text-muted);text-decoration:underline;">免责声明</a> ·
+        <a href="./privacy-policy.html" style="color:var(--text-muted);text-decoration:underline;">隐私政策</a> ·
+        <a href="./terms.html" style="color:var(--text-muted);text-decoration:underline;">使用条款</a>
+      </p>
+      <p class="copyright" style="margin-top:4px;">私家智囊 · 2026</p>
+    </div>
+  </footer>
+
+</body>
+</html>
