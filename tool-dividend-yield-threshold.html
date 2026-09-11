@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>股息率门槛验证器 — 私家智囊</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, "PingFang SC", "Noto Sans SC", "Helvetica Neue", sans-serif; background: #0f1424; color: #e8e6e3; line-height: 1.7; min-height: 100vh; }
+.container { max-width: 900px; margin: 0 auto; padding: 24px 20px 60px; }
+.header { text-align: center; padding: 30px 0 20px; border-bottom: 1px solid rgba(212,168,83,.15); margin-bottom: 30px; }
+.header h1 { font-size: 1.6rem; font-weight: 400; color: #d4a853; margin-bottom: 8px; }
+.header p { color: #8a8885; font-size: .88rem; }
+.card { background: #1a1f30; border-radius: 4px; padding: 24px 20px; margin-bottom: 16px; border: 1px solid rgba(212,168,83,.12); }
+.card-title { font-size: 1rem; font-weight: 500; color: #d4a853; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.input-group { margin-bottom: 14px; }
+.input-label { display: block; font-size: .82rem; color: #b0aeab; margin-bottom: 6px; }
+.input-label .hint { color: #6a6865; font-size: .75rem; margin-left: 6px; }
+.input-label .unit { color: #d4a853; font-size: .75rem; margin-left: 6px; }
+input[type="number"], input[type="text"], select { width: 100%; padding: 10px 12px; font-size: .92rem; background: #232840; border: 1px solid #3a3f55; border-radius: 4px; color: #e8e6e3; outline: none; transition: border-color .3s; font-family: inherit; }
+input:focus, select:focus { border-color: #d4a853; background: #2a2f48; }
+.btn { display: inline-block; padding: 12px 32px; font-size: .92rem; background: #d4a853; color: #0a0e1a; border: none; border-radius: 4px; cursor: pointer; font-weight: 500; transition: background .3s; }
+.btn:hover { background: #f0c868; }
+.btn-block { display: block; width: 100%; }
+.row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+.row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media(max-width:640px){ .row, .row-2 { grid-template-columns: 1fr; } }
+.hint-box { background: rgba(212,168,83,.04); border-radius: 4px; padding: 12px 16px; margin-bottom: 18px; font-size: .82rem; color: #8a8885; line-height: 1.6; border-left: 2px solid rgba(212,168,83,.2); }
+.warning-box { background: rgba(244,67,54,.04); border-left: 3px solid #f44336; padding: 14px 18px; border-radius: 3px; margin: 16px 0; font-size:.85rem; color: #b0aeab; line-height:1.6; }
+.warning-box strong { color: #f44336; }
+.positive-box { background: rgba(76,175,80,.04); border-left: 3px solid #4caf50; padding: 14px 18px; border-radius: 3px; margin: 16px 0; font-size:.85rem; color: #b0aeab; line-height:1.6; }
+.positive-box strong { color: #4caf50; }
+.neutral-box { background: rgba(212,168,83,.04); border-left: 3px solid #d4a853; padding: 14px 18px; border-radius: 3px; margin: 16px 0; font-size:.85rem; color: #b0aeab; line-height:1.6; }
+.neutral-box strong { color: #d4a853; }
+.result-section { background: linear-gradient(180deg,#1a1f30 0%,#1f2440 100%); border: 1px solid rgba(212,168,83,.15); border-radius: 4px; padding: 30px 24px; margin: 24px 0; text-align: center; }
+.result-label { font-size: .82rem; color: #8a8885; margin-bottom: 10px; }
+.result-value { font-size: clamp(2.5rem,5vw,4rem); font-weight: 300; color: #d4a853; margin-bottom: 8px; }
+.result-sub { font-size: .9rem; color: #8a8885; }
+.badge { display: inline-block; padding: 6px 16px; border-radius: 3px; font-size: .9rem; margin: 8px 0; }
+.badge-pass { background: rgba(76,175,80,.15); color: #4caf50; border: 1px solid #4caf50; }
+.badge-warn { background: rgba(255,152,0,.15); color: #ff9800; border: 1px solid #ff9800; }
+.badge-fail { background: rgba(244,67,54,.15); color: #f44336; border: 1px solid #f44336; }
+.summary-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed rgba(255,255,255,.05); font-size: .88rem; }
+.summary-row .lbl { color: #8a8885; }
+.summary-row .val { color: #d4a853; font-weight: 500; }
+.dividend-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+.dividend-table th, .dividend-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid rgba(212,168,83,.08); font-size: .88rem; }
+.dividend-table th { color: #d4a853; font-weight: 500; font-size: .82rem; }
+.dividend-table td { color: #b0aeab; }
+.dividend-table .row-pass { background: rgba(76,175,80,.05); }
+.dividend-table .row-warn { background: rgba(255,152,0,.05); }
+.dividend-table .row-fail { background: rgba(244,67,54,.05); }
+.footer { text-align: center; padding: 30px 0 10px; font-size: .8rem; color: #6a6865; }
+.footer a { color: #d4a853; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>📊 股息率门槛验证器</h1>
+        <p>用 744 次买入的样本结论,验证你手上的股票</p>
+        <p style="color:#6a6865; font-size:.78rem; margin-top:6px;">对应研究 02《"跌了这么多,总该抄底了吧"》</p>
+    </div>
+
+    <div class="hint-box">
+        <strong>核心结论(原研究):</strong> 2007-2026年,20只高股息标的、744次建仓事件,股息率≥5%门槛把最坏情形从 75%-86% 压到 20%-48%。744次建仓中,跌超50%只有2次(0.3%),跌超60%只有1次(0.1%)。<br>
+        <strong>反向警告:</strong> ~74%的"该卖了"信号是假信号(分红节奏改变导致),所以<strong>卖出前必须做分红验证</strong>。
+    </div>
+
+    <div class="card">
+        <div class="card-title">📝 填写数据</div>
+        <div class="row-2">
+            <div class="input-group">
+                <label class="input-label">股票名称/代码 <span class="hint">(选填)</span></label>
+                <input type="text" id="name" placeholder="例:某银行A / 600000">
+            </div>
+            <div class="input-group">
+                <label class="input-label">数据日期 <span class="hint">(选填)</span></label>
+                <input type="text" id="date" placeholder="例:2025-12-31">
+            </div>
+        </div>
+        <div class="row-2">
+            <div class="input-group">
+                <label class="input-label">当前股价 <span class="unit">元/股</span></label>
+                <input type="number" id="price" step="0.01" placeholder="10.00">
+            </div>
+            <div class="input-group">
+                <label class="input-label">过去12个月每股分红(DPS)<span class="unit">元/股</span></label>
+                <input type="number" id="dps" step="0.01" placeholder="0.50">
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-group">
+                <label class="input-label">5年前DPS <span class="unit">元</span></label>
+                <input type="number" id="dps-5y" step="0.01" placeholder="0.30">
+            </div>
+            <div class="input-group">
+                <label class="input-label">3年前DPS <span class="unit">元</span></label>
+                <input type="number" id="dps-3y" step="0.01" placeholder="0.40">
+            </div>
+            <div class="input-group">
+                <label class="input-label">1年前DPS <span class="unit">元</span></label>
+                <input type="number" id="dps-1y" step="0.01" placeholder="0.48">
+            </div>
+        </div>
+        <div class="row-2">
+            <div class="input-group">
+                <label class="input-label">公司行业 <span class="hint">(选填)</span></label>
+                <select id="industry">
+                    <option value="auto">自动判定</option>
+                    <option value="bank">银行</option>
+                    <option value="insurance">保险</option>
+                    <option value="energy">能源</option>
+                    <option value="steel">钢铁(周期股,反例)</option>
+                    <option value="transport">交运</option>
+                    <option value="utility">公用事业</option>
+                    <option value="telecom">通信</option>
+                    <option value="appliance">家电</option>
+                    <option value="other">其他</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label class="input-label">分红节奏变化 <span class="hint">(选填)</span></label>
+                <select id="rhythm">
+                    <option value="stable">稳定(年度分红)</option>
+                    <option value="changed">有变化(改中期/年数)</option>
+                    <option value="unknown">不知道</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn btn-block" onclick="verify()">运行门槛验证</button>
+    </div>
+
+    <div id="result"></div>
+
+    <div class="footer">
+        <p>📊 <a href="research.html">返回研究报告</a> · 数据本地计算 · 不上传任何信息</p>
+        <p style="margin-top:6px;">来源:研究 02《跌了这么多,总该抄底了吧》744次建仓事件</p>
+    </div>
+</div>
+
+<script>
+// 样本内744次建仓的统计
+const SAMPLE_STATS = {
+    totalTriggers: 744,
+    maxDrawdownThreshold: 60,
+    drawdownOver50: 2,
+    drawdownOver60: 1,
+    medianMaxDD: 14.1,  // 中位最大跌幅
+    p90MaxDD: 24.7,
+    worstCaseThresholded: 47.8,  // 设门槛后最坏情形(样本B)
+    worstCaseUnthresholded: 85.5,
+    sampleA: { name: '样本A 零售银行', triggers: 33, maxDD: 24.3, p90: 20.0, median: 10.9 },
+    sampleB: { name: '样本B 综合金融', triggers: 30, maxDD: 47.8, p90: 24.7, median: 14.1 },
+    sampleC: { name: '样本C 股份制银行', triggers: 13, maxDD: 20.5, p90: 14.1, median: 5.9 }
+};
+
+function verify() {
+    const name = document.getElementById('name').value || '该股票';
+    const date = document.getElementById('date').value || '当前';
+    const price = parseFloat(document.getElementById('price').value);
+    const dps = parseFloat(document.getElementById('dps').value);
+    const dps1y = parseFloat(document.getElementById('dps-1y').value);
+    const dps3y = parseFloat(document.getElementById('dps-3y').value);
+    const dps5y = parseFloat(document.getElementById('dps-5y').value);
+    const industry = document.getElementById('industry').value;
+    const rhythm = document.getElementById('rhythm').value;
+
+    if (isNaN(price) || isNaN(dps) || price <= 0 || dps < 0) {
+        alert('请填写当前股价和过去12个月每股分红。');
+        return;
+    }
+
+    // 1. 当前股息率
+    const dividendYield = (dps / price) * 100;
+
+    // 2. 判定门槛
+    const passThreshold = dividendYield >= 5;
+    const warnThreshold = dividendYield >= 3.5 && dividendYield < 5;
+    const passLevel = passThreshold ? 'pass' : warnThreshold ? 'warn' : 'fail';
+    const passText = passThreshold ? '✅ 通过 5% 门槛' : warnThreshold ? '⚠️ 3.5%-5% 警戒区' : '❌ 低于 3.5% 警戒线';
+    const passColor = passThreshold ? 'badge-pass' : warnThreshold ? 'badge-warn' : 'badge-fail';
+
+    // 3. 分红稳定性分析
+    const dpsValid = !isNaN(dps1y) && !isNaN(dps3y) && !isNaN(dps5y);
+    let stability = 'unknown';
+    let stabilityText = '未提供历史分红数据';
+    let cv = 0; // 变异系数
+    if (dpsValid) {
+        const dpsList = [dps5y, dps3y, dps1y, dps];
+        const mean = dpsList.reduce((a, b) => a + b, 0) / dpsList.length;
+        const std = Math.sqrt(dpsList.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b, 0) / dpsList.length);
+        cv = mean > 0 ? std / mean : 999;
+        if (cv < 0.15) { stability = 'high'; stabilityText = `稳定(变异系数${(cv*100).toFixed(1)}%)`; }
+        else if (cv < 0.30) { stability = 'medium'; stabilityText = `中等(变异系数${(cv*100).toFixed(1)}%)`; }
+        else { stability = 'low'; stabilityText = `不稳定(变异系数${(cv*100).toFixed(1)}%)`; }
+    }
+
+    // 4. 分红节奏分析
+    let rhythmWarning = false;
+    if (rhythm === 'changed') rhythmWarning = true;
+
+    // 5. 周期股反例
+    const isCyclical = industry === 'steel' || industry === 'energy';
+
+    // 6. 历史分红增长性
+    let growthRate = 0;
+    let growthText = '';
+    if (dpsValid && dps5y > 0) {
+        const totalYears = 5;
+        growthRate = (Math.pow(dps / dps5y, 1 / totalYears) - 1) * 100;
+        growthText = `${growthRate > 0 ? '+' : ''}${growthRate.toFixed(1)}%/年`;
+    }
+
+    // 7. 推断未来最大跌幅(基于样本统计)
+    let projectedMaxDD = SAMPLE_STATS.medianMaxDD;
+    if (passThreshold) {
+        // 通过门槛,基于样本中位
+        projectedMaxDD = SAMPLE_STATS.medianMaxDD;
+    } else {
+        // 不设门槛,最大跌幅可能更大
+        projectedMaxDD = SAMPLE_STATS.worstCaseUnthresholded * 0.5;
+    }
+
+    // 8. 反向信号(伪信号检测)
+    let sellFalseSignalProb = 0;
+    if (rhythm === 'changed') sellFalseSignalProb = 0.74;
+    else if (rhythm === 'stable') sellFalseSignalProb = 0.25;
+    else sellFalseSignalProb = 0.5;
+
+    // 9. 渲染结果
+    const result = [];
+
+    // 顶部核心结果
+    result.push(`
+        <div class="result-section">
+            <div class="result-label">${name} · ${date} · 当前股息率</div>
+            <div class="result-value">${dividendYield.toFixed(2)}%</div>
+            <div class="result-sub">门槛判定:</div>
+            <div class="badge ${passColor}">${passText}</div>
+            <div style="margin-top:18px; font-size:.85rem; color:#8a8885; line-height:1.7;">
+                5%是研究 02 验证的"建仓信号"门槛。3.5%以下是"减仓信号"门槛。
+            </div>
+        </div>
+    `);
+
+    // 第一个分析块:与样本对比
+    result.push(`
+        <div class="card">
+            <div class="card-title">📊 与 744 次建仓样本对比</div>
+            <div class="summary-row"><span class="lbl">样本数(744 次)</span><span class="val">总跌幅超 50% 的次数: <strong style="color:#4caf50;">2 次 (0.3%)</strong></span></div>
+            <div class="summary-row"><span class="lbl">跌幅超 60% 的次数</span><span class="val">仅 <strong style="color:#4caf50;">1 次 (0.1%)</strong></span></div>
+            <div class="summary-row"><span class="lbl">中位最大跌幅</span><span class="val">14.1%</span></div>
+            <div class="summary-row"><span class="lbl">P90 最大跌幅</span><span class="val">24.7%</span></div>
+            <div class="summary-row"><span class="lbl">最坏情形(设门槛后)</span><span class="val">47.8%(样本B综合金融)</span></div>
+            <div class="summary-row"><span class="lbl">最坏情形(无门槛随机)</span><span class="val"><strong style="color:#f44336;">75%-86%</strong></span></div>
+            <p style="font-size:.85rem; color:#8a8885; margin-top:12px; line-height:1.7;">
+                你的股息率为 <strong style="color:#d4a853;">${dividendYield.toFixed(2)}%</strong>。
+                ${passThreshold ? '如果满足 5% 门槛,预计建仓后未来 1-3 年的最大跌幅区间:<strong style="color:#d4a853;">' + SAMPLE_STATS.medianMaxDD + '% ~ ' + SAMPLE_STATS.worstCaseThresholded + '%</strong>。' : '当前未达 5% 门槛,如果建仓,最坏情形可能达 <strong style="color:#f44336;">' + SAMPLE_STATS.worstCaseUnthresholded + '%</strong>(样本无门槛基线)。'}
+            </p>
+        </div>
+    `);
+
+    // 第二个分析块:分红稳定性
+    if (dpsValid) {
+        result.push(`
+            <div class="card">
+                <div class="card-title">📈 分红稳定性分析</div>
+                <table class="dividend-table">
+                    <thead>
+                        <tr>
+                            <th>时间点</th>
+                            <th>每股分红(元)</th>
+                            <th>vs 当前</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>5年前</td>
+                            <td>${dps5y.toFixed(3)}</td>
+                            <td>${dps5y > 0 ? ((dps/dps5y - 1) * 100).toFixed(1) + '%' : '-'}</td>
+                        </tr>
+                        <tr>
+                            <td>3年前</td>
+                            <td>${dps3y.toFixed(3)}</td>
+                            <td>${dps3y > 0 ? ((dps/dps3y - 1) * 100).toFixed(1) + '%' : '-'}</td>
+                        </tr>
+                        <tr>
+                            <td>1年前</td>
+                            <td>${dps1y.toFixed(3)}</td>
+                            <td>${dps1y > 0 ? ((dps/dps1y - 1) * 100).toFixed(1) + '%' : '-'}</td>
+                        </tr>
+                        <tr style="background: rgba(212,168,83,.05);">
+                            <td><strong>当前(过去12个月)</strong></td>
+                            <td><strong>${dps.toFixed(3)}</strong></td>
+                            <td>—</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="summary-row"><span class="lbl">稳定性判定</span><span class="val">${stabilityText}</span></div>
+                <div class="summary-row"><span class="lbl">5年CAGR(分红增长率)</span><span class="val">${growthText || '无法计算'}</span></div>
+            </div>
+        `);
+    }
+
+    // 第三个分析块:信号与警告
+    result.push(`
+        <div class="card">
+            <div class="card-title">⚠️ 信号判定与警告</div>
+    `);
+
+    if (isCyclical) {
+        result.push(`
+            <div class="warning-box">
+                <strong>🚨 周期股警告</strong>
+                <p>该公司属于<strong>强周期行业(钢铁/能源)</strong>。研究 02 关键发现:周期股在景气顶点时,利润高、分红慷慨、股息率看着诱人,但随后盈利崩塌,跌幅远超常规。<br>
+                <strong>对周期股而言,高股息不是安全信号,而是陷阱信号</strong>——它反映的是"刚赚到一轮周期里最多的钱"。<br>
+                样本内仅有的"跌幅超 60%"那一例(某大型钢铁企业,-69.1%)就是这一机制。</p>
+            </div>
+        `);
+    }
+
+    if (rhythmWarning) {
+        result.push(`
+            <div class="warning-box">
+                <strong>🚨 分红节奏改变警告</strong>
+                <p>该公司分红节奏发生过变化(如"一年分一次"改成"一年分两次",或归属年度切换)。<br>
+                按"过去12个月"滚动计算的股息率,会出现<strong>技术性的腰斩</strong>——但实际分红能力一点没变,股价也没涨。<br>
+                <strong>在股息率降到 5% 以下时,务必先验证"每股分红是否真的减少"</strong>——这是研究 02 的关键补丁。<br>
+                样本显示,约 <strong>74% 的"该卖"信号是假信号</strong>。</p>
+            </div>
+        `);
+    }
+
+    if (stability === 'low' && dpsValid) {
+        result.push(`
+            <div class="warning-box">
+                <strong>⚠️ 分红不稳定警告</strong>
+                <p>该公司历史分红变异系数为 <strong>${(cv*100).toFixed(1)}%</strong>(高于 30%),分红波动较大。<br>
+                分红不稳定时,股息率作为信号的"干净度"会下降——滚动口径会反复出现技术性失真。<br>
+                <strong>建议:重点关注未来 2-3 年分红是否恢复稳定,而非只信单点股息率。</strong></p>
+            </div>
+        `);
+    }
+
+    if (passThreshold && stability === 'high' && !rhythmWarning && !isCyclical) {
+        result.push(`
+            <div class="positive-box">
+                <strong>✅ 综合判断:建仓信号有效</strong>
+                <p>1. 满足 5% 门槛 ✔<br>
+                2. 分红稳定 ✔<br>
+                3. 分红节奏未发生改变 ✔<br>
+                4. 非强周期行业 ✔<br><br>
+                在本样本历史统计下,这种"四星组合"的建仓事件出现极端跌幅的频率显著低于无门槛情形。但请注意:这是历史统计,不是未来保证。</p>
+            </div>
+        `);
+    }
+
+    result.push(`</div>`);
+
+    // 第四个块:卖出信号补丁
+    result.push(`
+        <div class="card">
+            <div class="card-title">🔁 卖出信号补丁(卖出前必看)</div>
+            <p style="font-size:.88rem; color:#b0aeab; margin-bottom:12px;">研究 02 关键发现:约 <strong style="color:#d4a853;">74%</strong> 的"该卖"信号是假信号。在执行卖出前,必须做一次分红验证:</p>
+            <div class="neutral-box">
+                <strong>📋 卖出前自检流程</strong>
+                <p>股息率降到门槛以下<br>
+                ↓<br>
+                <strong>先问:现在的每股分红 ≥ 建仓时的 95% 吗?</strong><br>
+                ├─ 是 → 是股价涨上去的(真信号,可考虑减仓)<br>
+                └─ 否 → 是分红数字掉了(假信号,不执行卖出)</p>
+            </div>
+            <p style="font-size:.82rem; color:#8a8885; margin-top:8px;">这一条能挡掉样本中约四分之三的误操作。先验证,再行动。</p>
+        </div>
+    `);
+
+    // 第五个块:边界与说明
+    result.push(`
+        <div class="warning-box">
+            <strong>📐 边界与局限</strong>
+            <p>
+                ① <strong>样本边界:</strong> 20只长期高股息标的(银行/保险/能源/钢铁/交运/公用/通信/家电),非全市场无偏抽样。<br>
+                ② <strong>事件不独立:</strong> 同一段下跌行情会被多个相邻交易日重复计入,不能把 0.3% 当作概率。<br>
+                ③ <strong>周期股例外:</strong> 钢铁/能源/航运等强周期行业,本结论不适用。<br>
+                ④ <strong>历史不代表未来:</strong> 2007-2026 这二十年 A 股没有经历过极端情形完整检验。<br>
+                ⑤ <strong>不构成投资建议:</strong> 这是机制验证,不是买卖建议。
+            </p>
+        </div>
+    `);
+
+    document.getElementById('result').innerHTML = result.join('');
+    document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

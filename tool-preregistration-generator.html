@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>预注册模板生成器 — 私家智囊</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, "PingFang SC", "Noto Sans SC", "Helvetica Neue", sans-serif; background: #0f1424; color: #e8e6e3; line-height: 1.7; min-height: 100vh; }
+.container { max-width: 920px; margin: 0 auto; padding: 24px 20px 60px; }
+.header { text-align: center; padding: 30px 0 20px; border-bottom: 1px solid rgba(212,168,83,.15); margin-bottom: 30px; }
+.header h1 { font-size: 1.6rem; font-weight: 400; color: #d4a853; margin-bottom: 8px; }
+.header p { color: #8a8885; font-size: .88rem; }
+.card { background: #1a1f30; border-radius: 4px; padding: 24px 20px; margin-bottom: 16px; border: 1px solid rgba(212,168,83,.12); }
+.card-title { font-size: 1rem; font-weight: 500; color: #d4a853; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.card-title .step { display: inline-block; width: 26px; height: 26px; background: #d4a853; color: #0a0e1a; border-radius: 50%; text-align: center; line-height: 26px; font-size: .85rem; font-weight: 600; }
+.input-group { margin-bottom: 14px; }
+.input-label { display: block; font-size: .82rem; color: #b0aeab; margin-bottom: 6px; }
+.input-label .hint { color: #6a6865; font-size: .75rem; margin-left: 6px; }
+.input-label .required { color: #d4a853; font-size: .7rem; margin-left: 4px; }
+input[type="text"], textarea, select { width: 100%; padding: 10px 12px; font-size: .92rem; background: #232840; border: 1px solid #3a3f55; border-radius: 4px; color: #e8e6e3; outline: none; transition: border-color .3s; font-family: inherit; }
+input:focus, textarea:focus, select:focus { border-color: #d4a853; background: #2a2f48; }
+textarea { min-height: 70px; resize: vertical; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media(max-width:640px){ .row { grid-template-columns: 1fr; } }
+.btn { display: inline-block; padding: 12px 32px; font-size: .92rem; background: #d4a853; color: #0a0e1a; border: none; border-radius: 4px; cursor: pointer; font-weight: 500; transition: background .3s; }
+.btn:hover { background: #f0c868; }
+.btn-block { display: block; width: 100%; }
+.btn-secondary { background: transparent; color: #d4a853; border: 1px solid #d4a853; margin-left: 10px; }
+.btn-secondary:hover { background: rgba(212,168,83,.1); }
+.hint-box { background: rgba(212,168,83,.04); border-radius: 4px; padding: 12px 16px; margin-bottom: 18px; font-size: .82rem; color: #8a8885; line-height: 1.6; border-left: 2px solid rgba(212,168,83,.2); }
+.warning-box { background: rgba(244,67,54,.04); border-left: 3px solid #f44336; padding: 14px 18px; border-radius: 3px; margin: 16px 0; font-size:.85rem; color: #b0aeab; line-height:1.6; }
+.warning-box strong { color: #f44336; }
+.positive-box { background: rgba(76,175,80,.04); border-left: 3px solid #4caf50; padding: 14px 18px; border-radius: 3px; margin: 16px 0; font-size:.85rem; color: #b0aeab; line-height:1.6; }
+.positive-box strong { color: #4caf50; }
+.section-break { font-size: .8rem; color: #6a6865; letter-spacing: .1em; margin: 30px 0 12px; text-align: center; }
+.preview-section { background: #0a0e1a; border: 1px solid rgba(212,168,83,.2); border-radius: 4px; padding: 30px 24px; margin: 24px 0; }
+.preview-h { font-size: 1.1rem; color: #d4a853; margin: 18px 0 10px; padding-bottom: 6px; border-bottom: 1px solid rgba(212,168,83,.15); }
+.preview-h:first-of-type { margin-top: 0; }
+.preview-h2 { font-size: .92rem; color: #d4a853; margin: 12px 0 6px; }
+.preview-body { font-size: .88rem; color: #b0aeab; line-height: 1.8; }
+.preview-body code { background: rgba(212,168,83,.08); padding: 2px 6px; border-radius: 2px; color: #d4a853; font-size: .82rem; }
+.preview-body ul, .preview-body ol { padding-left: 20px; }
+.preview-body li { margin-bottom: 4px; }
+.checklist-item { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 6px; }
+.checklist-item input[type="checkbox"] { margin-top: 4px; }
+.checklist-item label { font-size: .88rem; color: #b0aeab; cursor: pointer; }
+.footer { text-align: center; padding: 30px 0 10px; font-size: .8rem; color: #6a6865; }
+.footer a { color: #d4a853; text-decoration: none; }
+.hidden { display: none; }
+.section-card { border-left: 3px solid #d4a853; }
+.section-card.optional { border-left-color: #3a3f55; }
+.tag-display { display: inline-block; padding: 3px 10px; background: rgba(212,168,83,.12); color: #d4a853; border-radius: 2px; font-size: .75rem; margin-right: 6px; }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🔒 预注册模板生成器</h1>
+        <p>先写死标准,再跑数据——防住"先射箭再画靶"</p>
+        <p style="color:#6a6865; font-size:.78rem; margin-top:6px;">对应研究 05《先写死标准,再跑数据》</p>
+    </div>
+
+    <div class="warning-box">
+        <strong>⚠️ 这是冻结文档,不是草稿。</strong>
+        完成本表后,所有字段不得修改;如需调整,必须<strong>重新生成一份新的预注册</strong>,原文件保留为审计证据。<br>
+        这就是"防逃逸条款"——它堵死了"换指标再试一次"的最舒服的逃逸路径。
+    </div>
+
+    <!-- 第一块:命题 -->
+    <div class="card section-card">
+        <div class="card-title"><span class="step">1</span> 命题(必须能被数据判死)</div>
+        <div class="hint-box">
+            命题必须是一句可以被数据判死的话。<br>
+            <strong>推荐双向设计</strong>:不预设方向,把两个方向的结论都写好。跑前就承认"如果方向反了,是我错"。
+        </div>
+        <div class="input-group">
+            <label class="input-label">主命题 <span class="required">*必填</span><span class="hint">(单方向,比如"X有效果")</span></label>
+            <input type="text" id="hypothesis-main" placeholder="例:股息率5%门槛策略在A股跑赢买入持有">
+        </div>
+        <div class="input-group">
+            <label class="input-label">反向命题 <span class="required">*必填</span><span class="hint">(写清楚"方向反了,是我错")</span></label>
+            <input type="text" id="hypothesis-reverse" placeholder="例:股息率5%门槛策略不跑赢,或方向相反">
+        </div>
+        <div class="input-group">
+            <label class="input-label">不显著时的结论 <span class="required">*必填</span><span class="hint">(既不是正向也不是反向——怎么办)</span></label>
+            <input type="text" id="hypothesis-null" placeholder="例:两个方向都不显著——研究终止,写负结果归档">
+        </div>
+    </div>
+
+    <!-- 第二块:数据资格 -->
+    <div class="card section-card">
+        <div class="card-title"><span class="step">2</span> 数据资格(先审数据,再跑分析)</div>
+        <div class="hint-box">数据资格不过关,即使分析漂亮也得作废。<strong>这是十诫第1条的应用</strong>。</div>
+        <div class="input-group">
+            <label class="input-label">样本范围 <span class="required">*必填</span></label>
+            <textarea id="data-sample" placeholder="例:全市场A股,2007年1月-2026年8月,包含已退市标的(5514只)"></textarea>
+        </div>
+        <div class="row">
+            <div class="input-group">
+                <label class="input-label">幸存者偏差 <span class="required">*必填</span></label>
+                <select id="data-survivor">
+                    <option value="handled">已修正(包含退市)</option>
+                    <option value="partial">部分修正</option>
+                    <option value="unhandled">未修正(只统计活样本)</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label class="input-label">价格口径 <span class="required">*必填</span></label>
+                <select id="data-price">
+                    <option value="hfq">前复权(财富口径)</option>
+                    <option value="qfq">后复权</option>
+                    <option value="bfq">不复权</option>
+                </select>
+            </div>
+        </div>
+        <div class="input-group">
+            <label class="input-label">数据来源 <span class="required">*必填</span></label>
+            <input type="text" id="data-source" placeholder="例:Wind / Tushare / Choice / 公开数据接口">
+        </div>
+        <div class="input-group">
+            <label class="input-label">停牌/涨跌停处理 <span class="required">*必填</span></label>
+            <textarea id="data-suspension" placeholder="例:涨跌停不可成交日剔除;连续不可成交则整期不参与"></textarea>
+        </div>
+    </div>
+
+    <!-- 第三块:实验规格 -->
+    <div class="card section-card">
+        <div class="card-title"><span class="step">3</span> 实验规格(细到别人能照着复现)</div>
+        <div class="input-group">
+            <label class="input-label">信号定义 <span class="required">*必填</span></label>
+            <textarea id="exp-signal" placeholder="例:过去12个月每股分红÷当前股价 ≥ 5%,T日收盘确认,T+1开盘执行"></textarea>
+        </div>
+        <div class="input-group">
+            <label class="input-label">分组方式 <span class="required">*必填</span></label>
+            <textarea id="exp-group" placeholder="例:按股息率分为高/中/低三组,或按分红稳定性分为稳定/不稳定两组"></textarea>
+        </div>
+        <div class="input-group">
+            <label class="input-label">成本假设 <span class="required">*必填</span><span class="hint">(必须前置,不许后置)</span></label>
+            <textarea id="exp-cost" placeholder="例:佣金双边万2.5 + 卖出印花千1 + 每边滑点万5 + 平今仓15倍费率"></textarea>
+        </div>
+        <div class="input-group">
+            <label class="input-label">统计检验方法 <span class="required">*必填</span></label>
+            <input type="text" id="exp-stat" placeholder="例:t检验 + 块自举(块长20) + 95%置信区间">
+        </div>
+    </div>
+
+    <!-- 第四块:对照 -->
+    <div class="card section-card">
+        <div class="card-title"><span class="step">4</span> 对照(必须同期跑,必须有"随机组")</div>
+        <div class="hint-box">只报告"我的方法收益X%"没有意义——必须有同期对照。"随机组"专门用来回答"我这个方法的差异,会不会只是抽样噪声"。</div>
+        <div class="input-group">
+            <label class="input-label">对照组1 <span class="required">*必填</span></label>
+            <input type="text" id="ctrl-1" placeholder="例:全样本等权(基准)">
+        </div>
+        <div class="input-group">
+            <label class="input-label">对照组2 <span class="required">*必填</span></label>
+            <input type="text" id="ctrl-2" placeholder="例:按规模分层(检验效应是不是只在小盘上)">
+        </div>
+        <div class="input-group">
+            <label class="input-label">对照组3(随机组) <span class="required">*必填</span></label>
+            <input type="text" id="ctrl-3" placeholder="例:随机组合模拟500次,看差异是否在噪声范围内">
+        </div>
+    </div>
+
+    <!-- 第五块:弃用清单 -->
+    <div class="card section-card">
+        <div class="card-title"><span class="step">5</span> 弃用清单(明确"不碰什么")</div>
+        <div class="hint-box">这是给手准备的镣铐。明确写:这次实验不碰哪些指标/操作。最常见的"再加一个条件试试"必须明确禁止。</div>
+        <div class="input-group">
+            <label class="input-label">不碰的指标/操作 <span class="required">*必填</span></label>
+            <textarea id="ban-list" placeholder="例:不调参数/不做参数优化/不换样本/不换时间窗/不增加过滤器/不引入机器学习/不引入杠杆"></textarea>
+        </div>
+    </div>
+
+    <!-- 第六块:分叉 -->
+    <div class="card section-card">
+        <div class="card-title"><span class="step">6</span> 预期结果的分叉(跑前写好每一条出路)</div>
+        <div class="input-group">
+            <label class="input-label">分叉1:成立且稳健 <span class="required">*必填</span><span class="hint">(方向对+多窗口稳健)</span></label>
+            <textarea id="branch-1" placeholder="例:进入下一阶段,样本外验证"></textarea>
+        </div>
+        <div class="input-group">
+            <label class="input-label">分叉2:只在特定子样本成立 <span class="required">*必填</span></label>
+            <textarea id="branch-2" placeholder="例:标注'规模依赖',复活需重新预注册"></textarea>
+        </div>
+        <div class="input-group">
+            <label class="input-label">分叉3:方向相反 <span class="required">*必填</span></label>
+            <textarea id="branch-3" placeholder="例:原方向终止,按'发现反转'归档正结果,不得硬改原命题"></textarea>
+        </div>
+        <div class="input-group">
+            <label class="input-label">分叉4:全都不显著 <span class="required">*必填</span><span class="hint">(提前写好'这意味着终止')</span></label>
+            <textarea id="branch-4" placeholder="例:终止,写负结果归档,不再继续调参"></textarea>
+        </div>
+    </div>
+
+    <!-- 第七块:冻结纪律 -->
+    <div class="card section-card">
+        <div class="card-title"><span class="step">7</span> 冻结纪律(怎么防逃逸)</div>
+        <div class="hint-box">三条纪律:结果难看时不换指标/结果好看时先过独立复核/想改标准时只能重新写一份预注册。</div>
+        <div class="checklist-item"><input type="checkbox" id="rule-1" checked><label for="rule-1">结果难看时,不换指标、不换窗口、不换样本、不解释掉</label></div>
+        <div class="checklist-item"><input type="checkbox" id="rule-2" checked><label for="rule-2">结果好看时,先过独立反方复核,再谈下一步</label></div>
+        <div class="checklist-item"><input type="checkbox" id="rule-3" checked><label for="rule-3">想改标准时,只能重新写一份预注册,不能改原来那份</label></div>
+        <div class="input-group" style="margin-top: 12px;">
+            <label class="input-label">额外的纪律(选填)</label>
+            <textarea id="rule-extra" placeholder="例:任何'证明它有效'的检验都必须做全——以前漏过的,这次补全"></textarea>
+        </div>
+    </div>
+
+    <button class="btn btn-block" onclick="generate()">🔒 生成冻结预注册文档</button>
+    <button class="btn btn-block" onclick="document.getElementById('preview').classList.toggle('hidden'); window.scrollTo(0, document.body.scrollHeight);" style="margin-top:8px; background:transparent; color:#d4a853; border:1px solid #d4a853;">👁 切换预览</button>
+
+    <div id="preview" class="hidden"></div>
+
+    <div class="section-break">— 完 —</div>
+
+    <div class="footer">
+        <p>📊 <a href="research.html">返回研究报告</a> · 数据本地计算 · 不上传任何信息</p>
+        <p style="margin-top:6px;">来源:研究 05《先写死标准,再跑数据》七块结构</p>
+    </div>
+</div>
+
+<script>
+function val(id) { return document.getElementById(id).value.trim(); }
+function has(id) { return document.getElementById(id).checked; }
+
+function generate() {
+    const fields = {
+        main: val('hypothesis-main'),
+        reverse: val('hypothesis-reverse'),
+        null: val('hypothesis-null'),
+        sample: val('data-sample'),
+        survivor: val('data-survivor'),
+        price: val('data-price'),
+        source: val('data-source'),
+        suspension: val('data-suspension'),
+        signal: val('exp-signal'),
+        group: val('exp-group'),
+        cost: val('exp-cost'),
+        stat: val('exp-stat'),
+        ctrl1: val('ctrl-1'),
+        ctrl2: val('ctrl-2'),
+        ctrl3: val('ctrl-3'),
+        ban: val('ban-list'),
+        b1: val('branch-1'),
+        b2: val('branch-2'),
+        b3: val('branch-3'),
+        b4: val('branch-4'),
+        ruleExtra: val('rule-extra')
+    };
+
+    // 验证必填
+    const required = [
+        ['main', '命题(主)'],
+        ['reverse', '命题(反向)'],
+        ['null', '命题(不显著)'],
+        ['sample', '样本范围'],
+        ['source', '数据来源'],
+        ['suspension', '停牌处理'],
+        ['signal', '信号定义'],
+        ['group', '分组方式'],
+        ['cost', '成本假设'],
+        ['stat', '统计方法'],
+        ['ctrl1', '对照组1'],
+        ['ctrl2', '对照组2'],
+        ['ctrl3', '对照组3'],
+        ['ban', '弃用清单'],
+        ['b1', '分叉1'],
+        ['b2', '分叉2'],
+        ['b3', '分叉3'],
+        ['b4', '分叉4']
+    ];
+
+    const missing = required.filter(([k]) => !fields[k]);
+    if (missing.length > 0) {
+        alert('以下必填项未填写:\n' + missing.map(([_, name]) => '• ' + name).join('\n'));
+        return;
+    }
+
+    const now = new Date();
+    const dateStr = now.toLocaleString('zh-CN', { hour12: false });
+    const id = 'PREREG-' + now.getFullYear() + String(now.getMonth() + 1).padStart(2, '0') + String(now.getDate()).padStart(2, '0') + '-' + String(now.getHours()).padStart(2, '0') + String(now.getMinutes()).padStart(2, '0');
+
+    const survivorText = fields.survivor === 'handled' ? '已修正' : fields.survivor === 'partial' ? '部分修正' : '⚠️ 未修正';
+    const priceText = { hfq: '前复权(财富口径)', qfq: '后复权', bfq: '不复权' }[fields.price];
+
+    // 生成 Markdown 文档
+    const md = `# 预注册冻结文档 #${id}
+
+> **类型:** 原创研究预注册
+> **生成时间:** ${dateStr}
+> **版本:** 🔒 已冻结 (V1.0)
+> **状态:** 待独立反方审稿 → 修订 → 重新编号 → 再次冻结 → 才开始跑数据
+> **对应研究:** 05《先写死标准,再跑数据》
+
+---
+
+## 一、命题(必须能被数据判死)
+
+**主命题:** ${fields.main}
+
+**反向命题:** ${fields.reverse}
+
+**不显著时的结论:** ${fields.null}
+
+> ⚠️ 这三句话在跑数之前就已写好。事后不得修改。
+
+---
+
+## 二、数据资格(先审数据,再跑分析)
+
+| 项 | 内容 |
+|---|---|
+| 样本范围 | ${fields.sample} |
+| 幸存者偏差 | ${survivorText} |
+| 价格口径 | ${priceText} |
+| 数据来源 | ${fields.source} |
+| 停牌/涨跌停处理 | ${fields.suspension} |
+
+> **数据资格不过关,即使分析漂亮也得作废。**
+
+---
+
+## 三、实验规格(细到别人能照着复现)
+
+**信号定义:**
+${fields.signal}
+
+**分组方式:**
+${fields.group}
+
+**成本假设(必须前置,不许后置):**
+${fields.cost}
+
+**统计检验方法:**
+${fields.stat}
+
+---
+
+## 四、对照(必须同期跑,必须有"随机组")
+
+1. **对照组1:** ${fields.ctrl1}
+2. **对照组2:** ${fields.ctrl2}
+3. **对照组3(随机组):** ${fields.ctrl3}
+
+---
+
+## 五、弃用清单(明确"不碰什么")
+
+${fields.ban.split('\n').map(l => '- ' + l.trim()).filter(l => l.length > 2).join('\n')}
+
+> 这是给手准备的镣铐。"再加一个条件试试"必须明确禁止。
+
+---
+
+## 六、预期结果的分叉(跑前写好每一条出路)
+
+| 分叉 | 触发条件 | 对应结论 |
+|---|---|---|
+| **分叉1:成立且稳健** | 方向对+多窗口稳健 | ${fields.b1} |
+| **分叉2:只在子样本成立** | 规模依赖或子样本效应 | ${fields.b2} |
+| **分叉3:方向相反** | 出现反向证据 | ${fields.b3} |
+| **分叉4:全都不显著** | 统计不显著 | ${fields.b4} |
+
+---
+
+## 七、冻结纪律(怎么防逃逸)
+
+- [${has('rule-1') ? 'x' : ' '}] 结果难看时,不换指标、不换窗口、不换样本、不解释掉
+- [${has('rule-2') ? 'x' : ' '}] 结果好看时,先过独立反方复核,再谈下一步
+- [${has('rule-3') ? 'x' : ' '}] 想改标准时,只能重新写一份预注册,不能改原来那份
+
+${fields.ruleExtra ? '**额外纪律:**\n' + fields.ruleExtra : ''}
+
+---
+
+## 📋 自检清单(发布前)
+
+- [ ] 七块全部填写完整
+- [ ] 三种分叉都已写明结论
+- [ ] 弃用清单已写明
+- [ ] 已由独立方做反方攻击
+- [ ] 攻击轮所有问题已修订
+- [ ] 重新编号后已冻结
+- [ ] 任何修改都不静默覆盖原版本
+
+---
+
+## ⚠️ 边界声明
+
+本文档为研究方法学,不对任何证券作出评价、推荐或投资建议。所有数字均为研究设定或历史统计结果,不构成任何收益预测或业绩承诺。
+
+---
+
+*本预注册文档由 WorkBuddy 预注册生成器生成,对应研究系列 05*
+*生成器链接: [tool-preregistration-generator.html](tool-preregistration-generator.html)*
+`;
+
+    // 显示预览
+    const html = `
+<div class="preview-section">
+    <h2 style="color:#d4a853; text-align:center; font-weight:400; margin-bottom:8px;">预注册冻结文档 #${id}</h2>
+    <p style="text-align:center; color:#8a8885; font-size:.82rem; margin-bottom:20px;">${dateStr} · 🔒 V1.0 已冻结</p>
+
+    <div class="preview-h">一、命题</div>
+    <div class="preview-body">
+        <p><strong>主命题:</strong>${fields.main}</p>
+        <p><strong>反向命题:</strong>${fields.reverse}</p>
+        <p><strong>不显著时:</strong>${fields.null}</p>
+    </div>
+
+    <div class="preview-h">二、数据资格</div>
+    <div class="preview-body">
+        <p>样本范围:${fields.sample}</p>
+        <p>幸存者偏差:${survivorText} · 价格口径:${priceText}</p>
+        <p>数据来源:${fields.source}</p>
+        <p>停牌处理:${fields.suspension}</p>
+    </div>
+
+    <div class="preview-h">三、实验规格</div>
+    <div class="preview-body">
+        <p><strong>信号:</strong>${fields.signal}</p>
+        <p><strong>分组:</strong>${fields.group}</p>
+        <p><strong>成本:</strong>${fields.cost}</p>
+        <p><strong>统计:</strong>${fields.stat}</p>
+    </div>
+
+    <div class="preview-h">四、对照</div>
+    <div class="preview-body">
+        <ol>
+            <li>${fields.ctrl1}</li>
+            <li>${fields.ctrl2}</li>
+            <li>${fields.ctrl3}</li>
+        </ol>
+    </div>
+
+    <div class="preview-h">五、弃用清单</div>
+    <div class="preview-body">
+        <ul>${fields.ban.split('\n').map(l => '<li>' + l.trim() + '</li>').filter(l => l.length > 10).join('')}</ul>
+    </div>
+
+    <div class="preview-h">六、预期结果分叉</div>
+    <div class="preview-body">
+        <p><strong>① 成立且稳健:</strong>${fields.b1}</p>
+        <p><strong>② 子样本成立:</strong>${fields.b2}</p>
+        <p><strong>③ 方向相反:</strong>${fields.b3}</p>
+        <p><strong>④ 全都不显著:</strong>${fields.b4}</p>
+    </div>
+
+    <div class="preview-h">七、冻结纪律</div>
+    <div class="preview-body">
+        <p>${has('rule-1') ? '☑' : '☐'} 结果难看时不换指标/窗口/样本</p>
+        <p>${has('rule-2') ? '☑' : '☐'} 结果好看时先过独立反方复核</p>
+        <p>${has('rule-3') ? '☑' : '☐'} 想改标准时只能重新写预注册</p>
+        ${fields.ruleExtra ? '<p><strong>额外:</strong>' + fields.ruleExtra + '</p>' : ''}
+    </div>
+
+    <div style="margin-top:24px; display:flex; gap:8px; flex-wrap:wrap;">
+        <button class="btn" id="btn-download-md" type="button">💾 下载 Markdown</button>
+        <button class="btn btn-secondary" id="btn-copy-md" type="button">📋 复制 Markdown</button>
+    </div>
+</div>
+
+<div class="positive-box">
+    <strong>✅ 预注册文档已生成</strong>
+    <p>接下来请按流程操作:独立反方审稿 → 攻击轮修订 → 重新编号 → 再次冻结 → 才开始跑数据。<br>
+    任何修改都必须重新生成一份新预注册,原文件保留为审计证据。</p>
+</div>
+`;
+
+    document.getElementById('preview').innerHTML = html;
+    document.getElementById('preview').classList.remove('hidden');
+    // 事件绑定:避免把 Markdown 内容内联到 onclick 属性(用户输入含引号/标签时会破坏 HTML 结构)
+    window._pendingMD = md;
+    window._pendingID = id;
+    document.getElementById('btn-download-md').onclick = function() { downloadMD(window._pendingMD, window._pendingID); };
+    document.getElementById('btn-copy-md').onclick = function() { copyMD(window._pendingMD); };
+    document.getElementById('preview').scrollIntoView({ behavior: 'smooth' });
+}
+
+function downloadMD(content, id) {
+    const blob = new Blob([content], { type: 'text/markdown;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `预注册_${id}.md`;
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+function copyMD(content) {
+    navigator.clipboard.writeText(content).then(() => alert('已复制到剪贴板')).catch(() => prompt('复制以下内容:', content));
+}
+</script>
+</body>
+</html>

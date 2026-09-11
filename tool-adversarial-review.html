@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>反方审稿提问机 — 私家智囊</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, "PingFang SC", "Noto Sans SC", "Helvetica Neue", sans-serif; background: #0f1424; color: #e8e6e3; line-height: 1.7; min-height: 100vh; }
+.container { max-width: 820px; margin: 0 auto; padding: 24px 20px 60px; }
+.header { text-align: center; padding: 30px 0 20px; border-bottom: 1px solid rgba(212,168,83,.15); margin-bottom: 30px; }
+.header h1 { font-size: 1.6rem; font-weight: 400; color: #d4a853; margin-bottom: 8px; }
+.header p { color: #8a8885; font-size: .88rem; }
+.card { background: #1a1f30; border-radius: 4px; padding: 24px 20px; margin-bottom: 16px; border: 1px solid rgba(212,168,83,.12); }
+.card-title { font-size: 1rem; font-weight: 500; color: #d4a853; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.input-label { display: block; font-size: .82rem; color: #b0aeab; margin-bottom: 6px; }
+.input-label .hint { color: #6a6865; font-size: .75rem; margin-left: 6px; }
+input[type="text"], textarea, select { width: 100%; padding: 10px 12px; font-size: .92rem; background: #232840; border: 1px solid #3a3f55; border-radius: 4px; color: #e8e6e3; outline: none; transition: border-color .3s; font-family: inherit; }
+input[type="text"]:focus, textarea:focus, select:focus { border-color: #d4a853; background: #2a2f48; }
+textarea { min-height: 100px; resize: vertical; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+@media(max-width:640px){ .row { grid-template-columns: 1fr; } }
+.btn { display: inline-block; padding: 12px 32px; font-size: .92rem; background: #d4a853; color: #0a0e1a; border: none; border-radius: 4px; cursor: pointer; font-weight: 500; transition: background .3s; }
+.btn:hover { background: #f0c868; }
+.btn-block { display: block; width: 100%; }
+.btn-secondary { background: transparent; color: #d4a853; border: 1px solid #d4a853; margin-left: 10px; }
+.btn-secondary:hover { background: rgba(212,168,83,.1); }
+.q-card { background: rgba(255,255,255,.02); border-left: 3px solid #d4a853; border-radius: 3px; padding: 18px; margin-bottom: 12px; }
+.q-num { font-size: .78rem; color: #d4a853; font-weight: 500; letter-spacing: .05em; margin-bottom: 6px; }
+.q-text { font-size: .95rem; color: #e8e6e3; margin-bottom: 10px; font-weight: 500; line-height: 1.6; }
+.q-why { font-size: .82rem; color: #8a8885; background: rgba(0,0,0,.2); padding: 10px 12px; border-radius: 3px; margin-top: 8px; }
+.q-why strong { color: #d4a853; }
+.q-cat { display: inline-block; font-size: .7rem; padding: 2px 8px; border-radius: 2px; background: rgba(212,168,83,.12); color: #d4a853; margin-bottom: 8px; }
+.hidden { display: none; }
+.footer { text-align: center; padding: 30px 0 10px; font-size: .8rem; color: #6a6865; }
+.footer a { color: #d4a853; text-decoration: none; }
+.summary-bar { background: linear-gradient(180deg,#1a1f30 0%,#1f2440 100%); border: 1px solid rgba(212,168,83,.15); border-radius: 4px; padding: 24px; margin-bottom: 20px; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 16px; text-align: center; }
+.summary-item .num { font-size: 1.8rem; color: #d4a853; font-weight: 300; margin-bottom: 4px; }
+.summary-item .lbl { font-size: .75rem; color: #8a8885; }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🔍 反方审稿提问机</h1>
+        <p>任何"看起来有效"的方法,先交给一个不知道你预期的人挑错</p>
+        <p style="color:#6a6865; font-size:.78rem; margin-top:6px;">对应研究 04 第 8 条、研究 06 第六节、研究 09 全文</p>
+    </div>
+
+    <div class="card">
+        <div class="card-title">💬 描述你要检验的方法/策略/发现</div>
+        <div class="row">
+            <div>
+                <label class="input-label">方法/策略名称 <span class="hint">(选填)</span></label>
+                <input type="text" id="name" placeholder="例:高股息率门槛策略">
+            </div>
+            <div>
+                <label class="input-label">方法类型 <span class="hint">(选填)</span></label>
+                <select id="category">
+                    <option value="auto">自动判断</option>
+                    <option value="select">选股/择时策略</option>
+                    <option value="factor">单因子/多因子</option>
+                    <option value="backtest">回测结论</option>
+                    <option value="regime">市场判断/周期判断</option>
+                    <option value="other">其他</option>
+                </select>
+            </div>
+        </div>
+        <div style="margin-bottom: 12px;">
+            <label class="input-label">规则描述 <span class="hint">(越具体越好)</span></label>
+            <textarea id="desc" placeholder="例:选过去12个月股息率>5%的股票建仓,跌破3.5%清仓。声称在A股过去20年跑赢基准30%。样本为20只高股息股票,2007-2026年回测。"></textarea>
+        </div>
+        <div style="margin-bottom: 12px;">
+            <label class="input-label">关键数字/结论 <span class="hint">(选填,如年化、最大回撤等)</span></label>
+            <input type="text" id="numbers" placeholder="例:年化13.6%,最大回撤-25%,744次建仓">
+        </div>
+        <button class="btn btn-block" onclick="generate()">生成反方问题</button>
+    </div>
+
+    <div id="result" class="hidden">
+        <div class="summary-bar">
+            <div class="summary-item"><div class="num" id="q-count">0</div><div class="lbl">反方问题</div></div>
+            <div class="summary-item"><div class="num" id="cat-count">0</div><div class="lbl">问题类别</div></div>
+            <div class="summary-item"><div class="num" id="lethal">0</div><div class="lbl">致命级</div></div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">🎯 反方视角下的 10 个问题</div>
+            <p style="font-size:.8rem; color:#8a8885; margin-bottom:16px;">
+                这些问题的目的是"挖出你没想到的漏洞"。每个问题都附了"为什么要问"——让你能自己回答,也能让审稿人看到你是怎么回答的。
+            </p>
+            <div id="questions"></div>
+            <button class="btn btn-secondary" onclick="copyAll()">📋 复制全部问题</button>
+            <button class="btn" onclick="exportText()">💾 导出为 TXT</button>
+        </div>
+
+        <div class="card">
+            <div class="card-title">📌 反方审稿纪律</div>
+            <ul style="padding-left:20px; font-size:.88rem; color:#b0aeab; line-height:1.9;">
+                <li>问题没有回答清楚前,<strong>不要进入下一步</strong>(不要写报告、不要写结论、不要进模拟盘)</li>
+                <li>如果你"答不上来"——这就是数据缺口,不是可以跳过的小事</li>
+                <li>如果你"答上来了但对方不同意"——再问一遍,看是你还是对方没想清楚</li>
+                <li>如果问题让你不舒服——<strong>特别留意</strong>。反方审稿的本质就是"把不舒服的地方挑出来"</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>📊 <a href="research.html">返回研究报告</a> · 数据本地计算 · 不上传任何信息</p>
+        <p style="margin-top:6px;">来源:研究 04 / 06 / 09 共同方法论</p>
+    </div>
+</div>
+
+<script>
+const QUESTIONS = {
+    data: [
+        { cat: "数据资格", text: "你的样本是否包含<strong>已退市/已破产/已被吸收合并</strong>的标的?还是只统计活到今天的那批?", why: "只采访还活着的公司,调查不出创业成功率——这是幸存者偏差的典型表现。", level: "致命" },
+        { cat: "数据资格", text: "你说'过去20年'——这20年里的数据是<strong>同一个口径</strong>吗?有没有中途变更、补充、或替换?", why: "口径不一致的'同一组数据',其实是不同时期的拼图,常常自相矛盾。", level: "重要" },
+        { cat: "数据资格", text: "数据里的'停牌日''涨跌停日'怎么处理?真的能成交吗?", why: "回测说'当天买了',实盘可能'根本买不进'——这是研究 08 重点讨论的失败类型。", level: "重要" }
+    ],
+    future: [
+        { cat: "未来函数", text: "你的回测里,<strong>有没有用到'当时还不可能知道'的信息</strong>?比如用全年净利润决定1月该不该买,或者用研报评级决定历史时段的操作。", why: "这是不产生报错、只产生漂亮结果的那一类——也最致命。", level: "致命" },
+        { cat: "未来函数", text: "你用的因子是'过去12个月数据'——但12个月前的'12个月数据',是按<strong>滚动计算</strong>还是<strong>直接套用最新一年</strong>?", why: "后者就是未来函数。看似小事,实则致命。", level: "重要" }
+    ],
+    standard: [
+        { cat: "判定标准", text: "'什么算通过'这条标准,<strong>是看结果之前就写好的,还是看结果之后才定的</strong>?", why: "先射箭再画靶,等于从几十万种组合里挑最好看的那一个,然后声称'我验证了它'。", level: "致命" },
+        { cat: "判定标准", text: "如果结果不如预期,你有没有<strong>换指标、换窗口、换样本</strong>再试一次?", why: "'换个指标再试一次'是自欺最舒服的形态——必须写进纪律。", level: "重要" },
+        { cat: "判定标准", text: "你的方法有没有写'<strong>什么情况下算失败</strong>'?还是只写了成功条件?", why: "只写成功条件、不写失败条件的研究,无法被证伪——也就不值得相信。", level: "重要" }
+    ],
+    cost: [
+        { cat: "成本与执行", text: "你的收益数字,是<strong>扣完所有成本</strong>之后的净收益,还是毛收益?", why: "成本一旦后置,它就成了最后一根救命稻草。", level: "重要" },
+        { cat: "成本与执行", text: "成本里有没有包含<strong>滑点、冲击成本、不可成交</strong>的情况?具体是多少?", why: "小盘股/低流动性策略的真实成本,常常是理论值的3-5倍。", level: "重要" }
+    ],
+    mechanism: [
+        { cat: "机制归因", text: "你能说清这个方法<strong>为什么有效</strong>吗?如果说不清——失效时你也不会知道。", why: "说不清为什么有效,就无法知道它什么时候会失效——这是研究 04 第 9 条。", level: "重要" },
+        { cat: "机制归因", text: "假设这个方法确实赚到了钱——<strong>赚的是谁的钱</strong>?是市场的、对手方的、还是其他'看似不相关'的变量带来的?", why: "可能是别的什么东西的影子——这是研究 03、研究 09 反复出现的归因陷阱。", level: "重要" },
+        { cat: "机制归因", text: "你能不能用一句话说清,这个方法的<strong>反向镜像</strong>是什么?反向的逻辑成不成立?", why: "如果'追强'是错的,那'追强+过滤'也得错;反之亦然——同一种思维的不同马甲。", level: "重要" }
+    ],
+    sample: [
+        { cat: "样本边界", text: "你这个结论,<strong>在哪些市场/哪些时段/哪些品种</strong>上仍然成立?哪些不成立?", why: "没有'边界'的结论,等于没有结论——它可能在任何地方都不成立。", level: "重要" },
+        { cat: "样本边界", text: "如果换一组样本(比如换行业、换时间窗、换数据源),结论<strong>方向一致</strong>还是相反?", why: "在A股成立的策略,在港股、美股、商品上能不能成立——这是判断'底层逻辑'还是'数据巧合'的关键。", level: "重要" }
+    ],
+    walkforward: [
+        { cat: "时间切分", text: "你的回测<strong>用全部数据找参数</strong>还是'前半段找参数,后半段考试'?", why: "全样本跑赢+13.6pp的策略,可能样本外只有+1pp——这是研究 07 讲过的'漂亮是幻觉'。", level: "致命" },
+        { cat: "时间切分", text: "你试了多少组参数才挑出最好的那组?10组?100组?1000组?", why: "试了1000组再挑最好的,和只试1组,结论的可信度完全不同。", level: "重要" }
+    ],
+    robustness: [
+        { cat: "稳健性", text: "你的最优参数,<strong>在'邻近参数'上</strong>表现如何?是孤峰还是高原?", why: "孤立的最优点——过拟合的概率高;平稳的'参数高原'——更可能是真实规律。", level: "重要" },
+        { cat: "稳健性", text: "你的方法,在<strong>震荡市/急涨/急跌</strong>这三种不同行情下表现如何?是都好,还是只一种好?", why: "研究 06 关键发现:同一套规则,在'商品上涨期'是赚的,在'震荡期'是亏的——总分掩盖了机制。", level: "重要" }
+    ],
+    challenge: [
+        { cat: "反方攻击", text: "<strong>你亲自算出来的结果,和另一个人独立算出来的结果</strong>,差距多大?", why: "研究 08 真实案例:自己算31.4%,独立复现-0.7%——差32个百分点。分歧不消除,不出实盘。", level: "致命" },
+        { cat: "反方攻击", text: "这个方法最有可能在哪里<strong>彻底失效</strong>?你愿不愿意写下来?", why: "写不出来的'失效条件',通常就是你没想清楚的地方——或者是你不敢想的地方。", level: "重要" },
+        { cat: "反方攻击", text: "你能不能找到一份<strong>完全独立的研究</strong>(不是你自己写的),支持或反对这个结论?", why: "如果全世界只有你'发现了'这条规律,它要么是真金,要么是自欺。", level: "重要" }
+    ]
+};
+
+const CATEGORY_KEYWORDS = {
+    select: ["选股", "买入", "建仓", "卖出", "门槛", "信号", "触发"],
+    factor: ["因子", "评分", "排名", "动量", "反转", "波动率", "估值", "股息率", "ROE"],
+    backtest: ["回测", "历史", "样本", "2007", "2014", "2015", "2018", "2020", "2021", "2026"],
+    regime: ["周期", "阶段", "市场状态", "牛熊", "上行", "下行", "震荡", "趋势"]
+};
+
+function detectCategory(text) {
+    const t = (text || "").toLowerCase();
+    for (const [cat, keywords] of Object.entries(CATEGORY_KEYWORDS)) {
+        if (keywords.some(k => t.includes(k.toLowerCase()))) return cat;
+    }
+    return 'auto';
+}
+
+function pickQuestions(cat) {
+    // Always include all categories, but emphasize relevant ones
+    const all = [];
+    Object.values(QUESTIONS).forEach(arr => all.push(...arr));
+    // Shuffle a bit but ensure key ones come
+    return all;
+}
+
+function generate() {
+    const name = document.getElementById('name').value.trim();
+    const cat = document.getElementById('category').value;
+    const desc = document.getElementById('desc').value.trim();
+    const numbers = document.getElementById('numbers').value.trim();
+
+    if (!desc) {
+        alert('请先描述方法规则——描述越具体,反方问题越对症。');
+        return;
+    }
+
+    // Detect category
+    let finalCat = cat;
+    if (cat === 'auto') finalCat = detectCategory(desc + ' ' + numbers);
+
+    // Pick all questions
+    const qs = pickQuestions(finalCat);
+    const lethal = qs.filter(q => q.level === '致命').length;
+    const catSet = new Set(qs.map(q => q.cat));
+
+    // Render
+    document.getElementById('result').classList.remove('hidden');
+    document.getElementById('q-count').textContent = qs.length;
+    document.getElementById('cat-count').textContent = catSet.size;
+    document.getElementById('lethal').textContent = lethal;
+
+    const html = qs.map((q, i) => `
+        <div class="q-card">
+            <div class="q-cat">${q.cat} · ${q.level === '致命' ? '🚨 致命' : '⚠️ 重要'}</div>
+            <div class="q-num">问题 ${i + 1} / ${qs.length}</div>
+            <div class="q-text">${q.text}</div>
+            <div class="q-why"><strong>为什么要问:</strong>${q.why}</div>
+        </div>
+    `).join('');
+
+    document.getElementById('questions').innerHTML = html;
+    document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+}
+
+function copyAll() {
+    const qs = document.querySelectorAll('.q-card');
+    let text = `# 反方审稿问题清单\n# 生成时间:${new Date().toLocaleString('zh-CN')}\n\n`;
+    qs.forEach((q, i) => {
+        const cat = q.querySelector('.q-cat').textContent.trim();
+        const qt = q.querySelector('.q-text').textContent.trim();
+        const qw = q.querySelector('.q-why').textContent.replace('为什么要问:', '').trim();
+        text += `## 问题 ${i + 1} [${cat}]\n${qt}\n\n> 为什么要问:${qw}\n\n---\n\n`;
+    });
+    navigator.clipboard.writeText(text).then(() => alert('已复制到剪贴板')).catch(() => prompt('复制以下内容:', text));
+}
+
+function exportText() {
+    const qs = document.querySelectorAll('.q-card');
+    const name = document.getElementById('name').value || '未命名方法';
+    let text = `# 反方审稿问题清单\n\n## 方法名称:${name}\n## 生成时间:${new Date().toLocaleString('zh-CN')}\n## 问题数量:${qs.length}\n\n`;
+    qs.forEach((q, i) => {
+        const cat = q.querySelector('.q-cat').textContent.trim();
+        const qt = q.querySelector('.q-text').textContent.trim();
+        const qw = q.querySelector('.q-why').textContent.replace('为什么要问:', '').trim();
+        text += `### 问题 ${i + 1} [${cat}]\n${qt}\n\n> 为什么要问:${qw}\n\n---\n\n`;
+    });
+    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `反方审稿_${name}_${new Date().toISOString().slice(0,10)}.txt`;
+    a.click();
+    URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>

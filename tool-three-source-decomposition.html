@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>三源分解计算器 — 私家智囊</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, "PingFang SC", "Noto Sans SC", "Helvetica Neue", sans-serif; background: #0f1424; color: #e8e6e3; line-height: 1.7; min-height: 100vh; }
+.container { max-width: 880px; margin: 0 auto; padding: 24px 20px 60px; }
+.header { text-align: center; padding: 30px 0 20px; border-bottom: 1px solid rgba(212,168,83,.15); margin-bottom: 30px; }
+.header h1 { font-size: 1.6rem; font-weight: 400; color: #d4a853; margin-bottom: 8px; }
+.header p { color: #8a8885; font-size: .88rem; }
+.card { background: #1a1f30; border-radius: 4px; padding: 24px 20px; margin-bottom: 16px; border: 1px solid rgba(212,168,83,.12); }
+.card-title { font-size: 1rem; font-weight: 500; color: #d4a853; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.input-group { margin-bottom: 14px; }
+.input-label { display: block; font-size: .82rem; color: #b0aeab; margin-bottom: 6px; }
+.input-label .hint { color: #6a6865; font-size: .75rem; margin-left: 6px; }
+.input-label .unit { color: #d4a853; font-size: .75rem; margin-left: 6px; }
+input[type="number"], input[type="text"], select { width: 100%; padding: 10px 12px; font-size: .92rem; background: #232840; border: 1px solid #3a3f55; border-radius: 4px; color: #e8e6e3; outline: none; transition: border-color .3s; font-family: inherit; }
+input:focus, select:focus { border-color: #d4a853; background: #2a2f48; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media(max-width:640px){ .row { grid-template-columns: 1fr; } }
+.btn { display: inline-block; padding: 12px 32px; font-size: .92rem; background: #d4a853; color: #0a0e1a; border: none; border-radius: 4px; cursor: pointer; font-weight: 500; transition: background .3s; }
+.btn:hover { background: #f0c868; }
+.btn-block { display: block; width: 100%; }
+.hint-box { background: rgba(212,168,83,.04); border-radius: 4px; padding: 12px 16px; margin-bottom: 18px; font-size: .82rem; color: #8a8885; line-height: 1.6; border-left: 2px solid rgba(212,168,83,.2); }
+.result-section { background: linear-gradient(180deg,#1a1f30 0%,#1f2440 100%); border: 1px solid rgba(212,168,83,.15); border-radius: 4px; padding: 30px 24px; margin: 24px 0; }
+.result-title { font-size: .9rem; color: #d4a853; margin-bottom: 20px; letter-spacing: .05em; }
+.result-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media(max-width:640px){ .result-grid { grid-template-columns: 1fr; } }
+.result-card { background: rgba(0,0,0,.2); border-radius: 4px; padding: 20px 16px; text-align: center; }
+.result-num { font-size: 1.8rem; color: #d4a853; font-weight: 300; margin-bottom: 6px; }
+.result-lbl { font-size: .75rem; color: #8a8885; }
+.result-desc { font-size: .7rem; color: #6a6865; margin-top: 6px; line-height: 1.4; }
+.bar-container { background: rgba(0,0,0,.3); border-radius: 3px; height: 24px; overflow: hidden; display: flex; margin: 24px 0 12px; }
+.bar { height: 100%; display: flex; align-items: center; justify-content: center; font-size: .75rem; color: #0a0e1a; font-weight: 500; transition: width .5s; }
+.bar-1 { background: #d4a853; }
+.bar-2 { background: #b8941f; }
+.bar-3 { background: #8a6f1a; }
+.summary-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed rgba(255,255,255,.05); font-size: .85rem; }
+.summary-row .lbl { color: #8a8885; }
+.summary-row .val { color: #d4a853; font-weight: 500; }
+.warning-box { background: rgba(244,67,54,.04); border-left: 3px solid #f44336; padding: 14px 18px; border-radius: 3px; margin: 16px 0; }
+.warning-box h4 { color: #f44336; font-size: .9rem; margin-bottom: 8px; }
+.warning-box p { font-size: .85rem; color: #b0aeab; line-height: 1.6; }
+.positive-box { background: rgba(76,175,80,.04); border-left: 3px solid #4caf50; padding: 14px 18px; border-radius: 3px; margin: 16px 0; }
+.positive-box h4 { color: #4caf50; font-size: .9rem; margin-bottom: 8px; }
+.positive-box p { font-size: .85rem; color: #b0aeab; line-height: 1.6; }
+.footer { text-align: center; padding: 30px 0 10px; font-size: .8rem; color: #6a6865; }
+.footer a { color: #d4a853; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>📊 三源分解计算器</h1>
+        <p>把"股价回报"拆成三个来源:股息、留存再投资、市场重估</p>
+        <p style="color:#6a6865; font-size:.78rem; margin-top:6px;">对应研究开栏篇《从企业价值到资本配置》</p>
+    </div>
+
+    <div class="card">
+        <div class="card-title">📝 填写公司基本面数据</div>
+        <div class="hint-box">
+            <strong>所需数据(年报披露即可获取):</strong><br>
+            • 过去12个月每股分红(元) &nbsp; • 净资产收益率ROE(%)<br>
+            • 派息率(%) &nbsp; • 当前市净率PB(倍)<br>
+            • 当前市盈率PE(倍) &nbsp; • 资本成本r(%,可选,默认用8%)
+        </div>
+        <div class="row">
+            <div class="input-group">
+                <label class="input-label">股票名称/代码 <span class="hint">(选填)</span></label>
+                <input type="text" id="name" placeholder="例:某银行A">
+            </div>
+            <div class="input-group">
+                <label class="input-label">数据期间 <span class="hint">(选填)</span></label>
+                <input type="text" id="period" placeholder="例:2025年报">
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-group">
+                <label class="input-label">每股年分红 <span class="hint">(元/股)</span><span class="unit">元</span></label>
+                <input type="number" id="dps" step="0.01" placeholder="0.50">
+            </div>
+            <div class="input-group">
+                <label class="input-label">当前股价 <span class="hint">(元/股)</span><span class="unit">元</span></label>
+                <input type="number" id="price" step="0.01" placeholder="10.00">
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-group">
+                <label class="input-label">ROE <span class="unit">%</span></label>
+                <input type="number" id="roe" step="0.1" placeholder="13.5">
+            </div>
+            <div class="input-group">
+                <label class="input-label">派息率 <span class="unit">%</span></label>
+                <input type="number" id="payout" step="1" placeholder="35">
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-group">
+                <label class="input-label">当前PB <span class="unit">倍</span></label>
+                <input type="number" id="pb" step="0.01" placeholder="0.90">
+            </div>
+            <div class="input-group">
+                <label class="input-label">资本成本r <span class="hint">(默认8%)</span><span class="unit">%</span></label>
+                <input type="number" id="r" step="0.1" placeholder="8.0">
+            </div>
+        </div>
+        <button class="btn btn-block" onclick="decompose()">开始分解</button>
+    </div>
+
+    <div id="result"></div>
+
+    <div class="footer">
+        <p>📊 <a href="research.html">返回研究报告</a> · 数据本地计算 · 不上传任何信息</p>
+        <p style="margin-top:6px;">来源:研究开栏篇《从企业价值到资本配置》公式 1-1 / 2-2 / 4-1</p>
+    </div>
+</div>
+
+<script>
+function decompose() {
+    const name = document.getElementById('name').value || '该公司';
+    const period = document.getElementById('period').value || '本期';
+    const dps = parseFloat(document.getElementById('dps').value);
+    const price = parseFloat(document.getElementById('price').value);
+    const roe = parseFloat(document.getElementById('roe').value);
+    const payout = parseFloat(document.getElementById('payout').value);
+    const pb = parseFloat(document.getElementById('pb').value);
+    const r = parseFloat(document.getElementById('r').value) || 8;
+
+    if (isNaN(dps) || isNaN(price) || isNaN(roe) || isNaN(payout) || isNaN(pb) || dps <= 0 || price <= 0) {
+        alert('请完整填写核心数据(每股分红、股价、ROE、派息率、PB)。');
+        return;
+    }
+
+    // 公式计算
+    const payoutRatio = payout / 100;
+    const roeRatio = roe / 100;
+    const rRatio = r / 100;
+
+    // ① 股息率 = DPS / Price
+    const dividendYield = (dps / price) * 100;
+
+    // ② 留存再投资收益率 = ROE × (1 - 派息率)
+    const retentionYield = roeRatio * (1 - payoutRatio) * 100;
+
+    // ③ 派息率(分子+分母不同口径下的"市场重估"剩余)
+    // 用三源公式:总回报 ≈ 股息率 + 留存再投资收益率 + PB变动 + 交叉项
+    // 这里我们只能算"当前收益拆分",PB变动是未来变量
+    // 但可以给出"假如PB维持当前水平"的预期
+    const totalReturn = dividendYield + retentionYield;
+
+    // η系数 = 派息率 + (1 - 派息率) × PB
+    const eta = payoutRatio + (1 - payoutRatio) * pb;
+
+    // 留存价值判据
+    // 留存一元的价值 = ROE / r (永续假设)
+    // 当 ROE > r 时,留存创造价值
+    // 当 ROE < r 时,留存毁灭价值
+    const retentionValuePerYuan = roeRatio / rRatio; // 留存1元的NPV倍数
+    const valueCreating = roeRatio > rRatio;
+    const margin = (roeRatio - rRatio) * 100; // 差额(百分点)
+
+    // 盈利收益率 1/PE
+    // PE 我们用 (PB / ROE) × 100 估算(因为P/B = P/E × ROE, 即 PE = PB/ROE)
+    const estimatedPE = (pb / roeRatio);
+    const earningsYield = (1 / estimatedPE) * 100;
+
+    // 可实现回报 = 盈利收益率 × η
+    const realizableReturn = earningsYield * eta;
+
+    // PB<1折损:分红具有特殊意义
+    const pbBelowOne = pb < 1;
+
+    // 输出
+    const html = `
+        <div class="result-section">
+            <div class="result-title">📐 收益三源分解 · ${name} · ${period}</div>
+            <div class="result-grid">
+                <div class="result-card">
+                    <div class="result-lbl">① 股息</div>
+                    <div class="result-num">${dividendYield.toFixed(2)}%</div>
+                    <div class="result-desc">过去12个月每股分红 ÷ 当前股价</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-lbl">② 留存再投资</div>
+                    <div class="result-num">${retentionYield.toFixed(2)}%</div>
+                    <div class="result-desc">ROE × (1 - 派息率),企业内生增长</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-lbl">① + ②</div>
+                    <div class="result-num">${totalReturn.toFixed(2)}%</div>
+                    <div class="result-desc">不含市场重估的"基础收益"</div>
+                </div>
+            </div>
+
+            <div class="bar-container" id="bar-container">
+                <div class="bar bar-1" style="width:${dividendYield / totalReturn * 100}%;">${dividendYield.toFixed(1)}%</div>
+                <div class="bar bar-2" style="width:${retentionYield / totalReturn * 100}%;">${retentionYield.toFixed(1)}%</div>
+            </div>
+            <p style="font-size:.78rem; color:#6a6865; text-align:center; margin-bottom:8px;">
+                留存再投资贡献占比 ${(retentionYield / totalReturn * 100).toFixed(1)}% · 这就是"企业内生复利"的部分
+            </p>
+        </div>
+
+        <div class="result-section">
+            <div class="result-title">🔍 收益实现系数 η</div>
+            <div style="text-align:center; padding: 20px 0;">
+                <div style="font-size:.85rem; color:#8a8885;">η = 派息率 + (1 - 派息率) × PB</div>
+                <div style="font-size:2.4rem; color:#d4a853; font-weight:300; margin: 12px 0;">η = ${eta.toFixed(3)}</div>
+                <div style="font-size:.85rem; color:#b0aeab;">${eta > 1 ? '> 1:盈利大部分被市场承认(留存也"算数")' : eta < 1 ? '< 1:留存被市场折价(低PB环境常态)' : '= 1:市场刚好按账面承认盈利'}</div>
+            </div>
+
+            <div class="summary-row"><span class="lbl">盈利收益率(1/PE)</span><span class="val">${earningsYield.toFixed(2)}%</span></div>
+            <div class="summary-row"><span class="lbl">可实现回报 = 盈利收益率 × η</span><span class="val">${realizableReturn.toFixed(2)}%</span></div>
+            <div class="summary-row"><span class="lbl">估计PE (PB/ROE)</span><span class="val">${estimatedPE.toFixed(2)} 倍</span></div>
+        </div>
+
+        <div class="result-section">
+            <div class="result-title">⚖️ 留存价值判据</div>
+            <div style="padding: 18px 0;">
+                <div class="summary-row"><span class="lbl">留存1元钱的NPV(永续)</span><span class="val">${retentionValuePerYuan.toFixed(2)} 元</span></div>
+                <div class="summary-row"><span class="lbl">ROE vs 资本成本r</span><span class="val">${roe.toFixed(2)}% vs ${r.toFixed(2)}%</span></div>
+                <div class="summary-row"><span class="lbl">ROE - r</span><span class="val" style="color:${valueCreating ? '#4caf50' : '#f44336'};">${margin > 0 ? '+' : ''}${margin.toFixed(2)} 个百分点</span></div>
+            </div>
+
+            ${valueCreating ? `
+                <div class="positive-box">
+                    <h4>✅ 结论:留存利润创造价值</h4>
+                    <p>当 ROE (${roe.toFixed(2)}%) > r (${r.toFixed(2)}%) 时,公司将利润留存再投资是<strong>为股东创造价值</strong>的。<br>
+                    留存部分的内在价值是 ${retentionValuePerYuan.toFixed(2)} 元/留存1元,即每留存1元利润,股东最终获得 ${retentionValuePerYuan.toFixed(2)} 元。</p>
+                </div>
+            ` : `
+                <div class="warning-box">
+                    <h4>⚠️ 结论:留存利润毁灭价值</h4>
+                    <p>当 ROE (${roe.toFixed(2)}%) < r (${r.toFixed(2)}%) 时,公司将利润留存再投资<strong>对股东不利</strong>。<br>
+                    ${margin > -1 ? '但两者差距很小(' + Math.abs(margin).toFixed(2) + '个百分点),结论对参数敏感——需要复核资本成本r的设定是否合理。' : '建议这家公司提高派息率,把利润还给股东自己去配置。'}</p>
+                </div>
+            `}
+
+            ${pbBelowOne ? `
+                <div class="hint-box" style="margin-top:14px;">
+                    <strong>📌 PB < 1 的特殊含义:</strong><br>
+                    市净率小于1意味着市场认为公司资产在打折出售。${payout > 30 ? '你设置的派息率(' + payout + '%)较高,分红对投资者有特殊意义——因为分红是盈利中"按1:1兑现"的部分。' : '如果派息率也低,高盈利收益率会被PB折损掉,实际可实现回报显著低于表面PE所暗示的。'}
+                </div>
+            ` : ''}
+        </div>
+
+        <div class="result-section">
+            <div class="result-title">📋 一句话总结</div>
+            <p style="font-size:.95rem; color:#b0aeab; line-height:1.8; padding: 12px 0;">
+                ${name}的"基础收益"为 <strong style="color:#d4a853;">${totalReturn.toFixed(2)}%</strong>。
+                其中股息贡献 <strong style="color:#d4a853;">${dividendYield.toFixed(2)}%</strong>(${ (dividendYield/totalReturn*100).toFixed(0) }%),
+                留存再投资贡献 <strong style="color:#d4a853;">${retentionYield.toFixed(2)}%</strong>(${ (retentionYield/totalReturn*100).toFixed(0) }%)。
+                ${retentionYield > dividendYield * 2 ? '<br>⚠️ 留存再投资占大头——这部分价值要靠市场未来"承认",风险在市场重估。' : ''}
+                ${pbBelowOne && dividendYield > 5 ? '<br>📌 表面看股息率不低,但PB<1下市场正在折价——可实现回报要打折扣。' : ''}
+                ${valueCreating ? '当前ROE超过资本成本,留存创造价值。' : '当前ROE低于资本成本,留存对股东不利。'}
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-title">📚 术语表(对应原文)</div>
+            <div style="font-size:.85rem; color:#b0aeab; line-height:1.8;">
+                <p><strong style="color:#d4a853;">η(收益实现系数)</strong>:派息率 + (1 - 派息率) × PB。衡量企业盈利最终被市场承认的比例。当 PB<1 时,η<1,留存部分的市场价值低于账面价值。</p>
+                <p><strong style="color:#d4a853;">留存价值判据</strong>:留存1元的价值 = ROE / r(永续假设)。当 ROE>r 时,留存创造价值;否则毁灭价值。</p>
+                <p><strong style="color:#d4a853;">基础收益 vs 市场重估</strong>:本工具计算的是"基础收益"(股息+留存),不含市场重估(PB变动)。市场重估决定你的"实际回报"——但这部分不可预测。</p>
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <h4>📐 边界与局限</h4>
+            <p>
+                ① 本工具不计算市场重估(PB变动)——这部分不可预测,只能事后归因;<br>
+                ② PE 由 PB/ROE 估算,真实PE还受盈利预期、分红政策影响;<br>
+                ③ 资本成本r的取值有较强主观性,建议参考 CAPM 或行业经验值;<br>
+                ④ 这是机制分解,不是收益预测——历史分解不代表未来表现。
+            </p>
+        </div>
+    `;
+    document.getElementById('result').innerHTML = html;
+    document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
