@@ -1,10 +1,7 @@
 User-agent: *
 Allow: /
 
-# 不索引的临时/验证页
-Disallow: /tmp.html
-Disallow: /hero-chart-demo.html
-Disallow: /index_live.html
-Disallow: /triage_insert.html
+# 已更名的跳转桩（不索引，canonical 指向新地址）
+Disallow: /andalu-04.html
 
 Sitemap: https://abcsuodao.com/sitemap.xml
