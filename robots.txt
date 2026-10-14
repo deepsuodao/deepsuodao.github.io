@@ -1,3 +1,10 @@
 User-agent: *
 Allow: /
-Sitemap: https://www.deepsuodao.com/sitemap.xml
+
+# 不索引的临时/验证页
+Disallow: /tmp.html
+Disallow: /hero-chart-demo.html
+Disallow: /index_live.html
+Disallow: /triage_insert.html
+
+Sitemap: https://abcsuodao.com/sitemap.xml
