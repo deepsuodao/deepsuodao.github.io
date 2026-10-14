@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="把研究结论的适用范围拆成问题范围、检验设定范围与样本子范围三层，并标出「已判死」与「本次未覆盖」的边界差异。">
+<title>结论边界划定器 | 私家智囊 · 研究工具</title>
+<link rel="canonical" href="https://abcsuodao.com/tool-conclusion-boundary.html">
+<style>
+  :root {
+    --bg-page: #0f1424;
+    --bg-card: #1a1f30;
+    --bg-input: #232840;
+    --border: #3a3f55;
+    --border-focus: #d4a853;
+    --text-main: #e8e6e3;
+    --text-sub: #8a8885;
+    --gold: #d4a853;
+    --gold-bright: #f0c868;
+    --btn-text: #0a0e1a;
+    --green: #4caf7d;
+    --yellow: #f0c868;
+    --red: #d9534f;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg-page);
+    color: var(--text-main);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  .container { max-width: 1100px; margin: 0 auto; }
+  header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+  }
+  .breadcrumb { font-size: 13px; color: var(--text-sub); }
+  .breadcrumb a { color: var(--gold); text-decoration: none; }
+  h1 { font-size: 28px; color: var(--gold); margin-top: 6px; font-weight: 600; }
+  .subtitle { color: var(--text-sub); font-size: 14px; margin-top: 6px; }
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .card-title {
+    font-size: 16px;
+    color: var(--gold);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title .num {
+    background: var(--gold);
+    color: var(--btn-text);
+    width: 26px;
+    height: 26px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .field { margin-bottom: 16px; }
+  label {
+    display: block;
+    font-size: 13px;
+    color: var(--text-sub);
+    margin-bottom: 6px;
+  }
+  input[type="text"], textarea, select {
+    width: 100%;
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 10px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+  }
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 2px rgba(212, 168, 83, 0.2);
+  }
+  textarea { min-height: 60px; resize: vertical; line-height: 1.5; }
+  .matrix-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .matrix-table th, .matrix-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+  }
+  .matrix-table th {
+    background: var(--bg-input);
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+  .matrix-table td.center { text-align: center; }
+  .status-cell {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-main);
+    margin: 0 2px;
+  }
+  .status-cell.active.death { background: var(--red); color: white; border-color: var(--red); }
+  .status-cell.active.alive { background: var(--green); color: var(--btn-text); border-color: var(--green); }
+  .status-cell.active.uncovered { background: var(--text-sub); color: var(--btn-text); border-color: var(--text-sub); }
+  .status-cell.active.na { background: var(--border); color: var(--text-sub); border-color: var(--border); }
+  .status-row { display: flex; gap: 4px; justify-content: center; }
+  .revival-row {
+    background: var(--bg-input);
+    padding: 14px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    border-left: 4px solid var(--border);
+  }
+  .revival-row.met { border-left-color: var(--green); }
+  .revival-row.failed { border-left-color: var(--red); }
+  .revival-row-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+  }
+  .revival-label {
+    background: var(--gold);
+    color: var(--btn-text);
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .revival-title { font-size: 14px; color: var(--text-main); flex: 1; }
+  .revival-status {
+    display: flex;
+    gap: 4px;
+  }
+  .revival-status button {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    cursor: pointer;
+  }
+  .revival-status button.active.met { background: var(--green); color: var(--btn-text); border-color: var(--green); }
+  .revival-status button.active.failed { background: var(--red); color: white; border-color: var(--red); }
+  button.primary {
+    background: var(--gold);
+    color: var(--btn-text);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  button.primary:hover { background: var(--gold-bright); }
+  button.ghost {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 10px 18px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  button.ghost:hover { border-color: var(--gold); color: var(--gold); }
+  .actions { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+  .verdict {
+    padding: 20px;
+    border-radius: 6px;
+    margin: 16px 0;
+  }
+  .verdict.death { background: rgba(217, 83, 79, 0.1); border-left: 4px solid var(--red); }
+  .verdict.alive { background: rgba(76, 175, 125, 0.1); border-left: 4px solid var(--green); }
+  .verdict.partial { background: rgba(240, 200, 104, 0.1); border-left: 4px solid var(--yellow); }
+  .verdict.uncovered { background: rgba(138, 136, 133, 0.1); border-left: 4px solid var(--text-sub); }
+  .verdict-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+  .verdict.death .verdict-title { color: var(--red); }
+  .verdict.alive .verdict-title { color: var(--green); }
+  .verdict.partial .verdict-title { color: var(--yellow); }
+  .verdict.uncovered .verdict-title { color: var(--text-main); }
+  .verdict-body { color: var(--text-main); font-size: 14px; }
+  .disclaimer-card {
+    background: rgba(217, 83, 79, 0.08);
+    border: 1px solid var(--red);
+    border-radius: 4px;
+    padding: 14px 16px;
+    margin: 16px 0;
+  }
+  .disclaimer-card strong { color: var(--red); }
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .stat-box {
+    background: var(--bg-input);
+    padding: 14px;
+    border-radius: 4px;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--text-sub);
+    text-transform: uppercase;
+  }
+  .stat-value {
+    font-size: 22px;
+    color: var(--gold);
+    font-weight: 600;
+    margin-top: 4px;
+  }
+  .modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+    padding: 20px;
+  }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    max-width: 700px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .modal h3 { color: var(--gold); margin-bottom: 16px; }
+  pre.export-preview {
+    background: var(--bg-page);
+    border: 1px solid var(--border);
+    padding: 16px;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: 12px;
+    color: var(--text-main);
+    font-family: "SF Mono", Consolas, monospace;
+    max-height: 400px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--gold);
+    color: var(--btn-text);
+    padding: 12px 20px;
+    border-radius: 4px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s;
+    z-index: 100;
+  }
+  .toast.show { opacity: 1; transform: translateY(0); }
+  footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--text-sub);
+    font-size: 12px;
+    text-align: center;
+  }
+  footer a { color: var(--gold); text-decoration: none; }
+  @media (max-width: 720px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    h1 { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="breadcrumb"><a href="./research-value-capital-allocation.html">← 返回研究报告系列</a></div>
+  <h1>📐 结论边界划定器</h1>
+  <p class="subtitle">对应研究09《判死边界》——判死必须有范围："不判死"不等于"证明有效"</p>
+</header>
+
+<!-- 结论信息 -->
+<div class="card">
+  <div class="card-title"><span class="num">0</span>待划界的结论</div>
+  <div class="field">
+    <label>指标/方法名称</label>
+    <input type="text" id="conclusionName" placeholder="如：高位度 ≥ 0.75 / 双均线-N=20-M=10 / 铜策略-A">
+  </div>
+  <div class="field">
+    <label>原始结论（一句话）</label>
+    <textarea id="originalConclusion" placeholder="如：该指标作为全市场独立选股信号无效"></textarea>
+  </div>
+  <div class="field">
+    <label>研究问题（这个结论到底回答了哪个问题？）</label>
+    <textarea id="researchQuestion" placeholder="如：在全市场范围内，按这项指标单独选股，能不能拿到涨幅之外的额外收益？"></textarea>
+  </div>
+</div>
+
+<!-- 4类研究问题矩阵 -->
+<div class="card">
+  <div class="card-title"><span class="num">1</span>4类研究问题矩阵</div>
+  <div class="help-text" style="font-size: 12px; color: var(--text-sub); margin-bottom: 12px;">
+    同一个指标在不同用法下，结论可能完全不同。请逐项标注本次证据是否覆盖。
+  </div>
+
+  <table class="matrix-table">
+    <thead>
+      <tr>
+        <th style="width: 25%;">研究问题</th>
+        <th style="width: 30%;">具体问法</th>
+        <th style="width: 25%;">本次证据</th>
+        <th style="width: 20%;">判定</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>A 全市场独立信号</strong></td>
+        <td>能否作为全市场口径的独立选股信号？</td>
+        <td class="center">
+          <div class="status-row">
+            <button class="status-cell" data-q="A" data-val="uncovered">未覆盖</button>
+          </div>
+        </td>
+        <td class="center" id="judge-A">—</td>
+      </tr>
+      <tr>
+        <td><strong>B 条件变量</strong></td>
+        <td>能否作为已有标的池的进一步区分条件？</td>
+        <td class="center">
+          <div class="status-row">
+            <button class="status-cell" data-q="B" data-val="uncovered">未覆盖</button>
+          </div>
+        </td>
+        <td class="center" id="judge-B">—</td>
+      </tr>
+      <tr>
+        <td><strong>C 方向/极性</strong></td>
+        <td>在多空或不同方向上的表现如何？</td>
+        <td class="center">
+          <div class="status-row">
+            <button class="status-cell" data-q="C" data-val="uncovered">未覆盖</button>
+          </div>
+        </td>
+        <td class="center" id="judge-C">—</td>
+      </tr>
+      <tr>
+        <td><strong>D 规模/参数</strong></td>
+        <td>对规模因子或参数设置是否敏感？</td>
+        <td class="center">
+          <div class="status-row">
+            <button class="status-cell" data-q="D" data-val="uncovered">未覆盖</button>
+          </div>
+        </td>
+        <td class="center" id="judge-D">—</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="disclaimer-card" style="margin-top: 16px;">
+    <strong>⚠️ 关键纪律</strong>：
+    "未覆盖"≠"有效"。它只意味着当前证据<strong>没有测</strong>这个用法，<strong>不</strong>意味着这个用法下结论成立。
+  </div>
+</div>
+
+<!-- 综合判定 -->
+<div class="card">
+  <div class="card-title"><span class="num">2</span>综合判定</div>
+  <div class="actions">
+    <button class="primary" id="auditBtn">▶ 划定边界</button>
+    <button class="ghost" id="exportBtn">📤 导出报告 MD</button>
+    <button class="ghost" id="clearBtn">↺ 清空</button>
+  </div>
+  <div id="auditResult" style="margin-top: 20px;"></div>
+</div>
+
+<!-- 复活条件 -->
+<div class="card">
+  <div class="card-title"><span class="num">3</span>复活条件（4 条模板）</div>
+  <div class="help-text" style="font-size: 12px; color: var(--text-sub); margin-bottom: 12px;">
+    <strong>死因最精确的坐标</strong>：4 条复活条件里倒了哪一条，那就是这个结论的死亡坐标。<br>
+    满足的那几条说明它不是全错——只是某一个具体用法上不行。
+  </div>
+
+  <div class="revival-row" data-revival="1">
+    <div class="revival-row-head">
+      <span class="revival-label">1</span>
+      <span class="revival-title">控制相关因子后，增量显著为正</span>
+      <div class="revival-status">
+        <button data-val="met">✓ 满足</button>
+        <button data-val="failed">✗ 倒下</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="revival-row" data-revival="2">
+    <div class="revival-row-head">
+      <span class="revival-label">2</span>
+      <span class="revival-title">在多个子样本/时段上方向一致</span>
+      <div class="revival-status">
+        <button data-val="met">✓ 满足</button>
+        <button data-val="failed">✗ 倒下</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="revival-row" data-revival="3">
+    <div class="revival-row-head">
+      <span class="revival-label">3</span>
+      <span class="revival-title">在可交易子集内不反向（剔除停牌、流动性差等）</span>
+      <div class="revival-status">
+        <button data-val="met">✓ 满足</button>
+        <button data-val="failed">✗ 倒下</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="revival-row" data-revival="4">
+    <div class="revival-row-head">
+      <span class="revival-label">4</span>
+      <span class="revival-title">拆解验证：效应来自预期场景，而非被其他变量解释</span>
+      <div class="revival-status">
+        <button data-val="met">✓ 满足</button>
+        <button data-val="failed">✗ 倒下</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="field" style="margin-top: 16px;">
+    <label>死因自定义说明（"倒下"的那一条背后，到底发生了什么？）</label>
+    <textarea id="deathCause" placeholder="如：第4条倒下——把样本按前期涨幅分组后，效应只集中在'前期暴涨'那一组，在'慢慢涨上去'那一组里约等于零 (-0.07%)。所以它测到的不是'位置'，而是'暴涨之后会分化'。" style="min-height: 80px;"></textarea>
+  </div>
+</div>
+
+<!-- 方法论 -->
+<div class="card">
+  <div class="card-title"><span class="num">📖</span>为什么"判死"必须有边界？</div>
+  <div style="font-size: 14px; color: var(--text-main);">
+    <p style="margin-bottom: 10px;"><strong style="color: var(--gold);">最常见的错误</strong>：当一项研究得出"指标无效"后，把这个结论<strong>无限外推</strong>——"任何用法下都无效"。</p>
+    <p style="margin-bottom: 10px;"><strong style="color: var(--gold);">现实</strong>：一个指标可能只在某一个用法下无效，但在另一个用法下<strong>仍然有效</strong>。如果不分清边界，结论就被悄悄偷换成了"全面无效"。</p>
+    <p style="margin-bottom: 10px;"><strong style="color: var(--gold);">两个最危险的偷换</strong>：</p>
+    <ul style="padding-left: 24px; margin-bottom: 10px;">
+      <li><strong>"未判死"读成"有效"</strong>——未测的用法被默认成可用的用法</li>
+      <li><strong>"在 A 用法下无效"读成"在所有用法下无效"</strong>——边界被悄悄扩大</li>
+    </ul>
+    <p style="margin-bottom: 10px;"><strong style="color: var(--gold);">复活条件的意义</strong>：</p>
+    <p style="margin-bottom: 10px;">满足的复活条件越多，说明这个结论<strong>不是全错</strong>——只是在某一个具体问题上倒下。<strong>倒下的那一条</strong>，就是这个结论<strong>真正的死因</strong>。这比简单说"无效"信息量大得多。</p>
+    <p><strong style="color: var(--gold);">本工具的核心约束</strong>：每个被讨论的结论都必须明确写出"在哪个问题下被判定 / 在哪些问题上未测"。</p>
+  </div>
+</div>
+
+<!-- 导出预览 -->
+<div class="modal-overlay" id="exportModal">
+  <div class="modal">
+    <h3>导出预览</h3>
+    <pre class="export-preview" id="exportPreview"></pre>
+    <div class="modal-actions">
+      <button class="ghost" id="cancelExportBtn">取消</button>
+      <button class="primary" id="downloadExportBtn">📥 下载 .md 文件</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<footer>
+  数据来源：本工具不存储任何数据 · 纯本地计算<br>
+  <a href="./research-value-capital-allocation.html">返回研究系列</a> · <a href="./index.html">返回首页</a>
+</footer>
+
+</div>
+
+<script>
+// ========== 状态管理 ==========
+
+const state = {
+  questions: {}, // {A: 'death'|'alive'|'uncovered'|'na', B:..., C:..., D:...}
+  revivals: {}   // {1: 'met'|'failed', 2:..., 3:..., 4:...}
+};
+
+function setQuestion(q, val) {
+  state.questions[q] = val;
+  document.querySelectorAll(`button[data-q="${q}"]`).forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.val === val);
+  });
+  // 更新判定列
+  const judgeCell = document.getElementById(`judge-${q}`);
+  const labels = {
+    uncovered: { text: '⬜ 未覆盖', color: 'var(--text-sub)' },
+    death: { text: '❌ 判死', color: 'var(--red)' },
+    alive: { text: '✅ 有效', color: 'var(--green)' },
+    na: { text: '— N/A', color: 'var(--text-sub)' }
+  };
+  const l = labels[val] || labels.uncovered;
+  judgeCell.innerHTML = `<span style="color: ${l.color}; font-weight: 600;">${l.text}</span>`;
+}
+
+document.querySelectorAll('.status-cell').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const q = btn.dataset.q;
+    setQuestion(q, btn.dataset.val);
+  });
+});
+
+document.querySelectorAll('.revival-status button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const row = btn.closest('.revival-row');
+    const idx = row.dataset.revival;
+    state.revivals[idx] = btn.dataset.val;
+    row.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    row.classList.toggle('met', btn.dataset.val === 'met');
+    row.classList.toggle('failed', btn.dataset.val === 'failed');
+  });
+});
+
+// ========== 综合判定 ==========
+
+function runAudit() {
+  const name = document.getElementById('conclusionName').value.trim();
+  if (!name) {
+    showToast('请先填写指标/方法名称');
+    return;
+  }
+
+  const qs = ['A', 'B', 'C', 'D'];
+  const deaths = qs.filter(q => state.questions[q] === 'death').length;
+  const alives = qs.filter(q => state.questions[q] === 'alive').length;
+  const uncovered = qs.filter(q => state.questions[q] === 'uncovered').length;
+  const nas = qs.filter(q => state.questions[q] === 'na').length;
+
+  // 复活条件
+  const metCount = Object.values(state.revivals).filter(v => v === 'met').length;
+  const failedCount = Object.values(state.revivals).filter(v => v === 'failed').length;
+  const revivalSet = Object.keys(state.revivals).length;
+
+  // 综合判定
+  let verdictClass, verdictTitle, verdictBody;
+  if (deaths >= 1 && failedCount >= 1) {
+    verdictClass = 'death';
+    verdictTitle = `❌ 在 ${deaths} 个研究问题上被判死`;
+    if (deaths >= 2) {
+      verdictBody = `<strong>结论在多个用法上都不成立</strong>。复活条件中 ${failedCount} 条未满足。这是结构性失败，建议放弃。`;
+    } else {
+      verdictBody = `<strong>结论在 ${deaths} 个用法上不成立</strong>，复活条件中第 ${Object.keys(state.revivals).find(k => state.revivals[k] === 'failed')} 条倒下。这是真正的死因。`;
+    }
+  } else if (deaths >= 1) {
+    verdictClass = 'death';
+    verdictTitle = `❌ 在 ${deaths} 个研究问题上被判死`;
+    verdictBody = `结论在 ${deaths} 个用法上不成立。请补全复活条件（4 条），确认具体倒在哪一条。`;
+  } else if (alives >= 2 && uncovered === 0) {
+    verdictClass = 'alive';
+    verdictTitle = `✅ 在所有测过的用法上都有效`;
+    verdictBody = `结论在 ${alives} 个用法上都通过检验。这是真正的有效结论。`;
+  } else if (alives >= 1 && uncovered >= 1) {
+    verdictClass = 'partial';
+    verdictTitle = `⚠️ 部分有效，部分未覆盖`;
+    verdictBody = `在 ${alives} 个用法上有效，但还有 ${uncovered} 个用法未测。<strong>不要把"未覆盖"读成"有效"</strong>——只能等下一次研究来回答。`;
+  } else if (uncovered >= 2) {
+    verdictClass = 'uncovered';
+    verdictTitle = `⬜ 证据覆盖不足`;
+    verdictBody = `${uncovered} 个用法未测。建议<strong>明确标记为"未检验"</strong>，而不是"待启用"。`;
+  } else {
+    verdictClass = 'uncovered';
+    verdictTitle = `⬜ 评估不完整`;
+    verdictBody = `请完成所有问题的评估。`;
+  }
+
+  // 渲染
+  document.getElementById('auditResult').innerHTML = `
+    <div class="summary-grid">
+      <div class="stat-box">
+        <div class="stat-label">被判死</div>
+        <div class="stat-value" style="color: var(--red);">${deaths}</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">已确认有效</div>
+        <div class="stat-value" style="color: var(--green);">${alives}</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">未覆盖</div>
+        <div class="stat-value" style="color: var(--text-sub);">${uncovered}</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">N/A</div>
+        <div class="stat-value" style="color: var(--text-sub);">${nas}</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">复活条件满足</div>
+        <div class="stat-value" style="color: var(--green);">${metCount}/${revivalSet || '—'}</div>
+      </div>
+    </div>
+
+    <div class="verdict ${verdictClass}">
+      <div class="verdict-title">${verdictTitle}</div>
+      <div class="verdict-body">${verdictBody}</div>
+    </div>
+
+    <div class="disclaimer-card">
+      <strong>⚠️ 请再次确认</strong>：
+      <ul style="margin-top: 8px; padding-left: 20px; font-size: 13px;">
+        <li>"未覆盖"≠"有效"——它只意味着没测，不意味着可用</li>
+        <li>"在 A 用法下无效"≠"在所有用法下无效"——边界不能扩大</li>
+        <li>未通过的复活条件就是真正的死因——比"无效"信息量大得多</li>
+      </ul>
+    </div>
+  `;
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+document.getElementById('auditBtn').addEventListener('click', runAudit);
+
+document.getElementById('clearBtn').addEventListener('click', () => {
+  document.querySelectorAll('input[type="text"], textarea').forEach(el => el.value = '');
+  state.questions = {};
+  state.revivals = {};
+  document.querySelectorAll('.status-cell').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.revival-status button').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.revival-row').forEach(r => r.classList.remove('met', 'failed'));
+  document.querySelectorAll('[id^="judge-"]').forEach(c => c.innerHTML = '—');
+  document.getElementById('auditResult').innerHTML = '';
+});
+
+// ========== 导出 ==========
+
+function generateMarkdown() {
+  const name = document.getElementById('conclusionName').value.trim() || '未命名';
+  const original = document.getElementById('originalConclusion').value.trim() || '—';
+  const question = document.getElementById('researchQuestion').value.trim() || '—';
+  const deathCause = document.getElementById('deathCause').value.trim() || '—';
+
+  let md = `# 结论边界划定报告\n\n`;
+  md += `**指标/方法**：${name}\n`;
+  md += `**生成时间**：${new Date().toLocaleString('zh-CN')}\n\n`;
+  md += `**原始结论**：${original}\n\n`;
+  md += `**研究问题**：${question}\n\n`;
+  md += `---\n\n`;
+
+  md += `## 4 类研究问题矩阵\n\n`;
+  md += `| 研究问题 | 具体问法 | 证据覆盖 | 判定 |\n`;
+  md += `|---|---|---|---|\n`;
+  const qs = ['A', 'B', 'C', 'D'];
+  const qTitles = {
+    A: '全市场独立信号',
+    B: '条件变量',
+    C: '方向/极性',
+    D: '规模/参数'
+  };
+  const qDetails = {
+    A: '能否作为全市场口径的独立选股信号？',
+    B: '能否作为已有标的池的进一步区分条件？',
+    C: '在多空或不同方向上的表现如何？',
+    D: '对规模因子或参数设置是否敏感？'
+  };
+  const judgeLabels = {
+    uncovered: '⬜ 未覆盖',
+    death: '❌ 判死',
+    alive: '✅ 有效',
+    na: '— N/A'
+  };
+  qs.forEach(q => {
+    const v = state.questions[q] || 'uncovered';
+    md += `| ${qTitles[q]} | ${qDetails[q]} | ${v === 'uncovered' ? '未覆盖' : '已测'} | ${judgeLabels[v]} |\n`;
+  });
+
+  md += `\n> ⚠️ **"未覆盖"≠"有效"**——它只意味着没测，不意味着可用。\n\n`;
+
+  md += `## 复活条件（4 条）\n\n`;
+  const revivalTitles = [
+    '控制相关因子后，增量显著为正',
+    '在多个子样本/时段上方向一致',
+    '在可交易子集内不反向',
+    '拆解验证：效应来自预期场景，而非被其他变量解释'
+  ];
+  for (let i = 1; i <= 4; i++) {
+    const v = state.revivals[i];
+    const label = v === 'met' ? '✓ 满足' : v === 'failed' ? '✗ 倒下' : '— 未填';
+    md += `${i}. **${revivalTitles[i-1]}**：${label}\n`;
+  }
+
+  md += `\n### 死因说明\n\n${deathCause}\n\n`;
+
+  md += `---\n\n*由「结论边界划定器」自动生成 · 对应研究09*\n`;
+  return md;
+}
+
+document.getElementById('exportBtn').addEventListener('click', () => {
+  const md = generateMarkdown();
+  document.getElementById('exportPreview').textContent = md;
+  document.getElementById('exportModal').classList.add('show');
+  window._pendingExport = md;
+  const name = document.getElementById('conclusionName').value.trim() || 'conclusion';
+  window._pendingFilename = `boundary_${name.replace(/[\/\\:*?"<>|]/g, '_')}_${new Date().toISOString().split('T')[0]}.md`;
+});
+
+document.getElementById('cancelExportBtn').addEventListener('click', () => {
+  document.getElementById('exportModal').classList.remove('show');
+});
+
+document.getElementById('downloadExportBtn').addEventListener('click', () => {
+  const blob = new Blob([window._pendingExport], { type: 'text/markdown' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = window._pendingFilename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  document.getElementById('exportModal').classList.remove('show');
+  showToast('已下载');
+});
+
+</script>
+</body>
+</html>

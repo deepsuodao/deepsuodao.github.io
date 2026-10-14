@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="ttw57mj9p4F2lSOUoTBYWB">
+<head data-page-node-id="RB6ucQsbABQjmr2MeuOiE8">
+<meta charset="UTF-8" data-page-node-id="s2jBGsudG1K7WuPJl6TQ11">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="4jtcwubkquWsBG75dWEI2G">
+<meta name="description" content="登记已被判死的假设与死因，附复活条件；防止被证伪的结论重新流回候选清单。">
+<title>研究墓碑档案本 | 私家智囊 · 研究工具</title>
+<link rel="canonical" href="https://abcsuodao.com/tool-research-graveyard.html">
+<style>
+  :root {
+    --bg-page: #0f1424;
+    --bg-card: #1a1f30;
+    --bg-input: #232840;
+    --border: #3a3f55;
+    --border-focus: #d4a853;
+    --text-main: #e8e6e3;
+    --text-sub: #8a8885;
+    --gold: #d4a853;
+    --gold-bright: #f0c868;
+    --btn-text: #0a0e1a;
+    --green: #4caf7d;
+    --yellow: #f0c868;
+    --red: #d9534f;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg-page);
+    color: var(--text-main);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  .container { max-width: 1000px; margin: 0 auto; }
+  header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+  }
+  .breadcrumb { font-size: 13px; color: var(--text-sub); }
+  .breadcrumb a { color: var(--gold); text-decoration: none; }
+  h1 {
+    font-size: 28px;
+    color: var(--gold);
+    margin-top: 6px;
+    font-weight: 600;
+  }
+  .subtitle { color: var(--text-sub); font-size: 14px; margin-top: 6px; }
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .card-title {
+    font-size: 16px;
+    color: var(--gold);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title .num {
+    background: var(--gold);
+    color: var(--btn-text);
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .field { margin-bottom: 16px; }
+  label {
+    display: block;
+    font-size: 13px;
+    color: var(--text-sub);
+    margin-bottom: 6px;
+  }
+  label .required { color: var(--red); margin-left: 4px; }
+  input[type="text"], input[type="date"], select, textarea {
+    width: 100%;
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 10px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color 0.15s;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 2px rgba(212, 168, 83, 0.2);
+  }
+  textarea {
+    min-height: 80px;
+    resize: vertical;
+    line-height: 1.5;
+  }
+  .help {
+    font-size: 12px;
+    color: var(--text-sub);
+    margin-top: 4px;
+    font-style: italic;
+  }
+  button.primary {
+    background: var(--gold);
+    color: var(--btn-text);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  button.primary:hover { background: var(--gold-bright); }
+  button.primary:disabled {
+    background: var(--border);
+    cursor: not-allowed;
+    color: var(--text-sub);
+  }
+  button.ghost {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 10px 18px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  button.ghost:hover { border-color: var(--gold); color: var(--gold); }
+  .actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--gold);
+    color: var(--btn-text);
+    padding: 12px 20px;
+    border-radius: 4px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s;
+    z-index: 100;
+  }
+  .toast.show { opacity: 1; transform: translateY(0); }
+  .record {
+    background: var(--bg-input);
+    border-left: 4px solid var(--border);
+    padding: 16px;
+    margin-bottom: 12px;
+    border-radius: 4px;
+  }
+  .record.death { border-left-color: var(--red); }
+  .record.reprieve { border-left-color: var(--yellow); }
+  .record.alive { border-left-color: var(--green); }
+  .record-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .record-title {
+    font-size: 16px;
+    color: var(--text-main);
+    font-weight: 600;
+  }
+  .record-meta {
+    font-size: 12px;
+    color: var(--text-sub);
+    margin-top: 2px;
+  }
+  .badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .badge.red { background: rgba(217, 83, 79, 0.2); color: var(--red); }
+  .badge.yellow { background: rgba(240, 200, 104, 0.2); color: var(--yellow); }
+  .badge.green { background: rgba(76, 175, 125, 0.2); color: var(--green); }
+  .record-section {
+    margin-top: 8px;
+    font-size: 13px;
+  }
+  .record-section strong { color: var(--gold); }
+  .record-actions {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+  }
+  .empty-state {
+    text-align: center;
+    color: var(--text-sub);
+    padding: 32px;
+    font-style: italic;
+  }
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .stat-box {
+    background: var(--bg-input);
+    padding: 14px;
+    border-radius: 4px;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--text-sub);
+    text-transform: uppercase;
+  }
+  .stat-value {
+    font-size: 24px;
+    color: var(--gold);
+    font-weight: 600;
+    margin-top: 4px;
+  }
+  .filter-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+  .search-input {
+    flex: 1;
+    min-width: 200px;
+    padding: 8px 12px !important;
+    font-size: 13px !important;
+  }
+  .modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+    padding: 20px;
+  }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    max-width: 700px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .modal h3 {
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  pre.export-preview {
+    background: var(--bg-page);
+    border: 1px solid var(--border);
+    padding: 16px;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: 12px;
+    color: var(--text-main);
+    font-family: "SF Mono", Consolas, monospace;
+    max-height: 300px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--text-sub);
+    font-size: 12px;
+    text-align: center;
+  }
+  footer a { color: var(--gold); text-decoration: none; }
+  @media (max-width: 720px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    h1 { font-size: 22px; }
+  }
+</style>
+</head>
+<body data-page-node-id="LweZMn5vys2omYBTsLkDLs">
+<div class="container" data-page-node-id="ZuTXbNCpp6jvYHYwhRWkGd">
+
+<header data-page-node-id="AiaCYZIRohpqCq1rf4GzD4">
+  <div class="breadcrumb" data-page-node-id="Y0Fyuq8XFQCAqnDcO9ZkIw"><a href="./research-value-capital-allocation.html" data-page-node-id="o7GT3mM7KT8TD2uj6pY6Li">← 返回研究报告系列</a></div>
+  <h1 data-page-node-id="9spBGesexVAxRazzjyGRwI">🪦 研究墓碑档案本</h1>
+  <p class="subtitle" data-page-node-id="tBhOAAmZKGhaFMNLI7g9xn">对应研究04第9条"九块墓碑"——每个被否定的策略，都应该有一块碑</p>
+</header>
+
+<!-- 输入卡片 -->
+<div class="card" data-page-node-id="TXBJzXsfORpfhPB8QvmCpl">
+  <div class="card-title" data-page-node-id="az7j78p2UlSKBRF0LHQ02l"><span class="num" data-page-node-id="OtugajaZmhovFnwakYiEXB">1</span>记录一次研究判定</div>
+
+  <div class="grid-2" data-page-node-id="1IbyR94JLY6VKl4RV18EYh">
+    <div class="field" data-page-node-id="4x71KEzTZTfK4KUEZpmrGG">
+      <label data-page-node-id="S2gAqnrkAiJIrWdBIaAvNs">策略名称<span class="required" data-page-node-id="OosZCIZ4KDwrCCIh5xvpLk">*</span></label>
+      <input type="text" id="strategyName" placeholder="如：铜策略A / 双均线-N=20-M=10-K=2.0" data-page-node-id="lqR27NF2OeYZ0ZgOmknaUd">
+    </div>
+    <div class="field" data-page-node-id="0fIfDe7R6Em5rzsb4fSehJ">
+      <label data-page-node-id="kiJ81wTb3J5aVoBO03iQWt">判定日期<span class="required" data-page-node-id="q4cBDaCK78rXhUZTScoJr7">*</span></label>
+      <input type="date" id="judgmentDate" data-page-node-id="ECZgwou7JnFzTF39ApStFe">
+    </div>
+  </div>
+
+  <div class="grid-2" data-page-node-id="btvAFlyx2Y0TIOOm9cCKLn">
+    <div class="field" data-page-node-id="RbgaYc6cF4uYGUGnajoHvY">
+      <label data-page-node-id="tdWqlFUD8KHz22SF844xW5">判定结果<span class="required" data-page-node-id="10IRVMTQ6qKejUp1dx3mXQ">*</span></label>
+      <select id="verdict" data-page-node-id="ytuUVJDtEFnQpEqtgFUf8g">
+        <option value="" data-page-node-id="OeGSxsPqGxd8lquMA4TT1x">-- 请选择 --</option>
+        <option value="death" data-page-node-id="3PpRqRHT4h2YGXdkLF6U3J">🔴 死刑——策略被否</option>
+        <option value="reprieve" data-page-node-id="vwrdnNzAA0uyGuuZSnTU4r">🟡 缓刑——暂时保留，需再观察</option>
+        <option value="alive" data-page-node-id="f2A3sYzaV9FVIL1bElCHpe">🟢 存活——通过全部审查</option>
+      </select>
+    </div>
+    <div class="field" data-page-node-id="9wEHJdNiEgmRqzNaPDFZuW">
+      <label data-page-node-id="wI273JxE1WZIQvL61RB3VO">墓碑归类（仅"死刑"必填）</label>
+      <select id="grave" data-page-node-id="UXxr7EhwFBgoMNKMy5V2q5">
+        <option value="" data-page-node-id="gszTMWXpZvxELKNu9oPlNB">-- 请选择墓碑 --</option>
+        <option value="data-mining" data-page-node-id="YkGGgJsqoUvIMQurduDHtO">① 数据挖掘产物（curve fitting）</option>
+        <option value="look-ahead" data-page-node-id="ugmARuMS1EdscwfMtXSh3K">② 未来函数（look-ahead bias）</option>
+        <option value="cost-eats-profit" data-page-node-id="ZEz6Fdd6UNxCvEbJ7iUPFs">③ 交易成本吃掉利润</option>
+        <option value="sample-too-short" data-page-node-id="atkHFhNoW3WNtCVUC9ck97">④ 样本太短 / 单一时段</option>
+        <option value="overfitting" data-page-node-id="WeUl8LRJMxXCttTLGP4Jt3">⑤ 过拟合（参数多于信号）</option>
+        <option value="survivorship" data-page-node-id="HQFuaJKwEqSAcWADrcKdx7">⑥ 幸存者偏差</option>
+        <option value="black-swan" data-page-node-id="qMJdhIiu3yVFWVcLDYJZim">⑦ 黑天鹅免疫失败</option>
+        <option value="unfalsifiable" data-page-node-id="RHAlyum4XJmYHJBcpPcfoY">⑧ 反方无法击破的"完美"逻辑</option>
+        <option value="other" data-page-node-id="e8LAW77GA4pjtcLFfH464W">⑨ 其它（自填说明）</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="field" data-page-node-id="swRx91t0LmXYKlSagtLCsO">
+    <label data-page-node-id="0WlgnPYmpGi6DFUplAatwN">证据要点<span class="required" data-page-node-id="cPheHn2uUPyDJjBCkcFBGI">*</span></label>
+    <textarea id="evidence" placeholder="如：样本外夏普从 1.4 衰减到 0.3（衰减 11pp）；交易成本 2.7%/年吃掉了全部 alpha；等等"></textarea>
+    <div class="help" data-page-node-id="53N1irmNue7GMCPCUFdmFP">必须给出可验证的数字或可重做的实验。空泛描述无效。</div>
+  </div>
+
+  <div class="field" data-page-node-id="k7T24dR4Gx6CUHAqKq0KNR">
+    <label data-page-node-id="GIGSEZxlMblUEu5E2WNOls">复活条件<span class="required" data-page-node-id="TMGUsIqBaTS36RD79VnlhW">*</span></label>
+    <textarea id="revivalCondition" placeholder="如：未来出现明显不同的市场状态（持续&gt;3个月的趋势或&gt;20%的急速下跌）时，重新跑一遍样本外检验；若夏普仍&gt;1.0则考虑复活"></textarea>
+    <div class="help" data-page-node-id="KD9TDxjsj9uqXUQjL1Dg7b">⚠️ 本工具的灵魂：<strong data-page-node-id="Yh4N0GrhBhUW85Y4eNO43q">每个被判死的策略都必须写出"在什么情况下可以重新评估"</strong>。否则墓碑就成了认知闭合的借口。</div>
+  </div>
+
+  <div class="field" data-page-node-id="w5VdFPfdWNYGxkGIr9Zsve">
+    <label data-page-node-id="3UNyl6YM55HC6495lDBEwU">反方角色扮演记录（可选）</label>
+    <textarea id="adversarialNote" placeholder="如：让两个同事扮演反方，第一个人提出'样本是否包含2015年股灾'，第二个人提出'是否扣除了分红再投资成本'。两个问题都答上了，但第三个'是否做了换手率冲击成本'无法回答。"></textarea>
+    <div class="help" data-page-node-id="kqa0TchMTEM3RMUDIEZyO8">研究04第8条：反方是策略最大的朋友。这条填得越具体越好。</div>
+  </div>
+</div>
+
+<!-- 操作 -->
+<div class="actions" data-page-node-id="oQFUuuWv9jGMw3XeJLTL71">
+  <button class="primary" id="saveBtn" data-page-node-id="YMaYALI94uJlep60Rvr2w9">📌 存档</button>
+  <button class="ghost" id="clearBtn" data-page-node-id="aCfPHwFOT1LN983fa30XhE">↺ 清空表单</button>
+</div>
+
+<!-- 档案库 -->
+<div class="card" data-page-node-id="toBcwjiByxukBBzqxu8RqA">
+  <div class="card-title" data-page-node-id="qaxFTDQOwCNEFFZoc17ZY5"><span class="num" data-page-node-id="pJrDqbZnBApYx8OKuJO6m8">📜</span>墓碑档案库（本地存储）</div>
+
+  <div class="stats-row" id="statsRow" data-page-node-id="0UZ1RRASi0EAqHPQmdWiyM"></div>
+
+  <div class="filter-row" data-page-node-id="KxBFOt2WzNoVL796xOc6ne">
+    <button class="filter-btn active" data-filter="all" data-page-node-id="rTQt3EdX5FpMg7DY9ffXCJ">全部</button>
+    <button class="filter-btn" data-filter="death" data-page-node-id="VAGUVFMEqtGqBE5IFY2DPO">死刑</button>
+    <button class="filter-btn" data-filter="reprieve" data-page-node-id="7flIVplJIRLoCGpTcrl4bv">缓刑</button>
+    <button class="filter-btn" data-filter="alive" data-page-node-id="aJtmOiUfk8YUIXpo3uoTNw">存活</button>
+    <input type="text" class="search-input" id="searchInput" placeholder="搜索策略名/证据/复活条件..." data-page-node-id="sYMVNFJihBtiCAwH2lXLdT">
+    <button class="ghost" id="exportAllBtn" data-page-node-id="7k0d5HHxB11ExontFTfmGk">📤 导出全部 MD</button>
+  </div>
+
+  <div id="recordsList" data-page-node-id="IxVNL4uvGnZqHQyG8EyBgF"></div>
+</div>
+
+<!-- 方法论 -->
+<div class="card" data-page-node-id="gozzgjBLnk9HSGmCVyOxSZ">
+  <div class="card-title" data-page-node-id="VMmohp8wF9SYgw7D35Oegm"><span class="num" data-page-node-id="iHnQ2UmF8e6Zrhh7peK4Os">📖</span>为什么需要墓碑？</div>
+  <div style="font-size: 14px; color: var(--text-main);" data-page-node-id="gytClXYIDH4gHSaC8ULzlH">
+    <p style="margin-bottom: 10px;" data-page-node-id="Ly5ZEVAE9HszRIfbKCm50i"><strong style="color: var(--gold);" data-page-node-id="dzVna1kDQmWRKplJdXQbUM">研究的最大浪费</strong>，不是策略被否，而是<strong data-page-node-id="HHdIBsdGkjth3horEnZG0P">策略被否后没有记录</strong>。三个月后你又想试一遍，忘了为什么当初放弃，重新踩同一个坑。</p>
+    <p style="margin-bottom: 10px;" data-page-node-id="1S5BlM5eGTpI90P4uUrT0H"><strong style="color: var(--gold);" data-page-node-id="Tl8c2QDuDbiODObOog7sAn">墓碑档案的三重作用</strong>：</p>
+    <ul style="padding-left: 24px; margin-bottom: 10px;" data-page-node-id="Uz4FXeFdmcOH94AhTcGwr7">
+      <li data-page-node-id="4f2MND9HH5ZD5pBWwE5XjS"><strong data-page-node-id="V55kXhSl9FN5hKhDQFgmIW">防止重复劳动</strong>——每一次"新点子"都在验证它不是被旧墓碑覆盖过的旧想法</li>
+      <li data-page-node-id="VE86wlMbEycfaBHvKEe81N"><strong data-page-node-id="umDtvOami4dVCqNG1YKG4X">强制自己写证据</strong>——没有证据的否定是偏见，不是研究</li>
+      <li data-page-node-id="vKZDPYDpYT5qb1GFlhfrwu"><strong data-page-node-id="s0HYUbZikrvZ8EiWirT489">保留复活通道</strong>——市场会变，被否定的策略可能在新的市场状态下重新有效</li>
+    </ul>
+    <p style="margin-bottom: 10px;" data-page-node-id="MGtEU9B4ZZaFCtbgFdx2Me"><strong style="color: var(--gold);" data-page-node-id="FY7foFPViCh00J08lnvfyp">复活条件的必要性</strong>：</p>
+    <p style="margin-bottom: 10px;" data-page-node-id="V4JFwGZKaP1TpGBdnmdViH">如果一个策略被判死，但你写不出"在什么情况下可以重新评估"——大概率这不是基于证据的判断，而是<strong data-page-node-id="XCSSAIb8MZBjPn12I8FtKo">情绪化的否定</strong>。这种"否定"最危险，因为它<strong data-page-node-id="hsEdAPe7i2mZDiGi3XqFRR">关闭了认知通道</strong>。</p>
+    <p data-page-node-id="N4CRux4WEjAGC86oyCNVeN"><strong style="color: var(--gold);" data-page-node-id="oQjZezWmUV3AvM7I1ELrM8">本工具的核心约束</strong>：<strong data-page-node-id="7aJwCMRaKAmXEARmjkgVN0">复活条件不能为空</strong>。这是工具设计的硬约束，绕过它就等于绕过研究本身。</p>
+  </div>
+</div>
+
+<!-- 导出预览 modal -->
+<div class="modal-overlay" id="exportModal" data-page-node-id="FKj7tYfmVHTTqqTazmrFtD">
+  <div class="modal" data-page-node-id="vMMEQdEvrHhWaZiEsgLUdS">
+    <h3 data-page-node-id="MFeoRf6YhSoHVURXGSzgJn">导出预览</h3>
+    <pre class="export-preview" id="exportPreview" data-page-node-id="npxCFn9H2y5wNjPYFcyqZa"></pre>
+    <div class="modal-actions" data-page-node-id="IrFuwCdryxzBd2bh5Gdvco">
+      <button class="ghost" id="cancelExportBtn" data-page-node-id="BfHmY6bXzaj0OqmwKKsdJw">取消</button>
+      <button class="primary" id="downloadExportBtn" data-page-node-id="wgplpQ71yksgsZ6CfxBtcg">📥 下载 .md 文件</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" data-page-node-id="hXUAJbk5J3H51Sclx7Cb7E"></div>
+
+<footer data-page-node-id="Y2IdTXHFSva4vamwg66xNQ">
+  数据来源：本工具使用 localStorage 本地存储 · 不会上传任何数据<br data-page-node-id="C1bkfnHB3mBHY8vC9NSTes">
+  <a href="./research-value-capital-allocation.html" data-page-node-id="DcJmYc0OwIuA19GsP59jzM">返回研究系列</a> · <a href="./index.html" data-page-node-id="ljHXeFGB3z5CQjayvbwI4c">返回首页</a>
+</footer>
+
+</div>
+
+<script>
+// ========== 数据存储 ==========
+
+const STORAGE_KEY = 'research_graveyard_records_v1';
+
+function loadRecords() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  } catch { return []; }
+}
+function saveRecords(records) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+}
+function genId() {
+  return 'rec_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+}
+
+// ========== 工具函数 ==========
+
+const GRAVE_LABELS = {
+  'data-mining': '① 数据挖掘产物',
+  'look-ahead': '② 未来函数',
+  'cost-eats-profit': '③ 交易成本吃掉利润',
+  'sample-too-short': '④ 样本太短',
+  'overfitting': '⑤ 过拟合',
+  'survivorship': '⑥ 幸存者偏差',
+  'black-swan': '⑦ 黑天鹅免疫失败',
+  'unfalsifiable': '⑧ 反方无法击破的逻辑',
+  'other': '⑨ 其它'
+};
+
+const VERDICT_LABELS = {
+  'death': { text: '死刑', cls: 'red' },
+  'reprieve': { text: '缓刑', cls: 'yellow' },
+  'alive': { text: '存活', cls: 'green' }
+};
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+// ========== 表单操作 ==========
+
+document.getElementById('judgmentDate').value = new Date().toISOString().split('T')[0];
+
+document.getElementById('saveBtn').addEventListener('click', () => {
+  const name = document.getElementById('strategyName').value.trim();
+  const date = document.getElementById('judgmentDate').value;
+  const verdict = document.getElementById('verdict').value;
+  const grave = document.getElementById('grave').value;
+  const evidence = document.getElementById('evidence').value.trim();
+  const revival = document.getElementById('revivalCondition').value.trim();
+  const adversarial = document.getElementById('adversarialNote').value.trim();
+
+  if (!name || !date || !verdict) {
+    showToast('请填写策略名称、日期、判定结果');
+    return;
+  }
+  if (!evidence) {
+    showToast('请填写证据要点（必须有数字/实验）');
+    return;
+  }
+  if (!revival) {
+    showToast('复活条件不能为空——这是本工具的硬约束');
+    return;
+  }
+  if (verdict === 'death' && !grave) {
+    showToast('死刑判定必须选择墓碑归类');
+    return;
+  }
+
+  const record = {
+    id: genId(),
+    name, date, verdict, grave,
+    evidence, revival, adversarial,
+    createdAt: new Date().toISOString()
+  };
+  const records = loadRecords();
+  records.unshift(record);
+  saveRecords(records);
+
+  showToast('✅ 已存档');
+  document.getElementById('clearBtn').click();
+  renderRecords();
+});
+
+document.getElementById('clearBtn').addEventListener('click', () => {
+  document.getElementById('strategyName').value = '';
+  document.getElementById('verdict').value = '';
+  document.getElementById('grave').value = '';
+  document.getElementById('evidence').value = '';
+  document.getElementById('revivalCondition').value = '';
+  document.getElementById('adversarialNote').value = '';
+  document.getElementById('judgmentDate').value = new Date().toISOString().split('T')[0];
+});
+
+document.getElementById('searchInput').addEventListener('input', renderRecords);
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderRecords();
+  });
+});
+
+function getCurrentFilter() {
+  return document.querySelector('.filter-btn.active').dataset.filter;
+}
+
+function renderRecords() {
+  const records = loadRecords();
+  const filter = getCurrentFilter();
+  const search = document.getElementById('searchInput').value.toLowerCase().trim();
+
+  // 统计
+  const totalDeath = records.filter(r => r.verdict === 'death').length;
+  const totalReprieve = records.filter(r => r.verdict === 'reprieve').length;
+  const totalAlive = records.filter(r => r.verdict === 'alive').length;
+  document.getElementById('statsRow').innerHTML = `
+    <div class="stat-box">
+      <div class="stat-label">总记录</div>
+      <div class="stat-value">${records.length}</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">死刑</div>
+      <div class="stat-value" style="color: var(--red);">${totalDeath}</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">缓刑</div>
+      <div class="stat-value" style="color: var(--yellow);">${totalReprieve}</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">存活</div>
+      <div class="stat-value" style="color: var(--green);">${totalAlive}</div>
+    </div>
+  `;
+
+  // 筛选
+  let filtered = records;
+  if (filter !== 'all') {
+    filtered = filtered.filter(r => r.verdict === filter);
+  }
+  if (search) {
+    filtered = filtered.filter(r =>
+      r.name.toLowerCase().includes(search) ||
+      (r.evidence && r.evidence.toLowerCase().includes(search)) ||
+      (r.revival && r.revival.toLowerCase().includes(search))
+    );
+  }
+
+  const list = document.getElementById('recordsList');
+  if (filtered.length === 0) {
+    list.innerHTML = '<div class="empty-state">— 没有匹配的记录 —</div>';
+    return;
+  }
+
+  list.innerHTML = filtered.map(r => {
+    const vd = VERDICT_LABELS[r.verdict];
+    const graveLabel = r.grave ? GRAVE_LABELS[r.grave] || r.grave : '';
+    return `
+      <div class="record ${r.verdict}" data-id="${r.id}">
+        <div class="record-head">
+          <div>
+            <div class="record-title">${escapeHtml(r.name)}</div>
+            <div class="record-meta">判定日期：${r.date}${graveLabel ? ' · ' + graveLabel : ''}</div>
+          </div>
+          <span class="badge ${vd.cls}">${vd.text}</span>
+        </div>
+        <div class="record-section"><strong>证据要点：</strong>${escapeHtml(r.evidence)}</div>
+        <div class="record-section"><strong>复活条件：</strong>${escapeHtml(r.revival)}</div>
+        ${r.adversarial ? `<div class="record-section"><strong>反方记录：</strong>${escapeHtml(r.adversarial)}</div>` : ''}
+        <div class="record-actions">
+          <button class="ghost" data-action="edit" data-id="${r.id}">编辑</button>
+          <button class="ghost" data-action="export" data-id="${r.id}">导出</button>
+          <button class="ghost" data-action="delete" data-id="${r.id}">删除</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // 绑定按钮
+  list.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.id;
+      const action = btn.dataset.action;
+      if (action === 'delete') {
+        if (confirm('确定删除这条墓碑记录？')) {
+          const recs = loadRecords().filter(r => r.id !== id);
+          saveRecords(recs);
+          renderRecords();
+          showToast('已删除');
+        }
+      } else if (action === 'export') {
+        const rec = loadRecords().find(r => r.id === id);
+        if (rec) exportRecord(rec);
+      } else if (action === 'edit') {
+        const rec = loadRecords().find(r => r.id === id);
+        if (rec) loadIntoForm(rec);
+      }
+    });
+  });
+}
+
+function escapeHtml(s) {
+  if (!s) return '';
+  return s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+}
+
+function loadIntoForm(rec) {
+  document.getElementById('strategyName').value = rec.name;
+  document.getElementById('judgmentDate').value = rec.date;
+  document.getElementById('verdict').value = rec.verdict;
+  document.getElementById('grave').value = rec.grave || '';
+  document.getElementById('evidence').value = rec.evidence;
+  document.getElementById('revivalCondition').value = rec.revival;
+  document.getElementById('adversarialNote').value = rec.adversarial || '';
+  // 删除原记录
+  const recs = loadRecords().filter(r => r.id !== rec.id);
+  saveRecords(recs);
+  renderRecords();
+  showToast('已加载到表单，修改后重新存档');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ========== 导出 ==========
+
+function recordToMarkdown(rec) {
+  const vd = VERDICT_LABELS[rec.verdict];
+  const grave = rec.grave ? GRAVE_LABELS[rec.grave] || rec.grave : '—';
+  return `# ${rec.name}
+
+**判定日期**：${rec.date}
+**判定结果**：${vd.text}
+**墓碑归类**：${grave}
+
+## 证据要点
+
+${rec.evidence}
+
+## 复活条件
+
+${rec.revival}
+${rec.adversarial ? `\n## 反方记录\n\n${rec.adversarial}\n` : ''}
+---
+*归档于：${rec.createdAt}*
+*ID：${rec.id}*
+`;
+}
+
+function exportRecord(rec) {
+  const md = recordToMarkdown(rec);
+  document.getElementById('exportPreview').textContent = md;
+  document.getElementById('exportModal').classList.add('show');
+  window._pendingExport = md;
+  window._pendingFilename = `${rec.name.replace(/[\/\\:*?"<>|]/g, '_')}_${rec.date}.md`;
+}
+
+document.getElementById('cancelExportBtn').addEventListener('click', () => {
+  document.getElementById('exportModal').classList.remove('show');
+});
+
+document.getElementById('downloadExportBtn').addEventListener('click', () => {
+  const md = window._pendingExport;
+  const filename = window._pendingFilename;
+  const blob = new Blob([md], { type: 'text/markdown' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  document.getElementById('exportModal').classList.remove('show');
+  showToast('已下载 .md 文件');
+});
+
+document.getElementById('exportAllBtn').addEventListener('click', () => {
+  const records = loadRecords();
+  if (records.length === 0) {
+    showToast('档案库为空');
+    return;
+  }
+  const md = `# 研究墓碑档案汇总\n\n导出时间：${new Date().toLocaleString('zh-CN')}\n共 ${records.length} 条记录\n\n---\n\n` +
+    records.map(recordToMarkdown).join('\n\n');
+  document.getElementById('exportPreview').textContent = md;
+  document.getElementById('exportModal').classList.add('show');
+  window._pendingExport = md;
+  window._pendingFilename = `graveyard_${new Date().toISOString().split('T')[0]}.md`;
+});
+
+// 初始化
+renderRecords();
+</script>
+</body>
+</html>

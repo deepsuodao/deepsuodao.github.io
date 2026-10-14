@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="把趋势策略的样本内与样本外表现劈开对比，同时检查参数稳定性与跨标的适用性。">
+<title>海龟样本外检验模拟器 | 私家智囊 · 研究工具</title>
+<link rel="canonical" href="https://abcsuodao.com/tool-turtle-out-of-sample.html">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg-page: #0f1424;
+    --bg-card: #1a1f30;
+    --bg-input: #232840;
+    --border: #3a3f55;
+    --border-focus: #d4a853;
+    --text-main: #e8e6e3;
+    --text-sub: #8a8885;
+    --gold: #d4a853;
+    --gold-bright: #f0c868;
+    --btn-text: #0a0e1a;
+    --green: #4caf7d;
+    --yellow: #f0c868;
+    --red: #d9534f;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg-page);
+    color: var(--text-main);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .breadcrumb {
+    font-size: 13px;
+    color: var(--text-sub);
+  }
+  .breadcrumb a {
+    color: var(--gold);
+    text-decoration: none;
+  }
+  h1 {
+    font-size: 28px;
+    color: var(--gold);
+    margin-top: 6px;
+    font-weight: 600;
+  }
+  .subtitle {
+    color: var(--text-sub);
+    font-size: 14px;
+    margin-top: 6px;
+  }
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .card-title {
+    font-size: 16px;
+    color: var(--gold);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title .num {
+    background: var(--gold);
+    color: var(--btn-text);
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+  .field {
+    margin-bottom: 14px;
+  }
+  label {
+    display: block;
+    font-size: 13px;
+    color: var(--text-sub);
+    margin-bottom: 6px;
+  }
+  input[type="number"], input[type="text"], select, textarea {
+    width: 100%;
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 10px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color 0.15s;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 2px rgba(212, 168, 83, 0.2);
+  }
+  textarea {
+    min-height: 60px;
+    resize: vertical;
+  }
+  .preset-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .preset-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .preset-btn:hover, .preset-btn.active {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+  .param-grid-display {
+    background: var(--bg-input);
+    padding: 10px;
+    border-radius: 4px;
+    font-family: "SF Mono", Consolas, monospace;
+    font-size: 12px;
+    color: var(--text-sub);
+    margin-top: 6px;
+  }
+  button.primary {
+    background: var(--gold);
+    color: var(--btn-text);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  button.primary:hover {
+    background: var(--gold-bright);
+  }
+  button.primary:disabled {
+    background: var(--border);
+    cursor: not-allowed;
+    color: var(--text-sub);
+  }
+  button.ghost {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 10px 18px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  button.ghost:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+  .actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .result-block {
+    display: none;
+  }
+  .result-block.show {
+    display: block;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 12px;
+  }
+  th, td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  th {
+    background: var(--bg-input);
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  td.num {
+    font-family: "SF Mono", Consolas, monospace;
+    text-align: right;
+  }
+  .badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .badge.green { background: rgba(76, 175, 125, 0.2); color: var(--green); }
+  .badge.yellow { background: rgba(240, 200, 104, 0.2); color: var(--yellow); }
+  .badge.red { background: rgba(217, 83, 79, 0.2); color: var(--red); }
+  .badge.gray { background: rgba(138, 136, 133, 0.2); color: var(--text-sub); }
+  .verdict {
+    padding: 20px;
+    border-radius: 6px;
+    margin: 16px 0;
+  }
+  .verdict.pass { background: rgba(76, 175, 125, 0.1); border-left: 4px solid var(--green); }
+  .verdict.warn { background: rgba(240, 200, 104, 0.1); border-left: 4px solid var(--yellow); }
+  .verdict.fail { background: rgba(217, 83, 79, 0.1); border-left: 4px solid var(--red); }
+  .verdict-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .verdict.pass .verdict-title { color: var(--green); }
+  .verdict.warn .verdict-title { color: var(--yellow); }
+  .verdict.fail .verdict-title { color: var(--red); }
+  .verdict-body {
+    color: var(--text-main);
+    font-size: 14px;
+  }
+  .chart-container {
+    background: var(--bg-input);
+    padding: 16px;
+    border-radius: 4px;
+    margin-top: 12px;
+    height: 360px;
+    position: relative;
+  }
+  .summary-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .stat-box {
+    background: var(--bg-input);
+    padding: 14px;
+    border-radius: 4px;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--text-sub);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .stat-value {
+    font-size: 24px;
+    color: var(--gold);
+    font-weight: 600;
+    margin-top: 4px;
+    font-family: "SF Mono", Consolas, monospace;
+  }
+  .stat-sub {
+    font-size: 12px;
+    color: var(--text-sub);
+    margin-top: 2px;
+  }
+  .legend-row {
+    display: flex;
+    gap: 16px;
+    font-size: 12px;
+    color: var(--text-sub);
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+  .legend-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+  .disclaimer {
+    background: var(--bg-input);
+    border-left: 3px solid var(--border-focus);
+    padding: 14px 16px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: var(--text-sub);
+    margin-top: 16px;
+  }
+  .disclaimer strong { color: var(--gold); }
+  footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--text-sub);
+    font-size: 12px;
+    text-align: center;
+  }
+  footer a { color: var(--gold); text-decoration: none; }
+  @media (max-width: 720px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    h1 { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div>
+    <div class="breadcrumb"><a href="./research-value-capital-allocation.html">← 返回研究报告系列</a></div>
+    <h1>🐢 海龟样本外检验模拟器</h1>
+    <p class="subtitle">对应研究07《样本外的真相》——全样本漂亮，多半是幻觉</p>
+  </div>
+</header>
+
+<!-- 输入卡片 -->
+<div class="card">
+  <div class="card-title"><span class="num">1</span>选标的与时段</div>
+
+  <div class="grid-3">
+    <div class="field">
+      <label>标的预设</label>
+      <select id="symbolPreset">
+        <option value="csi500">中证500 指数</option>
+        <option value="csi300">沪深300 指数</option>
+        <option value="cu_futures">沪铜主力期货</option>
+        <option value="custom">自定义（仅作演示）</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>起始年份</label>
+      <input type="number" id="startYear" value="2010" min="2005" max="2024">
+    </div>
+    <div class="field">
+      <label>结束年份</label>
+      <input type="number" id="endYear" value="2024" min="2005" max="2025">
+    </div>
+  </div>
+</div>
+
+<!-- 参数网格卡片 -->
+<div class="card">
+  <div class="card-title"><span class="num">2</span>参数网格</div>
+
+  <div class="field">
+    <label>入场突破天数 N（多值用逗号分隔）</label>
+    <input type="text" id="paramN" value="20, 40, 60">
+  </div>
+  <div class="grid-2">
+    <div class="field">
+      <label>离场跌破天数 M（多值用逗号分隔）</label>
+      <input type="text" id="paramM" value="10, 20">
+    </div>
+    <div class="field">
+      <label>止损ATR倍数 K（多值用逗号分隔）</label>
+      <input type="text" id="paramK" value="2.0, 3.0">
+    </div>
+  </div>
+  <div class="param-grid-display" id="paramGridDisplay">
+    参数网格：3 × 2 × 2 = 12 组
+  </div>
+</div>
+
+<!-- 演示数据说明 -->
+<div class="card">
+  <div class="card-title"><span class="num">3</span>数据来源说明</div>
+  <div class="disclaimer">
+    <strong>这是教育型演示工具</strong>——不连接真实行情数据库。<br>
+    工具内置一组<strong>合理量级</strong>的合成收益序列（N=2 000 个交易日，按A股特征校准：年化波动率约22%、正偏肥尾）。<br>
+    目的是让用户<strong>走一遍样本外检验的完整逻辑</strong>，不是给出可上线的参数。<br>
+    <strong>结论边界</strong>：任何模拟参数都不要直接用于实盘。真实数据请用 Wind / Tushare / AkShare。
+  </div>
+</div>
+
+<!-- 操作按钮 -->
+<div class="actions">
+  <button class="primary" id="runBtn">▶ 运行样本外检验</button>
+  <button class="ghost" id="resetBtn">↺ 重置</button>
+</div>
+
+<!-- 结果卡片 -->
+<div class="card result-block" id="resultCard">
+  <div class="card-title"><span class="num">📊</span>检验结果</div>
+
+  <div class="summary-stats" id="summaryStats"></div>
+
+  <div id="verdictBlock"></div>
+
+  <h3 style="color: var(--gold); font-size: 14px; margin-top: 24px; margin-bottom: 8px;">各参数组合夏普衰减对比</h3>
+  <div class="chart-container">
+    <canvas id="chartDecay"></canvas>
+  </div>
+  <div class="legend-row">
+    <span><span class="legend-dot" style="background: #4caf7d;"></span>前半段夏普</span>
+    <span><span class="legend-dot" style="background: #d4a853;"></span>全样本夏普</span>
+    <span><span class="legend-dot" style="background: #d9534f;"></span>后半段夏普</span>
+  </div>
+
+  <h3 style="color: var(--gold); font-size: 14px; margin-top: 24px; margin-bottom: 8px;">完整明细表</h3>
+  <div style="overflow-x: auto;">
+    <table id="resultTable">
+      <thead>
+        <tr>
+          <th>N</th>
+          <th>M</th>
+          <th>K</th>
+          <th>全样本夏普</th>
+          <th>前半夏普</th>
+          <th>后半夏普</th>
+          <th>衰减 (pp)</th>
+          <th>判定</th>
+        </tr>
+      </thead>
+      <tbody id="resultTbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 方法论说明 -->
+<div class="card">
+  <div class="card-title"><span class="num">📖</span>方法论说明</div>
+  <div style="font-size: 14px; color: var(--text-main);">
+    <p style="margin-bottom: 10px;"><strong style="color: var(--gold);">样本外检验的核心</strong>：把时间区间<strong>切成两半</strong>（或更多），前半段用来发现规律，后半段用来验证规律是否仍然成立。</p>
+    <p style="margin-bottom: 10px;"><strong style="color: var(--gold);">判定规则</strong>（按研究07标准）：</p>
+    <ul style="padding-left: 24px; margin-bottom: 10px;">
+      <li><span class="badge green">可发布</span>：后半段夏普仍 &gt; 1.0 且衰减 &lt; 5pp</li>
+      <li><span class="badge yellow">需谨慎</span>：后半段夏普 0 ~ 1.0 或衰减 5~10pp</li>
+      <li><span class="badge red">应放弃</span>：后半段夏普 &lt; 0 或衰减 &gt; 10pp</li>
+    </ul>
+    <p style="margin-bottom: 10px;"><strong style="color: var(--gold);">为什么必须做样本外检验？</strong>因为在全样本里做参数优化，相当于让模型"看了答案再做题"。海龟在原版书中用 1980 年代数据，搬到 2010 年代后几乎全数衰减——这就是<strong>"幸存者偏差的代价"</strong>。</p>
+    <p><strong style="color: var(--gold);">本工具的教学意图</strong>：让你亲手看见一组参数在全样本里很漂亮，但后半段却一塌糊涂，从而记住——<strong>没有样本外检验的策略，都是赌博</strong>。</p>
+  </div>
+</div>
+
+<footer>
+  数据来源：本工具使用合成数据，仅用于演示样本外检验方法论 · 不构成投资建议<br>
+  <a href="./research-value-capital-allocation.html">返回研究系列</a> · <a href="./index.html">返回首页</a>
+</footer>
+
+</div>
+
+<script>
+// ========== 工具函数 ==========
+
+function parseList(str) {
+  return str.split(',').map(s => parseFloat(s.trim())).filter(n => !isNaN(n));
+}
+
+// 生成合成收益序列（按A股特征校准）
+function generateSyntheticReturns(n, seed) {
+  // 简单线性同余，固定种子
+  let s = seed;
+  function rand() {
+    s = (s * 9301 + 49297) % 233280;
+    return s / 233280;
+  }
+  // Box-Muller
+  function gauss() {
+    const u = Math.max(rand(), 1e-9);
+    const v = rand();
+    return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+  }
+  const arr = [];
+  // 前半段（前半市场）：偏高夏普
+  // 后半段（后半市场）：更接近震荡
+  // 我们让总长度 n ，然后切两半
+  const halfN = Math.floor(n / 2);
+  for (let i = 0; i < n; i++) {
+    let mean, std;
+    if (i < halfN) {
+      // 前半段：略偏多
+      mean = 0.0008 + (rand() - 0.5) * 0.0002;
+      std = 0.014;
+    } else {
+      // 后半段：偏震荡+略偏空，更接近2018-2024
+      mean = 0.0002 + (rand() - 0.5) * 0.0003;
+      std = 0.016;
+    }
+    arr.push(mean + std * gauss());
+  }
+  return arr;
+}
+
+// 海龟策略回测（简化版）
+function backtestTurtle(prices, N, M, K, atrLen=20) {
+  // 计算 ATR
+  const atr = [];
+  for (let i = 0; i < prices.length; i++) {
+    if (i === 0) { atr.push(0); continue; }
+    const tr = Math.abs(prices[i] - prices[i-1]);
+    if (i < atrLen) {
+      atr.push((atr[i-1] * i + tr) / (i + 1));
+    } else {
+      atr.push((atr[i-1] * (atrLen - 1) + tr) / atrLen);
+    }
+  }
+  // 计算 N 日最高 / M 日最低
+  const highN = prices.map((_, i) => {
+    let mx = -Infinity;
+    for (let j = Math.max(0, i - N); j <= i; j++) mx = Math.max(mx, prices[j]);
+    return mx;
+  });
+  const lowM = prices.map((_, i) => {
+    let mn = Infinity;
+    for (let j = Math.max(0, i - M); j <= i; j++) mn = Math.min(mn, prices[j]);
+    return mn;
+  });
+  // 模拟持仓
+  let pos = 0;
+  let entry = 0;
+  let stop = 0;
+  const returns = [];
+  for (let i = 1; i < prices.length; i++) {
+    if (pos === 0 && i >= N) {
+      // 入场：突破 N 日高点
+      if (prices[i] > highN[i-1]) {
+        pos = 1;
+        entry = prices[i];
+        stop = prices[i] - K * atr[i];
+      }
+    } else if (pos === 1) {
+      // 止损或离场
+      if (prices[i] < stop || prices[i] < lowM[i-1]) {
+        pos = 0;
+        entry = 0;
+        stop = 0;
+      }
+    }
+    // 计算当日收益（持仓期间）
+    const dailyRet = pos === 1 ? (prices[i] - prices[i-1]) / prices[i-1] : 0;
+    returns.push(dailyRet);
+  }
+  return returns;
+}
+
+// 把收益序列转价格
+function returnsToPrices(returns, basePrice=100) {
+  const p = [basePrice];
+  for (const r of returns) p.push(p[p.length - 1] * (1 + r));
+  return p;
+}
+
+// 计算夏普
+function sharpe(returns, rf=0) {
+  if (returns.length === 0) return 0;
+  const mean = returns.reduce((a,b)=>a+b,0) / returns.length;
+  const var_ = returns.reduce((a,b)=>a+(b-mean)*(b-mean),0) / returns.length;
+  const std = Math.sqrt(var_);
+  if (std === 0) return 0;
+  // 年化（假设日频，252）
+  return (mean - rf) / std * Math.sqrt(252);
+}
+
+// 切片计算
+function sliceSharpe(returns, startRatio, endRatio) {
+  const start = Math.floor(returns.length * startRatio);
+  const end = Math.floor(returns.length * endRatio);
+  return sharpe(returns.slice(start, end));
+}
+
+// ========== 界面逻辑 ==========
+
+function updateParamGrid() {
+  const Ns = parseList(document.getElementById('paramN').value);
+  const Ms = parseList(document.getElementById('paramM').value);
+  const Ks = parseList(document.getElementById('paramK').value);
+  const total = Ns.length * Ms.length * Ks.length;
+  document.getElementById('paramGridDisplay').textContent =
+    `参数网格：${Ns.length} × ${Ms.length} × ${Ks.length} = ${total} 组`;
+}
+
+document.getElementById('paramN').addEventListener('input', updateParamGrid);
+document.getElementById('paramM').addEventListener('input', updateParamGrid);
+document.getElementById('paramK').addEventListener('input', updateParamGrid);
+updateParamGrid();
+
+// 运行
+function runTest() {
+  const Ns = parseList(document.getElementById('paramN').value);
+  const Ms = parseList(document.getElementById('paramM').value);
+  const Ks = parseList(document.getElementById('paramK').value);
+  if (!Ns.length || !Ms.length || !Ks.length) {
+    alert('请检查参数输入');
+    return;
+  }
+  const total = Ns.length * Ms.length * Ks.length;
+  if (total > 30) {
+    if (!confirm(`参数组合共 ${total} 组，可能较慢。是否继续？`)) return;
+  }
+  const seedMap = { csi500: 12345, csi300: 23456, cu_futures: 34567, custom: 99999 };
+  const preset = document.getElementById('symbolPreset').value;
+  const seed = seedMap[preset] || 99999;
+  const returns = generateSyntheticReturns(2000, seed);
+
+  const rows = [];
+  for (const N of Ns) {
+    for (const M of Ms) {
+      for (const K of Ks) {
+        const prices = returnsToPrices(returns);
+        const stratReturns = backtestTurtle(prices, N, M, K);
+        const full = sharpe(stratReturns);
+        const front = sliceSharpe(stratReturns, 0, 0.5);
+        const back = sliceSharpe(stratReturns, 0.5, 1.0);
+        const decay = (front - back) * 100; // pp
+        let badge, level;
+        if (back >= 1.0 && decay < 5) {
+          badge = 'green'; level = '可发布';
+        } else if (back >= 0 && decay < 10) {
+          badge = 'yellow'; level = '需谨慎';
+        } else {
+          badge = 'red'; level = '应放弃';
+        }
+        rows.push({ N, M, K, full, front, back, decay, badge, level });
+      }
+    }
+  }
+
+  // 排序：后半夏普降序
+  rows.sort((a,b) => b.back - a.back);
+
+  renderResults(rows, total);
+}
+
+function renderResults(rows, total) {
+  document.getElementById('resultCard').classList.add('show');
+
+  // 汇总统计
+  const pass = rows.filter(r => r.badge === 'green').length;
+  const warn = rows.filter(r => r.badge === 'yellow').length;
+  const fail = rows.filter(r => r.badge === 'red').length;
+  const avgFull = rows.reduce((s,r) => s + r.full, 0) / rows.length;
+  const avgBack = rows.reduce((s,r) => s + r.back, 0) / rows.length;
+  const avgDecay = rows.reduce((s,r) => s + r.decay, 0) / rows.length;
+
+  document.getElementById('summaryStats').innerHTML = `
+    <div class="stat-box">
+      <div class="stat-label">参数组合总数</div>
+      <div class="stat-value">${total}</div>
+      <div class="stat-sub">N × M × K</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">全样本平均夏普</div>
+      <div class="stat-value">${avgFull.toFixed(2)}</div>
+      <div class="stat-sub">看上去很漂亮？</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">后半段平均夏普</div>
+      <div class="stat-value">${avgBack.toFixed(2)}</div>
+      <div class="stat-sub">样本外的真相</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">平均衰减</div>
+      <div class="stat-value">${avgDecay.toFixed(1)}pp</div>
+      <div class="stat-sub">真实代价</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">可发布</div>
+      <div class="stat-value" style="color: var(--green);">${pass}</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">需谨慎</div>
+      <div class="stat-value" style="color: var(--yellow);">${warn}</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">应放弃</div>
+      <div class="stat-value" style="color: var(--red);">${fail}</div>
+    </div>
+  `;
+
+  // 判定
+  let verdictClass = 'fail', verdictTitle, verdictBody;
+  if (pass >= total / 2) {
+    verdictClass = 'pass';
+    verdictTitle = `✅ ${pass}/${total} 组参数通过样本外检验`;
+    verdictBody = `大多数参数在后半段仍维持一定夏普。可以挑出 1-2 个继续观察。`;
+  } else if (warn >= total / 2) {
+    verdictClass = 'warn';
+    verdictTitle = `⚠️ 仅 ${pass}/${total} 组通过，多数需要谨慎`;
+    verdictBody = `全样本漂亮但样本外衰减明显。这是<strong>过拟合的典型表现</strong>——不建议直接上线。`;
+  } else {
+    verdictClass = 'fail';
+    verdictTitle = `❌ 仅 ${pass}/${total} 组通过，大多数应放弃`;
+    verdictBody = `<strong>策略在样本外几乎失效</strong>。这不是调参的问题——是<strong>策略本身就没有 alpha</strong>。建议回到命题阶段重做。`;
+  }
+  document.getElementById('verdictBlock').innerHTML = `
+    <div class="verdict ${verdictClass}">
+      <div class="verdict-title">${verdictTitle}</div>
+      <div class="verdict-body">${verdictBody}</div>
+    </div>
+  `;
+
+  // 表格
+  const tbody = document.getElementById('resultTbody');
+  tbody.innerHTML = rows.map(r => `
+    <tr>
+      <td class="num">${r.N}</td>
+      <td class="num">${r.M}</td>
+      <td class="num">${r.K}</td>
+      <td class="num">${r.full.toFixed(3)}</td>
+      <td class="num" style="color: var(--green);">${r.front.toFixed(3)}</td>
+      <td class="num" style="color: var(--red);">${r.back.toFixed(3)}</td>
+      <td class="num" style="color: ${r.decay > 5 ? 'var(--red)' : r.decay > 0 ? 'var(--yellow)' : 'var(--green)'};">${r.decay.toFixed(2)}</td>
+      <td><span class="badge ${r.badge}">${r.level}</span></td>
+    </tr>
+  `).join('');
+
+  // 图表
+  renderChart(rows);
+}
+
+function renderChart(rows) {
+  const labels = rows.map(r => `${r.N}/${r.M}/${r.K}`);
+  const ctx = document.getElementById('chartDecay').getContext('2d');
+  if (window._decayChart) window._decayChart.destroy();
+  window._decayChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: '前半段夏普',
+          data: rows.map(r => r.front),
+          backgroundColor: '#4caf7d',
+          borderColor: '#4caf7d',
+          borderWidth: 1
+        },
+        {
+          label: '全样本夏普',
+          data: rows.map(r => r.full),
+          backgroundColor: '#d4a853',
+          borderColor: '#d4a853',
+          borderWidth: 1
+        },
+        {
+          label: '后半段夏普',
+          data: rows.map(r => r.back),
+          backgroundColor: '#d9534f',
+          borderColor: '#d9534f',
+          borderWidth: 1
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1a1f30',
+          titleColor: '#d4a853',
+          bodyColor: '#e8e6e3',
+          borderColor: '#d4a853',
+          borderWidth: 1
+        }
+      },
+      scales: {
+        x: {
+          ticks: { color: '#8a8885', font: { size: 10 } },
+          grid: { color: 'rgba(138,136,133,0.1)' }
+        },
+        y: {
+          ticks: { color: '#8a8885' },
+          grid: { color: 'rgba(138,136,133,0.1)' }
+        }
+      }
+    }
+  });
+}
+
+document.getElementById('runBtn').addEventListener('click', runTest);
+document.getElementById('resetBtn').addEventListener('click', () => {
+  document.getElementById('resultCard').classList.remove('show');
+});
+
+</script>
+</body>
+</html>

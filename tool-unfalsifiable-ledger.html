@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="Kq1ouIkC2wwiGhHSWpTnoL">
+<head data-page-node-id="8d6jDFiJfBigu74f40Ig76">
+<meta charset="UTF-8" data-page-node-id="h72GG7UqljBET0inr9K86Z">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="eKKbTdmGwRAlQjdxUYi0ZI">
+<meta name="description" content="为无法证伪的判断建立观测台账：只记账、不下注，数据缺失就留空。">
+<title>不可证伪判断台账 | 私家智囊 · 研究工具</title>
+<link rel="canonical" href="https://abcsuodao.com/tool-unfalsifiable-ledger.html">
+<style>
+  :root {
+    --bg-page: #0f1424;
+    --bg-card: #1a1f30;
+    --bg-input: #232840;
+    --border: #3a3f55;
+    --border-focus: #d4a853;
+    --text-main: #e8e6e3;
+    --text-sub: #8a8885;
+    --gold: #d4a853;
+    --gold-bright: #f0c868;
+    --btn-text: #0a0e1a;
+    --green: #4caf7d;
+    --yellow: #f0c868;
+    --red: #d9534f;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg-page);
+    color: var(--text-main);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  .container { max-width: 1100px; margin: 0 auto; }
+  header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+  }
+  .breadcrumb { font-size: 13px; color: var(--text-sub); }
+  .breadcrumb a { color: var(--gold); text-decoration: none; }
+  h1 { font-size: 28px; color: var(--gold); margin-top: 6px; font-weight: 600; }
+  .subtitle { color: var(--text-sub); font-size: 14px; margin-top: 6px; }
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .card-title {
+    font-size: 16px;
+    color: var(--gold);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title .num {
+    background: var(--gold);
+    color: var(--btn-text);
+    width: 26px;
+    height: 26px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .field { margin-bottom: 16px; }
+  label {
+    display: block;
+    font-size: 13px;
+    color: var(--text-sub);
+    margin-bottom: 6px;
+  }
+  label .required { color: var(--red); margin-left: 4px; }
+  input[type="text"], input[type="number"], input[type="date"], select, textarea {
+    width: 100%;
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 10px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 2px rgba(212, 168, 83, 0.2);
+  }
+  textarea { min-height: 60px; resize: vertical; line-height: 1.5; }
+  .discipline-card {
+    background: rgba(217, 83, 79, 0.05);
+    border-left: 4px solid var(--red);
+    padding: 16px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+  }
+  .discipline-card.warn { background: rgba(240, 200, 104, 0.05); border-left-color: var(--yellow); }
+  .discipline-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .discipline-num {
+    background: var(--red);
+    color: white;
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .discipline-title {
+    font-size: 14px;
+    color: var(--text-main);
+    font-weight: 600;
+  }
+  .discipline-body {
+    font-size: 13px;
+    color: var(--text-sub);
+  }
+  .indicator-block {
+    background: var(--bg-input);
+    padding: 16px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    border-left: 4px solid var(--border);
+  }
+  .indicator-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .indicator-icon {
+    background: var(--gold);
+    color: var(--btn-text);
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .indicator-title { font-size: 14px; color: var(--text-main); font-weight: 600; flex: 1; }
+  .indicator-warning {
+    color: var(--yellow);
+    font-size: 12px;
+    font-style: italic;
+    margin-bottom: 8px;
+  }
+  .quarter-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .quarter-cell {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px;
+  }
+  .quarter-label {
+    font-size: 11px;
+    color: var(--gold);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .quarter-cell input {
+    width: 100%;
+    background: var(--bg-page);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 6px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-family: "SF Mono", Consolas, monospace;
+  }
+  .quarter-cell input:focus {
+    border-color: var(--gold);
+    outline: none;
+  }
+  .quarter-cell .note-input {
+    margin-top: 4px;
+    min-height: 32px !important;
+  }
+  .quarter-cell .empty-marker {
+    color: var(--text-sub);
+    font-size: 11px;
+    font-style: italic;
+    text-align: center;
+    padding: 6px;
+  }
+  button.primary {
+    background: var(--gold);
+    color: var(--btn-text);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  button.primary:hover { background: var(--gold-bright); }
+  button.primary:disabled {
+    background: var(--border);
+    cursor: not-allowed;
+    color: var(--text-sub);
+  }
+  button.ghost {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 10px 18px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  button.ghost:hover { border-color: var(--gold); color: var(--gold); }
+  .actions { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+  .records-list {
+    margin-top: 16px;
+  }
+  .record-card {
+    background: var(--bg-input);
+    padding: 14px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    border-left: 4px solid var(--gold);
+  }
+  .record-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .record-title {
+    font-size: 15px;
+    color: var(--text-main);
+    font-weight: 600;
+  }
+  .record-meta {
+    font-size: 12px;
+    color: var(--text-sub);
+  }
+  .record-body {
+    font-size: 13px;
+    color: var(--text-main);
+    margin-bottom: 6px;
+  }
+  .record-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .record-actions button {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 4px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .record-actions button:hover { border-color: var(--gold); color: var(--gold); }
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .stat-box {
+    background: var(--bg-input);
+    padding: 14px;
+    border-radius: 4px;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--text-sub);
+    text-transform: uppercase;
+  }
+  .stat-value {
+    font-size: 22px;
+    color: var(--gold);
+    font-weight: 600;
+    margin-top: 4px;
+  }
+  .filter-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+  .search-input {
+    flex: 1;
+    min-width: 200px;
+    padding: 8px 12px !important;
+    font-size: 13px !important;
+  }
+  .empty-state {
+    text-align: center;
+    color: var(--text-sub);
+    padding: 24px;
+    font-style: italic;
+  }
+  .self-disclosure {
+    background: rgba(240, 200, 104, 0.08);
+    border-left: 4px solid var(--yellow);
+    padding: 14px 16px;
+    border-radius: 4px;
+    margin-top: 16px;
+  }
+  .self-disclosure strong { color: var(--yellow); }
+  .modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+    padding: 20px;
+  }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    max-width: 700px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .modal h3 { color: var(--gold); margin-bottom: 16px; }
+  pre.export-preview {
+    background: var(--bg-page);
+    border: 1px solid var(--border);
+    padding: 16px;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: 12px;
+    color: var(--text-main);
+    font-family: "SF Mono", Consolas, monospace;
+    max-height: 400px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--gold);
+    color: var(--btn-text);
+    padding: 12px 20px;
+    border-radius: 4px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s;
+    z-index: 100;
+  }
+  .toast.show { opacity: 1; transform: translateY(0); }
+  footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--text-sub);
+    font-size: 12px;
+    text-align: center;
+  }
+  footer a { color: var(--gold); text-decoration: none; }
+  @media (max-width: 720px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .quarter-grid { grid-template-columns: 1fr 1fr; }
+    h1 { font-size: 22px; }
+  }
+</style>
+</head>
+<body data-page-node-id="Gf8VF19JqxEvGzycOF4rgK">
+<div class="container" data-page-node-id="t0uXbv3mCDe2Q9G9hPVepq">
+
+<header data-page-node-id="Q8t5wMTMiB7YuNEkCIfabM">
+  <div class="breadcrumb" data-page-node-id="Lxg9AC7VjHAMYy6lhyUOKG"><a href="./research-value-capital-allocation.html" data-page-node-id="UKFnbiQFuGNg6YaaqRkiNs">← 返回研究报告系列</a></div>
+  <h1 data-page-node-id="IZGXlgNvleqoACsZa23A2j">📒 不可证伪判断台账</h1>
+  <p class="subtitle" data-page-node-id="gGebO2ZHUkxu1cpux3Z22o">对应研究10《不判断，只记账》——把"信仰"降级成可记录的表格</p>
+</header>
+
+<!-- 判断描述 -->
+<div class="card" data-page-node-id="7RArGrHAXXILJNkmEaIkxu">
+  <div class="card-title" data-page-node-id="Gv6riEFBh0yL8UioTL6HYx"><span class="num" data-page-node-id="7jv8Tux2kHesaPlD7LBHJ6">0</span>待记录的判断</div>
+  <div class="grid-2" data-page-node-id="YC6rXhzTCd5gryYX2MZm8C">
+    <div class="field" data-page-node-id="mDt53a0p6DQZnqaSjMcXEq">
+      <label data-page-node-id="4eiZvWQe2bT4WbyEdiN5jq">判断描述<span class="required" data-page-node-id="XcZwCHCsQBLsEbyogp1Wad">*</span></label>
+      <input type="text" id="judgmentName" placeholder="如：某项技术改变行业成本结构 / 范式变化论" data-page-node-id="jhxnnRwg4L27GyLYhs4Bco">
+    </div>
+    <div class="field" data-page-node-id="dAVQlEO8JwpPEOPEom8KLD">
+      <label data-page-node-id="AyMxBOBXzfsBb6Bp0zgRIY">开始记录日期<span class="required" data-page-node-id="3fSTsUj7wrDZsChxUBCSf2">*</span></label>
+      <input type="date" id="startDate" data-page-node-id="2U2bdgZ7ItJBQF2TpMqimG">
+    </div>
+  </div>
+  <div class="field" data-page-node-id="ulCWL9FLUxgNFnqXlrrqwo">
+    <label data-page-node-id="IX7qz1pb6aagy8cHErnqLS">为什么这个判断"不可证伪"？（写出三层结构）</label>
+    <textarea id="unfalsifiableReason" placeholder="如：宏观层'生产方式变化'几乎必然对但节奏错；中观层'谁受益谁受损'已被价格计入；微观层才能检验。"></textarea>
+  </div>
+</div>
+
+<!-- 3条纪律 -->
+<div class="card" data-page-node-id="ZinychvIKdeHXtDIGNRPZM">
+  <div class="card-title" data-page-node-id="hOBd5pZfbB9skMaAh9OmEE"><span class="num" data-page-node-id="NsAU85cYvm53xXxIi9tHmL">1</span>三条使用纪律（强制）</div>
+
+  <div class="discipline-card" data-page-node-id="HDPzCsucxuxjPIsQQRe9Ec">
+    <div class="discipline-head" data-page-node-id="u3mPQRy9gjfhBQvlwGmFl3">
+      <span class="discipline-num" data-page-node-id="Y9Ig7f8u5XIt52Lvi8yIdT">1</span>
+      <span class="discipline-title" data-page-node-id="F2IIgzOM3iqq18LicXe1bF">第一年不设阈值</span>
+    </div>
+    <div class="discipline-body" data-page-node-id="6DCNFqQl2vthcv3lENxdWx">
+      <strong data-page-node-id="CPjGMp9uCMzVMfIufNyu5E">"提前设阈值 = 人为制造因子。"</strong>
+      先积累四个完整季度的记录，一年后再讨论"哪些指标真的有信息量"。
+    </div>
+  </div>
+
+  <div class="discipline-card warn" data-page-node-id="R0SCFSo6lAvU55z7tnOwow">
+    <div class="discipline-head" data-page-node-id="foPz8gc18oNoRJk5rNYAxP">
+      <span class="discipline-num" data-page-node-id="4zESbIdhqxYXSOHOEBTkEi">2</span>
+      <span class="discipline-title" data-page-node-id="xgn94Gs3gjdVqMUOBFTZAz">缺失就写"无"</span>
+    </div>
+    <div class="discipline-body" data-page-node-id="0YdF7rVyTI6GScjoqT5S0Z">
+      三条禁令写得很死：<strong data-page-node-id="tsYiAsLIrO034sNqoNSwCy">不许插值、不许估算、不许用行业均值填</strong>。
+      宁可留空，不要制造假数据——空本身是信息。
+    </div>
+  </div>
+
+  <div class="discipline-card warn" data-page-node-id="9mNl0lNOFaSxK5LQQPcQCC">
+    <div class="discipline-head" data-page-node-id="CCsDLf9iMTYMt5RHn3ZCFL">
+      <span class="discipline-num" data-page-node-id="vAfHfck8gZdv6acAnO2yzm">3</span>
+      <span class="discipline-title" data-page-node-id="lAP4JXBNDF8jLDlIjs61xa">不产生任何交易动作</span>
+    </div>
+    <div class="discipline-body" data-page-node-id="VWw6t7kebKTHLpw9MoTyVP">
+      本台账<strong data-page-node-id="TnDsJJnP5aGOByHW6rY9aC">任何时候都不得单独产生交易结论</strong>。它只产出观察记录，不产出信号。
+    </div>
+  </div>
+
+  <div class="field" data-page-node-id="UO0fUd6XJ4kgJvzrHnBlK5">
+    <label data-page-node-id="nwEn4y7mzroArCgGcPoorG">我已阅读并承诺遵守这三条纪律</label>
+    <div style="display: flex; gap: 16px; flex-wrap: wrap;" data-page-node-id="JCtS4lADXvT3VxDwHPhk5k">
+      <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;" data-page-node-id="40LK8A3myGp0ChwzYA2jHc">
+        <input type="checkbox" id="discipline-ack-1" style="width: auto;" data-page-node-id="KpUsXmdwWq5a4Q2beQWny9"> 第一年不设阈值
+      </label>
+      <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;" data-page-node-id="LYcIoy5fo92LGzMBbizQn1">
+        <input type="checkbox" id="discipline-ack-2" style="width: auto;" data-page-node-id="7OmbAFv1tfSHo3dW7xr9ZF"> 缺失写"无"，不插值
+      </label>
+      <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;" data-page-node-id="gqIyMhWF7mVEHWK8rm83DE">
+        <input type="checkbox" id="discipline-ack-3" style="width: auto;" data-page-node-id="OkJPvnCUbijCbFOEpCqQw4"> 不产生交易动作
+      </label>
+    </div>
+  </div>
+</div>
+
+<!-- 4个观测指标 -->
+<div class="card" data-page-node-id="Y9KNNVRwDsERDnVg7PMtuo">
+  <div class="card-title" data-page-node-id="joJOsuol7XA2OOps0PRmp5"><span class="num" data-page-node-id="ECO1SCsA4dzAP1q8OwRzjY">2</span>四个观测指标（季度记录）</div>
+
+  <div class="indicator-block" data-page-node-id="HCtF3blEd0lafPljnMAwCB">
+    <div class="indicator-head" data-page-node-id="jCjHcTJn4erjHY6Bihn6LK">
+      <span class="indicator-icon" data-page-node-id="5O0xzXdl3zo5SWyKM27Bqx">①</span>
+      <span class="indicator-title" data-page-node-id="9EA8DhMU6HHte9iFghoh2a">单位任务成本</span>
+    </div>
+    <div class="indicator-warning" data-page-node-id="FqTb2g17Vg1IG5nbmyZiYY">
+      ⚠️ 最容易搞错：单价下降 ≠ 总成本下降。必须记录"含复核的完全成本"，不是"调用成本"。
+    </div>
+    <div class="quarter-grid" data-indicator="cost" data-page-node-id="QG3WbA14TadU5BC7C7paj2">
+      <div class="quarter-cell" data-page-node-id="T2ZN8BjT4OnSwuoiAhpGrY">
+        <div class="quarter-label" data-page-node-id="jqRwQ4Q0Yw4qSZwJOB1uE9">Q1</div>
+        <input type="text" class="value-input" placeholder="数值或'无'" data-page-node-id="1K9uwsd3ZrP6uIY1bLTNqy">
+        <input type="text" class="note-input" placeholder="备注（口径/断点）" data-page-node-id="hoFcxE6hNTvYaMcV0u86H2">
+      </div>
+      <div class="quarter-cell" data-page-node-id="K6REAXSDPsaYRJeiw12vji">
+        <div class="quarter-label" data-page-node-id="qpXMOFwQtUPnYF4NWWTgJY">Q2</div>
+        <input type="text" class="value-input" placeholder="数值或'无'" data-page-node-id="7h6pQH7XjeVc2tLAHitUfH">
+        <input type="text" class="note-input" placeholder="备注（口径/断点）" data-page-node-id="b7VEBVhSMxpj2MApzqMFuh">
+      </div>
+      <div class="quarter-cell" data-page-node-id="xe7a8OdRtnGsyUGIQoiboJ">
+        <div class="quarter-label" data-page-node-id="wCNTsRFnDLVGxZbroABsWA">Q3</div>
+        <input type="text" class="value-input" placeholder="数值或'无'" data-page-node-id="BpLVku3gZmmGmGpmMaezXx">
+        <input type="text" class="note-input" placeholder="备注（口径/断点）" data-page-node-id="H5r0dmXVCZpSUgJKiMQiBD">
+      </div>
+      <div class="quarter-cell" data-page-node-id="2XMy3Tgp6tc0tu34BYxXHv">
+        <div class="quarter-label" data-page-node-id="ucBla2xEfLrNChRj35nwk4">Q4</div>
+        <input type="text" class="value-input" placeholder="数值或'无'" data-page-node-id="eT67JKaff5PRN34GvEntKo">
+        <input type="text" class="note-input" placeholder="备注（口径/断点）" data-page-node-id="Cx1Vb7SrP4Fc8WuvQKRlb3">
+      </div>
+    </div>
+  </div>
+
+  <div class="indicator-block" data-page-node-id="Hla7FIRwedo7cGYXEx1Jm1">
+    <div class="indicator-head" data-page-node-id="ktd7OeGg9gvDwb5IuVpTfJ">
+      <span class="indicator-icon" data-page-node-id="TIbDPDcOjAVnQsxHu4eDqU">②</span>
+      <span class="indicator-title" data-page-node-id="zUS4hdfnsI1Cm9iQ2pRK9a">企业侧的投入强度</span>
+    </div>
+    <div class="indicator-warning" data-page-node-id="HBA9XDt6XDd1fYBzS1l3Ov">
+      ⚠️ 最容易搞错：把"用不用"当指标。"钱花没花、花多少"才是硬口径（某项支出÷总运营成本）。
+    </div>
+    <div class="quarter-grid" data-indicator="intensity" data-page-node-id="rS65HB7pxEv78foFjKqPxj">
+      <div class="quarter-cell" data-page-node-id="gw5RJInoB8ygk5P0Y8Wx5E">
+        <div class="quarter-label" data-page-node-id="x50dm11sNK6rVWcZIZ4vQw">Q1</div>
+        <input type="text" class="value-input" placeholder="数值或'无'" data-page-node-id="uua8qiiNp8oswsVZUTaqxF">
+        <input type="text" class="note-input" placeholder="备注（口径/断点）" data-page-node-id="fOkEnZdi4YwfcUS8z5aGco">
+      </div>
+      <div class="quarter-cell" data-page-node-id="BWOe9UyUcfYbdRzSkNVvXz">
+        <div class="quarter-label" data-page-node-id="m8AydzWdnE9Bo8LEZcKfsg">Q2</div>
+        <input type="text" class="value-input" placeholder="数值或'无'" data-page-node-id="MuRslbtjpb5yxaD15ZLqsZ">
+        <input type="text" class="note-input" placeholder="备注（口径/断点）" data-page-node-id="kKdERAOpT3R3iwcAlINXNV">
+      </div>
+      <div class="quarter-cell" data-page-node-id="owhw5EVihZF7lx2nba75Vf">
+        <div class="quarter-label" data-page-node-id="I6ZWI2GzU4tAHrT6kSDSnI">Q3</div>
+        <input type="text" class="value-input" placeholder="数值或'无'" data-page-node-id="bhTu6GAh6OJPDTzlsXqH8A">
+        <input type="text" class="note-input" placeholder="备注（口径/断点）" data-page-node-id="pTqaEh9aeXYjAra0EyxTJf">
+      </div>
+      <div class="quarter-cell" data-page-node-id="t405fnqYsbY0uxWZEleJZC">
+        <div class="quarter-label" data-page-node-id="XpETegzNhR3q8y4IBclpiL">Q4</div>
+        <input type="text" class="value-input" placeholder="数值或'无'" data-page-node-id="kMUZ0C26GxGW00RhvLRUH1">
+        <input type="text" class="note-input" placeholder="备注（口径/断点）" data-page-node-id="kVbZsSDIHk64AFH5jz98jV">
+      </div>
+    </div>
+  </div>
+
+  <div class="indicator-block" data-page-node-id="8iHhv0CS204UlUb0jbDqkX">
+    <div class="indicator-head" data-page-node-id="vKEPyItf0vTC3hiUtYCwcC">
+      <span class="indicator-icon" data-page-node-id="AmcC5SXVjToMV3fvKYgigG">③</span>
+      <span class="indicator-title" data-page-node-id="yZLAXRtb4BKTuLfEssCXIx">劳动生产率（员工总数 + 人均）</span>
+    </div>
+    <div class="indicator-warning" data-page-node-id="ZD8BDxAanR2CRXwpzVKGlk">
+      ⚠️ 最容易搞错：把"人均上升"当提效。必须同时记录：人减、人均升=真提效；人减、人均平=只是缩表。
+    </div>
+    <div class="quarter-grid" data-indicator="productivity" data-page-node-id="O8ipILVn2S5FIebHHQhLrW">
+      <div class="quarter-cell" data-page-node-id="3ihFSAU1gBfuaCkhhOG3wv">
+        <div class="quarter-label" data-page-node-id="PQtpqplNA5BNlCqzwF3n2a">Q1</div>
+        <input type="text" class="value-input" placeholder="员工数/人均" data-page-node-id="8khjzwG8b9oUN4Y0KGEwNi">
+        <input type="text" class="note-input" placeholder="备注" data-page-node-id="4TJZUQn1clbmv2FU1jAQqX">
+      </div>
+      <div class="quarter-cell" data-page-node-id="eqB85TFgFJkI0CrqXJNHLi">
+        <div class="quarter-label" data-page-node-id="CP3oj8EDrC3LFLEDCJpxr4">Q2</div>
+        <input type="text" class="value-input" placeholder="员工数/人均" data-page-node-id="JSbTPjkmr3aDj3YYpTqO6c">
+        <input type="text" class="note-input" placeholder="备注" data-page-node-id="ES2GuBX3ORZgqUM0EsjwrB">
+      </div>
+      <div class="quarter-cell" data-page-node-id="ubXjEavsiSd7OOERRjfxpo">
+        <div class="quarter-label" data-page-node-id="oLKRLulNFR4bqmsurTVJAW">Q3</div>
+        <input type="text" class="value-input" placeholder="员工数/人均" data-page-node-id="pQgupE493nHhC69iR0hTgV">
+        <input type="text" class="note-input" placeholder="备注" data-page-node-id="MmTKd0BfvL3quAn8xT7GFx">
+      </div>
+      <div class="quarter-cell" data-page-node-id="9MHcN1nFmhPQ6IPcUdAlsC">
+        <div class="quarter-label" data-page-node-id="kBzHqrxTAej0UuXsLfVpxJ">Q4</div>
+        <input type="text" class="value-input" placeholder="员工数/人均" data-page-node-id="cD0DeDnqUNp8PTz8JJfVMc">
+        <input type="text" class="note-input" placeholder="备注" data-page-node-id="eEVaDACTJJGMUaXpwGCwof">
+      </div>
+    </div>
+  </div>
+
+  <div class="indicator-block" data-page-node-id="RSNwr47wGNHKXj2xI9XYMb">
+    <div class="indicator-head" data-page-node-id="8ruzVEE6ylY7ZHLoyXtwJ3">
+      <span class="indicator-icon" data-page-node-id="3aFBdNcNtEXwR6cbDAamZB">④</span>
+      <span class="indicator-title" data-page-node-id="TNDwTkNEcAZfEDCBZvNk9d">行业内部回报离散度</span>
+    </div>
+    <div class="indicator-warning" data-page-node-id="Lo4zSP5jxt639K7H04loer">
+      ⚠️ 最容易搞错：看中位数。中位数上升是"水涨船高"；离散度扩大才说明技术在把赢家和输家分开。
+    </div>
+    <div class="quarter-grid" data-indicator="dispersion" data-page-node-id="wmbEPgfBp6H1VGEEJJXjj9">
+      <div class="quarter-cell" data-page-node-id="Cx5IqaWGnOKtFPqS1I4iJT">
+        <div class="quarter-label" data-page-node-id="FQVCP5ZL957C53BRVr362R">Q1</div>
+        <input type="text" class="value-input" placeholder="离散度数值" data-page-node-id="KoOWEPUxk6I1CXeaB4T5Hd">
+        <input type="text" class="note-input" placeholder="备注" data-page-node-id="p6iq1KgtiH71MYJWnGrj00">
+      </div>
+      <div class="quarter-cell" data-page-node-id="IKyIndlzzgMa1vDK0KfJNr">
+        <div class="quarter-label" data-page-node-id="R8eVvhG4PUsoEkOQQKzRTi">Q2</div>
+        <input type="text" class="value-input" placeholder="离散度数值" data-page-node-id="AcQQNJEbfuUgKevfNiX61E">
+        <input type="text" class="note-input" placeholder="备注" data-page-node-id="2LjkXoGGtgqKrnHxcFBIIl">
+      </div>
+      <div class="quarter-cell" data-page-node-id="dAZmiSmNGdw2Sr4MhSBf3H">
+        <div class="quarter-label" data-page-node-id="j0SgmnZG0RiO3dvRfmGXUG">Q3</div>
+        <input type="text" class="value-input" placeholder="离散度数值" data-page-node-id="g6d0OLTJK0a42O1lCxstwC">
+        <input type="text" class="note-input" placeholder="备注" data-page-node-id="nmfGyLYC9uGrJM6ilJ1l43">
+      </div>
+      <div class="quarter-cell" data-page-node-id="RwRBsAIwXpLaRHdM47ONRL">
+        <div class="quarter-label" data-page-node-id="FHMFMafDSPQDZGNThLmEU5">Q4</div>
+        <input type="text" class="value-input" placeholder="离散度数值" data-page-node-id="Tqfp1zwwBXI0I4tzBnoLzC">
+        <input type="text" class="note-input" placeholder="备注" data-page-node-id="xPO9r7ctnuhktLCiYrGl9g">
+      </div>
+    </div>
+  </div>
+
+  <div class="self-disclosure" data-page-node-id="7NbXaZ7kqXUP6BFoIy7l8X">
+    <strong data-page-node-id="PNLZbpIwL6LPjKKLRrgrWm">⚠️ 自我披露</strong>：
+    研究这个判断的人，本身就是该项技术的大量使用者。
+    <strong data-page-node-id="m9eIScwnBSZzdyqd3Q4R5E">不要用"我在用、我觉得变化很大"，作为"变化很大"的证据</strong>。
+    你越是某个趋势的受益者，你越该怀疑自己的判断。
+  </div>
+</div>
+
+<!-- 操作 -->
+<div class="card" data-page-node-id="unIAQIfIHElQ9AxTCJ3cPk">
+  <div class="card-title" data-page-node-id="VLpYmc56PT4LkCtNvAfbjD"><span class="num" data-page-node-id="Di2FQvidRThzhhbV3TkeET">3</span>操作</div>
+  <div class="actions" data-page-node-id="ifekzEXslY1JsbnZ4LMtPS">
+    <button class="primary" id="saveBtn" data-page-node-id="bXxTflVdTH6QO419H4nYA1">📌 存档本周期记录</button>
+    <button class="ghost" id="loadBtn" data-page-node-id="mLQ4zzTgtrJV4F4JpmjlL4">📂 加载已有判断</button>
+    <button class="ghost" id="exportBtn" data-page-node-id="AcvlfxEmgcxUEKDUbRAtpr">📤 导出当前判断 MD</button>
+    <button class="ghost" id="clearBtn" data-page-node-id="QoXYDBjCOcsJzDNgRne8dn">↺ 清空表单</button>
+  </div>
+  <div id="loadResult" style="margin-top: 16px;" data-page-node-id="fVaC9HrOBUxpSKiRPbXUNV"></div>
+</div>
+
+<!-- 历史记录 -->
+<div class="card" data-page-node-id="mYXJNjUgUmfxZ5RldkadOQ">
+  <div class="card-title" data-page-node-id="0Rt6pNM5MqTSHmiDtQXTA8"><span class="num" data-page-node-id="21nTtmajmXHkAske56EEkN">📚</span>判断档案库（本地存储）</div>
+
+  <div class="stats-row" id="statsRow" data-page-node-id="f3RbKqVKs6ndQiFCTHv6up"></div>
+
+  <div class="filter-row" data-page-node-id="ijfJZfIZyG1Vsl63NjlWfZ">
+    <button class="filter-btn active" data-filter="all" data-page-node-id="HGB224Cv9REYXKO5PxCC82">全部</button>
+    <button class="filter-btn" data-filter="first-year" data-page-node-id="f94EqV8b0OGpnGqgBYJ058">第一年</button>
+    <button class="filter-btn" data-filter="multi-year" data-page-node-id="uFA01arn2zizSFp9sZlWwP">多年记录</button>
+    <input type="text" class="search-input" id="searchInput" placeholder="搜索判断名..." data-page-node-id="ShzzczNCobtbmEq2dh33Bt">
+    <button class="ghost" id="exportAllBtn" data-page-node-id="6pdfn11esL8NGlABnJIxDl">📤 导出全部 MD</button>
+  </div>
+
+  <div id="recordsList" class="records-list" data-page-node-id="9ZZGWRoWE1SqGimkLo6W3u"></div>
+</div>
+
+<!-- 方法论 -->
+<div class="card" data-page-node-id="oPE8bFcoQEw8FGHG1rAfIU">
+  <div class="card-title" data-page-node-id="3ukRhx1aWWlBooXkkBHzAX"><span class="num" data-page-node-id="im4skhtQZm3QXSSKrkAl0S">📖</span>为什么把"信仰"降级成"台账"？</div>
+  <div style="font-size: 14px; color: var(--text-main);" data-page-node-id="5TFzJfvAH3xC7gpxlhVlJM">
+    <p style="margin-bottom: 10px;" data-page-node-id="mnZ6TL1ab4ILLJDNK4W8Fx"><strong style="color: var(--gold);" data-page-node-id="3yJKeSjsehvHWqRubpsHpH">不可证伪判断的结构</strong>：它通常由三层拼起来：</p>
+    <ul style="padding-left: 24px; margin-bottom: 10px;" data-page-node-id="A4zyDVLgqbLswbu5m75jAj">
+      <li data-page-node-id="gKBsmM0nyhI0RAHb9Pntfb"><strong data-page-node-id="uFiUXkEZN0WO5ZPoH3fsUu">宏观层</strong>：方向几乎必然对，节奏几乎必然错</li>
+      <li data-page-node-id="TQ3KWyBWaQHFRBwZs1o7Te"><strong data-page-node-id="YZkBfsmn44hBWYBzZT1XpB">中观层</strong>：标准答案早就有了，通常已计入价格</li>
+      <li data-page-node-id="U2dOFZByucASCzFz3xTLif"><strong data-page-node-id="wt9BWn4nNSYpfXBl9Qw578">微观层</strong>：可检验，但容易被前两层带跑</li>
+    </ul>
+    <p style="margin-bottom: 10px;" data-page-node-id="N21hCIAZgNopE1HYGmsOhp"><strong style="color: var(--gold);" data-page-node-id="XGVeIuWV97SksiAW8zIzQU">问题出在第一层</strong>：宏观判断错了无法被任何单笔投资证伪，对了也无法被任何单笔投资证明——它天然会滑向"变化很大，要重视"的空洞结论。</p>
+    <p style="margin-bottom: 10px;" data-page-node-id="iFPNya4BuRN5UM5aQi12y7"><strong style="color: var(--gold);" data-page-node-id="YQu8OEoz9ET8lwsohpdAzC">降级成台账的意义</strong>：</p>
+    <ul style="padding-left: 24px; margin-bottom: 10px;" data-page-node-id="bb1cA4Kr2CJ7SiUnpe83NQ">
+      <li data-page-node-id="EiFGtVmu6Dox8nPlTkOWoi">作为"判断"错了沿用多年 → 作为"台账"数据栏空着一眼看得出来</li>
+      <li data-page-node-id="HU8s3h7H6cO5m1nhAzWnTI">作为"判断"对了只能反复宣称 → 作为"台账"数字累积成趋势可复核</li>
+      <li data-page-node-id="9NS1GiDYgJrQ2nnC7N5xa3"><strong data-page-node-id="5kFOEYtbkayBQtfutYCmuP">关键</strong>：一个判断可以永远含混下去，<strong data-page-node-id="c0uKnlj6isXqRb9D5gzE4w">但一张表格不能</strong>——栏位空着就是空着</li>
+    </ul>
+    <p style="margin-bottom: 10px;" data-page-node-id="AWj5VoqRu7mZWD24T88JDy"><strong style="color: var(--gold);" data-page-node-id="IpnErvr70F7U4vzPvHqM3B">三条纪律的本质</strong>：</p>
+    <ul style="padding-left: 24px; margin-bottom: 10px;" data-page-node-id="sOtb1aQLZdQ9Z7CvCrAdJv">
+      <li data-page-node-id="IS0Ph1q6kwz1yH0qWAmVDK"><strong data-page-node-id="fbzYR3IMGKCBSkyBKp2ZAJ">第一年不设阈值</strong>：反直觉地，"不设标准"比"设标准"更严谨——因为我们不知道会怎么走</li>
+      <li data-page-node-id="OabK6rGLZwrh1fFsE3drYm"><strong data-page-node-id="DISAoI5AtzYnwXNF35hJQp">缺失写"无"</strong>：空本身是信息——只有保住"不知道"这个状态，台账才有意义</li>
+      <li data-page-node-id="C9eOUzFaLhIFGuaQhV4ung"><strong data-page-node-id="EV48qOPgdNpIocYqfEvdzw">不产生交易动作</strong>：研究最常见的变质方式不是算错，而是"因为已经有了一个表，就开始用它"</li>
+    </ul>
+    <p data-page-node-id="JeTm1wvdenlBak2Ul8f9gL"><strong style="color: var(--gold);" data-page-node-id="JWw8heizVFVeQgI2IcfvzD">本工具的核心约束</strong>：三条纪律必须勾选才能存档；台账只记录不行动；自我披露是常态。</p>
+  </div>
+</div>
+
+<!-- 导出预览 -->
+<div class="modal-overlay" id="exportModal" data-page-node-id="dbLtrWgaL0rsSJBJ8Fnbom">
+  <div class="modal" data-page-node-id="r8sS2eUJYqC2ojieYXW3DB">
+    <h3 data-page-node-id="2pYYAD53eqd2cIDT496JCQ">导出预览</h3>
+    <pre class="export-preview" id="exportPreview" data-page-node-id="Pbkljn4TiPR7lsDKfwvcB6"></pre>
+    <div class="modal-actions" data-page-node-id="BHZ4gaiXzIMFKfN9iiCpKK">
+      <button class="ghost" id="cancelExportBtn" data-page-node-id="m2Lq2EF1bkfNQtryG458h2">取消</button>
+      <button class="primary" id="downloadExportBtn" data-page-node-id="97bg6EQoSlzevSMBUmqldO">📥 下载 .md 文件</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" data-page-node-id="Hh2Cj16XabNfv4HUkWgeTw"></div>
+
+<footer data-page-node-id="IEFdBAFPuixjyWjAg2RoJg">
+  数据来源：本工具使用 localStorage 本地存储 · 不会上传任何数据<br data-page-node-id="MffmbAyiavvMpIWPqSaEET">
+  <a href="./research-value-capital-allocation.html" data-page-node-id="ko6Iq2ASSwc0QtFP0BViQk">返回研究系列</a> · <a href="./index.html" data-page-node-id="xrthJHLUpkZrWhIHSEd4wi">返回首页</a>
+</footer>
+
+</div>
+
+<script>
+// ========== 数据存储 ==========
+
+const STORAGE_KEY = 'unfalsifiable_judgment_records_v1';
+
+function loadRecords() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  } catch { return []; }
+}
+function saveRecords(records) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+}
+function genId() {
+  return 'jud_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+}
+
+// ========== 工具函数 ==========
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+function collectIndicators() {
+  const result = {};
+  document.querySelectorAll('.indicator-block').forEach(block => {
+    const grid = block.querySelector('.quarter-grid');
+    const key = grid.dataset.indicator;
+    const indicatorTitle = block.querySelector('.indicator-title').textContent;
+    const indicatorWarn = block.querySelector('.indicator-warning').textContent.replace('⚠️ ', '').trim();
+    result[key] = {
+      title: indicatorTitle,
+      warning: indicatorWarn,
+      quarters: []
+    };
+    grid.querySelectorAll('.quarter-cell').forEach(cell => {
+      const label = cell.querySelector('.quarter-label').textContent;
+      const value = cell.querySelector('.value-input').value.trim();
+      const note = cell.querySelector('.note-input').value.trim();
+      result[key].quarters.push({ label, value, note });
+    });
+  });
+  return result;
+}
+
+function loadIndicators(indicators) {
+  document.querySelectorAll('.indicator-block').forEach(block => {
+    const grid = block.querySelector('.quarter-grid');
+    const key = grid.dataset.indicator;
+    const data = indicators[key];
+    if (!data) return;
+    grid.querySelectorAll('.quarter-cell').forEach((cell, i) => {
+      const q = data.quarters[i];
+      if (q) {
+        cell.querySelector('.value-input').value = q.value || '';
+        cell.querySelector('.note-input').value = q.note || '';
+      }
+    });
+  });
+}
+
+document.getElementById('startDate').value = new Date().toISOString().split('T')[0];
+
+document.getElementById('saveBtn').addEventListener('click', () => {
+  const name = document.getElementById('judgmentName').value.trim();
+  const startDate = document.getElementById('startDate').value;
+  const reason = document.getElementById('unfalsifiableReason').value.trim();
+  const ack1 = document.getElementById('discipline-ack-1').checked;
+  const ack2 = document.getElementById('discipline-ack-2').checked;
+  const ack3 = document.getElementById('discipline-ack-3').checked;
+
+  if (!name || !startDate) {
+    showToast('请填写判断描述和开始日期');
+    return;
+  }
+  if (!ack1 || !ack2 || !ack3) {
+    showToast('三条纪律必须全部勾选——这是本工具的硬约束');
+    return;
+  }
+
+  const indicators = collectIndicators();
+  const record = {
+    id: genId(),
+    name, startDate, reason,
+    indicators,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  };
+  const records = loadRecords();
+  const existingIdx = records.findIndex(r => r.name === name && r.startDate === startDate);
+  if (existingIdx >= 0) {
+    records[existingIdx] = { ...records[existingIdx], indicators, updatedAt: new Date().toISOString() };
+    saveRecords(records);
+    showToast('✅ 已更新该判断的记录');
+  } else {
+    records.unshift(record);
+    saveRecords(records);
+    showToast('✅ 已存档新判断');
+  }
+  renderRecords();
+});
+
+document.getElementById('loadBtn').addEventListener('click', () => {
+  const records = loadRecords();
+  if (records.length === 0) {
+    showToast('档案库为空');
+    return;
+  }
+  const html = `
+    <div style="background: var(--bg-input); padding: 14px; border-radius: 4px;">
+      <div style="margin-bottom: 8px; color: var(--text-sub); font-size: 12px;">选择要加载的判断：</div>
+      ${records.map(r => `
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; border-bottom: 1px solid var(--border);">
+          <div>
+            <div style="font-weight: 600;">${escapeHtml(r.name)}</div>
+            <div style="font-size: 12px; color: var(--text-sub);">开始：${r.startDate} · 更新：${r.updatedAt.split('T')[0]}</div>
+          </div>
+          <button class="primary" data-load="${r.id}" style="padding: 6px 14px; font-size: 13px;">加载</button>
+        </div>
+      `).join('')}
+    </div>
+  `;
+  document.getElementById('loadResult').innerHTML = html;
+  document.querySelectorAll('[data-load]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.load;
+      const rec = records.find(r => r.id === id);
+      if (!rec) return;
+      document.getElementById('judgmentName').value = rec.name;
+      document.getElementById('startDate').value = rec.startDate;
+      document.getElementById('unfalsifiableReason').value = rec.reason || '';
+      loadIndicators(rec.indicators);
+      document.getElementById('discipline-ack-1').checked = true;
+      document.getElementById('discipline-ack-2').checked = true;
+      document.getElementById('discipline-ack-3').checked = true;
+      document.getElementById('loadResult').innerHTML = '';
+      showToast('已加载到表单');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+});
+
+document.getElementById('clearBtn').addEventListener('click', () => {
+  document.getElementById('judgmentName').value = '';
+  document.getElementById('startDate').value = new Date().toISOString().split('T')[0];
+  document.getElementById('unfalsifiableReason').value = '';
+  document.querySelectorAll('.value-input, .note-input').forEach(el => el.value = '');
+  document.querySelectorAll('[id^="discipline-ack-"]').forEach(cb => cb.checked = false);
+  document.getElementById('loadResult').innerHTML = '';
+});
+
+document.getElementById('searchInput').addEventListener('input', renderRecords);
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderRecords();
+  });
+});
+
+function getCurrentFilter() {
+  return document.querySelector('.filter-btn.active').dataset.filter;
+}
+
+function renderRecords() {
+  const records = loadRecords();
+  const filter = getCurrentFilter();
+  const search = document.getElementById('searchInput').value.toLowerCase().trim();
+
+  // 统计
+  const totalQuarters = records.reduce((s, r) => {
+    return s + Object.values(r.indicators).reduce((ss, ind) => {
+      return ss + ind.quarters.filter(q => q.value).length;
+    }, 0);
+  }, 0);
+
+  document.getElementById('statsRow').innerHTML = `
+    <div class="stat-box">
+      <div class="stat-label">总判断</div>
+      <div class="stat-value">${records.length}</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">已填季度数</div>
+      <div class="stat-value">${totalQuarters}</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">本年新增</div>
+      <div class="stat-value">${records.filter(r => r.createdAt.startsWith(new Date().getFullYear().toString())).length}</div>
+    </div>
+  `;
+
+  let filtered = records;
+  if (filter === 'first-year') {
+    filtered = filtered.filter(r => {
+      const startYear = new Date(r.startDate).getFullYear();
+      return startYear === new Date().getFullYear();
+    });
+  } else if (filter === 'multi-year') {
+    filtered = filtered.filter(r => {
+      const startYear = new Date(r.startDate).getFullYear();
+      return startYear < new Date().getFullYear();
+    });
+  }
+  if (search) {
+    filtered = filtered.filter(r => r.name.toLowerCase().includes(search));
+  }
+
+  const list = document.getElementById('recordsList');
+  if (filtered.length === 0) {
+    list.innerHTML = '<div class="empty-state">— 没有匹配的记录 —</div>';
+    return;
+  }
+
+  list.innerHTML = filtered.map(r => {
+    const quarterCount = Object.values(r.indicators).reduce((s, ind) => s + ind.quarters.filter(q => q.value).length, 0);
+    return `
+      <div class="record-card" data-id="${r.id}">
+        <div class="record-head">
+          <div>
+            <div class="record-title">${escapeHtml(r.name)}</div>
+            <div class="record-meta">开始：${r.startDate} · 已填季度数：${quarterCount} · 最后更新：${r.updatedAt.split('T')[0]}</div>
+          </div>
+        </div>
+        ${r.reason ? `<div class="record-body"><strong>不可证伪理由：</strong>${escapeHtml(r.reason)}</div>` : ''}
+        <div class="record-actions">
+          <button data-action="load" data-id="${r.id}">加载到表单</button>
+          <button data-action="export" data-id="${r.id}">导出</button>
+          <button data-action="delete" data-id="${r.id}">删除</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  list.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.id;
+      const action = btn.dataset.action;
+      if (action === 'delete') {
+        if (confirm('确定删除这条判断？')) {
+          const recs = loadRecords().filter(r => r.id !== id);
+          saveRecords(recs);
+          renderRecords();
+          showToast('已删除');
+        }
+      } else if (action === 'export') {
+        const rec = loadRecords().find(r => r.id === id);
+        if (rec) exportRecord(rec);
+      } else if (action === 'load') {
+        document.getElementById('loadBtn').click();
+      }
+    });
+  });
+}
+
+function escapeHtml(s) {
+  if (!s) return '';
+  return s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+}
+
+// ========== 导出 ==========
+
+function recordToMarkdown(rec) {
+  let md = `# ${rec.name}\n\n`;
+  md += `**开始日期**：${rec.startDate}\n`;
+  md += `**最后更新**：${rec.updatedAt.split('T')[0]}\n\n`;
+  if (rec.reason) {
+    md += `**为什么不可证伪**：${rec.reason}\n\n`;
+  }
+  md += `---\n\n`;
+
+  md += `## 三条使用纪律（已确认）\n\n`;
+  md += `- ✅ 第一年不设阈值\n`;
+  md += `- ✅ 缺失写"无"，不插值/估算/均值\n`;
+  md += `- ✅ 不产生任何交易动作\n\n`;
+
+  md += `## 四个观测指标\n\n`;
+  Object.values(rec.indicators).forEach(ind => {
+    md += `### ${ind.title}\n\n`;
+    md += `*${ind.warning}*\n\n`;
+    md += `| 季度 | 数值 | 备注 |\n`;
+    md += `|---|---|---|\n`;
+    ind.quarters.forEach(q => {
+      const v = q.value || '—';
+      const n = q.note || '—';
+      md += `| ${q.label} | ${v} | ${n} |\n`;
+    });
+    md += `\n`;
+  });
+
+  md += `---\n\n*由「不可证伪判断台账」自动生成 · 对应研究10*\n`;
+  return md;
+}
+
+function exportRecord(rec) {
+  const md = recordToMarkdown(rec);
+  document.getElementById('exportPreview').textContent = md;
+  document.getElementById('exportModal').classList.add('show');
+  window._pendingExport = md;
+  window._pendingFilename = `judgment_${rec.name.replace(/[\/\\:*?"<>|]/g, '_')}_${rec.startDate}.md`;
+}
+
+document.getElementById('exportBtn').addEventListener('click', () => {
+  const name = document.getElementById('judgmentName').value.trim();
+  if (!name) {
+    showToast('请先填写判断描述');
+    return;
+  }
+  const indicators = collectIndicators();
+  const tempRec = {
+    name,
+    startDate: document.getElementById('startDate').value,
+    reason: document.getElementById('unfalsifiableReason').value.trim(),
+    indicators,
+    updatedAt: new Date().toISOString()
+  };
+  exportRecord(tempRec);
+});
+
+document.getElementById('cancelExportBtn').addEventListener('click', () => {
+  document.getElementById('exportModal').classList.remove('show');
+});
+
+document.getElementById('downloadExportBtn').addEventListener('click', () => {
+  const blob = new Blob([window._pendingExport], { type: 'text/markdown' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = window._pendingFilename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  document.getElementById('exportModal').classList.remove('show');
+  showToast('已下载');
+});
+
+document.getElementById('exportAllBtn').addEventListener('click', () => {
+  const records = loadRecords();
+  if (records.length === 0) {
+    showToast('档案库为空');
+    return;
+  }
+  const md = `# 不可证伪判断档案汇总\n\n导出时间：${new Date().toLocaleString('zh-CN')}\n共 ${records.length} 条判断\n\n---\n\n` +
+    records.map(recordToMarkdown).join('\n\n');
+  document.getElementById('exportPreview').textContent = md;
+  document.getElementById('exportModal').classList.add('show');
+  window._pendingExport = md;
+  window._pendingFilename = `judgments_${new Date().toISOString().split('T')[0]}.md`;
+});
+
+renderRecords();
+</script>
+</body>
+</html>
