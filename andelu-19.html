@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="有效独立赌注数只有1.28：5只A股指数在十年日线上的实际相关结构测算。数量增加降波动有限（21.45%→17.67%），加入创业板指后波动反升+0.43pp；沪深300跌幅最大20日，中证500/红利/银行全部20/20同跌。并辨析相关性漂移，给出一年一次的相关性复检动作。安德路专栏·地平线系列第19篇。">
+  <meta property="og:title" content="你的组合看着分散，其实只有1.28个独立赌注 — 私家智囊">
+  <meta property="og:description" content="买了很多，不等于分散了很多。名义上的五个赌注，实际是一个半。">
+  <meta property="og:image" content="https://abcsuodao.com/images/dialogue-scene.jpg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://abcsuodao.com/andelu-19.html">
+  <meta property="og:site_name" content="私家智囊">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://abcsuodao.com/images/dialogue-scene.jpg">
+  <title>你的组合看着分散，其实只有1.28个独立赌注 — 私家智囊</title>
+  <link rel="stylesheet" href="dialogue.css">
+  <link rel="stylesheet" href="research.css">
+  <link rel="canonical" href="https://abcsuodao.com/andelu-19.html">
+  <meta name="robots" content="index,follow">
+  <meta name="keywords" content="有效独立赌注数, 资产配置, 分散投资, 相关性, 相关系数, 假分散, N_eff, 风险分散度, 家庭财务规划">
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "你的组合看着分散，其实只有1.28个独立赌注",
+  "description": "有效独立赌注数只有1.28：5只A股指数在十年日线上的实际相关结构测算。数量增加降波动有限（21.45%→17.67%），加入创业板指后波动反升+0.43pp；沪深300跌幅最大20日，中证500/红利/银行全部20/20同跌。并辨析相关性漂移，给出一年一次的相关性复检动作。安德路专栏·地平线系列第19篇。",
+  "url": "https://abcsuodao.com/andelu-19.html",
+  "inLanguage": "zh-CN",
+  "author": {
+    "@type": "Person",
+    "name": "安德路"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "私家智囊"
+  },
+  "datePublished": "2026-10-22",
+  "dateModified": "2026-10-22",
+  "keywords": "资产配置, 分散投资, 相关性, 有效独立赌注数, N_eff, 假分散, 风险分散度, 家庭财务规划",
+  "mainEntity": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "那我到底该买几只？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "这个问题本身问错了。该问的是「我有几个独立赌注」，而不是「我买了几个」。数量只是名义值，N_eff 才是实际值。一个 3 只、但两两不相关的组合，好过 8 只同涨同跌的。目标不是凑数量，是让 N_eff 真实增长。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "算相关系数需要历史数据，我不会算怎么办？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "可以用公开指数做近似——每只持仓找一只对应的公开指数，取同一段时间的日收益率，两两算相关系数。这篇文章里所有数字都是这么做的。需要提醒的是，相关系数对样本区间敏感，所以算一次不够，要固定一个区间长期比较，看趋势而不是看单点。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "海外资产和黄金真的有用吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "我只能说相关性低这个事实：在我测算的区间里，它们与 A 股族的平均相关性分别在 0.13 和 0.06 附近，远低于 A 股内部的 0.43—0.89（这五只 A 股资产两两相关性的中位数是 0.80）。但低相关不等于无风险，也不等于一定赚钱。我自己更看重的是第四层那个发现——相关性会漂移，2026 年沪深300 与黄金的相关性就升到了 12 年最高的 0.238。所以我的结论不是「配了就安全」，而是「配了要定期复检」。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "N_eff 和相关矩阵这些名词会不会太专业？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "概念不复杂，你可以只记住一句：问自己「这几样东西会不会在同一天一起跌」。如果答案是「会」，那你的分散是假的。名字不重要，这个问题最重要。"
+        }
+      }
+    ]
+  }
+}</script>
+<meta name="msvalidate.01" content="F48C7A4625437CD09069E4F94D70C1D7" />
+<meta name="baidu-site-verification" content="codeva-zOTi2X5wIM" />
+</head>
+
+<body>
+
+  <!-- ===== Header (fixed, dark) ===== -->
+  <header class="header-dark">
+    <div class="container">
+      <div class="logo"><a href="./index.html">私家<span>智囊</span></a></div>
+      <nav>
+        <a href="index.html">首页</a>
+        <a href="belief.html">信念</a>
+        <a href="principles.html">原则</a>
+        <a href="triage.html">值班室</a>
+        <a href="content.html">瞭望台</a>
+        <a href="tools.html">工具箱</a>
+        <a href="index.html#about">关于</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="section" id="content">
+    <div class="container">
+
+      <div class="report-head">
+        <div class="report-badge">📝 安德路专栏 · 地平线系列 · 第四幕：投资 · 第 19 篇</div>
+        <h1 class="report-title">你的组合看着分散，其实只有1.28个独立赌注</h1>
+        <p class="report-subtitle">——十年数据算出来的有效独立赌注数（ENB），以及为什么数量不等于分散</p>
+        <div class="report-meta">
+          <strong>阅读时间</strong>：约 13 分钟　｜　<strong>标签</strong>：#有效独立赌注数 #资产配置 #分散投资 #相关性 #假分散 #风险分散度
+        </div>
+      </div>
+
+      <div class="report-body">
+
+<div class="report-toc">
+<h2>目 录</h2>
+<ol>
+<li><a href="#sec1">一、常识没撒谎，但它只说了一半</a></li>
+<li><a href="#sec2">二、一个能自己算的数字：有效独立赌注数</a></li>
+<li><a href="#sec3">三、平常看不出差别的那几个点，全在最该起作用的那天没了</a></li>
+<li><a href="#sec4">四、相关性不是常数，是会漂移的变量</a></li>
+<li><a href="#sec5">五、所以今天该做什么</a></li>
+<li><a href="#action">今日行动清单</a></li>
+<li><a href="#quotes">金句墙</a></li>
+<li><a href="#faq">常见问题（FAQ）</a></li>
+</ol>
+</div>
+
+<p class="disclaimer"><strong>风险提示：</strong>风险提示：本文为个人独立研究记录，全部数据基于公开指数日线自行测算，不构成投资建议、不推荐任何具体投资品种、不预测市场走势。历史统计结果不代表未来表现。文中出现的指数名称仅为计算口径的说明，不构成任何产品推荐。决策请独立判断。</p>
+<p>十年前，表弟问我一个很朴素的问题：钱不多，是不是多买几只股票更安全？</p>
+<p>我当时给的答案是"是"——分散总没错。这个答案在常识层面完全成立，在数学层面却只对了一半。</p>
+<p>半年前，我把这十一年拉出来重新算了一遍。结论有点扎心：<strong>很多被叫做"分散"的组合，拆开看只有一到两个独立赌注。买五只A股指数，等效独立赌注数是 1.28。</strong></p>
+<p>这篇文章我想把这件事算清楚，并且给你一个可以自己动手的方法——不是让你相信我，是让你下次能自己验证。</p>
+<h2 id="sec1">一、常识没撒谎，但它只说了一半</h2>
+<p>先给常识一个公道。分散确实有用。</p>
+<p>我取 2015 年 1 月到 2026 年 10 月的公开指数日线，9 类资产、2706 个共同交易日。等权买入 A 股一族，逐个加入，看组合年化波动怎么走：</p>
+<div class="table-wrap"><table>
+<thead><tr><th>组合</th><th>年化波动</th><th>相对上一行</th></tr></thead>
+<tbody>
+<tr><td>沪深300 单只</td><td>21.45%</td><td>—</td></tr>
+<tr><td>+ 中证500</td><td>19.93%</td><td>−1.51pp</td></tr>
+<tr><td>+ 中证银行</td><td>18.53%</td><td>−1.40pp</td></tr>
+<tr><td>+ 创业板指</td><td>18.96%</td><td><strong>+0.43pp</strong></td></tr>
+<tr><td>+ 中证红利</td><td>17.67%</td><td>−1.29pp</td></tr>
+</tbody></table></div>
+<p>看第一列：从 1 只到 5 只，波动从 21.45% 降到 17.67%。降了 3.78 个百分点。分散是有效的，这一点没有疑问。</p>
+<p>但请看第三列的第 4 行。<strong>加入创业板指之后，组合波动不降反升，从 18.53% 涨到 18.96%。</strong></p>
+<p>这不是我算错。我换样本区间重算了四遍：全样本 +0.43pp、2015—2018 年 +0.11pp、2023—2026 年 +1.53pp、近三年 +1.84pp。只有 2019—2022 年那一段是 −0.08pp，基本持平。五个区间里四个方向一致，且越靠近当下，幅度越大。</p>
+<p>原因不难理解：创业板指自身年化波动 31.83%，是这五只里最高的，而它跟沪深300的相关性高达 0.806。你以为你加了一只"不同风格"的资产，实际上你加进来的是一只<strong>波动更大、和原有持仓绑得更紧</strong>的资产。</p>
+<p>我把这个现象叫<strong>假分散</strong>——数量增加了，风险没有真正被拆开，反而多了一份。</p>
+<h2 id="sec2">二、一个能自己算的数字：有效独立赌注数</h2>
+<p>"买了很多是不是等于分散"这种问题，靠感觉回答不了，得靠一个数。</p>
+<p>学界有个现成的工具，叫<strong>有效独立赌注数</strong>（Effective Number of Bets，Meucci 2010）。思路不复杂：先算出你所有持仓两两之间的相关系数矩阵，再反推你的组合实际相当于几个互相独立的风险源。这个概念不是我发明的，我在这里标注出处。</p>
+<p>公式我说人话版。设你有 N 只资产、权重 w，两两相关系数构成矩阵 R，那么：</p>
+<blockquote><p><strong>N_eff = 1 / (w'Rw)</strong></p></blockquote>
+<p>其中 w'Rw 就是组合的"加权相关性水平"。这个数越接近 N，说明分散得越真；越接近 1，说明你其实只有 1 个赌注。</p>
+<p>拿刚才那五只 A 股族算：</p>
+<div class="table-wrap"><table>
+<thead><tr><th>组合</th><th>名义持仓数</th><th>N_eff</th><th>达成率</th></tr></thead>
+<tbody>
+<tr><td>5 只 A 股族</td><td>5</td><td><strong>1.28</strong></td><td>26%</td></tr>
+<tr><td>加 1 只海外权益</td><td>6</td><td>1.65</td><td>27%</td></tr>
+<tr><td>全部 9 类资产</td><td>9</td><td>2.35</td><td>26%</td></tr>
+</tbody></table></div>
+<p>看清楚第一行：<strong>名义上你有 5 个赌注，实际只相当于 1.28 个。</strong> 剩下 3.72 个是同一个赌注的复印件。</p>
+<p>我做了区间稳健性检验——分四个子区间重算，5 只 A 股族的 N_eff 分别是 1.15、1.32、1.52、1.95。全部低于名义值 5，全部在 2 以内。这个结论不依赖某一年。</p>
+<p>顺便说一句，有人会问：那 N_eff 到底是学界什么级别的东西？我查了一下，这个指标在基金业有实际应用——业内用它判断"基金超市"型组合的伪分散程度，在 N_eff 低于 3 的情况下被视为效果有限。而国内公募基金产品同质化严重，多只主题产品重仓股高度重合，是这个问题在国内的常见来源。</p>
+<p><strong>我的判断是：家庭账户的"分散"，目标不该是 N_eff 等于持仓数，而该是先看清你现在到底是几。</strong> 你现在只有 1.28，那第一个任务是把它变成 2，不是变成 5。</p>
+<h2 id="sec3">三、平常看不出差别的那几个点，全在最该起作用的那天没了</h2>
+<p>上面那些数字有个共同毛病：它们是十年平均。平均值是最会骗人的统计量——它把最该报警的日子平均掉了。</p>
+<p>所以我换了个口径：<strong>只取沪深300 跌幅最大的那些交易日，看其他资产在同一天做了什么。</strong></p>
+<div class="table-wrap"><table>
+<thead><tr><th>样本</th><th>中证500 同跌</th><th>中证红利 同跌</th><th>中证银行 同跌</th></tr></thead>
+<tbody>
+<tr><td>跌幅前 10 日</td><td>10/10</td><td>10/10</td><td>10/10</td></tr>
+<tr><td>跌幅前 20 日</td><td><strong>20/20</strong></td><td><strong>20/20</strong></td><td><strong>20/20</strong></td></tr>
+<tr><td>跌幅前 50 日</td><td>50/50</td><td>49/50</td><td>48/50</td></tr>
+</tbody></table></div>
+<p><strong>20/20。不是"大概率同跌"，是每一次都同跌。</strong></p>
+<p>同一个日子，把两个组合放一起比：</p>
+<ul>
+<li>A 股族 5 只等权：平均单日 <strong>−6.92%</strong>，最差 −8.75%</li>
+<li>同期黄金：平均单日 <strong>−0.29%</strong>，最差 −1.87%</li>
+<li>差额：<strong>6.63 个百分点</strong></li>
+</ul>
+<p>这就是假分散的代价。平时你看到的是"我有五只，它们走势不完全一样"；到了真正需要它们不一样的那天，五只一起走。</p>
+<p>而这一天恰恰是<strong>你情绪最差、最可能做出错误决策</strong>的一天。分散的真实作用从来不是让净值曲线好看，是让你在最难看的那天还能照着计划执行。</p>
+<p>顺便说句公道话：黄金在这 20 天里也跌了 9 天，平均还是 −0.29%。它不是免疫，只是跌得少。<strong>任何资产都救不了你，但有些资产能让你的判断不失效。</strong></p>
+<h2 id="sec4">四、相关性不是常数，是会漂移的变量</h2>
+<p>上面第三层其实还藏着一个更麻烦的问题。</p>
+<p>我按年度拆开算沪深300 和黄金的相关系数：2015 年 0.015、2016 年 −0.164、2017 年 0.029、2018 年 0.125、2019 年 −0.076、2020 年 0.174、2026 年 0.238。</p>
+<p><strong>同一个资产对，同一段历史里，相关性在正负之间来回摆。</strong></p>
+<p>这意味着什么？意味着"我的组合很分散"这个判断，是<strong>有保质期的</strong>。你在 2016 年算出的搭配，到 2026 年可能已经漂走了——2026 年这一对的相关性是 +0.238，比 2016 年的 −0.164 高出 0.4，是这 12 年里的最高值。</p>
+<p>所以"资产配置"如果只做一次，它就是一张过期的地图。真正要做的不是配置一次，而是<strong>定期复检</strong>：一年一次，把你的持仓重新算一遍相关系数，看 N_eff 是升了还是降了。</p>
+<p>需要说清楚的是，相关性漂移不只发生在黄金上。标普500 和纳斯达克全样本相关性高达 0.949——这两位在很多人眼里是"两个东西"，实际是同一个赌注的两种叫法。</p>
+<h2 id="sec5">五、所以今天该做什么</h2>
+<p>如果你只想带走三件事：</p>
+<p><strong>第一，把"我买了几只"换成"我实际上有几个独立赌注"。</strong> 不需要复杂的工具，用任何一个能算相关系数的表格都行，把你的持仓两两算一遍。数字会自己说话。</p>
+<p><strong>第二，先加低相关，再加数量。</strong> 我实测过，把 25% 放到与 A 股族平均相关性只有 0.06 的那类资产上，组合年化波动从 17.67% 降到 14.05%，降 3.62 个百分点。而同等数量、同样分散的 A 股内部加仓，只换来 3.78 个百分点里的一部分，且随你加得越多越边际递减。</p>
+<p><strong>第三，给你的组合设一个年检日。</strong> 每年固定一天，重新算相关系数、看 N_eff。这一天你要回答的问题只有一个：<strong>"我的赌注数量，是变多了还是变少了？"</strong></p>
+<p>如果变少了，说明你无意中买入了一个新的相关性集中——可能是行业轮动，可能是某次追热点顺手加的。找出它。</p>
+<p>至于要不要真的调整、调多少，取决于你的判断和你的风险承受能力——我这个专栏不给具体比例建议。但我自己的做法是：<strong>先砍掉那些"我以为它算分散"的部分，再考虑加新的。</strong> 顺序反了，你会越调越集中。</p>
+<h2 id="action">今日行动清单</h2>
+<ol>
+<li><strong>列出你的全部投资持仓</strong>（不含应急金、保障金和自住房）</li>
+<li><strong>两两算相关系数</strong>，或者用公开指数做近似</li>
+<li><strong>算一次 N_eff</strong>，写在纸上。这个数字就是你现在的真实分散度</li>
+<li><strong>对照我上面的表</strong>：如果 N_eff 不到持仓数的一半，你的分散是假的</li>
+<li><strong>在日历上标一个日期</strong>——一年后的今天，重做第 2、3 步</li>
+</ol>
+<h2 id="quotes">金句墙</h2>
+<blockquote class="quote-lead"><p>买了很多，不等于分散了很多。</p></blockquote>
+<blockquote><p></p></blockquote>
+<blockquote><p>五只 A 股指数，等效独立赌注数是 1.28——名义上的五个赌注，实际是一个半。</p></blockquote>
+<blockquote><p></p></blockquote>
+<blockquote><p>平常看不出差别的那几个点，全在最该起作用的那天没了。</p></blockquote>
+<blockquote><p></p></blockquote>
+<blockquote><p>「资产配置」如果只做一次，它就是一张过期的地图。</p></blockquote>
+<blockquote><p></p></blockquote>
+<blockquote><p>分散的真实作用不是让净值曲线好看，是让你在最难看的那天还能照着计划执行。</p></blockquote>
+<h2 id="faq">常见问题（FAQ）</h2>
+<div class="faq-item">
+  <h3>那我到底该买几只？</h3>
+  <p>这个问题本身问错了。该问的是「我有几个独立赌注」，而不是「我买了几个」。数量只是名义值，N_eff 才是实际值。一个 3 只、但两两不相关的组合，好过 8 只同涨同跌的。目标不是凑数量，是让 N_eff 真实增长。</p>
+</div>
+<div class="faq-item">
+  <h3>算相关系数需要历史数据，我不会算怎么办？</h3>
+  <p>可以用公开指数做近似——每只持仓找一只对应的公开指数，取同一段时间的日收益率，两两算相关系数。这篇文章里所有数字都是这么做的。需要提醒的是，相关系数对样本区间敏感，所以算一次不够，要固定一个区间长期比较，看趋势而不是看单点。</p>
+</div>
+<div class="faq-item">
+  <h3>海外资产和黄金真的有用吗？</h3>
+  <p>我只能说相关性低这个事实：在我测算的区间里，它们与 A 股族的平均相关性分别在 0.13 和 0.06 附近，远低于 A 股内部的 0.43—0.89（这五只 A 股资产两两相关性的中位数是 0.80）。但低相关不等于无风险，也不等于一定赚钱。我自己更看重的是第四层那个发现——相关性会漂移，2026 年沪深300 与黄金的相关性就升到了 12 年最高的 0.238。所以我的结论不是「配了就安全」，而是「配了要定期复检」。</p>
+</div>
+<div class="faq-item">
+  <h3>N_eff 和相关矩阵这些名词会不会太专业？</h3>
+  <p>概念不复杂，你可以只记住一句：问自己「这几样东西会不会在同一天一起跌」。如果答案是「会」，那你的分散是假的。名字不重要，这个问题最重要。</p>
+</div>
+<hr />
+<p><strong>数据来源</strong>：本文全部统计基于公开指数日线数据（沪深300、中证500、中证银行、创业板指、中证红利、恒生指数、标普500、纳斯达克、黄金现货），取 2015-01-01 至 2026-10-22 区间的 2706 个共同交易日，由作者独立测算。相关系数为日收益率皮尔逊相关系数；组合波动按协方差矩阵法计算并年化（252 交易日）；N_eff 按 1/(w'Rw) 计算，等权权重。指数名称仅作为计算口径说明，不构成任何产品推荐。</p>
+<p><strong>方法出处</strong>：有效独立赌注数（Effective Number of Bets）概念由 Attilio Meucci（2010）提出；本文使用其等权简化形式，所有测算为作者基于公开数据的独立整理，非引用第三方研究成果。</p>
+<p><strong>站内术语对表</strong>：本文的「N_eff / 有效独立赌注数」对应网站方法论中的<strong>风险分散度</strong>（见<a href="tool-five-grid.html">五格家庭财务结构图</a>与<a href="tool-asset-allocation-checker.html">家庭资产配置测算器</a>）；本文的「假分散」对应<strong>应急金/保障金分层</strong>中的<strong>同层集中</strong>问题——钱分在不同账户里叫分层，钱分散在同类资产里叫假分散。L2 应急金与 L3 保障金的分层逻辑，同样适用于投资端的资产分层。</p>
+
+      </div>
+
+      <div class="related-block">
+        <h3>🔧 配套工具</h3>
+        <a href="tool-asset-allocation-checker.html">📊 家庭资产配置测算器 <span>· 先测资产比例与负债，再谈分散</span></a>
+        <a href="tool-five-grid.html">🧱 五格家庭财务结构图 <span>· 账户分层与风险敞口的位置</span></a>
+        <a href="tool-debt-stress-test.html">💥 债务压力测试 <span>· 组合波动放大后，负债端能不能扛住</span></a>
+      </div>
+
+      <div class="related-block">
+        <h3>📖 相关阅读</h3>
+        <a href="andelu-18.html">看不见的积累 <span>· 长期投资的三行检验卡，本篇的上游</span></a>
+        <a href="research-value-capital-allocation.html">从企业价值到资本配置 <span>· 三源分解与留存价值判据</span></a>
+        <a href="research-03.html">涨得多的，以后还会涨 <span>· 用五轮验证把动量念头证伪</span></a>
+        <a href="dialogue-25.html">对话·资产配置入门 <span>· 深索道讲「同涨同跌」的那一层</span></a>
+      </div>
+
+      <div class="related-block">
+        <h3>📝 地平线系列 · 第一幕：地基期</h3>
+        <a href="andelu-01.html">01 制度缺口系数 <span>· 为什么美国人不需要6个月应急金</span></a>
+        <a href="andelu-02.html">02 表弟的17万 <span>· 我为什么没让他买股票</span></a>
+        <a href="andelu-03.html">03 钱在漏水 <span>· 用量化思维做账单体检</span></a>
+        <a href="andelu-04.html">04 四层账户 <span>· 一个量化交易者的家庭资产模型</span></a>
+        <a href="andelu-05.html">05 第一桶金 <span>· 年轻人最重要的不是收益率</span></a>
+      </div>
+
+      <div class="related-block">
+        <h3>📝 地平线系列 · 第四幕：投资</h3>
+        <a href="andelu-18.html">18 看不见的积累 <span>· 长期投资的三行检验卡</span></a>
+        <a href="andelu-19.html">19 有效独立赌注数 <span>· 你的组合看着分散，其实只有1.28个</span></a>
+      </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p class="slogan">家庭财务的<span>规划师</span>与<span>守夜人</span></p>
+      <p class="copyright">
+        <a href="./disclaimer.html" style="color:var(--text-muted);text-decoration:underline;">免责声明</a> ·
+        <a href="./privacy-policy.html" style="color:var(--text-muted);text-decoration:underline;">隐私政策</a> ·
+        <a href="./terms.html" style="color:var(--text-muted);text-decoration:underline;">使用条款</a>
+      </p>
+      <p class="copyright" style="margin-top:4px;">私家智囊 · 2026</p>
+    </div>
+  </footer>
+
+</body>
+</html>
