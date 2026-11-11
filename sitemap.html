@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<!--
+  草稿 v0.1 · 读者版站点地图 · 暂不发布
+  位置：内容工作区（D:\微信公众号和网站文章），未进部署源。
+  授权后：复制为 D:\temp_website\deepsuodao.github.io\sitemap.html 即可。
+  设计约束：
+    ① 不重列逐页清单，指向各家族既有索引页 → 避免与 content.html 双份维护；
+    ② 主题沿用 content.html 的既有 id 锚点 → 不新造分类词；
+    ③ 全文不写死任何篇数/数量宣称 → 动态自洽纪律；
+    ④ 不改公共 CSS、不改全站 102 页共用导航；内联样式与 dialogue.css 同值，便于独立预览。
+  注：about.html 为同批配套页，发布时须一同落地，否则本页「关于本站」链接为死链。
+-->
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="读者版站点地图——按重点入口、内容家族、主题三个视角，快速找到私家智囊的安德路专栏、工具箱、研究专题、对话、读书会与圆桌。帮助读者理解网站结构，不是搜索引擎用的 sitemap.xml。">
+  <meta property="og:title" content="读者版站点地图 — 私家智囊">
+  <meta property="og:description" content="按重点入口、内容家族、主题三个视角浏览本站，理解各栏目之间的关系与各自入口。">
+  <meta property="og:image" content="https://abcsuodao.com/images/og-image.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://abcsuodao.com/sitemap.html">
+  <meta property="og:site_name" content="私家智囊">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://abcsuodao.com/images/og-image.jpg">
+  <title>读者版站点地图 — 私家智囊</title>
+  <link rel="stylesheet" href="dialogue.css">
+  <style>
+    /* —— 基础外壳：与 dialogue.css 同值，便于草稿脱离部署目录独立预览 —— */
+    :root{--border-color:rgba(0,0,0,.08);--text-muted:#8a8885}
+    body{font-family:-apple-system,"PingFang SC","Noto Sans SC","Helvetica Neue",sans-serif;background:#fcfbfa;color:#3a3f47;line-height:1.85;-webkit-font-smoothing:antialiased;max-width:1100px;margin:0 auto;padding:0 24px}
+    .container{max-width:900px;margin:0 auto}
+    nav{display:flex;flex-wrap:wrap;gap:22px;justify-content:center;padding:18px 0;border-bottom:1px solid rgba(0,0,0,.06);font-size:.85rem}
+    nav a{color:#6a6865;text-decoration:none}
+    nav a:hover,nav a.active{color:#D4AF37}
+    footer{border-top:1px solid var(--border-color);padding:48px 0 32px;text-align:center;margin-top:60px}
+    footer .slogan{font-size:.9rem;color:var(--text-muted);margin-bottom:8px;letter-spacing:.05em}
+    footer .slogan span{color:#D4AF37}
+    footer .copyright{font-size:.75rem;color:var(--text-muted)}
+    /* —— 以下逐字沿用 content.html 内联样式 —— */
+    .cat-nav{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:32px;padding:16px 0;border-bottom:1px solid rgba(212,168,83,.08)}
+    .cat-nav a{padding:8px 18px;border:1px solid rgba(212,168,83,.25);border-radius:20px;font-size:.85rem;color:#D4AF37;text-decoration:none;transition:all .15s}
+    .cat-nav a:hover{background:rgba(212,168,83,.08)}
+    .cat-section{margin-bottom:36px;scroll-margin-top:80px}
+    .cat-title{font-size:1.1rem;color:#D4AF37;font-weight:500;margin-bottom:4px;padding-bottom:8px;border-bottom:1px solid rgba(212,168,83,.1)}
+    .cat-count{font-size:.78rem;color:#8a8885;margin-bottom:20px}
+    .d-card{display:block;padding:16px 20px;margin-bottom:10px;border:1px solid rgba(255,255,255,.04);border-radius:4px;text-decoration:none;transition:all .15s}
+    .d-card:hover{border-color:rgba(212,168,83,.2);background:rgba(255,255,255,.015)}
+    .d-num{display:inline-block;min-width:40px;font-size:.82rem;color:#D4AF37;font-weight:500}
+    .d-title{font-size:.95rem;color:#3a3f47;font-weight:600}
+    .d-desc{font-size:.82rem;color:#6a6865;margin-top:4px;line-height:1.5}
+    .d-time{font-size:.72rem;color:#8a8885;margin-top:4px;display:inline-block}
+    .page-header{text-align:center;padding:100px 0 40px}
+    .page-header h1{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:400;color:#D4AF37;margin-bottom:8px;letter-spacing:-.02em}
+    .page-header p{font-size:.9rem;color:#6a6865}
+    .back-link{display:inline-block;margin-top:24px;padding:10px 24px;border:1px solid rgba(212,168,83,.25);color:#D4AF37;font-size:.82rem;text-decoration:none;border-radius:3px}
+    .back-link:hover{background:rgba(212,168,83,.05)}
+    /* —— 本页专用 —— */
+    .sm-note{font-size:.82rem;color:#6a6865;line-height:1.8;margin:0 0 18px}
+    .sm-links{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:.85rem;margin:0 0 24px;padding:0}
+    .sm-links a{color:#6a6865;text-decoration:none;border-bottom:1px solid rgba(212,168,83,.25)}
+    .sm-links a:hover{color:#D4AF37}
+    .sm-divider{height:1px;background:rgba(212,168,83,.1);margin:40px 0}
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <a href="index.html">首页</a>
+    <a href="belief.html">信念</a>
+    <a href="principles.html">原则</a>
+    <a href="triage.html">值班室</a>
+    <a href="content.html">瞭望台</a>
+    <a href="tools.html">工具箱</a>
+    <a href="index.html#about">关于</a>
+  </nav>
+
+  <div class="container">
+
+    <div class="page-header">
+      <h1>读者版站点地图</h1>
+      <p>先找到入口，再理解结构。这一页不重列全部文章，只告诉你每个家族从哪里进、各主题在哪里看。</p>
+    </div>
+
+    <div class="cat-nav">
+      <a href="#start">重点入口</a>
+      <a href="#family">按内容家族</a>
+      <a href="#topic">按主题</a>
+      <a href="#difference">与 sitemap.xml 的区别</a>
+    </div>
+
+    <p class="sm-note">
+      站内已经有多份按栏目组织的清单（瞭望台、工具箱、研究报告、安德路专栏、值班室）。本页的职责是<b>说明它们之间的关系</b>，
+      并提供「按家族」与「按主题」两种互补的找法；逐篇清单仍以各栏目自己的索引页为准，避免同一份目录维护两处。
+    </p>
+
+    <!-- ===== A. 重点入口 ===== -->
+    <div class="cat-section" id="start">
+      <div class="cat-title">⭐ 重点入口</div>
+      <div class="cat-count">第一次来，从这六个入口开始</div>
+
+      <a href="andelu.html" class="d-card"><span class="d-num">01</span><span class="d-title">安德路专栏 · 地平线系列</span><span class="d-desc">按幕推进的家庭财富笔记，从第一桶金到房子与负债，再到量化视角的验证方法。按幕连读最顺。</span><span class="d-time">专栏聚合页 · 按幕浏览</span></a>
+      <a href="tools.html" class="d-card"><span class="d-num">02</span><span class="d-title">工具箱</span><span class="d-desc">按使用场景组织的测算与自检工具：快速体检、专项决策、深度分析、综合工具、研究方法。数据只在浏览器本地计算。</span><span class="d-time">按场景浏览</span></a>
+      <a href="research.html" class="d-card"><span class="d-num">03</span><span class="d-title">研究专题</span><span class="d-desc">基于公开数据的原创实证研究：数据可追溯、结论标边界、证据强度分级；不推荐标的，不预测走势。</span><span class="d-time">研究报告栏目</span></a>
+      <a href="content.html" class="d-card"><span class="d-num">04</span><span class="d-title">瞭望台 · 按主题浏览</span><span class="d-desc">全站文章按主题归类的主目录：读书会、保障、房产、投资、传承、综合，另有专栏与研究报告专段。</span><span class="d-time">按主题浏览全部文章</span></a>
+      <a href="triage.html" class="d-card"><span class="d-num">05</span><span class="d-title">值班室 · 快答</span><span class="d-desc">带着一个具体问题来，搜一下、几分钟答完；适合不想通读系列、只想解决当下疑问的时候。</span><span class="d-time">按问题检索</span></a>
+      <a href="principles.html" class="d-card"><span class="d-num">06</span><span class="d-title">信念与原则</span><span class="d-desc">基石信念、规划师三原则、守夜人五条底线。想先理解本站为什么这么写，从这两页读起。</span><span class="d-time">信念 · 原则</span></a>
+    </div>
+
+    <!-- ===== B. 按内容家族 ===== -->
+    <div class="cat-section" id="family">
+      <div class="cat-title">📚 按内容家族</div>
+      <div class="cat-count">同一类内容从哪里进 · 每族只给一个入口，逐篇清单留给各栏目自己的索引页</div>
+
+      <a href="content.html" class="d-card"><span class="d-num">对话</span><span class="d-title">对话系列</span><span class="d-desc">规划师与守夜人的对谈，覆盖结构、决策与底线；是本站篇数最多的主干。</span><span class="d-time">→ 瞭望台按主题浏览</span></a>
+      <a href="tools.html" class="d-card"><span class="d-num">工具</span><span class="d-title">工具箱</span><span class="d-desc">可自己填参数复算的测算器、自检表与研究方法工具。</span><span class="d-time">→ 工具箱按场景浏览</span></a>
+      <a href="andelu.html" class="d-card"><span class="d-num">安德路</span><span class="d-title">安德路专栏 · 地平线系列</span><span class="d-desc">按六幕推进的连续专栏，适合从头到尾读。</span><span class="d-time">→ 专栏聚合页</span></a>
+      <a href="research.html" class="d-card"><span class="d-num">研究</span><span class="d-title">研究报告</span><span class="d-desc">原创实证、样本外检验、预注册与结论边界；方法与数据来源写在正文里。</span><span class="d-time">→ 研究报告栏目</span></a>
+      <a href="content.html#bookclub" class="d-card"><span class="d-num">读书会</span><span class="d-title">智囊·读书会</span><span class="d-desc">一本书配一个讨论场：先读书笔记，再看几个家庭的课后复盘。</span><span class="d-time">→ 瞭望台 · 读书会</span></a>
+      <a href="content.html#zonghe" class="d-card"><span class="d-num">圆桌</span><span class="d-title">圆桌对话</span><span class="d-desc">多位嘉宾就一个尖锐问题各执一端；与深度话题同列在综合篇。</span><span class="d-time">→ 瞭望台 · 综合篇</span></a>
+
+      <div class="cat-count" style="margin-top:26px;">站点级页面（不属任何内容家族）</div>
+      <div class="sm-links">
+        <a href="belief.html">信念</a>
+        <a href="principles.html">原则</a>
+        <a href="triage.html">值班室</a>
+        <a href="cases.html">读者问诊档案</a>
+        <a href="wall-eaves-upper.html">数字安全（上）</a>
+        <a href="wall-eaves-lower.html">CRS 与境外资产（下）</a>
+        <a href="about.html">关于本站</a>
+        <a href="disclaimer.html">免责声明</a>
+        <a href="terms.html">使用条款</a>
+        <a href="privacy-policy.html">隐私政策</a>
+      </div>
+    </div>
+
+    <!-- ===== C. 按主题 ===== -->
+    <div class="cat-section" id="topic">
+      <div class="cat-title">🧭 按主题</div>
+      <div class="cat-count">主题划分沿用瞭望台，不另设一套分类 · 点进去看该主题下的全部文章</div>
+      <div class="cat-nav">
+        <a href="content.html#bookclub">📖 读书会</a>
+        <a href="content.html#baozhang">🛡️ 保障篇</a>
+        <a href="content.html#fangchan">🏠 房产篇</a>
+        <a href="content.html#touzi">📈 投资篇</a>
+        <a href="content.html#chuancheng">📜 传承篇</a>
+        <a href="content.html#zonghe">📋 综合篇</a>
+      </div>
+      <p class="sm-note">
+        「按家族」回答的是<b>这是什么类型的内容</b>，「按主题」回答的是<b>我现在关心哪件事</b>。两者会交叉：
+        例如「房子与负债」既是安德路专栏第二幕（家族视角），也归在房产篇（主题视角）；这类交叉在本站按<b>双重归属</b>处理，不搬移、不去重。
+      </p>
+      <p class="sm-note">
+        另外两个家族在瞭望台里设有专段，与主题段并列：<a href="content.html#andelu" style="color:#D4AF37;">安德路专栏</a> ·
+        <a href="content.html#research" style="color:#D4AF37;">研究报告</a>。
+      </p>
+    </div>
+
+    <!-- ===== D. 与 sitemap.xml 的区别 ===== -->
+    <div class="cat-section" id="difference">
+      <div class="cat-title">🔍 本页与 sitemap.xml 的区别</div>
+      <div class="cat-count">两者作用不同，互不替代</div>
+      <p class="sm-note">
+        <b>本页（sitemap.html）</b>是给读者看的：说明网站有哪些内容家族、彼此什么关系、从哪里进，
+        只列入口不列逐篇清单。<br>
+        <b><a href="sitemap.xml" style="color:#D4AF37;">sitemap.xml</a></b>是给搜索引擎看的：
+        逐条列出可抓取的页面地址，帮助搜索引擎发现和更新页面，不承担导航职责。
+      </p>
+      <p class="sm-note">
+        本页不复制逐页清单，是为了让新增一篇文章时只更新栏目自己的索引页与 sitemap.xml，不必再改第三处。
+      </p>
+    </div>
+
+    <div class="sm-divider"></div>
+
+    <p class="sm-note">
+      想先了解本站为什么存在、采用什么验证方法、不提供什么服务，请读
+      <a href="about.html" style="color:#D4AF37;">关于本站</a>；
+      权利与边界见 <a href="disclaimer.html" style="color:#D4AF37;">免责声明</a> 与
+      <a href="terms.html" style="color:#D4AF37;">使用条款</a>。
+    </p>
+
+    <div style="text-align:center;margin-top:32px;">
+      <a href="index.html" class="back-link">← 返回首页</a>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="container">
+      <p class="slogan">家庭财富的<span>规划师</span>与<span>守夜人</span></p>
+      <p class="copyright">私家智囊 · 2026</p>
+    </div>
+  </footer>
+
+</body>
+
+</html>
